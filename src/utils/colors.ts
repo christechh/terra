@@ -2,7 +2,7 @@ import { toRGB } from './helper'
 import tailwindColors from 'tailwindcss/colors'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from 'tailwind-config'
-import flatten from 'flat'
+import { flatten } from 'flat'
 
 const twConfig = resolveConfig(tailwindConfig)
 const colors = twConfig.theme?.colors
