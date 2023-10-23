@@ -1,27 +1,26 @@
 <script setup lang="ts">
-import { ref,computed } from "vue";
-import Lucide from "../../base-components/Lucide";
-import Breadcrumb from "../../base-components/Breadcrumb";
-import { FormInput } from "../../base-components/Form";
-import { Menu, Popover } from "../../base-components/Headless";
-import fakerData from "../../utils/faker";
-import _ from "lodash";
-import { TransitionRoot } from "@headlessui/vue";
-import headPickUrl from "../../assets/images/logo.png";
-import {useUserStore} from "../../stores/user";
-const account = computed(() => useUserStore().getAccount);
-const searchDropdown = ref(false);
+import { ref, computed } from 'vue'
+import Lucide from '../../base-components/Lucide'
+import Breadcrumb from '../../base-components/Breadcrumb'
+import { FormInput } from '../../base-components/Form'
+import { Menu, Popover } from '../../base-components/Headless'
+import fakerData from '../../utils/faker'
+import _ from 'lodash'
+import { TransitionRoot } from '@headlessui/vue'
+import headPickUrl from '../../assets/images/logo.png'
+import { useUserStore } from '../../stores/user'
+const account = computed(() => useUserStore().getAccount)
+const searchDropdown = ref(false)
 const showSearchDropdown = () => {
-  searchDropdown.value = true;
-};
+  searchDropdown.value = true
+}
 const hideSearchDropdown = () => {
-  searchDropdown.value = false;
-};
-
-const doLogout = () => {  
-  useUserStore().logout();
+  searchDropdown.value = false
 }
 
+const doLogout = () => {
+  useUserStore().logout()
+}
 </script>
 
 <template>
@@ -191,18 +190,15 @@ const doLogout = () => {
       <Menu.Button
         class="block w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit zoom-in intro-x"
       >
-        <img
-          alt="Midone Tailwind HTML Admin Template"
-          :src="headPickUrl"
-        />        
+        <img alt="Midone Tailwind HTML Admin Template" :src="headPickUrl" />
       </Menu.Button>
       <Menu.Items class="w-56 mt-px text-white bg-primary">
         <Menu.Header class="font-normal">
-          <div class="font-medium">{{ account }}</div>          
-        </Menu.Header>                
+          <div class="font-medium">{{ account }}</div>
+        </Menu.Header>
         <Menu.Divider class="bg-white/[0.08]" />
         <Menu.Item class="hover:bg-white/5" @click="doLogout">
-          <Lucide icon="ToggleRight" class="w-4 h-4 mr-2"  /> Logout
+          <Lucide icon="ToggleRight" class="w-4 h-4 mr-2" /> Logout
         </Menu.Item>
       </Menu.Items>
     </Menu>

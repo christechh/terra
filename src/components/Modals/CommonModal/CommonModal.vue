@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import WarningModal from "../WarningModal";
-  import DeleteModal from "../DeleteModal";
+import WarningModal from '../WarningModal'
+import DeleteModal from '../DeleteModal'
 </script>
 
 <template>

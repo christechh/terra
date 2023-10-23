@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { useDarkModeStore } from "../../stores/dark-mode";
-import { useColorSchemeStore, ColorSchemes } from "../../stores/color-scheme";
-import { computed } from "vue";
+import { useDarkModeStore } from '../../stores/dark-mode'
+import { useColorSchemeStore, ColorSchemes } from '../../stores/color-scheme'
+import { computed } from 'vue'
 
-const colorScheme = computed(() => useColorSchemeStore().colorScheme);
-const darkMode = computed(() => useDarkModeStore().darkMode);
+const colorScheme = computed(() => useColorSchemeStore().colorScheme)
+const darkMode = computed(() => useDarkModeStore().darkMode)
 
 const setColorSchemeClass = () => {
-  const el = document.querySelectorAll("html")[0];
-  el.setAttribute("class", colorScheme.value);
-  darkMode.value && el.classList.add("dark");
-};
+  const el = document.querySelectorAll('html')[0]
+  el.setAttribute('class', colorScheme.value)
+  darkMode.value && el.classList.add('dark')
+}
 
 const switchColorScheme = (colorScheme: ColorSchemes) => {
-  useColorSchemeStore().setColorScheme(colorScheme);
-  setColorSchemeClass();
-};
+  useColorSchemeStore().setColorScheme(colorScheme)
+  setColorSchemeClass()
+}
 
-setColorSchemeClass();
+setColorSchemeClass()
 </script>
 
 <template>
@@ -34,9 +34,9 @@ setColorSchemeClass();
         'block w-8 h-8 cursor-pointer bg-blue-800 rounded-full border-4 mr-1 hover:border-slate-200',
         {
           'border-slate-300 dark:border-darkmode-800/80':
-            colorScheme == 'default',
+            colorScheme == 'default'
         },
-        { 'border-white dark:border-darkmode-600': colorScheme != 'default' },
+        { 'border-white dark:border-darkmode-600': colorScheme != 'default' }
       ]"
     ></a>
     <a
@@ -45,9 +45,9 @@ setColorSchemeClass();
         'block w-8 h-8 cursor-pointer bg-emerald-900 rounded-full border-4 mr-1 hover:border-slate-200',
         {
           'border-slate-300 dark:border-darkmode-800/80':
-            colorScheme == 'theme-1',
+            colorScheme == 'theme-1'
         },
-        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-1' },
+        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-1' }
       ]"
     ></a>
     <a
@@ -56,9 +56,9 @@ setColorSchemeClass();
         'block w-8 h-8 cursor-pointer bg-blue-900 rounded-full border-4 mr-1 hover:border-slate-200',
         {
           'border-slate-300 dark:border-darkmode-800/80':
-            colorScheme == 'theme-2',
+            colorScheme == 'theme-2'
         },
-        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-2' },
+        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-2' }
       ]"
     ></a>
     <a
@@ -67,9 +67,9 @@ setColorSchemeClass();
         'block w-8 h-8 cursor-pointer bg-cyan-900 rounded-full border-4 mr-1 hover:border-slate-200',
         {
           'border-slate-300 dark:border-darkmode-800/80':
-            colorScheme == 'theme-3',
+            colorScheme == 'theme-3'
         },
-        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-3' },
+        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-3' }
       ]"
     ></a>
     <a
@@ -78,9 +78,9 @@ setColorSchemeClass();
         'block w-8 h-8 cursor-pointer bg-indigo-900 rounded-full border-4 hover:border-slate-200',
         {
           'border-slate-300 dark:border-darkmode-800/80':
-            colorScheme == 'theme-4',
+            colorScheme == 'theme-4'
         },
-        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-4' },
+        { 'border-white dark:border-darkmode-600': colorScheme != 'theme-4' }
       ]"
     ></a>
   </div>

@@ -1,42 +1,42 @@
 <script lang="ts">
 export default {
-  inheritAttrs: false,
-};
+  inheritAttrs: false
+}
 </script>
 
 <script setup lang="ts">
 import {
   DialogPanel as HeadlessDialogPanel,
-  TransitionChild,
-} from "@headlessui/vue";
-import _ from "lodash";
-import { twMerge } from "tailwind-merge";
-import { ProvideDialog } from "./Dialog.vue";
-import { inject, useAttrs, computed } from "vue";
+  TransitionChild
+} from '@headlessui/vue'
+import _ from 'lodash'
+import { twMerge } from 'tailwind-merge'
+import { ProvideDialog } from './Dialog.vue'
+import { inject, useAttrs, computed } from 'vue'
 
 interface PanelProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessDialogPanel> {
-  as?: string | object;
+  as?: string | object
 }
 
 const { as } = withDefaults(defineProps<PanelProps>(), {
-  as: "div",
-});
+  as: 'div'
+})
 
-const dialog = inject<ProvideDialog>("dialog");
+const dialog = inject<ProvideDialog>('dialog')
 
-const attrs = useAttrs();
+const attrs = useAttrs()
 const computedClass = computed(() =>
   twMerge([
-    "w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-transform dark:bg-darkmode-600",
-    dialog?.size == "md" && "sm:w-[460px]",
-    dialog?.size == "sm" && "sm:w-[300px]",
-    dialog?.size == "lg" && "sm:w-[600px]",
-    dialog?.size == "xl" && "sm:w-[600px] lg:w-[900px]",
-    dialog?.zoom.value && "scale-105",
-    typeof attrs.class === "string" && attrs.class,
+    'w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-transform dark:bg-darkmode-600',
+    dialog?.size == 'md' && 'sm:w-[460px]',
+    dialog?.size == 'sm' && 'sm:w-[300px]',
+    dialog?.size == 'lg' && 'sm:w-[600px]',
+    dialog?.size == 'xl' && 'sm:w-[600px] lg:w-[900px]',
+    dialog?.zoom.value && 'scale-105',
+    typeof attrs.class === 'string' && attrs.class
   ])
-);
+)
 </script>
 
 <template>

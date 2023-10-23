@@ -1,3 +1,3 @@
-import RedirectTo from "./RedirectTo.vue";
+import RedirectTo from './RedirectTo.vue'
 
-export default RedirectTo;
+export default RedirectTo

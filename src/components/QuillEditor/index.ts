@@ -1,3 +1,3 @@
-import QuillEditor from "./QuillEditor.vue";
+import QuillEditor from './QuillEditor.vue'
 
-export default QuillEditor;
+export default QuillEditor

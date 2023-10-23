@@ -1,48 +1,48 @@
 <script setup lang="ts">
-  import { computed } from "vue";
-  import { Dialog } from "../../../base-components/Headless";
-  import Lucide from "../../../base-components/Lucide";
-  import Button from "../../../base-components/Button";
-  import { useWaningModalStore } from "../../../stores/modals/warrningModal";
+import { computed } from 'vue'
+import { Dialog } from '../../../base-components/Headless'
+import Lucide from '../../../base-components/Lucide'
+import Button from '../../../base-components/Button'
+import { useWaningModalStore } from '../../../stores/modals/warrningModal'
 
-  const showModal = computed(() => useWaningModalStore().status);
-  const modalText = computed(() => useWaningModalStore().text);
-  const content = computed(() => useWaningModalStore().content);
-  const type = computed(() => useWaningModalStore().type);
-  const icon = computed(() => {
-    if (type.value === "success") {
-      return "CheckCircle";
-    }
+const showModal = computed(() => useWaningModalStore().status)
+const modalText = computed(() => useWaningModalStore().text)
+const content = computed(() => useWaningModalStore().content)
+const type = computed(() => useWaningModalStore().type)
+const icon = computed(() => {
+  if (type.value === 'success') {
+    return 'CheckCircle'
+  }
 
-    if (type.value === "warning") {
-      return "AlertCircle";
-    }
+  if (type.value === 'warning') {
+    return 'AlertCircle'
+  }
 
-    if (type.value === "danger") {
-      return "XCircle";
-    }
+  if (type.value === 'danger') {
+    return 'XCircle'
+  }
 
-    return "XCircle";
-  });
-  const iconColor = computed(() => {
-    if (type.value === "success") {
-      return "text-success";
-    }
+  return 'XCircle'
+})
+const iconColor = computed(() => {
+  if (type.value === 'success') {
+    return 'text-success'
+  }
 
-    if (type.value === "warning") {
-      return "text-warning";
-    }
+  if (type.value === 'warning') {
+    return 'text-warning'
+  }
 
-    if (type.value === "danger") {
-      return "text-danger";
-    }
+  if (type.value === 'danger') {
+    return 'text-danger'
+  }
 
-    return "text-warning";
-  });
+  return 'text-warning'
+})
 
-  const setWarningModalPreview = (value: boolean) => {
-    useWaningModalStore().displayModal({ status: value });
-  };
+const setWarningModalPreview = (value: boolean) => {
+  useWaningModalStore().displayModal({ status: value })
+}
 </script>
 
 <template>
@@ -52,7 +52,7 @@
       :open="showModal"
       @close="
         () => {
-          setWarningModalPreview(false);
+          setWarningModalPreview(false)
         }
       "
     >
@@ -77,7 +77,7 @@
             variant="primary"
             @click="
               () => {
-                setWarningModalPreview(false);
+                setWarningModalPreview(false)
               }
             "
             class="w-24"

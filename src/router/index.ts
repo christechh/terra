@@ -1,37 +1,34 @@
-import { createRouter, createWebHistory } from "vue-router";
-import SideMenu from "../layouts/SideMenu/SideMenu.vue";
-import Login from "../pages/Login.vue";
+import { createRouter, createWebHistory } from 'vue-router'
+import SideMenu from '../layouts/SideMenu/SideMenu.vue'
+import Login from '../pages/Login.vue'
 // import CampaignList from "../pages/CampaignList.vue";
-import Index from "../pages/Index.vue";
-
+import Index from '../pages/Index.vue'
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     component: SideMenu,
     children: [
       {
-        path: "/dashboard/",
-        name: "index",
-        component: Index,
-      },
-      
-    ],
+        path: '/dashboard/',
+        name: 'index',
+        component: Index
+      }
+    ]
   },
   {
-    path: "/dashboard/login",
-    name: "login",
-    component: Login,
-  },
- 
-];
+    path: '/dashboard/login',
+    name: 'login',
+    component: Login
+  }
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    return savedPosition || { left: 0, top: 0 };
-  },
-});
+    return savedPosition || { left: 0, top: 0 }
+  }
+})
 
-export default router;
+export default router

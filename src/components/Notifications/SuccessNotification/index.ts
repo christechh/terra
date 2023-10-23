@@ -1,3 +1,3 @@
-import SuccessNotification from "./SuccessNotification.vue";
+import SuccessNotification from './SuccessNotification.vue'
 
-export default SuccessNotification;
+export default SuccessNotification

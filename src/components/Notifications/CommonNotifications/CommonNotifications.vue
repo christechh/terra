@@ -1,11 +1,9 @@
 <script setup lang="ts">
-
-import SuccessNotification from "../SuccessNotification";
+import SuccessNotification from '../SuccessNotification'
 </script>
 
 <template>
   <div>
-    <SuccessNotification></SuccessNotification>    
+    <SuccessNotification></SuccessNotification>
   </div>
 </template>
-

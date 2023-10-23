@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { initializeMap, MapConfig } from "./google-map-loader";
-import { HTMLAttributes, ref, onMounted } from "vue";
+import { initializeMap, MapConfig } from './google-map-loader'
+import { HTMLAttributes, ref, onMounted } from 'vue'
 
 export type Init = (
   callback: (
     mapConfig: MapConfig
   ) => ReturnType<typeof initializeMap> | undefined
-) => void;
+) => void
 
 interface GoogleMapLoaderProps extends HTMLAttributes {
-  init: Init;
+  init: Init
 }
 
-const props = defineProps<GoogleMapLoaderProps>();
+const props = defineProps<GoogleMapLoaderProps>()
 
-const mapRef = ref<HTMLDivElement>();
+const mapRef = ref<HTMLDivElement>()
 
 onMounted(() => {
   props.init((mapConfig) => {
     if (mapRef.value) {
-      return initializeMap(mapRef.value, mapConfig);
+      return initializeMap(mapRef.value, mapConfig)
     }
-  });
-});
+  })
+})
 </script>
 
 <template>

@@ -1,6 +1,6 @@
-import { Router } from "vue-router";
-import { slideUp, slideDown } from "../../utils/helper";
-import { FormattedMenu } from "../../layouts/SideMenu/side-menu";
+import { Router } from 'vue-router'
+import { slideUp, slideDown } from '../../utils/helper'
+import { FormattedMenu } from '../../layouts/SideMenu/side-menu'
 
 const linkTo = (
   menu: FormattedMenu,
@@ -8,23 +8,23 @@ const linkTo = (
   setActiveMobileMenu: (active: boolean) => void
 ) => {
   if (menu.subMenu) {
-    menu.activeDropdown = !menu.activeDropdown;
+    menu.activeDropdown = !menu.activeDropdown
   } else {
     if (menu.pageName !== undefined) {
-      setActiveMobileMenu(false);
+      setActiveMobileMenu(false)
       router.push({
-        name: menu.pageName,
-      });
+        name: menu.pageName
+      })
     }
   }
-};
+}
 
 const enter = (el: HTMLElement) => {
-  slideDown(el, 300);
-};
+  slideDown(el, 300)
+}
 
 const leave = (el: HTMLElement) => {
-  slideUp(el, 300);
-};
+  slideUp(el, 300)
+}
 
-export { linkTo, enter, leave };
+export { linkTo, enter, leave }

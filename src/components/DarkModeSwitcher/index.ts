@@ -1,3 +1,3 @@
-import DarkModeSwitcher from "./DarkModeSwitcher.vue";
+import DarkModeSwitcher from './DarkModeSwitcher.vue'
 
-export default DarkModeSwitcher;
+export default DarkModeSwitcher

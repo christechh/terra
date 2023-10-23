@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "zoom-vanilla.js/dist/zoom-vanilla.min.js";
+import 'zoom-vanilla.js/dist/zoom-vanilla.min.js'
 </script>
 
 <template>

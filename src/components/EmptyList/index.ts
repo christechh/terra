@@ -1,3 +1,3 @@
-import EmptyList from "./EmptyList.vue";
+import EmptyList from './EmptyList.vue'
 
-export default EmptyList;
+export default EmptyList

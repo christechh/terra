@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { HTMLAttributes, useSlots, provide } from "vue";
+import { HTMLAttributes, useSlots, provide } from 'vue'
 
 export type ProvideBeradcrumb = {
-  light?: boolean;
-};
-
-interface BreadcrumbProps extends /* @vue-ignore */ HTMLAttributes {
-  light?: boolean;
+  light?: boolean
 }
 
-const slots = useSlots();
+interface BreadcrumbProps extends /* @vue-ignore */ HTMLAttributes {
+  light?: boolean
+}
 
-const { light } = defineProps<BreadcrumbProps>();
+const slots = useSlots()
 
-provide<ProvideBeradcrumb>("breadcrumb", {
-  light: light,
-});
+const { light } = defineProps<BreadcrumbProps>()
+
+provide<ProvideBeradcrumb>('breadcrumb', {
+  light: light
+})
 </script>
 
 <template>
@@ -23,7 +23,7 @@ provide<ProvideBeradcrumb>("breadcrumb", {
     <ol
       :class="[
         'flex items-center text-primary dark:text-slate-300',
-        { 'text-white/90': light },
+        { 'text-white/90': light }
       ]"
     >
       <component

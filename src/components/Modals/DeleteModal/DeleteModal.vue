@@ -1,39 +1,41 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { Dialog } from "../../../base-components/Headless";
-import Lucide from "../../../base-components/Lucide";
-import Button from "../../../base-components/Button";
-import { useDeleteModalStore } from "../../../stores/modals/deleteModal";
+import { computed } from 'vue'
+import { Dialog } from '../../../base-components/Headless'
+import Lucide from '../../../base-components/Lucide'
+import Button from '../../../base-components/Button'
+import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 
+const deleteModalStore = useDeleteModalStore()
 
-
-const deleteModalStore = useDeleteModalStore();
-
-const status = computed(() => deleteModalStore.status);
-const title = computed(() => deleteModalStore.title);
-const content = computed(() => deleteModalStore.content);
+const status = computed(() => deleteModalStore.status)
+const title = computed(() => deleteModalStore.title)
+const content = computed(() => deleteModalStore.content)
 
 const setOpen = (value: boolean) => {
-  deleteModalStore.setOpen({ status: value });
-};
+  deleteModalStore.setOpen({ status: value })
+}
 
 const deleteExec = () => {
-  const { deleteType, deleteData } = deleteModalStore;
+  const { deleteType, deleteData } = deleteModalStore
   switch (deleteType) {
-    case "course":
-      //@ts-ignore      
-      break;    
+    case 'course':
+      //@ts-ignore
+      break
   }
-  setOpen(false);
-};
+  setOpen(false)
+}
 </script>
 
 <template>
   <div>
-    <Dialog :open="status" @close="() => {
-        setOpen(false);
-      }
-      ">
+    <Dialog
+      :open="status"
+      @close="
+        () => {
+          setOpen(false)
+        }
+      "
+    >
       <Dialog.Panel>
         <div class="p-5 text-center">
           <Lucide icon="XCircle" class="w-16 h-16 mx-auto mt-3 text-danger" />
@@ -43,13 +45,24 @@ const deleteExec = () => {
           </div>
         </div>
         <div class="px-5 pb-8 text-center">
-          <Button type="button" variant="outline-secondary" @click="() => {
-              setOpen(false);
-            }
-            " class="w-24 mr-1">
+          <Button
+            type="button"
+            variant="outline-secondary"
+            @click="
+              () => {
+                setOpen(false)
+              }
+            "
+            class="w-24 mr-1"
+          >
             取消
           </Button>
-          <Button type="button" variant="danger" class="w-24 ml-5" @click="deleteExec">
+          <Button
+            type="button"
+            variant="danger"
+            class="w-24 ml-5"
+            @click="deleteExec"
+          >
             刪除
           </Button>
         </div>

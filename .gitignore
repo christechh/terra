@@ -26,4 +26,3 @@ docker-compose.yaml
 Makefile
 
 dist/
-.vscode/

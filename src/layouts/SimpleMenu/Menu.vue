@@ -1,35 +1,35 @@
 <script lang="ts">
 export default {
-  inheritAttrs: false,
-};
+  inheritAttrs: false
+}
 </script>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import Lucide from "../../base-components/Lucide";
-import Tippy from "../../base-components/Tippy";
-import { FormattedMenu, linkTo } from "./simple-menu";
+import { useRouter } from 'vue-router'
+import Lucide from '../../base-components/Lucide'
+import Tippy from '../../base-components/Tippy'
+import { FormattedMenu, linkTo } from './simple-menu'
 
 interface MenuProps {
-  class?: string | object;
-  menu: FormattedMenu;
+  class?: string | object
+  menu: FormattedMenu
   formattedMenuState: [
-    (FormattedMenu | "divider")[],
-    (computedFormattedMenu: Array<FormattedMenu | "divider">) => void
-  ];
-  level: "first" | "second" | "third";
+    (FormattedMenu | 'divider')[],
+    (computedFormattedMenu: Array<FormattedMenu | 'divider'>) => void
+  ]
+  level: 'first' | 'second' | 'third'
 }
 
-const router = useRouter();
-const props = defineProps<MenuProps>();
-const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
+const router = useRouter()
+const props = defineProps<MenuProps>()
+const [formattedMenu, setFormattedMenu] = props.formattedMenuState
 </script>
 
 <template>
   <Tippy
     as="a"
     :options="{
-      placement: 'left',
+      placement: 'left'
     }"
     :content="props.menu.title"
     :href="
@@ -38,10 +38,10 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
         : ((pageName: string | undefined) => {
             try {
               return router.resolve({
-                name: pageName,
-              }).fullPath;
+                name: pageName
+              }).fullPath
             } catch (err) {
-              return '';
+              return ''
             }
           })(props.menu.pageName)
     "
@@ -60,15 +60,17 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
         '[&>div:nth-child(1)]:hover:before:bg-white/5 [&>div:nth-child(1)]:hover:before:dark:bg-darkmode-500/70':
           !props.menu.active &&
           !props.menu.activeDropdown &&
-          props.level == 'first',
+          props.level == 'first'
       },
-      props.class,
+      props.class
     ]"
-    @click="(event: MouseEvent) => {
-        event.preventDefault();
-        linkTo(props.menu, router);
-        setFormattedMenu([...formattedMenu]);
-    }"
+    @click="
+      (event: MouseEvent) => {
+        event.preventDefault()
+        linkTo(props.menu, router)
+        setFormattedMenu([...formattedMenu])
+      }
+    "
   >
     <div
       :class="{
@@ -80,7 +82,7 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
         'before:content-[\'\'] before:z-[-1] before:w-[230px] before:absolute before:top-0 before:left-0 before:h-full before:rounded-l-full before:transition before:ease-in before:duration-100':
           !props.menu.activeDropdown &&
           !props.menu.active &&
-          props.level == 'first',
+          props.level == 'first'
       }"
     >
       <Lucide :icon="props.menu.icon" />

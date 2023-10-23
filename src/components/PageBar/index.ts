@@ -1,2 +1,2 @@
-import PageBar from "./PageBar.vue";
-export default PageBar;
+import PageBar from './PageBar.vue'
+export default PageBar

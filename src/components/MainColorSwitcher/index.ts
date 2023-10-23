@@ -1,3 +1,3 @@
-import MainColorSwitcher from "./MainColorSwitcher.vue";
+import MainColorSwitcher from './MainColorSwitcher.vue'
 
-export default MainColorSwitcher;
+export default MainColorSwitcher

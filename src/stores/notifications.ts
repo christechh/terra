@@ -1,45 +1,45 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
 export interface Notifications {
-  type: "success" | "error" | "warning" | "info";
-  successVersion: number;
-  successTitle: string;
-  successContent: string;
+  type: 'success' | 'error' | 'warning' | 'info'
+  successVersion: number
+  successTitle: string
+  successContent: string
 }
 
-export const useNotificationsStore = defineStore("notifications", {
+export const useNotificationsStore = defineStore('notifications', {
   state: (): Notifications => ({
-    type: "success",
+    type: 'success',
     successVersion: 0,
-    successTitle: "",
-    successContent: "",
+    successTitle: '',
+    successContent: ''
   }),
   getters: {
     getSuccessTitle(state) {
-      return state.successTitle;
-    },
+      return state.successTitle
+    }
   },
   actions: {
     showSuccess(input: { title: string; content: string }) {
-      this.type = "success";
-      this.successTitle = input.title;
-      this.successContent = input.content;
-      this.successVersion = new Date().getTime();
+      this.type = 'success'
+      this.successTitle = input.title
+      this.successContent = input.content
+      this.successVersion = new Date().getTime()
     },
     showError(input: { title: string; content: string }) {
-      this.type = "error";
-      this.successTitle = input.title;
-      this.successContent = input.content;
-      this.successVersion = new Date().getTime();
+      this.type = 'error'
+      this.successTitle = input.title
+      this.successContent = input.content
+      this.successVersion = new Date().getTime()
     },
     showSaveError(message?: string, content?: string) {
-      this.showError({ title: message || "儲存失敗", content: content || "" });
+      this.showError({ title: message || '儲存失敗', content: content || '' })
     },
     showSaveSuccess(message?: string) {
-      this.showSuccess({ title: message || "儲存成功", content: "" });
+      this.showSuccess({ title: message || '儲存成功', content: '' })
     },
     showDeleteSuccess() {
-      this.showSuccess({ title: "刪除成功", content: "" });
-    },
-  },
-});
+      this.showSuccess({ title: '刪除成功', content: '' })
+    }
+  }
+})

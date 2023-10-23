@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import _ from "lodash";
+import _ from 'lodash'
 
 interface DividerProps {
-  as?: string | object;
+  as?: string | object
 }
 
 const { as } = withDefaults(defineProps<DividerProps>(), {
-  as: "div",
-});
+  as: 'div'
+})
 </script>
 
 <template>

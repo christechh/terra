@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-import logoUrl from "../../assets/images/logo.svg";
-import Divider from "./Divider.vue";
-import Menu from "./Menu.vue";
-import TopBar from "../../components/TopBar";
-import DarkModeSwitcher from "../../components/DarkModeSwitcher";
-import MainColorSwitcher from "../../components/MainColorSwitcher";
-import MobileMenu from "../../components/MobileMenu";
-import { useSimpleMenuStore } from "../../stores/simple-menu";
+import { useRoute } from 'vue-router'
+import logoUrl from '../../assets/images/logo.svg'
+import Divider from './Divider.vue'
+import Menu from './Menu.vue'
+import TopBar from '../../components/TopBar'
+import DarkModeSwitcher from '../../components/DarkModeSwitcher'
+import MainColorSwitcher from '../../components/MainColorSwitcher'
+import MobileMenu from '../../components/MobileMenu'
+import { useSimpleMenuStore } from '../../stores/simple-menu'
 import {
   ProvideForceActiveMenu,
   forceActiveMenu,
@@ -15,39 +15,39 @@ import {
   FormattedMenu,
   nestedMenu,
   enter,
-  leave,
-} from "./simple-menu";
-import { watch, reactive, computed, onMounted, provide } from "vue";
+  leave
+} from './simple-menu'
+import { watch, reactive, computed, onMounted, provide } from 'vue'
 
-const route: Route = useRoute();
-let formattedMenu = reactive<Array<FormattedMenu | "divider">>([]);
+const route: Route = useRoute()
+let formattedMenu = reactive<Array<FormattedMenu | 'divider'>>([])
 const setFormattedMenu = (
-  computedFormattedMenu: Array<FormattedMenu | "divider">
+  computedFormattedMenu: Array<FormattedMenu | 'divider'>
 ) => {
-  Object.assign(formattedMenu, computedFormattedMenu);
-};
-const simpleMenuStore = useSimpleMenuStore();
-const simpleMenu = computed(() => nestedMenu(simpleMenuStore.menu, route));
+  Object.assign(formattedMenu, computedFormattedMenu)
+}
+const simpleMenuStore = useSimpleMenuStore()
+const simpleMenu = computed(() => nestedMenu(simpleMenuStore.menu, route))
 
-provide<ProvideForceActiveMenu>("forceActiveMenu", (pageName: string) => {
-  forceActiveMenu(route, pageName);
-  setFormattedMenu(simpleMenu.value);
-});
+provide<ProvideForceActiveMenu>('forceActiveMenu', (pageName: string) => {
+  forceActiveMenu(route, pageName)
+  setFormattedMenu(simpleMenu.value)
+})
 
 watch(simpleMenu, () => {
-  setFormattedMenu(simpleMenu.value);
-});
+  setFormattedMenu(simpleMenu.value)
+})
 
 watch(
   computed(() => route.path),
   () => {
-    delete route.forceActiveMenu;
+    delete route.forceActiveMenu
   }
-);
+)
 
 onMounted(() => {
-  setFormattedMenu(simpleMenu.value);
-});
+  setFormattedMenu(simpleMenu.value)
+})
 </script>
 
 <template>
@@ -81,7 +81,7 @@ onMounted(() => {
                 // Animation
                 `opacity-0 animate-[0.4s_ease-in-out_0.1s_intro-divider] animate-fill-mode-forwards animate-delay-${
                   (menuKey + 1) * 10
-                }`,
+                }`
               ]"
               :key="'divider-' + menuKey"
             ></Divider>
@@ -91,7 +91,7 @@ onMounted(() => {
                   // Animation
                   [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                     (menuKey + 1) * 10
-                  }`]: !menu.active,
+                  }`]: !menu.active
                 }"
                 :menu="menu"
                 :formattedMenuState="[formattedMenu, setFormattedMenu]"
@@ -112,7 +112,7 @@ onMounted(() => {
                         // Animation
                         [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                           (subMenuKey + 1) * 10
-                        }`]: !subMenu.active,
+                        }`]: !subMenu.active
                       }"
                       :menu="subMenu"
                       :formattedMenuState="[formattedMenu, setFormattedMenu]"
@@ -139,12 +139,12 @@ onMounted(() => {
                               // Animation
                               [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                                 (lastSubMenuKey + 1) * 10
-                              }`]: !lastSubMenu.active,
+                              }`]: !lastSubMenu.active
                             }"
                             :menu="lastSubMenu"
                             :formattedMenuState="[
                               formattedMenu,
-                              setFormattedMenu,
+                              setFormattedMenu
                             ]"
                             level="third"
                           ></Menu>

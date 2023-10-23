@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { inject, HTMLAttributes, computed } from "vue";
-import { ProvidePreview } from "./Preview.vue";
+import { inject, HTMLAttributes, computed } from 'vue'
+import { ProvidePreview } from './Preview.vue'
 
 interface PanelProps extends /* @vue-ignore */ HTMLAttributes {
-  type?: "preview" | "source";
+  type?: 'preview' | 'source'
 }
 
 const { type } = withDefaults(defineProps<PanelProps>(), {
-  type: "preview",
-});
+  type: 'preview'
+})
 
 const preview = inject<ProvidePreview>(
-  "preview",
+  'preview',
   computed(() => true)
-);
+)
 </script>
 
 <template>

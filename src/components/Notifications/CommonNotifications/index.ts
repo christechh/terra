@@ -1,3 +1,3 @@
-import CommonNotifications from "./CommonNotifications.vue";
+import CommonNotifications from './CommonNotifications.vue'
 
-export default CommonNotifications;
+export default CommonNotifications

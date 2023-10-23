@@ -1,87 +1,84 @@
 <script setup lang="ts">
-  import { ref, watch } from "vue";
-  import Pagination from "../../base-components/Pagination";
-  import Lucide from "../../base-components/Lucide";
+import { ref, watch } from 'vue'
+import Pagination from '../../base-components/Pagination'
+import Lucide from '../../base-components/Lucide'
 
-  interface Props {
-    pageType: string;
-  }
-  interface PageEntity {
-    type: string;
-    page: number;
-    active: boolean;
-  }
-  const { pageType } = defineProps<Props>();
+interface Props {
+  pageType: string
+}
+interface PageEntity {
+  type: string
+  page: number
+  active: boolean
+}
+const { pageType } = defineProps<Props>()
 
-  const pageList = ref<PageEntity[]>([]);
+const pageList = ref<PageEntity[]>([])
 
+switch (pageType) {
+  case 'course':
+    break
+}
+const setPageData = (page: number) => {
   switch (pageType) {
-    case "course":
-     
-      break;
-   
+    case 'course':
+      break
   }
-  const setPageData = (page: number) => {
-    switch (pageType) {
-      case "course":       
-        break;
-  
-    }
-  };
+}
 
-  // 設定分頁
-  const setPageList = (limit: number, page: number, total: number) => {
-    if (total === 0) {
-      return [];
+// 設定分頁
+const setPageList = (limit: number, page: number, total: number) => {
+  if (total === 0) {
+    return []
+  }
+  const totalPages = Math.ceil(total / limit)
+  const data = []
+  const range = 2
+  if (page > 1) {
+    data.push({ type: 'first', page: 1, active: false })
+    data.push({ type: 'before', page: page - 1, active: false })
+  }
+  let unsortNums = []
+  for (let i = page - 1; i >= 1; i--) {
+    if (i <= 0) {
+      continue
     }
-    const totalPages = Math.ceil(total / limit);
-    const data = [];
-    const range = 2;
-    if (page > 1) {
-      data.push({ type: "first", page: 1, active: false });
-      data.push({ type: "before", page: page - 1, active: false });
+    if (i < page - range) {
+      continue
     }
-    let unsortNums = [];
-    for (let i = page - 1; i >= 1; i--) {
-      if (i <= 0) {
-        continue;
-      }
-      if (i < page - range) {
-        continue;
-      }
-      unsortNums.push(i);
+    unsortNums.push(i)
+  }
+  if (unsortNums.length > 0) {
+    unsortNums.sort((a, b) => a - b)
+    for (let val of unsortNums) {
+      data.push({ type: 'numbers', page: val, active: false })
     }
-    if (unsortNums.length > 0) {
-      unsortNums.sort((a, b) => a - b);
-      for (let val of unsortNums) {
-        data.push({ type: "numbers", page: val, active: false });
-      }
-    }
+  }
 
-    data.push({ type: "numbers", page: page, active: true });
-    unsortNums = [];
-    for (let i = page + 1; i <= totalPages; i++) {
-      if (i > totalPages) {
-        continue;
-      }
-      if (i > page + range) {
-        continue;
-      }
-      unsortNums.push(i);
+  data.push({ type: 'numbers', page: page, active: true })
+  unsortNums = []
+  for (let i = page + 1; i <= totalPages; i++) {
+    if (i > totalPages) {
+      continue
     }
-    if (unsortNums.length > 0) {
-      unsortNums.sort((a, b) => a - b);
-      for (let val of unsortNums) {
-        data.push({ type: "numbers", page: val, active: false });
-      }
+    if (i > page + range) {
+      continue
     }
-    if (page < totalPages) {
-      data.push({ type: "next", page: page + 1, active: false });
-      data.push({ type: "last", page: totalPages, active: false });
+    unsortNums.push(i)
+  }
+  if (unsortNums.length > 0) {
+    unsortNums.sort((a, b) => a - b)
+    for (let val of unsortNums) {
+      data.push({ type: 'numbers', page: val, active: false })
     }
+  }
+  if (page < totalPages) {
+    data.push({ type: 'next', page: page + 1, active: false })
+    data.push({ type: 'last', page: totalPages, active: false })
+  }
 
-    return data;
-  };
+  return data
+}
 </script>
 
 <template>
@@ -91,7 +88,7 @@
         v-if="row.type === 'first'"
         @click="
           () => {
-            setPageData(row.page);
+            setPageData(row.page)
           }
         "
       >
@@ -101,7 +98,7 @@
         v-if="row.type === 'before'"
         @click="
           () => {
-            setPageData(row.page);
+            setPageData(row.page)
           }
         "
       >
@@ -111,7 +108,7 @@
         v-if="row.type === 'numbers' && row.active === false"
         @click="
           () => {
-            setPageData(row.page);
+            setPageData(row.page)
           }
         "
       >
@@ -127,7 +124,7 @@
         v-if="row.type === 'next'"
         @click="
           () => {
-            setPageData(row.page);
+            setPageData(row.page)
           }
         "
       >
@@ -137,7 +134,7 @@
         v-if="row.type === 'last'"
         @click="
           () => {
-            setPageData(row.page);
+            setPageData(row.page)
           }
         "
       >

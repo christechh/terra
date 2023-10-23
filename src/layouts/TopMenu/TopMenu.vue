@@ -1,61 +1,61 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-import logoUrl from "../../assets/images/logo.svg";
-import MenuLink from "./MenuLink.vue";
-import DarkModeSwitcher from "../../components/DarkModeSwitcher";
-import MainColorSwitcher from "../../components/MainColorSwitcher";
-import MobileMenu from "../../components/MobileMenu";
-import fakerData from "../../utils/faker";
-import _ from "lodash";
-import { useTopMenuStore } from "../../stores/top-menu";
+import { useRoute } from 'vue-router'
+import logoUrl from '../../assets/images/logo.svg'
+import MenuLink from './MenuLink.vue'
+import DarkModeSwitcher from '../../components/DarkModeSwitcher'
+import MainColorSwitcher from '../../components/MainColorSwitcher'
+import MobileMenu from '../../components/MobileMenu'
+import fakerData from '../../utils/faker'
+import _ from 'lodash'
+import { useTopMenuStore } from '../../stores/top-menu'
 import {
   ProvideForceActiveMenu,
   forceActiveMenu,
   Route,
   FormattedMenu,
-  nestedMenu,
-} from "./top-menu";
-import Lucide from "../../base-components/Lucide";
-import Breadcrumb from "../../base-components/Breadcrumb";
-import { FormInput } from "../../base-components/Form";
-import { Menu, Popover } from "../../base-components/Headless";
-import { TransitionRoot } from "@headlessui/vue";
-import { watch, reactive, computed, onMounted, ref, provide } from "vue";
+  nestedMenu
+} from './top-menu'
+import Lucide from '../../base-components/Lucide'
+import Breadcrumb from '../../base-components/Breadcrumb'
+import { FormInput } from '../../base-components/Form'
+import { Menu, Popover } from '../../base-components/Headless'
+import { TransitionRoot } from '@headlessui/vue'
+import { watch, reactive, computed, onMounted, ref, provide } from 'vue'
 
-const searchDropdown = ref(false);
+const searchDropdown = ref(false)
 const showSearchDropdown = () => {
-  searchDropdown.value = true;
-};
+  searchDropdown.value = true
+}
 const hideSearchDropdown = () => {
-  searchDropdown.value = false;
-};
-const route: Route = useRoute();
-let formattedMenu = reactive<Array<FormattedMenu>>([]);
+  searchDropdown.value = false
+}
+const route: Route = useRoute()
+let formattedMenu = reactive<Array<FormattedMenu>>([])
 const setFormattedMenu = (computedFormattedMenu: Array<FormattedMenu>) => {
-  Object.assign(formattedMenu, computedFormattedMenu);
-};
-const topMenuStore = useTopMenuStore();
-const topMenu = computed(() => nestedMenu(topMenuStore.menu, route));
+  Object.assign(formattedMenu, computedFormattedMenu)
+}
+const topMenuStore = useTopMenuStore()
+const topMenu = computed(() => nestedMenu(topMenuStore.menu, route))
 
-provide<ProvideForceActiveMenu>("forceActiveMenu", (pageName: string) => {
-  forceActiveMenu(route, pageName);
-  setFormattedMenu(topMenu.value);
-});
+provide<ProvideForceActiveMenu>('forceActiveMenu', (pageName: string) => {
+  forceActiveMenu(route, pageName)
+  setFormattedMenu(topMenu.value)
+})
 
 watch(topMenu, () => {
-  setFormattedMenu(topMenu.value);
-});
+  setFormattedMenu(topMenu.value)
+})
 
 watch(
   computed(() => route.path),
   () => {
-    delete route.forceActiveMenu;
+    delete route.forceActiveMenu
   }
-);
+)
 
 onMounted(() => {
-  setFormattedMenu(topMenu.value);
-});
+  setFormattedMenu(topMenu.value)
+})
 </script>
 
 <template>
@@ -211,7 +211,7 @@ onMounted(() => {
               :key="fakerKey"
               :class="[
                 'cursor-pointer relative flex items-center',
-                { 'mt-5': fakerKey },
+                { 'mt-5': fakerKey }
               ]"
             >
               <div class="relative flex-none w-12 h-12 mr-1 image-fit">
@@ -293,15 +293,15 @@ onMounted(() => {
             'relative [&:hover>ul]:block [&:hover>a>div:nth-child(2)>svg]:-rotate-90',
             {
               '[&:hover>a>div:nth-child(1)]:before:bg-white/5 [&:hover>a>div:nth-child(1)]:before:dark:bg-darkmode-500/70':
-                !menu.active,
-            },
+                !menu.active
+            }
           ]"
         >
           <MenuLink
             :class="{
               [`opacity-0 translate-y-[50px] animate-[0.4s_ease-in-out_0.3s_intro-menu] animate-fill-mode-forwards animate-delay-${
                 (menuKey + 1) * 10
-              }`]: !menu.active,
+              }`]: !menu.active
             }"
             :menu="menu"
             level="first"
@@ -322,7 +322,7 @@ onMounted(() => {
               <ul
                 v-if="subMenu.subMenu"
                 :class="[
-                  'left-[100%] ml-0 shadow-[0px_3px_20px_#0000000b] bg-primary hidden w-56 absolute rounded-md z-20 px-0 top-0 mt-0 before:block before:absolute before:w-full before:h-full before:bg-black/10 before:inset-0 before:rounded-md before:z-[-1] dark:bg-darkmode-600 dark:shadow-[0px_3px_7px_#0000001c]',
+                  'left-[100%] ml-0 shadow-[0px_3px_20px_#0000000b] bg-primary hidden w-56 absolute rounded-md z-20 px-0 top-0 mt-0 before:block before:absolute before:w-full before:h-full before:bg-black/10 before:inset-0 before:rounded-md before:z-[-1] dark:bg-darkmode-600 dark:shadow-[0px_3px_7px_#0000001c]'
                 ]"
               >
                 <li

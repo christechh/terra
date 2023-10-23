@@ -1,50 +1,50 @@
 <script setup lang="ts">
-import _ from "lodash";
-import { init, reInit } from "./tiny-slider";
+import _ from 'lodash'
+import { init, reInit } from './tiny-slider'
 import {
   TinySliderInstance,
-  TinySliderSettings,
-} from "tiny-slider/src/tiny-slider";
-import { HTMLAttributes, ref, onMounted, inject } from "vue";
+  TinySliderSettings
+} from 'tiny-slider/src/tiny-slider'
+import { HTMLAttributes, ref, onMounted, inject } from 'vue'
 
 export interface TinySliderElement extends HTMLDivElement {
-  tns: TinySliderInstance;
+  tns: TinySliderInstance
 }
 
-export type ProvideTinySlider = (el: TinySliderElement) => void;
+export type ProvideTinySlider = (el: TinySliderElement) => void
 
 export interface TinySliderProps extends /* @vue-ignore */ HTMLAttributes {
-  refKey?: string;
-  options?: TinySliderSettings;
+  refKey?: string
+  options?: TinySliderSettings
 }
 
-const props = defineProps<TinySliderProps>();
+const props = defineProps<TinySliderProps>()
 
-const sliderRef = ref<TinySliderElement>();
+const sliderRef = ref<TinySliderElement>()
 
 const bindInstance = (el: TinySliderElement) => {
   if (props.refKey) {
-    const bind = inject<ProvideTinySlider>(`bind[${props.refKey}]`, () => {});
+    const bind = inject<ProvideTinySlider>(`bind[${props.refKey}]`, () => {})
     if (bind) {
-      bind(el);
+      bind(el)
     }
   }
-};
+}
 
 const vSliderDirective = {
   mounted(el: TinySliderElement) {
-    init(el, props);
+    init(el, props)
   },
   updated(el: TinySliderElement) {
-    reInit(el);
-  },
-};
+    reInit(el)
+  }
+}
 
 onMounted(() => {
   if (sliderRef.value) {
-    bindInstance(sliderRef.value);
+    bindInstance(sliderRef.value)
   }
-});
+})
 </script>
 
 <template>

@@ -1,56 +1,56 @@
 <script setup lang="ts">
-  import { useRoute } from "vue-router";
-  import logoUrl from "../../assets/images/logo.svg";
-  import Divider from "./Divider.vue";
-  import Menu from "./Menu.vue";
-  import TopBar from "../../components/TopBar";
-  // import DarkModeSwitcher from "../../components/DarkModeSwitcher";
-  // import MainColorSwitcher from "../../components/MainColorSwitcher";
-  // import MobileMenu from "../../components/MobileMenu";
-  import { useSideMenuStore } from "../../stores/side-menu";
-  import {
-    ProvideForceActiveMenu,
-    forceActiveMenu,
-    Route,
-    FormattedMenu,
-    nestedMenu,
-    enter,
-    leave,
-  } from "./side-menu";
-  import { watch, reactive, computed, onMounted, provide } from "vue";
-  import CommonModal from "../../components/Modals/CommonModal";
-  import RedirectTo from "../../components/RedirectTo";
-  import CommonNotifications from "../../components/Notifications/CommonNotifications";
+import { useRoute } from 'vue-router'
+import logoUrl from '../../assets/images/logo.svg'
+import Divider from './Divider.vue'
+import Menu from './Menu.vue'
+import TopBar from '../../components/TopBar'
+// import DarkModeSwitcher from "../../components/DarkModeSwitcher";
+// import MainColorSwitcher from "../../components/MainColorSwitcher";
+// import MobileMenu from "../../components/MobileMenu";
+import { useSideMenuStore } from '../../stores/side-menu'
+import {
+  ProvideForceActiveMenu,
+  forceActiveMenu,
+  Route,
+  FormattedMenu,
+  nestedMenu,
+  enter,
+  leave
+} from './side-menu'
+import { watch, reactive, computed, onMounted, provide } from 'vue'
+import CommonModal from '../../components/Modals/CommonModal'
+import RedirectTo from '../../components/RedirectTo'
+import CommonNotifications from '../../components/Notifications/CommonNotifications'
 
-  const route: Route = useRoute();
-  let formattedMenu = reactive<Array<FormattedMenu | "divider">>([]);
-  const setFormattedMenu = (
-    computedFormattedMenu: Array<FormattedMenu | "divider">
-  ) => {
-    Object.assign(formattedMenu, computedFormattedMenu);
-  };
-  const sideMenuStore = useSideMenuStore();
-  const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route));
+const route: Route = useRoute()
+let formattedMenu = reactive<Array<FormattedMenu | 'divider'>>([])
+const setFormattedMenu = (
+  computedFormattedMenu: Array<FormattedMenu | 'divider'>
+) => {
+  Object.assign(formattedMenu, computedFormattedMenu)
+}
+const sideMenuStore = useSideMenuStore()
+const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route))
 
-  provide<ProvideForceActiveMenu>("forceActiveMenu", (pageName: string) => {
-    forceActiveMenu(route, pageName);
-    setFormattedMenu(sideMenu.value);
-  });
+provide<ProvideForceActiveMenu>('forceActiveMenu', (pageName: string) => {
+  forceActiveMenu(route, pageName)
+  setFormattedMenu(sideMenu.value)
+})
 
-  watch(sideMenu, () => {
-    setFormattedMenu(sideMenu.value);
-  });
+watch(sideMenu, () => {
+  setFormattedMenu(sideMenu.value)
+})
 
-  watch(
-    computed(() => route.path),
-    () => {
-      delete route.forceActiveMenu;
-    }
-  );
+watch(
+  computed(() => route.path),
+  () => {
+    delete route.forceActiveMenu
+  }
+)
 
-  onMounted(() => {
-    setFormattedMenu(sideMenu.value);
-  });
+onMounted(() => {
+  setFormattedMenu(sideMenu.value)
+})
 </script>
 
 <template>
@@ -89,7 +89,7 @@
                 // Animation
                 `opacity-0 animate-[0.4s_ease-in-out_0.1s_intro-divider] animate-fill-mode-forwards animate-delay-${
                   (menuKey + 1) * 10
-                }`,
+                }`
               ]"
               :key="'divider-' + menuKey"
             ></Divider>
@@ -99,7 +99,7 @@
                   // Animation
                   [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                     (menuKey + 1) * 10
-                  }`]: !menu.active,
+                  }`]: !menu.active
                 }"
                 :menu="menu"
                 :formattedMenuState="[formattedMenu, setFormattedMenu]"
@@ -120,7 +120,7 @@
                         // Animation
                         [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                           (subMenuKey + 1) * 10
-                        }`]: !subMenu.active,
+                        }`]: !subMenu.active
                       }"
                       :menu="subMenu"
                       :formattedMenuState="[formattedMenu, setFormattedMenu]"
@@ -147,12 +147,12 @@
                               // Animation
                               [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
                                 (lastSubMenuKey + 1) * 10
-                              }`]: !lastSubMenu.active,
+                              }`]: !lastSubMenu.active
                             }"
                             :menu="lastSubMenu"
                             :formattedMenuState="[
                               formattedMenu,
-                              setFormattedMenu,
+                              setFormattedMenu
                             ]"
                             level="third"
                           ></Menu>

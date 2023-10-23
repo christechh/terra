@@ -1,3 +1,3 @@
-import WarnningModal from "./WarnningModal.vue";
+import WarnningModal from './WarnningModal.vue'
 
-export default WarnningModal;
+export default WarnningModal

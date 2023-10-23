@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { RouterLinkProps } from "vue-router";
-import { computed, LiHTMLAttributes, inject } from "vue";
-import { ProvideBeradcrumb } from "./Breadcrumb.vue";
+import { RouterLinkProps } from 'vue-router'
+import { computed, LiHTMLAttributes, inject } from 'vue'
+import { ProvideBeradcrumb } from './Breadcrumb.vue'
 
 interface LinkProps extends /* @vue-ignore */ LiHTMLAttributes {
-  to?: RouterLinkProps["to"];
-  active?: boolean;
-  index?: number;
+  to?: RouterLinkProps['to']
+  active?: boolean
+  index?: number
 }
 
 const { to, active, index } = withDefaults(defineProps<LinkProps>(), {
-  to: "",
+  to: '',
   active: false,
-  index: 0,
-});
+  index: 0
+})
 
-const breadcrumb = inject<ProvideBeradcrumb>("breadcrumb");
+const breadcrumb = inject<ProvideBeradcrumb>('breadcrumb')
 
 const computedClass = computed(() => [
-  index > 0 && "relative ml-5 pl-0.5",
+  index > 0 && 'relative ml-5 pl-0.5',
   breadcrumb &&
     !breadcrumb.light &&
     index > 0 &&
@@ -27,13 +27,13 @@ const computedClass = computed(() => [
     breadcrumb.light &&
     index > 0 &&
     "before:content-[''] before:w-[14px] before:h-[14px] before:bg-bredcrumb-chevron-light before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0",
-  index > 0 && "dark:before:bg-bredcrumb-chevron-darkmode",
+  index > 0 && 'dark:before:bg-bredcrumb-chevron-darkmode',
   breadcrumb &&
     !breadcrumb.light &&
     active &&
-    "text-slate-800 cursor-text dark:text-slate-400",
-  breadcrumb && breadcrumb.light && active && "text-white/70",
-]);
+    'text-slate-800 cursor-text dark:text-slate-400',
+  breadcrumb && breadcrumb.light && active && 'text-white/70'
+])
 </script>
 
 <template>

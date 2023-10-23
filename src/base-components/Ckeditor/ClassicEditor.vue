@@ -1,62 +1,64 @@
 <script setup lang="ts">
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { ref, onMounted, inject } from "vue";
-import { CkeditorElement, init  ,updateDataNew } from "./ckeditor";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { ref, onMounted, inject } from 'vue'
+import { CkeditorElement, init, updateDataNew } from './ckeditor'
 
-export type ProvideClassicEditor = (el: CkeditorElement) => void;
-
+export type ProvideClassicEditor = (el: CkeditorElement) => void
 
 interface CkeditorProps {
-  modelValue: string;
-  config?: any;
-  as?: string | object;
-  disabled?: boolean;
-  refKey?: string;
+  modelValue: string
+  config?: any
+  as?: string | object
+  disabled?: boolean
+  refKey?: string
 }
 
 interface CkeditorEmit {
-  (e: "update:modelValue", value: string): void;
-  (e: "focus", value: string, editor: any): void;
-  (e: "blur", value: string, editor: any): void;
-  (e: "ready", editor: string): void;
+  (e: 'update:modelValue', value: string): void
+  (e: 'focus', value: string, editor: any): void
+  (e: 'blur', value: string, editor: any): void
+  (e: 'ready', editor: string): void
 }
 
 const props = withDefaults(defineProps<CkeditorProps>(), {
-  as: "div",
-  config: {},
-});
+  as: 'div',
+  config: {}
+})
 
-const emit = defineEmits<CkeditorEmit>();
-const editorRef = ref<CkeditorElement>();
-const cacheData = ref("");
+const emit = defineEmits<CkeditorEmit>()
+const editorRef = ref<CkeditorElement>()
+const cacheData = ref('')
 
 const bindInstance = (el: CkeditorElement) => {
   if (props.refKey) {
-    const bind = inject<ProvideClassicEditor>(`bind[${props.refKey}]`);
+    const bind = inject<ProvideClassicEditor>(`bind[${props.refKey}]`)
     if (bind) {
-      bind(el);
+      bind(el)
     }
   }
-};
+}
 
 const vEditorDirective = {
   mounted(el: CkeditorElement) {
-    init(el, ClassicEditor, { props, emit, cacheData });
-  },
-};
+    init(el, ClassicEditor, { props, emit, cacheData })
+  }
+}
 
 onMounted(() => {
   if (editorRef.value) {
-    bindInstance(editorRef.value);
+    bindInstance(editorRef.value)
   }
-});
-//@ts-ignore
-const forceRender = (input:string) => { updateDataNew(editorRef.value,input)};
+})
 
+const forceRender = (input: string) => {
+  if (editorRef.value) {
+    updateDataNew(editorRef.value, input)
+  }
+}
 
 defineExpose({
-  forceRender,
-});
+  forceRender
+})
 </script>
 
 <template>

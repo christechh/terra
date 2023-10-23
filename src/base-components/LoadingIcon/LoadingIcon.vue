@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useDarkModeStore } from "../../stores/dark-mode";
+import { computed } from 'vue'
+import { useDarkModeStore } from '../../stores/dark-mode'
 
 const props = withDefaults(
   defineProps<{
     icon:
-      | "audio"
-      | "ball-triangle"
-      | "bars"
-      | "circles"
-      | "grid"
-      | "hearts"
-      | "oval"
-      | "puff"
-      | "rings"
-      | "spinning-circles"
-      | "tail-spin"
-      | "three-dots";
-    color?: string;
+      | 'audio'
+      | 'ball-triangle'
+      | 'bars'
+      | 'circles'
+      | 'grid'
+      | 'hearts'
+      | 'oval'
+      | 'puff'
+      | 'rings'
+      | 'spinning-circles'
+      | 'tail-spin'
+      | 'three-dots'
+    color?: string
   }>(),
   {
-    color: "#2d3748",
+    color: '#2d3748'
   }
-);
+)
 
-const darkMode = computed(() => useDarkModeStore().darkMode);
+const darkMode = computed(() => useDarkModeStore().darkMode)
 const iconColor = computed(() => {
-  return !darkMode.value ? props.color : "#ffffff";
-});
-const { icon } = props;
+  return !darkMode.value ? props.color : '#ffffff'
+})
+const { icon } = props
 </script>
 
 <template>

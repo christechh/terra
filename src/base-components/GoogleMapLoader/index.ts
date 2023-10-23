@@ -1,5 +1,5 @@
-import GoogleMapLoader from "./GoogleMapLoader.vue";
+import GoogleMapLoader from './GoogleMapLoader.vue'
 
-export type { Init } from "./GoogleMapLoader.vue";
+export type { Init } from './GoogleMapLoader.vue'
 
-export default GoogleMapLoader;
+export default GoogleMapLoader

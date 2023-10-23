@@ -1,101 +1,101 @@
 <script setup lang="ts">
-  import { PropType, computed, ref, onMounted, watch } from "vue";
-  import { Dialog } from "../../../base-components/Headless";
-  import Button from "../../../base-components/Button";
-  import { Colors } from "../../../utils/design-patterns";
-  import {
-    FormLabel,
-    FormSwitch,
-    FormInput,
-    FormSelect,
-  } from "../../../base-components/Form";
-  import { ISimpleFormButtons, ISimpleFormInputs } from "./types";
+import { PropType, computed, ref, onMounted, watch } from 'vue'
+import { Dialog } from '../../../base-components/Headless'
+import Button from '../../../base-components/Button'
+import { Colors } from '../../../utils/design-patterns'
+import {
+  FormLabel,
+  FormSwitch,
+  FormInput,
+  FormSelect
+} from '../../../base-components/Form'
+import { ISimpleFormButtons, ISimpleFormInputs } from './types'
 
-  defineOptions({
-    name: "SimpleFormModal",
-  });
-  const props = defineProps({
-    title: {
-      type: String,
-      required: true,
-    },
-    initForm: {
-      type: Object as PropType<any>,
-      default: () => ({}),
-    },
-    inputs: {
-      type: Array as PropType<ISimpleFormInputs[]>,
-      required: true,
-    },
-    buttons: {
-      type: Array as PropType<ISimpleFormButtons[]>,
-      required: true,
-    },
-  });
-  const emits = defineEmits(["submit"]);
-
-  const open = ref(false);
-  // const title = ref("");
-  const form = ref<any>(props.initForm);
-  const normalizeButtons = computed(() =>
-    props.buttons.map((button) => {
-      const defaultProps = {
-        variant: "outline-secondary",
-        onClick: () => {},
-      };
-      return {
-        ...defaultProps,
-        ...button,
-      };
-    })
-  );
-
-  const setOpen = (value: boolean) => {
-    open.value = value;
-  };
-  const handleClick = (onClick: ISimpleFormButtons["onClick"], event: any) => {
-    const data = {
-      form: form.value,
-      event,
-    };
-    onClick(data);
-  };
-  const getComponent = (componentName: string) => {
-    switch (componentName) {
-      case "input":
-        return FormInput;
-      case "switch":
-        return FormSwitch;
-      case "select":
-        return FormSelect;
-      default:
-        return FormInput;
-    }
-  };
-  const handleInput = (key: string, value: string) => {
-    form.value[key] = value;
-  };
-  const handleSubmit = () => {
-    emits("submit", { form: form.value })
+defineOptions({
+  name: 'SimpleFormModal'
+})
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  initForm: {
+    type: Object as PropType<any>,
+    default: () => ({})
+  },
+  inputs: {
+    type: Array as PropType<ISimpleFormInputs[]>,
+    required: true
+  },
+  buttons: {
+    type: Array as PropType<ISimpleFormButtons[]>,
+    required: true
   }
+})
+const emits = defineEmits(['submit'])
 
-  onMounted(() => {
-    form.value = props.inputs.reduce((acc, input) => {
-      acc[input.name] = "";
-      return acc;
-    }, {} as any);
-  });
-
-  watch(
-    () => props.initForm,
-    () => {
-      form.value = props.initForm;
+const open = ref(false)
+// const title = ref("");
+const form = ref<any>(props.initForm)
+const normalizeButtons = computed(() =>
+  props.buttons.map((button) => {
+    const defaultProps = {
+      variant: 'outline-secondary',
+      onClick: () => {}
     }
-  );
+    return {
+      ...defaultProps,
+      ...button
+    }
+  })
+)
 
-  defineExpose({
-    setOpen,
-  });
+const setOpen = (value: boolean) => {
+  open.value = value
+}
+const handleClick = (onClick: ISimpleFormButtons['onClick'], event: any) => {
+  const data = {
+    form: form.value,
+    event
+  }
+  onClick(data)
+}
+const getComponent = (componentName: string) => {
+  switch (componentName) {
+    case 'input':
+      return FormInput
+    case 'switch':
+      return FormSwitch
+    case 'select':
+      return FormSelect
+    default:
+      return FormInput
+  }
+}
+const handleInput = (key: string, value: string) => {
+  form.value[key] = value
+}
+const handleSubmit = () => {
+  emits('submit', { form: form.value })
+}
+
+onMounted(() => {
+  form.value = props.inputs.reduce((acc, input) => {
+    acc[input.name] = ''
+    return acc
+  }, {} as any)
+})
+
+watch(
+  () => props.initForm,
+  () => {
+    form.value = props.initForm
+  }
+)
+
+defineExpose({
+  setOpen
+})
 </script>
 
 <template>
@@ -105,7 +105,7 @@
       :open="open"
       @close="
         () => {
-          setOpen(false);
+          setOpen(false)
         }
       "
     >
@@ -128,7 +128,7 @@
               <FormLabel :htmlFor="`modal-form-${index}`">
                 {{ input.label }}
               </FormLabel>
-              
+
               <component
                 :id="`modal-form-${index}`"
                 :is="getComponent(input?.component || 'input')"
