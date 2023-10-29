@@ -1,4 +1,4 @@
-const DesignPattern = {
+const DesignTemplate = {
   main: {
     theme1: '#02513F',
     theme2: '#E3F2A5',
@@ -34,4 +34,4 @@ const DesignPattern = {
   }
 }
 
-export default DesignPattern
+export default DesignTemplate

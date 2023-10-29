@@ -2,7 +2,7 @@
 const plugin = require('tailwindcss/plugin')
 const colors = require('tailwindcss/colors')
 const { parseColor } = require('tailwindcss/lib/util/color')
-import DesignPattern from './src/types/design-pattern'
+import DesignTemplate from './src/types/design-template'
 
 /** Converts HEX color to RGB */
 const toRGB = (value) => {
@@ -128,47 +128,47 @@ module.exports = {
           '--color-danger': toRGB(colors.red['600']),
           '--color-light': toRGB(colors.slate['100']),
           '--color-dark': toRGB(colors.slate['800']),
-          '--color-primary': toRGB(DesignPattern.main.theme1),
-          '--color-secondary': toRGB(DesignPattern.main.theme2),
-          '--color-warning': toRGB(DesignPattern.main.warning),
-          '--color-theme1': toRGB(DesignPattern.main.theme1),
-          '--color-theme2': toRGB(DesignPattern.main.theme2),
-          '--color-theme3': toRGB(DesignPattern.main.theme3),
-          '--color-theme4': toRGB(DesignPattern.main.theme4),
-          '--color-disabled_bg': toRGB(DesignPattern.main.disabled_bg),
+          '--color-primary': toRGB(DesignTemplate.main.theme1),
+          '--color-secondary': toRGB(DesignTemplate.main.theme2),
+          '--color-warning': toRGB(DesignTemplate.main.warning),
+          '--color-theme1': toRGB(DesignTemplate.main.theme1),
+          '--color-theme2': toRGB(DesignTemplate.main.theme2),
+          '--color-theme3': toRGB(DesignTemplate.main.theme3),
+          '--color-theme4': toRGB(DesignTemplate.main.theme4),
+          '--color-disabled_bg': toRGB(DesignTemplate.main.disabled_bg),
           '--opacity-disabled_bg': '0.3',
-          '--color-disabled_font': toRGB(DesignPattern.main.disabled_font),
-          '--color-dashboard_bg': toRGB(DesignPattern.main.dashboard_bg),
-          '--color-content_bg': toRGB(DesignPattern.main.content_bg),
-          '--color-input_bg': toRGB(DesignPattern.main.input_bg),
-          '--color-font': toRGB(DesignPattern.main.font),
+          '--color-disabled_font': toRGB(DesignTemplate.main.disabled_font),
+          '--color-dashboard_bg': toRGB(DesignTemplate.main.dashboard_bg),
+          '--color-content_bg': toRGB(DesignTemplate.main.content_bg),
+          '--color-input_bg': toRGB(DesignTemplate.main.input_bg),
+          '--color-font': toRGB(DesignTemplate.main.font),
           '--opacity-font': '1',
-          '--color-desc_font': toRGB(DesignPattern.main.desc_font),
+          '--color-desc_font': toRGB(DesignTemplate.main.desc_font),
           '--color-placeholder_font': toRGB(
-            DesignPattern.main.placeholder_font
+            DesignTemplate.main.placeholder_font
           ),
           '--opacity-placeholder_font': '0.25'
         },
         '.dark': {
-          '--color-primary': toRGB(DesignPattern.dark.theme1),
-          '--color-secondary': toRGB(DesignPattern.dark.theme2),
-          '--color-warning': toRGB(DesignPattern.dark.warning),
-          '--color-theme1': toRGB(DesignPattern.dark.theme1),
-          '--color-theme2': toRGB(DesignPattern.dark.theme2),
-          '--color-theme3': toRGB(DesignPattern.dark.theme3),
-          '--color-theme4': toRGB(DesignPattern.dark.theme4),
+          '--color-primary': toRGB(DesignTemplate.dark.theme1),
+          '--color-secondary': toRGB(DesignTemplate.dark.theme2),
+          '--color-warning': toRGB(DesignTemplate.dark.warning),
+          '--color-theme1': toRGB(DesignTemplate.dark.theme1),
+          '--color-theme2': toRGB(DesignTemplate.dark.theme2),
+          '--color-theme3': toRGB(DesignTemplate.dark.theme3),
+          '--color-theme4': toRGB(DesignTemplate.dark.theme4),
           '--color-html_bg': '27 37 59',
-          '--color-disabled_bg': toRGB(DesignPattern.dark.disabled_bg),
+          '--color-disabled_bg': toRGB(DesignTemplate.dark.disabled_bg),
           '--opacity-disabled_bg': '1',
-          '--color-disabled_font': toRGB(DesignPattern.dark.disabled_font),
-          '--color-dashboard_bg': toRGB(DesignPattern.dark.dashboard_bg),
-          '--color-content_bg': toRGB(DesignPattern.dark.content_bg),
-          '--color-input_bg': toRGB(DesignPattern.dark.input_bg),
-          '--color-font': toRGB(DesignPattern.dark.font),
+          '--color-disabled_font': toRGB(DesignTemplate.dark.disabled_font),
+          '--color-dashboard_bg': toRGB(DesignTemplate.dark.dashboard_bg),
+          '--color-content_bg': toRGB(DesignTemplate.dark.content_bg),
+          '--color-input_bg': toRGB(DesignTemplate.dark.input_bg),
+          '--color-font': toRGB(DesignTemplate.dark.font),
           '--opacity-font': '0.87',
-          '--color-desc_font': toRGB(DesignPattern.dark.desc_font),
+          '--color-desc_font': toRGB(DesignTemplate.dark.desc_font),
           '--color-placeholder_font': toRGB(
-            DesignPattern.dark.placeholder_font
+            DesignTemplate.dark.placeholder_font
           ),
           '--opacity-placeholder_font': '0.25',
 

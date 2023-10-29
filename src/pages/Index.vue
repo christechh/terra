@@ -3,6 +3,9 @@ import _ from 'lodash'
 import DarkModeSwitcher from '../components/DarkModeSwitcher'
 import { getColor } from '../utils/colors'
 const primaryColor = getColor('primary', 0.9)
+import designImg1 from '../assets/images/design-template/design-template1.png'
+// import designImg2 from '../assets/images/design-template/design-template2.png'
+import designImg3 from '../assets/images/design-template/design-template3.png'
 </script>
 
 <template>
@@ -18,7 +21,7 @@ const primaryColor = getColor('primary', 0.9)
     <br />
     <br />
     <div>
-      <div style="color: red">design pattern 使用方式</div>
+      <div style="color: red">design template 使用方式</div>
       <div>
         (如果要自己定義,需要用到 tailwind.config.js 定義變數顏色 / _global.css
         定義共用css)
@@ -223,6 +226,11 @@ const primaryColor = getColor('primary', 0.9)
           </td>
         </tr>
       </table>
+    </div>
+    <br />
+    <div style="display: flex; justify-content: space-between">
+      <img :src="designImg1" style="width: 63%" />
+      <img :src="designImg3" style="width: 35%; height: 80%" />
     </div>
     <br />
     <br />
