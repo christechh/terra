@@ -1,14 +1,91 @@
 html {
   scroll-behavior: smooth;
-  background-color: theme("colors.primary");
+  background-color: theme('colors.html_bg');
+  .theme1-bg {
+    background-color: theme('colors.theme1') !important;
+  }
+  .theme1-font {
+    color: theme('colors.theme1') !important;
+  }
+  .theme1-border {
+    border-color: theme('colors.theme1') !important;
+  }
+  .theme2-bg {
+    background-color: theme('colors.theme2') !important;
+  }
+  .theme2-font {
+    color: theme('colors.theme2') !important;
+  }
+  .theme2-border {
+    border-color: theme('colors.theme2') !important;
+  }
+
+  .theme3-bg {
+    background-color: theme('colors.theme3') !important;
+  }
+  .theme3-font {
+    color: theme('colors.theme3') !important;
+  }
+  .theme3-border {
+    border-color: theme('colors.theme3') !important;
+  }
+  .theme4-bg {
+    background-color: theme('colors.theme4') !important;
+  }
+  .theme4-font {
+    color: theme('colors.theme4') !important;
+  }
+  .theme4-border {
+    border-color: theme('colors.theme4') !important;
+  }
+  .warning-bg {
+    background-color: theme('colors.warning') !important;
+  }
+  .warning-font {
+    color: theme('colors.warning') !important;
+  }
+  .warning-border {
+    border-color: theme('colors.warning') !important;
+  }
+  .disabled-font {
+    color: theme('colors.disabled_font') !important;
+  }
+  .dashboard-bg {
+    background-color: theme('colors.dashboard_bg') !important;
+  }
+  .content-bg {
+    background-color: theme('colors.content_bg') !important;
+  }
+  button:disabled,
+  a:disabled,
+  .button-disabled {
+    background-color: theme('colors.disabled_bg');
+  }
+
+  input[type='text'],
+  input[type='password'],
+  input[type='number'] {
+    background-color: theme('colors.input_bg');
+  }
+  input[type='text']::placeholder,
+  input[type='password']::placeholder,
+  input[type='number']::placeholder {
+    color: theme('colors.placeholder_font');
+  }
+  .theme-font {
+    color: theme('colors.font') !important;
+  }
+  .desc-font {
+    color: theme('colors.desc_font') !important;
+  }
   &.dark {
-    background-color: theme("colors.darkmode.800");
+    background-color: theme('colors.html_bg');
     body {
-      color: theme("colors.slate.300");
+      color: theme('colors.font');
       *,
       ::before,
       ::after {
-        border-color: theme("colors.white" / 5%);
+        border-color: theme('colors.white' / 5%);
       }
     }
   }
@@ -16,14 +93,14 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    padding: theme("spacing.3");
-    font-family: theme("fontFamily.roboto");
-    font-size: theme("fontSize.sm");
-    line-height: theme("lineHeight.5");
-    color: theme("colors.slate.800");
+    padding: theme('spacing.3');
+    font-family: theme('fontFamily.roboto');
+    font-size: theme('fontSize.sm');
+    line-height: theme('lineHeight.5');
+    color: theme('colors.font');
     @media screen(sm) {
-      padding-left: theme("spacing.8");
-      padding-right: theme("spacing.8");
+      padding-left: theme('spacing.8');
+      padding-right: theme('spacing.8');
     }
   }
 }
