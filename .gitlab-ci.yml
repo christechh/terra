@@ -1,0 +1,29 @@
+image: node:lts-hydrogen
+variables:
+  HUSKY: 0
+
+stages:
+  - build-deploy
+
+cache:
+  key:
+    files:
+      - pnpm-lock.yaml
+  paths:
+    - .pnpm-store
+before_script:
+  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+  - pnpm config set store-dir .pnpm-store
+
+build-deploy:
+  stage: build-deploy
+  script:
+    - pnpm install --no-frozen-lockfile
+    - pnpm build
+    - npm install -g firebase-tools
+    - firebase deploy --token "$FIREBASE_TOKEN"
+  only:
+    refs:
+      - dev
+    variables:
+      - $CI_PROJECT_ID == "287"
