@@ -18,8 +18,8 @@ export const useSideMenuStore = defineStore('sideMenu', {
     menu: [
       {
         icon: 'BookOpen',
-        pageName: 'index',
-        title: '首頁'
+        pageName: 'links',
+        title: '我的連結'
       }
     ]
   })

@@ -2,17 +2,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 import SideMenu from '../layouts/SideMenu/SideMenu.vue'
 import Login from '../pages/Login.vue'
 // import CampaignList from "../pages/CampaignList.vue";
-import Index from '../pages/Index.vue'
+import Landing from '../pages/Landing.vue'
+import Links from '../pages/Links.vue'
 
 const routes = [
   {
     path: '/',
+    name: 'landing-page',
+    component: Landing
+  },
+  {
+    path: '/dashboard',
     component: SideMenu,
     children: [
       {
-        path: '/',
-        name: 'index',
-        component: Index
+        path: '/dashboard',
+        name: 'links',
+        component: Links
       }
     ]
   },

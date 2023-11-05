@@ -58,14 +58,14 @@ onMounted(() => {
     <!-- <DarkModeSwitcher />
     <MainColorSwitcher />
     <MobileMenu /> -->
-    <div class="flex mt-[4.7rem] md:mt-0">
+    <div class="mt-[4.7rem] flex md:mt-0">
       <!-- BEGIN: Side Menu -->
       <nav
-        class="pr-5 pb-16 overflow-x-hidden hidden md:block w-[85px] xl:w-[230px]"
+        class="hidden w-[85px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]"
       >
         <RouterLink
-          :to="{ name: 'index' }"
-          class="flex items-center pt-4 pl-5 intro-x"
+          :to="{ name: 'landing-page' }"
+          class="intro-x flex items-center pl-5 pt-4"
         >
           <img alt="Pinchat" class="w-100" :src="logoUrl" />
         </RouterLink>
@@ -80,7 +80,7 @@ onMounted(() => {
                 'my-6',
 
                 // Animation
-                `opacity-0 animate-[0.4s_ease-in-out_0.1s_intro-divider] animate-fill-mode-forwards animate-delay-${
+                `animate-[0.4s_ease-in-out_0.1s_intro-divider] opacity-0 animate-fill-mode-forwards animate-delay-${
                   (menuKey + 1) * 10
                 }`
               ]"
@@ -90,7 +90,7 @@ onMounted(() => {
               <Menu
                 :class="{
                   // Animation
-                  [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
+                  [`translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] opacity-0 animate-fill-mode-forwards animate-delay-${
                     (menuKey + 1) * 10
                   }`]: !menu.active
                 }"
@@ -111,7 +111,7 @@ onMounted(() => {
                     <Menu
                       :class="{
                         // Animation
-                        [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
+                        [`translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] opacity-0 animate-fill-mode-forwards animate-delay-${
                           (subMenuKey + 1) * 10
                         }`]: !subMenu.active
                       }"
@@ -138,7 +138,7 @@ onMounted(() => {
                           <Menu
                             :class="{
                               // Animation
-                              [`opacity-0 translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-${
+                              [`translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] opacity-0 animate-fill-mode-forwards animate-delay-${
                                 (lastSubMenuKey + 1) * 10
                               }`]: !lastSubMenu.active
                             }"
@@ -165,7 +165,7 @@ onMounted(() => {
       <!-- END: Side Menu -->
       <!-- BEGIN: Content -->
       <div
-        class="rounded-[30px] min-w-0 min-h-screen flex-1 pb-10 bg-slate-100 dark:bg-darkmode-700 px-4 md:px-[22px] max-w-full md:max-w-auto before:content-[''] before:w-full before:h-px before:block"
+        class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]"
       >
         <TopBar />
         <RouterView />

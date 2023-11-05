@@ -11,7 +11,7 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
 <template>
   <h2 class="intro-y mt-10 text-lg font-medium">首頁</h2>
   <div>
-    <div>{{ $t('hello') }} 登入頁面 /login</div>
+    <div>{{ $t('hello') }} landing</div>
     <br />
     <DarkModeSwitcher />
     <div :style="{ color: primaryColor }">
@@ -128,7 +128,7 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
           </td>
         </tr>
 
-         <tr>
+        <tr>
           <td class="table-border">.theme5-bg</td>
           <td class="table-border">
             <div class="theme5-bg" style="">.theme5-bg</div>
