@@ -11,7 +11,7 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
 <template>
   <h2 class="intro-y mt-10 text-lg font-medium">首頁</h2>
   <div>
-    <div>{{ $t('hello') }} 登入頁面 /dashboard/login</div>
+    <div>{{ $t('hello') }} 登入頁面 /login</div>
     <br />
     <DarkModeSwitcher />
     <div :style="{ color: primaryColor }">

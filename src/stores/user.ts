@@ -37,7 +37,7 @@ export const useUserStore = defineStore('user', {
         this.token = token
         localStorage.setItem('admin_token', token)
         localStorage.setItem('admin_account', credentials.account)
-        useRedirectToStore().redirect({ path: '/dashboard/' })
+        useRedirectToStore().redirect({ path: '/' })
       } catch (error) {
         const axiosError = error as AxiosError
         // console.log("error : ",error)

@@ -10,14 +10,14 @@ const routes = [
     component: SideMenu,
     children: [
       {
-        path: '/dashboard/',
+        path: '/',
         name: 'index',
         component: Index
       }
     ]
   },
   {
-    path: '/dashboard/login',
+    path: '/login',
     name: 'login',
     component: Login
   }
