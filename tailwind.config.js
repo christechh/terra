@@ -5,10 +5,11 @@ const { parseColor } = require('tailwindcss/lib/util/color')
 
 const DesignTemplate = {
   main: {
-    theme1: '#02513F',
-    theme2: '#E3F2A5',
-    theme3: '#F4FABD',
-    theme4: '#1D3D0E',
+    theme1: '#02B13F',
+    theme2: '#02513F',
+    theme3: '#E3F2A5',
+    theme4: '#F4FABD',
+    theme5: '#1D3D0E',
     disabled_bg: '#02B13F', // opactiy 30%
     disabled_font: '#7B7B7B',
     warning: '#FF4D4F',
@@ -21,10 +22,11 @@ const DesignTemplate = {
     placeholder_font: '#000000' // opactiy 25%
   },
   dark: {
-    theme1: '#009E37',
-    theme2: '#D7DFB3',
-    theme3: '#E9ECD0',
-    theme4: '#1D3D0E',
+    theme1: '#02B13F',
+    theme2: '#009E37',
+    theme3: '#D7DFB3',
+    theme4: '#E9ECD0',
+    theme5: '#1D3D0E',
     disabled_bg: '#31383F',
     disabled_font: '#7B7B7B',
     warning: '#FF4D4F',
@@ -68,6 +70,7 @@ module.exports = {
         theme2: 'rgb(var(--color-theme2) / <alpha-value>)',
         theme3: 'rgb(var(--color-theme3) / <alpha-value>)',
         theme4: 'rgb(var(--color-theme4) / <alpha-value>)',
+        theme5: 'rgb(var(--color-theme5) / <alpha-value>)',
         html_bg: 'rgb(var(--color-html_bg) / <alpha-value>)',
         disabled_bg:
           'rgb(var(--color-disabled_bg) / var(--opacity-disabled_bg))',
@@ -169,6 +172,7 @@ module.exports = {
           '--color-theme2': toRGB(DesignTemplate.main.theme2),
           '--color-theme3': toRGB(DesignTemplate.main.theme3),
           '--color-theme4': toRGB(DesignTemplate.main.theme4),
+          '--color-theme5': toRGB(DesignTemplate.main.theme5),
           '--color-disabled_bg': toRGB(DesignTemplate.main.disabled_bg),
           '--opacity-disabled_bg': '0.3',
           '--color-disabled_font': toRGB(DesignTemplate.main.disabled_font),
@@ -191,6 +195,7 @@ module.exports = {
           '--color-theme2': toRGB(DesignTemplate.dark.theme2),
           '--color-theme3': toRGB(DesignTemplate.dark.theme3),
           '--color-theme4': toRGB(DesignTemplate.dark.theme4),
+          '--color-theme5': toRGB(DesignTemplate.dark.theme5),
           '--color-html_bg': '27 37 59',
           '--color-disabled_bg': toRGB(DesignTemplate.dark.disabled_bg),
           '--opacity-disabled_bg': '1',

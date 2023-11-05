@@ -128,6 +128,29 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
           </td>
         </tr>
 
+         <tr>
+          <td class="table-border">.theme5-bg</td>
+          <td class="table-border">
+            <div class="theme5-bg" style="">.theme5-bg</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="table-border">.theme5-font</td>
+          <td class="table-border">
+            <div class="theme5-font" style="">.theme5-font</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="table-border">.theme5-border</td>
+          <td class="table-border">
+            <div
+              class="theme5-border"
+              style="border-style: dashed; border-width: 1px"
+            >
+              .theme5-border
+            </div>
+          </td>
+        </tr>
         <tr>
           <td class="table-border">.warning-bg</td>
           <td class="table-border">
