@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { Icon } from '../base-components/Lucide/Lucide.vue'
-
+import i18n from '../i18n'
 export interface Menu {
   icon: Icon
   title: string
@@ -19,7 +19,7 @@ export const useSideMenuStore = defineStore('sideMenu', {
       {
         icon: 'BookOpen',
         pageName: 'links',
-        title: '我的連結'
+        title: i18n.global.t('my-links')
       }
     ]
   })

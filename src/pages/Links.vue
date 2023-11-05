@@ -2,239 +2,101 @@
 import _ from 'lodash'
 import DarkModeSwitcher from '../components/DarkModeSwitcher'
 import { getColor } from '../utils/colors'
+import { ref } from 'vue'
+const searchKeyword = ref('')
 const primaryColor = getColor('primary', 0.9)
-import designImg1 from '../assets/images/design-template/design-template1.png'
-// import designImg2 from '../assets/images/design-template/design-template2.png'
-import designImg3 from '../assets/images/design-template/design-template3.png'
+const links = [
+  {
+    id: 1,
+    name: '91APP 05.22.2023 創建',
+    avatar:
+      'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/user/e2669806e2830fc502f8835f2e6e4abe.png'
+  },
+  {
+    id: 2,
+    name: 'test group',
+    avatar:
+      'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/user/e2669806e2830fc502f8835f2e6e4abe.png'
+  },
+  {
+    id: 3,
+    name: '藥局',
+    avatar:
+      'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/user/e2669806e2830fc502f8835f2e6e4abe.png'
+  }
+]
 </script>
 
 <template>
-  <h2 class="intro-y mt-10 text-lg font-medium">首頁</h2>
-  <div>
-    <div>{{ $t('hello') }} 登入頁面 /login</div>
-    <br />
-    <DarkModeSwitcher />
-    <div :style="{ color: primaryColor }">
-      store取得顏色方式: primaryColor = getColor('primary', 0.9) =>
-      {{ primaryColor }}
-    </div>
-    <br />
-    <br />
-    <div>
-      <div style="color: red">design template 使用方式</div>
-      <div>
-        (如果要自己定義,需要用到 tailwind.config.js 定義變數顏色 / _global.css
-        定義共用css)
+  <div class="min-h-screen rounded-xl bg-white p-6">
+    <div class="space-y-3">
+      <div class="flex flex-wrap gap-3">
+        <div class="flex gap-3">
+          <button
+            class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary px-5 text-base font-bold text-primary"
+          >
+            {{ $t('create-new-link') }}
+            <img
+              width="20"
+              height="20"
+              src="@/assets/images/new-link.svg"
+              alt=""
+            />
+          </button>
+          <button
+            class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary bg-primary px-5 text-base font-bold text-primary text-white"
+          >
+            {{ $t('all-chat-rooms') }}
+            <img
+              width="20"
+              height="20"
+              src="@/assets/images/arrow-right.png"
+              alt=""
+            />
+          </button>
+        </div>
+        <div
+          class="ml-auto flex h-[40px] items-center justify-center gap-2 rounded-lg bg-gray-100 pr-2"
+        >
+          <input
+            ref="searchInput"
+            class="rounded-lg border-none bg-gray-100 outline-none"
+            v-model="searchKeyword"
+            :placeholder="$t('search')"
+          />
+          <img width="20" height="20" src="@/assets/images/search.png" alt="" />
+        </div>
       </div>
-      <br />
-      <table style="width: 80%; text-align: left" class="table-border">
-        <tr>
-          <th style="width: 25%" class="table-border">class name</th>
-          <th style="width: 25%" class="table-border">範例</th>
-        </tr>
-        <tr>
-          <td class="table-border">.theme1-bg</td>
-          <td class="table-border">
-            <div class="theme1-bg" style="">.theme1-bg</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme1-font</td>
-          <td class="table-border">
-            <div class="theme1-font" style="">.theme1-font</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme1-border</td>
-          <td class="table-border">
-            <div
-              class="theme1-border"
-              style="border-style: dashed; border-width: 1px"
-            >
-              .theme1-border
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="table-border">.theme2-bg</td>
-          <td class="table-border">
-            <div class="theme2-bg" style="">.theme2-bg</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme2-font</td>
-          <td class="table-border">
-            <div class="theme2-font" style="">.theme2-font</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme2-border</td>
-          <td class="table-border">
-            <div
-              class="theme2-border"
-              style="border-style: dashed; border-width: 1px"
-            >
-              .theme2-border
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="table-border">.theme3-bg</td>
-          <td class="table-border">
-            <div class="theme3-bg" style="">.theme3-bg</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme3-font</td>
-          <td class="table-border">
-            <div class="theme3-font" style="">.theme3-font</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme3-border</td>
-          <td class="table-border">
-            <div
-              class="theme3-border"
-              style="border-style: dashed; border-width: 1px"
-            >
-              .theme3-border
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="table-border">.theme4-bg</td>
-          <td class="table-border">
-            <div class="theme4-bg" style="">.theme4-bg</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme4-font</td>
-          <td class="table-border">
-            <div class="theme4-font" style="">.theme4-font</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme4-border</td>
-          <td class="table-border">
-            <div
-              class="theme4-border"
-              style="border-style: dashed; border-width: 1px"
-            >
-              .theme4-border
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="table-border">.warning-bg</td>
-          <td class="table-border">
-            <div class="warning-bg" style="">.warning-bg</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.warning-font</td>
-          <td class="table-border">
-            <div class="warning-font" style="">.warning-font</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.warning-border</td>
-          <td class="table-border">
-            <div
-              class="warning-border"
-              style="border-style: dashed; border-width: 1px"
-            >
-              .warning-border
-            </div>
-          </td>
-        </tr>
-        <tr style="height: 1rem">
-          <td class="table-border">下方的是:依照定義設定單一class</td>
-          <td class="table-border"></td>
-        </tr>
-        <tr>
-          <td class="table-border">.disabled-font</td>
-          <td class="table-border">
-            <div class="disabled-font" style="">
-              .disabled-font (disabled文字)
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.dashboard-bg</td>
-          <td class="table-border">
-            <div class="dashboard-bg" style="">.dashboard-bg(後台背景色)</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.content-bg</td>
-          <td class="table-border">
-            <div class="content-bg" style="">.content-bg(內容背景色)</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.theme-font</td>
-          <td class="table-border">
-            <div class="theme-font" style="">.theme-font (主題的文字顏色)</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">.desc-font</td>
-          <td class="table-border">
-            <div class="desc-font" style="">.desc-font (說明文字的顏色)</div>
-          </td>
-        </tr>
-        <tr style="height: 1rem">
-          <td class="table-border">下方定義的是:複合式套用</td>
-          <td class="table-border"></td>
-        </tr>
-        <tr>
-          <td class="table-border">
-            button:disabled, a:disabled, .button-disabled
-          </td>
-          <td class="table-border">
-            <button disabled="true">button:disabled(disable按鈕底色)</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">
-            input[type='text'], input[type='password'], input[type='number'] bg
-          </td>
-          <td class="table-border">
-            <input
-              type="text"
-              style="width: 100%"
-              placeholder="input[type='text'](輸入框背景色)"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td class="table-border">
-            input[type='text']::placeholder,
-            input[type='password']::placeholder,
-            input[type='number']::placeholder placeholder文字顏色
-          </td>
-          <td class="table-border">
-            <input
-              type="text"
-              style="width: 100%"
-              placeholder="input[type='text']::placeholder(placeholder 文字顏色)"
-            />
-          </td>
-        </tr>
-      </table>
+      <div
+        v-for="link in links"
+        :key="link.id"
+        class="flex flex-col flex-wrap items-start justify-center gap-6 rounded-xl border border-gray-200 p-5 dark:border-darkmode-700 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div class="flex items-center space-x-3">
+          <img :src="link.avatar" alt="" class="h-10 w-10 rounded-full" />
+          <span
+            class="overflow-hidden text-ellipsis whitespace-nowrap font-bold text-gray-800"
+            >{{ link.name }}</span
+          >
+          <img width="18" height="18" src="@/assets/images/copy.png" alt="" />
+        </div>
+        <div class="flex items-center space-x-5">
+          <img
+            width="20"
+            height="20"
+            src="@/assets/images/qr-code_1.svg"
+            alt=""
+          />
+          <img width="20" height="20" src="@/assets/images/chat.png" alt="" />
+          <img
+            width="20"
+            height="20"
+            src="@/assets/images/setting.png"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
-    <br />
-    <div style="display: flex; justify-content: space-between">
-      <img :src="designImg1" style="width: 63%" />
-      <img :src="designImg3" style="width: 35%; height: 80%" />
-    </div>
-    <br />
-    <br />
-    <br />
   </div>
 </template>
 <style>
