@@ -60,14 +60,14 @@ const setWarningModalPreview = (value: boolean) => {
         <div class="p-5 text-center">
           <Lucide
             :icon="icon"
-            class="w-16 h-16 mx-auto mt-3"
+            class="mx-auto mt-3 h-16 w-16"
             :class="iconColor"
           />
           <div class="mt-5 text-3xl"></div>
-          <div class="mt-2 text-dark text-4xl font-bold">
+          <div class="mt-2 text-4xl font-bold text-dark">
             {{ modalText }}
           </div>
-          <div class="mt-2 text-slate-500 text-lg" v-if="content">
+          <div class="mt-2 text-lg text-slate-500" v-if="content">
             {{ content }}
           </div>
         </div>

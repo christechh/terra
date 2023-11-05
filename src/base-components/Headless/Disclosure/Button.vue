@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
@@ -11,7 +5,9 @@ import { DisclosureButton as HeadlessDisclosureButton } from '@headlessui/vue'
 import { useAttrs, computed, inject, watch } from 'vue'
 import { ProvideDisclosure } from './Disclosure/Provider.vue'
 import { ProvideGroup } from './Group.vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface ButtonProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessDisclosureButton> {
   as?: string | object

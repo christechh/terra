@@ -1,14 +1,10 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { useAttrs, computed } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface HeaderProps {
   as?: string | object
 }

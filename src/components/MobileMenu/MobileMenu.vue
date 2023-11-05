@@ -49,14 +49,14 @@ onMounted(() => {
   <!-- BEGIN: Mobile Menu -->
   <div
     :class="[
-      'w-full fixed bg-primary/90 z-[60] border-b border-white/[0.08] -mt-5 -mx-3 sm:-mx-8 mb-6 dark:bg-darkmode-800/90 md:hidden',
-      'before:content-[\'\'] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out',
+      'fixed z-[60] -mx-3 -mt-5 mb-6 w-full border-b border-white/[0.08] bg-primary/90 dark:bg-darkmode-800/90 sm:-mx-8 md:hidden',
+      'before:fixed before:inset-x-0 before:z-10 before:h-screen before:w-full before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:content-[\'\']',
       !activeMobileMenu && 'before:invisible before:opacity-0',
       activeMobileMenu && 'before:visible before:opacity-100'
     ]"
   >
-    <div class="h-[70px] px-3 sm:px-8 flex items-center">
-      <a href="" class="flex mr-auto">
+    <div class="flex h-[70px] items-center px-3 sm:px-8">
+      <a href="" class="mr-auto flex">
         <img
           alt="Midone Tailwind HTML Admin Template"
           class="w-6"
@@ -66,7 +66,7 @@ onMounted(() => {
       <a href="#" @click="(e) => e.preventDefault()">
         <Lucide
           icon="BarChart2"
-          class="w-8 h-8 text-white transform -rotate-90"
+          class="h-8 w-8 -rotate-90 transform text-white"
           @click="
             () => {
               setActiveMobileMenu(!activeMobileMenu)
@@ -79,7 +79,7 @@ onMounted(() => {
       ref="scrollableRef"
       :class="
         twMerge([
-          'h-screen z-20 top-0 left-0 w-[270px] -ml-[100%] bg-primary transition-all duration-300 ease-in-out dark:bg-darkmode-800',
+          'left-0 top-0 z-20 -ml-[100%] h-screen w-[270px] bg-primary transition-all duration-300 ease-in-out dark:bg-darkmode-800',
           '[&[data-simplebar]]:fixed [&_.simplebar-scrollbar]:before:bg-black/50',
           activeMobileMenu && 'ml-0'
         ])
@@ -89,14 +89,14 @@ onMounted(() => {
         href="#"
         @click="(e) => e.preventDefault()"
         :class="[
-          'fixed top-0 right-0 mt-4 mr-4 transition-opacity duration-200 ease-in-out',
+          'fixed right-0 top-0 mr-4 mt-4 transition-opacity duration-200 ease-in-out',
           !activeMobileMenu && 'invisible opacity-0',
           activeMobileMenu && 'visible opacity-100'
         ]"
       >
         <Lucide
           icon="XCircle"
-          class="w-8 h-8 text-white transform -rotate-90"
+          class="h-8 w-8 -rotate-90 transform text-white"
           @click="
             () => {
               setActiveMobileMenu(!activeMobileMenu)
@@ -129,14 +129,14 @@ onMounted(() => {
               <ul
                 v-if="menu.subMenu && menu.activeDropdown"
                 :class="[
-                  'bg-black/10 rounded-lg mx-4 my-1 dark:bg-darkmode-700',
+                  'mx-4 my-1 rounded-lg bg-black/10 dark:bg-darkmode-700',
                   !menu.activeDropdown && 'hidden',
                   menu.activeDropdown && 'block'
                 ]"
               >
                 <li
                   v-for="(subMenu, subMenuKey) in menu.subMenu"
-                  class="max-w-[1280px] w-full mx-auto"
+                  class="mx-auto w-full max-w-[1280px]"
                   :key="subMenuKey"
                 >
                   <Menu
@@ -154,14 +154,14 @@ onMounted(() => {
                     <ul
                       v-if="subMenu.subMenu && subMenu.activeDropdown"
                       :class="[
-                        'bg-black/10 rounded-lg my-1 dark:bg-darkmode-600',
+                        'my-1 rounded-lg bg-black/10 dark:bg-darkmode-600',
                         !subMenu.activeDropdown && 'hidden',
                         subMenu.activeDropdown && 'block'
                       ]"
                     >
                       <li
                         v-for="(lastSubMenu, lastSubMenuKey) in subMenu.subMenu"
-                        class="max-w-[1280px] w-full mx-auto"
+                        class="mx-auto w-full max-w-[1280px]"
                         :key="lastSubMenuKey"
                       >
                         <Menu

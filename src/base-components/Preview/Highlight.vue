@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
@@ -102,7 +96,7 @@ onMounted(() => {
         }
       "
     >
-      <Lucide icon="File" class="w-4 h-4 mr-2" /> {{ copyText }}
+      <Lucide icon="File" class="mr-2 h-4 w-4" /> {{ copyText }}
     </Button>
     <div ref="highlightRef" :class="highlightComputedClass">
       <pre class="relative grid">

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import _ from 'lodash'
 import { onMounted, ref, provide } from 'vue'
 import Tippy, { ProvideTippy } from '../../base-components/Tippy'
 import { PopperElement } from 'tippy.js'

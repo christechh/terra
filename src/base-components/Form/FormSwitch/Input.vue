@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, InputHTMLAttributes, useAttrs } from 'vue'
 import FormCheck from '../FormCheck'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface InputProps extends /* @vue-ignore */ InputHTMLAttributes {
   modelValue?: InputHTMLAttributes['value']
   type: 'checkbox'

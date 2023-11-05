@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, useAttrs, inject } from 'vue'
 import { ProvideTable } from './Table.vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 const table = inject<ProvideTable>('table', {
   dark: false,
   bordered: false,

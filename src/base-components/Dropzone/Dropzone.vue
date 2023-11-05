@@ -44,7 +44,7 @@ onMounted(() => {
   <div
     ref="fileUploadRef"
     v-file-upload-directive
-    class="[&.dropzone]:border-2 [&.dropzone]:border-dashed dropzone [&.dropzone]:border-darkmode-200/60 [&.dropzone]:dark:bg-darkmode-600 [&.dropzone]:dark:border-white/5"
+    class="dropzone [&.dropzone]:border-2 [&.dropzone]:border-dashed [&.dropzone]:border-darkmode-200/60 [&.dropzone]:dark:border-white/5 [&.dropzone]:dark:bg-darkmode-600"
   >
     <div class="dz-message">
       <slot></slot>

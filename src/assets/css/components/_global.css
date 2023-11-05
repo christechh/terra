@@ -38,7 +38,7 @@ html {
   .theme4-border {
     border-color: theme('colors.theme4') !important;
   }
-   .theme5-bg {
+  .theme5-bg {
     background-color: theme('colors.theme5') !important;
   }
   .theme5-font {

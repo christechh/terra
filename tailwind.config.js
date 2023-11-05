@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const plugin = require('tailwindcss/plugin')
 const colors = require('tailwindcss/colors')
 const { parseColor } = require('tailwindcss/lib/util/color')

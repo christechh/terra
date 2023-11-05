@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
@@ -12,7 +6,9 @@ import { ProvideTable } from './Table.vue'
 import { ProvideThead } from './Thead.vue'
 import Lucide from '../Lucide/index'
 // import { requiredUnless } from "@vuelidate/validators";
-
+defineOptions({
+  inheritAttrs: false
+})
 defineOptions({
   name: 'CTh'
 })

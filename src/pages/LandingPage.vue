@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import _ from 'lodash'
 import DarkModeSwitcher from '../components/DarkModeSwitcher'
 import { getColor } from '../utils/colors'
 const primaryColor = getColor('primary', 0.9)
 import designImg1 from '../assets/images/design-template/design-template1.png'
-// import designImg2 from '../assets/images/design-template/design-template2.png'
 import designImg3 from '../assets/images/design-template/design-template3.png'
 </script>
 

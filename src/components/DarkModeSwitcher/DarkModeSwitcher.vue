@@ -20,16 +20,16 @@ setDarkModeClass()
 <template>
   <!-- BEGIN: Dark Mode Switcher -->
   <div
-    class="fixed bottom-0 right-0 z-50 flex items-center justify-center w-40 h-12 mb-10 mr-10 border rounded-full shadow-md cursor-pointer box"
+    class="box fixed bottom-0 right-0 z-50 mb-10 mr-10 flex h-12 w-40 cursor-pointer items-center justify-center rounded-full border shadow-md"
     @click="switchMode"
   >
     <div class="mr-4 text-slate-600 dark:text-slate-200">Dark Mode</div>
     <div
       :class="[
-        'border w-[38px] h-[24px] p-px outline-none rounded-full relative cursor-pointer',
-        'before:content-[\'\'] before:w-[22px] before:h-[22px] before:transition-all before:duration-200 before:shadow-[1px_1px_3px_rgba(0,0,0,0.25)] before:absolute before:inset-y-0 before:my-auto before:rounded-full',
+        'relative h-[24px] w-[38px] cursor-pointer rounded-full border p-px outline-none',
+        'before:absolute before:inset-y-0 before:my-auto before:h-[22px] before:w-[22px] before:rounded-full before:shadow-[1px_1px_3px_rgba(0,0,0,0.25)] before:transition-all before:duration-200 before:content-[\'\']',
         {
-          'bg-primary border-primary': darkMode,
+          'border-primary bg-primary': darkMode,
           'before:ml-[13px] before:bg-white': darkMode
         }
       ]"

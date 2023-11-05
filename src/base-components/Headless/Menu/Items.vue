@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { MenuItems as HeadlessMenuItems, TransitionRoot } from '@headlessui/vue'
 import { useAttrs, computed } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface ItemsProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessMenuItems> {
   as?: string | object
@@ -56,18 +52,18 @@ const computedClass = computed(() =>
     <div
       :class="[
         'absolute z-30',
-        { 'left-0 bottom-[100%]': placement == 'top-start' },
-        { 'left-[50%] translate-x-[-50%] bottom-[100%]': placement == 'top' },
-        { 'right-0 bottom-[100%]': placement == 'top-end' },
+        { 'bottom-[100%] left-0': placement == 'top-start' },
+        { 'bottom-[100%] left-[50%] translate-x-[-50%]': placement == 'top' },
+        { 'bottom-[100%] right-0': placement == 'top-end' },
         { 'left-[100%] translate-y-[-50%]': placement == 'right-start' },
         { 'left-[100%] top-[50%] translate-y-[-50%]': placement == 'right' },
-        { 'left-[100%] bottom-0': placement == 'right-end' },
-        { 'top-[100%] right-0': placement == 'bottom-end' },
-        { 'top-[100%] left-[50%] translate-x-[-50%]': placement == 'bottom' },
-        { 'top-[100%] left-0': placement == 'bottom-start' },
+        { 'bottom-0 left-[100%]': placement == 'right-end' },
+        { 'right-0 top-[100%]': placement == 'bottom-end' },
+        { 'left-[50%] top-[100%] translate-x-[-50%]': placement == 'bottom' },
+        { 'left-0 top-[100%]': placement == 'bottom-start' },
         { 'right-[100%] translate-y-[-50%]': placement == 'left-start' },
         { 'right-[100%] top-[50%] translate-y-[-50%]': placement == 'left' },
-        { 'right-[100%] bottom-0': placement == 'left-end' }
+        { 'bottom-0 right-[100%]': placement == 'left-end' }
       ]"
     >
       <HeadlessMenuItems as="template">

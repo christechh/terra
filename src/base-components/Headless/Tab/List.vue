@@ -1,21 +1,15 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-
-type Variant = 'tabs' | 'pills' | 'boxed-tabs' | 'link-tabs'
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { provide, useAttrs, computed } from 'vue'
 import { twMerge } from 'tailwind-merge'
 import { TabList as HeadlessTabList } from '@headlessui/vue'
-
+type Variant = 'tabs' | 'pills' | 'boxed-tabs' | 'link-tabs'
 export type ProvideList = {
   variant?: Variant
 }
-
+defineOptions({
+  inheritAttrs: false
+})
 interface ListProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessTabList> {
   variant?: Variant

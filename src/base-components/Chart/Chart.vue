@@ -1,13 +1,9 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import ChartJs, { ChartConfiguration } from 'chart.js/auto'
 import { CanvasHTMLAttributes, ref, onMounted, inject, watch } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 export interface ChartElement extends HTMLCanvasElement {
   instance: ChartJs
 }

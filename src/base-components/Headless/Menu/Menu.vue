@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { Menu as HeadlessMenu } from '@headlessui/vue'
 import { useAttrs, computed } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface MenuProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessMenu> {
   as?: string | object

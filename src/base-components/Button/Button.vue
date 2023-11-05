@@ -1,15 +1,8 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, ButtonHTMLAttributes, useAttrs } from 'vue'
 import LoadingIcon from '../LoadingIcon'
-
 export type Variant =
   | 'primary'
   | 'secondary'
@@ -42,7 +35,8 @@ type Size = 'sm' | 'lg'
 type Rounded = boolean
 
 defineOptions({
-  name: 'CButton'
+  name: 'CButton',
+  inheritAttrs: false
 })
 
 interface ButtonProps extends /* @vue-ignore */ ButtonHTMLAttributes {

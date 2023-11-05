@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { Popover as HeadlessPopover } from '@headlessui/vue'
 import { useAttrs, computed } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface PopoverProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessPopover> {
   as?: string | object

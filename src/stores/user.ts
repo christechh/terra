@@ -31,7 +31,7 @@ export const useUserStore = defineStore('user', {
           AuthType.CMS
         )
 
-        const { user, token } = response.data
+        const { token } = response.data
 
         this.account = credentials.account
         this.token = token

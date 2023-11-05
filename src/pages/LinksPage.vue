@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import _ from 'lodash'
-import DarkModeSwitcher from '../components/DarkModeSwitcher'
-import { getColor } from '../utils/colors'
 import { ref } from 'vue'
 const searchKeyword = ref('')
-const primaryColor = getColor('primary', 0.9)
 const links = [
   {
     id: 1,

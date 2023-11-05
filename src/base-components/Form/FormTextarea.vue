@@ -1,16 +1,12 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, InputHTMLAttributes, useAttrs, inject } from 'vue'
 import { ProvideFormInline } from './FormInline.vue'
 import { ProvideInputGroup } from './InputGroup/InputGroup.vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface FormTextareaProps extends /* @vue-ignore */ InputHTMLAttributes {
   modelValue?: InputHTMLAttributes['value']
   formTextareaSize?: 'sm' | 'lg'

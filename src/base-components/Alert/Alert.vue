@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { TransitionRoot } from '@headlessui/vue'
 import { computed, ref, HTMLAttributes, useAttrs } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 type Variant =
   | 'primary'
   | 'secondary'
@@ -37,18 +33,15 @@ interface AlertProps extends /* @vue-ignore */ HTMLAttributes {
   as?: string | object
   dismissible?: boolean
   variant?: Variant
-  onShow?: () => {}
-  onShown?: () => {}
-  onHide?: () => {}
-  onHidden?: () => {}
+  onShow?: void
+  onShown?: void
+  onHide?: void
+  onHidden?: void
 }
 
-const { as, dismissible, variant, ...props } = withDefaults(
-  defineProps<AlertProps>(),
-  {
-    as: 'div'
-  }
-)
+const { as, dismissible, variant } = withDefaults(defineProps<AlertProps>(), {
+  as: 'div'
+})
 
 const attrs = useAttrs()
 const show = ref<boolean>(true)

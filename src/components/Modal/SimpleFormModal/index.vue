@@ -144,7 +144,7 @@ defineExpose({
             </div>
           </Dialog.Description>
           <Dialog.Footer>
-            <div class="flex gap-3 justify-end">
+            <div class="flex justify-end gap-3">
               <Button
                 v-for="(button, index) in normalizeButtons"
                 :key="`simplet-form-modal-button-${index}`"

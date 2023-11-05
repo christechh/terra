@@ -1,15 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import SideMenu from '../layouts/SideMenu/SideMenu.vue'
-import Login from '../pages/Login.vue'
-// import CampaignList from "../pages/CampaignList.vue";
-import Landing from '../pages/Landing.vue'
-import Links from '../pages/Links.vue'
+import LoginPage from '../pages/LoginPage.vue'
+import LandingPage from '../pages/LandingPage.vue'
+import LinksPage from '../pages/LinksPage.vue'
 import i18n from '../i18n'
 const routes = [
   {
     path: '/',
     name: 'landing-page',
-    component: Landing
+    component: LandingPage
   },
   {
     path: '/dashboard',
@@ -18,7 +17,7 @@ const routes = [
       {
         path: '/dashboard',
         name: 'links',
-        component: Links,
+        component: LinksPage,
         meta: {
           title: i18n.global.t('my-links')
         }
@@ -28,15 +27,15 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: LoginPage
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    return savedPosition || { left: 0, top: 0 }
+  scrollBehavior: (to, from, savedPosition) => {
+    return savedPosition ?? { left: 0, top: 0 }
   }
 })
 

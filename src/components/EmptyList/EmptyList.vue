@@ -11,7 +11,7 @@ const { show, content } = defineProps<Props>()
 
 <template>
   <div
-    class="flex justify-center items-center flex-col"
+    class="flex flex-col items-center justify-center"
     style="min-height: 400px"
     v-if="show"
   >

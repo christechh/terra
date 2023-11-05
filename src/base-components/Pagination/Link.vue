@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, LiHTMLAttributes, useAttrs } from 'vue'
 import Button from '../Button'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface LinkProps extends /* @vue-ignore */ LiHTMLAttributes {
   as?: string | object
   active?: boolean

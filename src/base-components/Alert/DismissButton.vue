@@ -1,14 +1,10 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, ButtonHTMLAttributes, useAttrs } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface DismissButtonProps extends /* @vue-ignore */ ButtonHTMLAttributes {
   as?: string | object
 }

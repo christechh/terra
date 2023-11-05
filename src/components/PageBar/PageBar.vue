@@ -82,7 +82,7 @@ const setPageList = (limit: number, page: number, total: number) => {
 </script>
 
 <template>
-  <Pagination class="w-full sm:w-auto sm:mr-auto">
+  <Pagination class="w-full sm:mr-auto sm:w-auto">
     <template v-for="(row, key) in pageList" :key="key">
       <Pagination.Link
         v-if="row.type === 'first'"
@@ -92,7 +92,7 @@ const setPageList = (limit: number, page: number, total: number) => {
           }
         "
       >
-        <Lucide icon="ChevronsLeft" class="w-4 h-4" />
+        <Lucide icon="ChevronsLeft" class="h-4 w-4" />
       </Pagination.Link>
       <Pagination.Link
         v-if="row.type === 'before'"
@@ -102,7 +102,7 @@ const setPageList = (limit: number, page: number, total: number) => {
           }
         "
       >
-        <Lucide icon="ChevronLeft" class="w-4 h-4" />
+        <Lucide icon="ChevronLeft" class="h-4 w-4" />
       </Pagination.Link>
       <Pagination.Link
         v-if="row.type === 'numbers' && row.active === false"
@@ -128,7 +128,7 @@ const setPageList = (limit: number, page: number, total: number) => {
           }
         "
       >
-        <Lucide icon="ChevronRight" class="w-4 h-4" />
+        <Lucide icon="ChevronRight" class="h-4 w-4" />
       </Pagination.Link>
       <Pagination.Link
         v-if="row.type === 'last'"
@@ -138,7 +138,7 @@ const setPageList = (limit: number, page: number, total: number) => {
           }
         "
       >
-        <Lucide icon="ChevronsRight" class="w-4 h-4" />
+        <Lucide icon="ChevronsRight" class="h-4 w-4" />
       </Pagination.Link>
     </template>
   </Pagination>

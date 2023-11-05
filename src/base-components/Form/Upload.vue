@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ComputedRef, ref, Ref } from 'vue'
+import { computed, ComputedRef, ref } from 'vue'
 import UploadIcon from '../../components/Icons/UploadIcon.vue'
 import CloseIcon from '../../components/Icons/CloseIcon.vue'
 import ClipIcon from '../../components/Icons/ClipIcon.vue'
@@ -73,6 +73,7 @@ const fileChangeHandler = async (e: Event) => {
 }
 
 const removeImgHandler = (index: number) => {
+  console.log(index)
   emit('update:modelValue', [])
 }
 
@@ -99,21 +100,21 @@ const resetFiles = (event: Event) => {
           alt=""
           style="height: 109px"
         />
-        <div v-else class="w-36 flex">
+        <div v-else class="flex w-36">
           <ClipIcon />
           <span class="ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{{
             file.name
           }}</span>
         </div>
         <div
-          class="rounded-full w-4 h-4 bg-danger flex justify-center items-center absolute right-0 top-0 translate-x-1/2 -translate-y-1/2 cursor-pointer"
+          class="absolute right-0 top-0 flex h-4 w-4 -translate-y-1/2 translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-danger"
           @click="removeImgHandler(k)"
         >
           <CloseIcon />
         </div>
       </div>
       <div
-        class="flex-1 border border-dashed rounded flex justify-center items-center border-slate-200 cursor-pointer"
+        class="flex flex-1 cursor-pointer items-center justify-center rounded border border-dashed border-slate-200"
         style="height: 110px"
         @click="clickHandler"
       >
@@ -132,9 +133,9 @@ const resetFiles = (event: Event) => {
     <Alert
       v-if="fileSize > limit"
       variant="soft-danger"
-      class="flex items-center mt-3"
+      class="mt-3 flex items-center"
     >
-      <Lucide icon="AlertCircle" class="w-6 h-6 mr-2" />
+      <Lucide icon="AlertCircle" class="mr-2 h-6 w-6" />
       <b>上傳失敗</b
       ><span class="ml-2">{{ typeName }}大小超過 {{ limit }}MB</span>
     </Alert>

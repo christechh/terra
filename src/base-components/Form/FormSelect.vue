@@ -1,15 +1,11 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, SelectHTMLAttributes, useAttrs, inject } from 'vue'
 import { ProvideFormInline } from './FormInline.vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface FormSelectProps extends /* @vue-ignore */ SelectHTMLAttributes {
   modelValue?: SelectHTMLAttributes['value']
   formSelectSize?: 'sm' | 'lg'

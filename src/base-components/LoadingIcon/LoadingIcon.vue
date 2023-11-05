@@ -39,7 +39,7 @@ const { icon } = props
       viewBox="0 0 55 80"
       xmlns="http://www.w3.org/2000/svg"
       :fill="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <g transform="matrix(1 0 0 -1 0 80)">
         <rect width="10" height="20" rx="3">
@@ -89,7 +89,7 @@ const { icon } = props
       width="20"
       viewBox="0 0 57 57"
       xmlns="http://www.w3.org/2000/svg"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <g fill="none" fill-rule="evenodd">
         <g transform="translate(1 1)">
@@ -162,7 +162,7 @@ const { icon } = props
       viewBox="0 0 135 140"
       xmlns="http://www.w3.org/2000/svg"
       :fill="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <rect y="10" width="15" height="120" rx="6">
         <animate
@@ -261,7 +261,7 @@ const { icon } = props
       viewBox="0 0 135 135"
       xmlns="http://www.w3.org/2000/svg"
       :fill="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <path
         d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z"
@@ -294,7 +294,7 @@ const { icon } = props
       viewBox="0 0 105 105"
       xmlns="http://www.w3.org/2000/svg"
       :fill="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <circle cx="12.5" cy="12.5" r="12.5">
         <animate
@@ -393,7 +393,7 @@ const { icon } = props
       viewBox="0 0 140 64"
       xmlns="http://www.w3.org/2000/svg"
       :fill="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <path
         d="M30.262 57.02L7.195 40.723c-5.84-3.976-7.56-12.06-3.842-18.063 3.715-6 11.467-7.65 17.306-3.68l4.52 3.76 2.6-5.274c3.717-6.002 11.47-7.65 17.305-3.68 5.84 3.97 7.56 12.054 3.842 18.062L34.49 56.118c-.897 1.512-2.793 1.915-4.228.9z"
@@ -431,7 +431,7 @@ const { icon } = props
       viewBox="-2 -2 42 42"
       xmlns="http://www.w3.org/2000/svg"
       :stroke="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <g fill="none" fill-rule="evenodd">
         <g transform="translate(1 1)" stroke-width="4">
@@ -455,7 +455,7 @@ const { icon } = props
       viewBox="0 0 44 44"
       xmlns="http://www.w3.org/2000/svg"
       :stroke="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <g fill="none" fill-rule="evenodd" stroke-width="4">
         <circle cx="22" cy="22" r="1">
@@ -510,7 +510,7 @@ const { icon } = props
       viewBox="0 0 45 45"
       xmlns="http://www.w3.org/2000/svg"
       :stroke="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <g
         fill="none"
@@ -587,7 +587,7 @@ const { icon } = props
       width="20"
       viewBox="0 0 58 58"
       xmlns="http://www.w3.org/2000/svg"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <g fill="none" fill-rule="evenodd">
         <g transform="translate(2 1)" :stroke="iconColor" stroke-width="1.5">
@@ -715,7 +715,7 @@ const { icon } = props
       width="20"
       viewBox="0 0 38 38"
       xmlns="http://www.w3.org/2000/svg"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <defs>
         <linearGradient id="a" x1="8.042%" y1="0%" x2="65.682%" y2="23.865%">
@@ -760,7 +760,7 @@ const { icon } = props
       viewBox="0 0 120 30"
       xmlns="http://www.w3.org/2000/svg"
       :fill="iconColor"
-      class="w-full h-full"
+      class="h-full w-full"
     >
       <circle cx="15" cy="15" r="15">
         <animate

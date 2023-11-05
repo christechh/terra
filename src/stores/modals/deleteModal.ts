@@ -25,14 +25,13 @@ export const useDeleteModalStore = defineStore('delete_modal', {
     setOpen(input: { status: boolean }) {
       this.status = input.status
     },
-    showModal<T>(input: {
+    showModal<T extends object>(input: {
       deleteType: string
       title: string
       content: string
       deleteData: T
     }) {
       this.deleteType = input.deleteType
-      //@ts-ignore
       this.deleteData = input.deleteData
       this.title = input.title
       this.content = input.content

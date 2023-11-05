@@ -30,10 +30,10 @@ onMounted(() => {
   <div
     :class="{
       '[&_.leaflet-tile-pane]:saturate-[.3]': !props.darkMode,
-      '[&_.leaflet-tile-pane]:grayscale [&_.leaflet-tile-pane]:invert [&_.leaflet-tile-pane]:brightness-90 [&_.leaflet-tile-pane]:hue-rotate-15':
+      '[&_.leaflet-tile-pane]:brightness-90 [&_.leaflet-tile-pane]:grayscale [&_.leaflet-tile-pane]:hue-rotate-15 [&_.leaflet-tile-pane]:invert':
         props.darkMode
     }"
   >
-    <div ref="mapRef" class="w-full h-full"></div>
+    <div ref="mapRef" class="h-full w-full"></div>
   </div>
 </template>

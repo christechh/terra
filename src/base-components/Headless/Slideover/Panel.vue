@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import {
   DialogPanel as HeadlessDialogPanel,
@@ -13,7 +7,9 @@ import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { ProvideSlideover } from './Slideover.vue'
 import { inject, useAttrs, computed } from 'vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface PanelProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessDialogPanel> {
   as?: string | object

@@ -1,17 +1,12 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-
-type Size = 'sm' | 'md' | 'lg' | 'xl'
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { Dialog as HeadlessDialog, TransitionRoot } from '@headlessui/vue'
 import { provide, useAttrs, computed, ref, Ref } from 'vue'
-
+type Size = 'sm' | 'md' | 'lg' | 'xl'
+defineOptions({
+  inheritAttrs: false
+})
 export type ProvideDialog = {
   open: boolean
   zoom: Ref<boolean>

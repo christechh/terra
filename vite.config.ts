@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import eslint from 'vite-plugin-eslint'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +13,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['tailwind-config']
   },
-  plugins: [vue()],
+  plugins: [vue(), eslint()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

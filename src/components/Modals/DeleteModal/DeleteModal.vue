@@ -16,10 +16,9 @@ const setOpen = (value: boolean) => {
 }
 
 const deleteExec = () => {
-  const { deleteType, deleteData } = deleteModalStore
+  const { deleteType } = deleteModalStore
   switch (deleteType) {
     case 'course':
-      //@ts-ignore
       break
   }
   setOpen(false)
@@ -38,7 +37,7 @@ const deleteExec = () => {
     >
       <Dialog.Panel>
         <div class="p-5 text-center">
-          <Lucide icon="XCircle" class="w-16 h-16 mx-auto mt-3 text-danger" />
+          <Lucide icon="XCircle" class="mx-auto mt-3 h-16 w-16 text-danger" />
           <div class="mt-5 text-3xl">{{ title }}</div>
           <div class="mt-2 text-slate-500">
             {{ content }}
@@ -53,14 +52,14 @@ const deleteExec = () => {
                 setOpen(false)
               }
             "
-            class="w-24 mr-1"
+            class="mr-1 w-24"
           >
             取消
           </Button>
           <Button
             type="button"
             variant="danger"
-            class="w-24 ml-5"
+            class="ml-5 w-24"
             @click="deleteExec"
           >
             刪除

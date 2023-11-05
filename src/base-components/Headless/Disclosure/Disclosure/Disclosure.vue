@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
@@ -11,7 +5,9 @@ import { Disclosure as HeadlessDisclosure } from '@headlessui/vue'
 import { useAttrs, computed, inject } from 'vue'
 import { ProvideGroup } from '../Group.vue'
 import Provider from './Provider.vue'
-
+defineOptions({
+  inheritAttrs: false
+})
 interface DisclosureProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessDisclosure> {
   index?: number

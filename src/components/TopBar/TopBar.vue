@@ -2,8 +2,7 @@
 import { ref, computed } from 'vue'
 import Lucide from '../../base-components/Lucide'
 import Breadcrumb from '../../base-components/Breadcrumb'
-import { FormInput } from '../../base-components/Form'
-import { Menu, Popover } from '../../base-components/Headless'
+import { Menu } from '../../base-components/Headless'
 import fakerData from '../../utils/faker'
 import _ from 'lodash'
 import { TransitionRoot } from '@headlessui/vue'
@@ -13,13 +12,6 @@ import { useRoute } from 'vue-router'
 const account = computed(() => useUserStore().getAccount)
 const route = useRoute()
 const searchDropdown = ref(false)
-const showSearchDropdown = () => {
-  searchDropdown.value = true
-}
-const hideSearchDropdown = () => {
-  searchDropdown.value = false
-}
-
 const doLogout = () => {
   useUserStore().logout()
 }

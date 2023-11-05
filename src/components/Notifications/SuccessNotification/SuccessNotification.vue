@@ -13,8 +13,8 @@ const notificationsStore = useNotificationsStore()
 
 const type = ref<'success' | 'error' | 'warning' | 'info'>('success')
 const title = ref('')
-const alertVariant = ref<any>('')
-const alertIcon = ref<any>('')
+const alertVariant = ref<any>('') // eslint-disable-line @typescript-eslint/no-explicit-any
+const alertIcon = ref<any>('') // eslint-disable-line @typescript-eslint/no-explicit-any
 // const title = notificationsStore.successTitle;
 // const content = computed(() => notificationsStore.successContent);
 // const content = computed(() => notificationsStore.content );
@@ -89,7 +89,7 @@ watch(
         :variant="alertVariant"
         class="flex items-center pr-12"
       >
-        <Lucide :icon="alertIcon" class="w-6 h-6 mr-2" />
+        <Lucide :icon="alertIcon" class="mr-2 h-6 w-6" />
         {{ title }}
       </Alert>
       <!-- <Lucide icon="CheckCircle" class="text-success" />

@@ -9,7 +9,7 @@ import { useNotificationsStore } from '../stores/notifications'
 export interface Response {
   code: number
   msg: string | null
-  data: Object | null
+  data: Record<string, unknown> | null
 }
 
 export enum AuthType {
@@ -20,7 +20,7 @@ export class ApiResponse implements Response {
   constructor(
     public code: number,
     public msg: string | null,
-    public data: object | null
+    public data: Record<string, unknown> | null
   ) {}
 }
 const instance = axios.create({
@@ -131,7 +131,7 @@ export const fileUploadRequest = async (
   endpoint: string,
   file: File,
   authType: AuthType,
-  resolve: any | null
+  resolve: any | null // eslint-disable-line @typescript-eslint/no-explicit-any
 ) => {
   try {
     const formData = new FormData()
@@ -194,7 +194,8 @@ export const handleError = (error: AxiosError) => {
       useNotificationsStore().showSaveError(message)
       return new ApiResponse(401, 'unauthorized error', null)
     } else if (status === 400) {
-      //@ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       useWaningModalStore().showModal({ text: error.response.data?.message })
       // return new ApiResponse(404,"404 not found",null)
     } else if (status === 404 || status === 500) {
@@ -203,7 +204,8 @@ export const handleError = (error: AxiosError) => {
     } else {
       // 使用RedirectTo元件
       useRedirectToStore().redirect({ path: '/login' })
-      //@ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       useWaningModalStore().showModal({ text: error.response.data?.message })
       //return new ApiResponse(400,"error:"+error.message,null)
     }

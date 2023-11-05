@@ -11,7 +11,7 @@ const { as } = withDefaults(defineProps<DividerProps>(), {
 </script>
 
 <template>
-  <component :is="as" class="w-full h-px bg-white/[0.08] relative">
+  <component :is="as" class="relative h-px w-full bg-white/[0.08]">
     <slot></slot>
   </component>
 </template>
