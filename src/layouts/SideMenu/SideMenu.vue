@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import logoUrl from '../../assets/images/logo.svg'
+import logoUrl from '../../assets/images/logo_dark_v6.png'
 import Divider from './Divider.vue'
 import Menu from './Menu.vue'
 import TopBar from '../../components/TopBar'
@@ -67,14 +67,7 @@ onMounted(() => {
           :to="{ name: 'index' }"
           class="flex items-center pt-4 pl-5 intro-x"
         >
-          <img
-            alt="Midone Tailwind HTML Admin Template"
-            class="w-6"
-            :src="logoUrl"
-          />
-          <span class="hidden ml-3 text-lg text-white xl:block">
-            Biliguakid
-          </span>
+          <img alt="Pinchat" class="w-100" :src="logoUrl" />
         </RouterLink>
         <Divider type="div" class="my-6"></Divider>
         <ul>

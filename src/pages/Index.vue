@@ -9,7 +9,7 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
 </script>
 
 <template>
-  <h2 class="mt-10 text-lg font-medium intro-y">首頁</h2>
+  <h2 class="intro-y mt-10 text-lg font-medium">首頁</h2>
   <div>
     <div>{{ $t('hello') }} 登入頁面 /dashboard/login</div>
     <br />
