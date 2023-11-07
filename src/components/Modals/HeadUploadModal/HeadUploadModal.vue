@@ -8,6 +8,8 @@ import avatar4 from '../../../assets/images/head/avatar4.png'
 import Button from '../../../base-components/Button/index'
 import { ref } from 'vue'
 import { FormInput, InputGroup } from '../../../base-components/Form'
+import { AuthType, postRequest } from '../../../api/api'
+
 interface Props {
   modelValue: boolean
   imageId: number
@@ -31,16 +33,27 @@ const animatePage = ref(1)
 const pageCount = ref(0)
 const animateHeads = ref<{ stickerImg: string; stickerId: number }[]>([])
 const selectedGIFId = ref(0)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const localImg = ref<any>(null)
 
-const save = () => {
+const save = async () => {
+  const defaultAvata = avatars.find((i) => i.id === selectedId.value)
+  if (localImg.value) {
+    await uploadAvatar()
+  }
   emit('save', {
     ...(isAnimate.value && {
       img: animateHeads.value.find((i) => i.stickerId === selectedGIFId.value)
         ?.stickerImg
     }),
-    ...(!isAnimate.value && {
-      ...avatars.find((i) => i.id === selectedId.value)
-    })
+    ...(!isAnimate.value && defaultAvata
+      ? {
+          ...avatars.find((i) => i.id === selectedId.value)
+        }
+      : {
+          id: selectedId.value,
+          img: localImg.value
+        })
   })
   emit('update:modelValue', false)
 }
@@ -121,7 +134,33 @@ const gifClickhandler = (id: number) => {
 
 const defaultAvatarClick = (id: number) => {
   selectedId.value = id
+  localImg.value = null
   isChange.value = true
+}
+
+const fileChangeHandler = (e: Event) => {
+  const target = e.target as HTMLInputElement
+  const file = target.files && target.files[0]
+  if (file) {
+    localImg.value = file
+    selectedId.value = 0
+    isChange.value = true
+  }
+}
+
+const uploadAvatar = async () => {
+  const form = new FormData()
+  form.append('file', localImg.value)
+  form.append('setAvatar', 'false')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const res = await postRequest('user/image', form, AuthType.JWT)
+  const { id, url } = res.data.data
+  selectedId.value = id
+  localImg.value = url
+}
+
+const file2Src = (file: File) => {
+  return URL.createObjectURL(file)
 }
 </script>
 
@@ -152,22 +191,26 @@ const defaultAvatarClick = (id: number) => {
             class="relative mx-auto rounded-full border-2 border-dashed pt-5 text-center"
             style="width: 200px; height: 200px; border-color: #c0c0c0"
           >
-            <Lucide
-              icon="UploadCloud"
-              class="mx-auto"
-              width="48"
-              height="48"
-              color="#c0c0c0"
-            />
-            <div class="text-gray mt-4">
-              <div>{{ $t('dropImgHere') }}</div>
-              <div>{{ $t('or') }}</div>
-              <div>{{ $t('click-to-upload-image') }}</div>
-            </div>
+            <template v-if="!localImg">
+              <Lucide
+                icon="UploadCloud"
+                class="mx-auto"
+                width="48"
+                height="48"
+                color="#c0c0c0"
+              />
+              <div class="text-gray mt-4">
+                <div>{{ $t('dropImgHere') }}</div>
+                <div>{{ $t('or') }}</div>
+                <div>{{ $t('click-to-upload-image') }}</div>
+              </div>
+            </template>
+            <img v-else :src="file2Src(localImg)" alt="" />
             <input
               class="absolute left-0 top-0 opacity-0"
               type="file"
               style="width: 200px; height: 200px"
+              @change="fileChangeHandler"
             />
           </div>
           <div class="mt-3 flex justify-around">

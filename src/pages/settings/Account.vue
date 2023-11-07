@@ -124,6 +124,8 @@ const confirmDeleteAccout = () => {
 }
 
 const headChangehandler = (img: { img: string; id: number }) => {
+  // eslint-disable-next-line no-debugger
+  debugger
   userInfo.image_id = ''
   if (img.id) {
     userInfo.image_id = img.id
