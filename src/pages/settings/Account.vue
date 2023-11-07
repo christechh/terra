@@ -52,6 +52,7 @@ const updateAccountSetting = async () => {
       'auth/setting',
       {
         image_id: userInfo.image_id,
+        ...(!userInfo.image_id && { avatar: userInfo.avatar }),
         name: userInfo.name
       },
       AuthType.JWT
@@ -120,6 +121,17 @@ const confirmDeleteAccout = () => {
     content: t('delete-account-modal-desc'),
     deleteData: { id: userInfo.id }
   })
+}
+
+const headChangehandler = (img: { img: string; id: number }) => {
+  userInfo.image_id = ''
+  if (img.id) {
+    userInfo.image_id = img.id
+  }
+  if (img.img) {
+    userInfo.avatar = img.img
+  }
+  accountSettingChange.value = true
 }
 
 getUserInfo()
@@ -328,7 +340,12 @@ getUserActiveLog()
         </div>
       </div>
     </div>
-    <HeadUploadModal v-model="showHeadUploadPopup" />
+    <HeadUploadModal
+      v-if="showHeadUploadPopup"
+      v-model="showHeadUploadPopup"
+      :image-id="userInfo.image_id"
+      @save="headChangehandler"
+    />
     <ActiveLogsModal :active-logs="allLogs" v-model="showActiveLogPopup" />
   </div>
 </template>
