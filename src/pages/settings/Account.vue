@@ -6,14 +6,23 @@ import { FormSwitch, FormCheck, InputGroup } from '../../base-components/Form'
 import Lucide from '../../base-components/Lucide/index'
 import HeadUploadModal from '../../components/Modals/HeadUploadModal'
 import { reactive, ref } from 'vue'
-import { AuthType, getRequest } from '../../api/api'
+import { AuthType, getRequest, postRequest, putRequest } from '../../api/api'
+import { useNotificationsStore } from '../../stores/notifications'
+import ActiveLogsModal from '../../components/Modals/ActiveLogsModal/'
 
 const showHeadUploadPopup = ref(false)
-const userInfo = reactive({})
-const activeLogs = ref([])
+const showActiveLogPopup = ref(false)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const userInfo: any = reactive({})
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const activeLogs: any = ref([])
+const allLogs = ref([])
 const accountSettingChange = ref(false)
-const psdChange = ref(false)
 const nofityChange = ref(false)
+const oldPsd = ref('')
+const newPsd = ref('')
+const newPsdAgain = ref('')
+const resetPsdError = ref('')
 
 const getUserInfo = () => {
   getRequest('auth/setting', {}, AuthType.JWT).then((res) => {
@@ -22,13 +31,82 @@ const getUserInfo = () => {
   })
 }
 
+const getLogs = (page: number, pageSize: number) => {
+  return getRequest('user/login', { page, pageSize }, AuthType.JWT)
+}
+
 const getUserActiveLog = () => {
-  getRequest('user/login', { page: 0, pageSize: 5 }, AuthType.JWT).then(
-    (res) => {
-      const { data } = res.data
-      activeLogs.value = data
-    }
-  )
+  getLogs(0, 5).then((res) => {
+    const { data } = res.data
+    activeLogs.value = data
+  })
+}
+
+const updateAccountSetting = async () => {
+  try {
+    const res = await postRequest(
+      'auth/setting',
+      {
+        image_id: userInfo.image_id,
+        name: userInfo.name
+      },
+      AuthType.JWT
+    )
+    const { data } = res.data
+    Object.assign(userInfo, data)
+    useNotificationsStore().showSaveSuccess()
+  } catch (e) {
+    console.log(e)
+  } finally {
+    accountSettingChange.value = false
+  }
+}
+
+const updatePassword = async () => {
+  try {
+    await putRequest(
+      'auth/updatePassword',
+      {
+        new_password: newPsd.value,
+        new_password_confirmation: newPsdAgain.value,
+        old_password: oldPsd.value
+      },
+      AuthType.JWT
+    )
+    oldPsd.value = ''
+    newPsd.value = ''
+    newPsdAgain.value = ''
+    useNotificationsStore().showSaveSuccess()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
+    resetPsdError.value = e.response.data.message
+  }
+}
+
+const updateNotification = async () => {
+  try {
+    await putRequest(
+      'user/notify',
+      {
+        email: userInfo.notify_email,
+        is_open_notify: userInfo.is_open_notify,
+        phone: userInfo.notify_phone,
+        type: userInfo.notify_type
+      },
+      AuthType.JWT
+    )
+    nofityChange.value = false
+    useNotificationsStore().showSaveSuccess()
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+const viewMore = async () => {
+  const res = await getLogs(0, 999)
+  const { data } = res.data
+  allLogs.value = data
+  showActiveLogPopup.value = true
 }
 
 getUserInfo()
@@ -42,20 +120,20 @@ getUserActiveLog()
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
           <div>{{ $t('accountSetting') }}</div>
-          <Button variant="primary" :disabled="!accountSettingChange">{{
-            $t('save')
-          }}</Button>
+          <Button
+            variant="primary"
+            :disabled="!accountSettingChange"
+            @click="updateAccountSetting"
+            >{{ $t('save') }}</Button
+          >
         </div>
-        <div
-          class="grid cursor-pointer grid-cols-4 gap-y-3 p-4"
-          @click="showHeadUploadPopup = true"
-        >
+        <div class="grid cursor-pointer grid-cols-4 gap-y-3 p-4">
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             >{{ $t('head') }}</FormLabel
           >
           <div class="col-span-3">
-            <div class="relative h-32 w-32">
+            <div class="relative h-32 w-32" @click="showHeadUploadPopup = true">
               <img
                 :src="userInfo.avatar"
                 width="128"
@@ -74,12 +152,16 @@ getUserActiveLog()
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             >{{ $t('displayName') }}</FormLabel
           >
-          <FormInput v-model="userInfo.name" class="col-span-3" />
+          <FormInput
+            v-model="userInfo.name"
+            class="col-span-3"
+            @input="accountSettingChange = true"
+          />
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             >{{ $t('email') }}</FormLabel
           >
-          <FormInput v-model="userInfo.email" class="col-span-3" />
+          <FormInput v-model="userInfo.email" class="col-span-3" disabled />
         </div>
       </div>
       <div class="mt-3 rounded-xl bg-white dark:bg-darkmode-600">
@@ -87,26 +169,48 @@ getUserActiveLog()
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
           <div>{{ $t('changePassword') }}</div>
-          <Button variant="primary" :disabled="!psdChange">{{
-            $t('confirmEdit')
-          }}</Button>
+          <Button
+            variant="primary"
+            :disabled="[newPsd, newPsdAgain, oldPsd].some((i) => !i)"
+            @click="updatePassword"
+            >{{ $t('confirmEdit') }}</Button
+          >
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4">
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             >{{ $t('oldPassword') }}</FormLabel
           >
-          <FormInput :placeholder="$t('inputOldPSD')" class="col-span-3" />
+          <FormInput
+            v-model="oldPsd"
+            :placeholder="$t('inputOldPSD')"
+            class="col-span-3"
+            type="password"
+          />
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             >{{ $t('newPassword') }}</FormLabel
           >
-          <FormInput :placeholder="$t('inputNewPSD')" class="col-span-3" />
+          <FormInput
+            v-model="newPsd"
+            :placeholder="$t('inputNewPSD')"
+            class="col-span-3"
+            type="password"
+          />
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             >{{ $t('email') }}</FormLabel
           >
-          <FormInput :placeholder="$t('inputNewPSDAgain')" class="col-span-3" />
+          <div class="col-span-3">
+            <FormInput
+              v-model="newPsdAgain"
+              :placeholder="$t('inputNewPSDAgain')"
+              type="password"
+            />
+            <div v-if="resetPsdError" class="mt-2 text-xs text-danger">
+              {{ resetPsdError }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -116,9 +220,12 @@ getUserActiveLog()
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
           <div>{{ $t('notifySetting') }}</div>
-          <Button variant="primary" :disabled="!nofityChange">{{
-            $t('save')
-          }}</Button>
+          <Button
+            variant="primary"
+            :disabled="!nofityChange"
+            @click="updateNotification"
+            >{{ $t('save') }}</Button
+          >
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4">
           <FormCheck class="col-span-1">
@@ -126,26 +233,37 @@ getUserActiveLog()
               id="radio-switch-6"
               type="radio"
               name="horizontal_radio_button"
-              value="horizontal-radio-daniel-craig"
+              v-model="userInfo.notify_type"
+              :value="20"
+              @change="nofityChange = true"
             />
             <FormCheck.Label htmlFor="radio-switch-6">
               {{ $t('email') }}
             </FormCheck.Label>
           </FormCheck>
-          <FormInput v-model="userInfo.notify_email" class="col-span-3" />
+          <FormInput
+            v-model="userInfo.notify_email"
+            class="col-span-3"
+            @input="nofityChange = true"
+          />
           <FormCheck class="col-span-1">
             <FormCheck.Input
               id="radio-switch-6"
               type="radio"
               name="horizontal_radio_button"
-              value="horizontal-radio-daniel-craig"
+              v-model="userInfo.notify_type"
+              :value="10"
+              @change="nofityChange = true"
             />
             <FormCheck.Label htmlFor="radio-switch-6">
               {{ $t('phone') }}
             </FormCheck.Label>
           </FormCheck>
           <InputGroup class="col-span-3">
-            <FormInput v-model="userInfo.notify_phone" />
+            <FormInput
+              v-model="userInfo.notify_phone"
+              @input="nofityChange = true"
+            />
           </InputGroup>
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
@@ -157,6 +275,7 @@ getUserActiveLog()
                 v-model="userInfo.is_open_notify"
                 id="checkbox-switch-7"
                 type="checkbox"
+                @change="nofityChange = true"
               />
             </FormSwitch>
           </div>
@@ -167,7 +286,9 @@ getUserActiveLog()
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
           <div>{{ $t('activeLog') }}</div>
-          <Button variant="outline-primary">{{ $t('viewAll') }}</Button>
+          <Button variant="outline-primary" @click="viewMore">{{
+            $t('viewAll')
+          }}</Button>
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4 text-xs">
           <span>{{ $t('browser') }}</span>
@@ -193,5 +314,6 @@ getUserActiveLog()
       </div>
     </div>
     <HeadUploadModal v-model="showHeadUploadPopup" />
+    <ActiveLogsModal :active-logs="allLogs" v-model="showActiveLogPopup" />
   </div>
 </template>

@@ -23,11 +23,11 @@ const routes = [
         }
       },
       {
-        path: '/settings',
+        path: 'settings',
         name: 'settings',
         children: [
           {
-            path: 'account',
+            path: '',
             name: 'settings-account',
             component: () => import('@/pages/settings/account.vue')
           }
