@@ -2617,5 +2617,12 @@
   "time": "時間",
   "deleteAccount": "刪除帳號",
   "deleteAlert": "請注意，這將會永久的刪除您的所有資料，一但您刪除帳號，您的帳號將無法還原。",
-  "delete": "刪除"
+  "delete": "刪除",
+  "editHead": "編輯頭像",
+  "dropImgHere": "拖曳圖片至此",
+  "inputOldPSD": "輸入舊密碼",
+  "inputNewPSD": "輸入新密碼",
+  "inputNewPSDAgain": "再次輸入新密碼",
+  "viewAll": "查看全部",
+  "confirmEdit": "確認修改"
 }
