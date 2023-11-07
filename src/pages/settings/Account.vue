@@ -9,6 +9,10 @@ import { reactive, ref } from 'vue'
 import { AuthType, getRequest, postRequest, putRequest } from '../../api/api'
 import { useNotificationsStore } from '../../stores/notifications'
 import ActiveLogsModal from '../../components/Modals/ActiveLogsModal/'
+import { useDeleteModalStore } from '../../stores/modals/deleteModal'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const showHeadUploadPopup = ref(false)
 const showActiveLogPopup = ref(false)
@@ -107,6 +111,15 @@ const viewMore = async () => {
   const { data } = res.data
   allLogs.value = data
   showActiveLogPopup.value = true
+}
+
+const confirmDeleteAccout = () => {
+  useDeleteModalStore().showModal({
+    deleteType: 'account',
+    title: '',
+    content: t('delete-account-modal-desc'),
+    deleteData: { id: userInfo.id }
+  })
 }
 
 getUserInfo()
@@ -309,7 +322,9 @@ getUserActiveLog()
         </div>
         <div class="flex items-center justify-between p-4">
           <span class="text-xs">{{ $t('deleteAlert') }}</span>
-          <Button variant="danger">{{ $t('delete') }}</Button>
+          <Button variant="danger" @click="confirmDeleteAccout">{{
+            $t('delete')
+          }}</Button>
         </div>
       </div>
     </div>
