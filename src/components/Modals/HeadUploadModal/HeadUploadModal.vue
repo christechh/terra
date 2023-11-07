@@ -9,6 +9,7 @@ import Button from '../../../base-components/Button/index'
 import { ref } from 'vue'
 import { FormInput, InputGroup } from '../../../base-components/Form'
 import { AuthType, postRequest } from '../../../api/api'
+import { watch } from 'vue'
 
 interface Props {
   modelValue: boolean
@@ -35,6 +36,9 @@ const animateHeads = ref<{ stickerImg: string; stickerId: number }[]>([])
 const selectedGIFId = ref(0)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const localImg = ref<any>(null)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const canvas: any = ref(null)
+const scale = ref<number>(2)
 
 const save = async () => {
   const defaultAvata = avatars.find((i) => i.id === selectedId.value)
@@ -142,15 +146,46 @@ const fileChangeHandler = (e: Event) => {
   const target = e.target as HTMLInputElement
   const file = target.files && target.files[0]
   if (file) {
+    draw(file)
     localImg.value = file
     selectedId.value = 0
     isChange.value = true
   }
 }
 
+const draw = (file?: Blob) => {
+  if (!file) {
+    file = localImg.value
+  }
+  const reader = new FileReader()
+  reader.onload = (event) => {
+    const img = new Image()
+    img.onload = () => {
+      canvas.value
+        .getContext('2d')
+        .clearRect(0, 0, canvas.value.width, canvas.value.height)
+      canvas.value
+        .getContext('2d')
+        ?.drawImage(
+          img,
+          canvas.value.width / 2 - (img.width / 2) * scale.value,
+          canvas.value.height / 2 - (img.height / 2) * scale.value,
+          img.width * scale.value,
+          img.height * scale.value
+        )
+    }
+    // const h = (img.height / img.width) * 196
+    // img.width = 196
+    // img.height = h
+    img.src = event.target?.result as string
+  }
+  reader.readAsDataURL(file as Blob)
+}
+
 const uploadAvatar = async () => {
   const form = new FormData()
-  form.append('file', localImg.value)
+  const blob = await new Promise((resolve) => canvas.value.toBlob(resolve))
+  form.append('file', blob as Blob)
   form.append('setAvatar', 'false')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const res = await postRequest('user/image', form, AuthType.JWT)
@@ -159,9 +194,13 @@ const uploadAvatar = async () => {
   localImg.value = url
 }
 
-const file2Src = (file: File) => {
-  return URL.createObjectURL(file)
-}
+// const file2Src = (file: File) => {
+//   return URL.createObjectURL(file)
+// }
+
+watch(scale, () => {
+  draw()
+})
 </script>
 
 <template>
@@ -185,16 +224,37 @@ const file2Src = (file: File) => {
           "
         />
       </Dialog.Title>
-      <Dialog.Description>
+      <Dialog.Description class="pt-0">
         <template v-if="!isAnimate">
+          <canvas
+            ref="canvas"
+            width="250"
+            height="250"
+            class="absolute left-1/2 top-1/2"
+            style="transform: translate(-50%, -236px)"
+          />
+          <input
+            id="meter--ranger"
+            class="absolute h-1 w-48 focus-visible:outline-none"
+            type="range"
+            v-model="scale"
+            min="1"
+            max="4"
+            style="top: 340px; left: 50%; transform: translateX(-50%)"
+          />
           <div
-            class="relative mx-auto rounded-full border-2 border-dashed pt-5 text-center"
-            style="width: 200px; height: 200px; border-color: #c0c0c0"
+            class="relative mx-auto mb-28 rounded-full border-2 border-dashed text-center"
+            style="
+              width: 200px;
+              height: 200px;
+              border-color: #c0c0c0;
+              transform: translateY(20px);
+            "
           >
             <template v-if="!localImg">
               <Lucide
                 icon="UploadCloud"
-                class="mx-auto"
+                class="mx-auto mt-6"
                 width="48"
                 height="48"
                 color="#c0c0c0"
@@ -205,7 +265,7 @@ const file2Src = (file: File) => {
                 <div>{{ $t('click-to-upload-image') }}</div>
               </div>
             </template>
-            <img v-else :src="file2Src(localImg)" alt="" />
+            <!-- <img v-else :src="file2Src(localImg)" alt="" /> -->
             <input
               class="absolute left-0 top-0 opacity-0"
               type="file"
@@ -213,7 +273,7 @@ const file2Src = (file: File) => {
               @change="fileChangeHandler"
             />
           </div>
-          <div class="mt-3 flex justify-around">
+          <div class="mt-10 flex justify-around">
             <div
               v-for="avatar in avatars"
               :key="avatar.id"

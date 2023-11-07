@@ -35,6 +35,9 @@ export const postRequest = async (
 ) => {
   try {
     instance.defaults.headers.common['Content-Type'] = 'application/json'
+    if (data instanceof FormData) {
+      instance.defaults.headers.common['Content-Type'] = 'multipart/form-data'
+    }
     const response = await instance.post(endpoint, data, {
       headers: {
         //'Content-Type': 'application/json',
