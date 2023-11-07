@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DarkModeSwitcher from '../components/DarkModeSwitcher'
 import { getColor } from '../utils/colors'
 const primaryColor = getColor('primary', 0.9)
 import designImg1 from '../assets/images/design-template/design-template1.png'
@@ -44,7 +43,10 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
         <tr>
           <td class="table-border">.theme1-border</td>
           <td class="table-border">
-            <div class="theme1-border" style="border-style: dashed; border-width: 1px">
+            <div
+              class="theme1-border"
+              style="border-style: dashed; border-width: 1px"
+            >
               .theme1-border
             </div>
           </td>
@@ -65,7 +67,10 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
         <tr>
           <td class="table-border">.theme2-border</td>
           <td class="table-border">
-            <div class="theme2-border" style="border-style: dashed; border-width: 1px">
+            <div
+              class="theme2-border"
+              style="border-style: dashed; border-width: 1px"
+            >
               .theme2-border
             </div>
           </td>
@@ -86,7 +91,10 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
         <tr>
           <td class="table-border">.theme3-border</td>
           <td class="table-border">
-            <div class="theme3-border" style="border-style: dashed; border-width: 1px">
+            <div
+              class="theme3-border"
+              style="border-style: dashed; border-width: 1px"
+            >
               .theme3-border
             </div>
           </td>
@@ -107,7 +115,10 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
         <tr>
           <td class="table-border">.theme4-border</td>
           <td class="table-border">
-            <div class="theme4-border" style="border-style: dashed; border-width: 1px">
+            <div
+              class="theme4-border"
+              style="border-style: dashed; border-width: 1px"
+            >
               .theme4-border
             </div>
           </td>
@@ -128,7 +139,10 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
         <tr>
           <td class="table-border">.theme5-border</td>
           <td class="table-border">
-            <div class="theme5-border" style="border-style: dashed; border-width: 1px">
+            <div
+              class="theme5-border"
+              style="border-style: dashed; border-width: 1px"
+            >
               .theme5-border
             </div>
           </td>
@@ -148,7 +162,10 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
         <tr>
           <td class="table-border">.warning-border</td>
           <td class="table-border">
-            <div class="warning-border" style="border-style: dashed; border-width: 1px">
+            <div
+              class="warning-border"
+              style="border-style: dashed; border-width: 1px"
+            >
               .warning-border
             </div>
           </td>
@@ -206,7 +223,11 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
             input[type='text'], input[type='password'], input[type='number'] bg
           </td>
           <td class="table-border">
-            <input type="text" style="width: 100%" placeholder="input[type='text'](輸入框背景色)" />
+            <input
+              type="text"
+              style="width: 100%"
+              placeholder="input[type='text'](輸入框背景色)"
+            />
           </td>
         </tr>
         <tr>
@@ -216,7 +237,11 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
             input[type='number']::placeholder placeholder文字顏色
           </td>
           <td class="table-border">
-            <input type="text" style="width: 100%" placeholder="input[type='text']::placeholder(placeholder 文字顏色)" />
+            <input
+              type="text"
+              style="width: 100%"
+              placeholder="input[type='text']::placeholder(placeholder 文字顏色)"
+            />
           </td>
         </tr>
       </table>
