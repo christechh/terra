@@ -5,11 +5,14 @@ import avatar1 from '../../../assets/images/head/avatar1.png'
 import avatar2 from '../../../assets/images/head/avatar2.png'
 import avatar3 from '../../../assets/images/head/avatar3.png'
 import avatar4 from '../../../assets/images/head/avatar4.png'
+import EmptyList from '../../EmptyList'
 import Button from '../../../base-components/Button/index'
 import { ref } from 'vue'
 import { FormInput, InputGroup } from '../../../base-components/Form'
 import { AuthType, postRequest } from '../../../api/api'
+import { getRequest as thirdPartyApiGet } from '../../../api/thirdPartyApi'
 import { watch } from 'vue'
+import { debounce } from 'lodash'
 
 interface Props {
   modelValue: boolean
@@ -39,6 +42,7 @@ const localImg = ref<any>(null)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const canvas: any = ref(null)
 const scale = ref<number>(2)
+const search = ref<string>('')
 
 const save = async () => {
   const defaultAvata = avatars.find((i) => i.id === selectedId.value)
@@ -63,21 +67,13 @@ const save = async () => {
 }
 
 const getKeyWords = () => {
-  fetch(
-    'https://messenger.stipop.io/v1/search/keyword?userId=pinchat_v3_user_1589&lang=zh-tw',
-    {
-      headers: {
-        Apikey: '604e1ad4d75ae2f9cd29f00d49093378'
-      }
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  )
-    .then((res) => {
-      return res.json()
-    })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    .then((r) => {
-      const { keywordList } = r.body
+  thirdPartyApiGet('search/keyword', {
+    userId: 'pinchat_v3_user_1589',
+    lang: 'zh-tw'
+  })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .then((res: any) => {
+      const { keywordList } = res.body
       keywords.value = keywordList
     })
 }
@@ -89,37 +85,24 @@ const getAnimate = () => {
   isAnimate.value = true
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function debounce<T extends Function>(cb: T, wait = 20) {
-  let h = 0
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let callable = (...args: any) => {
-    clearTimeout(h)
-    h = setTimeout(() => cb(...args), wait)
-  }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <T>(<any>callable)
-}
-
 const getHeads = () => {
   if (animateHeads.value.length > 0 && animatePage.value > pageCount.value) {
     return
   }
-  fetch(
-    `https://messenger.stipop.io/v1/search?q=&userId=pinchat_v3_user_1589&lang=zh-tw&pageNumber=${animatePage.value}`,
-    {
-      headers: {
-        Apikey: '604e1ad4d75ae2f9cd29f00d49093378'
-      }
-    }
-  )
-    .then((res) => res.json())
-    .then((r) => {
-      const { stickerList, pageMap } = r.body
+  thirdPartyApiGet('search', {
+    q: search.value,
+    userId: 'pinchat_v3_user_1589',
+    lang: 'zh-tw',
+    pageNumber: animatePage.value
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  }).then((res) => {
+    const { stickerList, pageMap } = res.body
+    if (stickerList && pageMap) {
       pageCount.value = pageMap.pageCount
       animateHeads.value = [...animateHeads.value, ...stickerList]
       animatePage.value++
-    })
+    }
+  })
 }
 
 const scrollHandler = (event: Event) => {
@@ -127,7 +110,7 @@ const scrollHandler = (event: Event) => {
   const target = event.target as HTMLElement
   console.log(target.scrollHeight - target.scrollTop - 5, target.clientHeight)
   if (target.scrollHeight - target.scrollTop - 5 <= target.clientHeight) {
-    debounce(getHeads, 20)()
+    debounce(getHeads, 200)()
   }
 }
 
@@ -174,9 +157,6 @@ const draw = (file?: Blob) => {
           img.height * scale.value
         )
     }
-    // const h = (img.height / img.width) * 196
-    // img.width = 196
-    // img.height = h
     img.src = event.target?.result as string
   }
   reader.readAsDataURL(file as Blob)
@@ -194,12 +174,18 @@ const uploadAvatar = async () => {
   localImg.value = url
 }
 
-// const file2Src = (file: File) => {
-//   return URL.createObjectURL(file)
-// }
+const keywordClickHandler = (keyword: string) => {
+  search.value = keyword
+}
 
 watch(scale, () => {
   draw()
+})
+
+watch(search, () => {
+  animatePage.value = 1
+  animateHeads.value = []
+  debounce(getHeads, 200)()
 })
 </script>
 
@@ -234,6 +220,7 @@ watch(scale, () => {
             style="transform: translate(-50%, -236px)"
           />
           <input
+            v-if="localImg"
             id="meter--ranger"
             class="absolute h-1 w-48 focus-visible:outline-none"
             type="range"
@@ -294,6 +281,7 @@ watch(scale, () => {
         <template v-else>
           <InputGroup class="items-center rounded-lg border px-2">
             <FormInput
+              v-model="search"
               class="border-0 focus-visible:ring-transparent"
               :placeholder="$t('search')"
             />
@@ -305,11 +293,13 @@ watch(scale, () => {
               v-for="keyword in keywords"
               :key="keyword.keyword"
               class="mr-2 shrink-0 cursor-pointer rounded-full bg-primary px-4 py-2 text-white"
+              @click="() => keywordClickHandler(keyword.keyword)"
             >
               {{ keyword.keyword }}
             </li>
           </ul>
           <ul
+            v-if="animateHeads.length > 0"
             class="grid h-60 grid-cols-4 gap-6 overflow-auto"
             @scroll="scrollHandler"
           >
@@ -329,6 +319,10 @@ watch(scale, () => {
               />
             </li>
           </ul>
+          <EmptyList
+            :show="animateHeads.length === 0"
+            :content="$t('empty-sticker')"
+          />
         </template>
         <Button
           v-show="!isAnimate"
