@@ -15,6 +15,7 @@ interface FormInputProps extends /* @vue-ignore */ InputHTMLAttributes {
 
 interface FormInputEmit {
   (e: 'update:modelValue', value: string): void
+  (e: 'change'): void
 }
 
 const props = defineProps<FormInputProps>()
@@ -56,5 +57,6 @@ const localValue = computed({
     :type="props.type"
     v-bind="_.omit(attrs, 'class')"
     v-model="localValue"
+    @change="emit('change')"
   />
 </template>

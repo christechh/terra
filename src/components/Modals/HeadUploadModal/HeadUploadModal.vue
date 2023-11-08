@@ -5,6 +5,7 @@ import avatar1 from '../../../assets/images/head/avatar1.png'
 import avatar2 from '../../../assets/images/head/avatar2.png'
 import avatar3 from '../../../assets/images/head/avatar3.png'
 import avatar4 from '../../../assets/images/head/avatar4.png'
+import EmptyList from '../../EmptyList'
 import Button from '../../../base-components/Button/index'
 import { ref } from 'vue'
 import { FormInput, InputGroup } from '../../../base-components/Form'
@@ -41,6 +42,7 @@ const localImg = ref<any>(null)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const canvas: any = ref(null)
 const scale = ref<number>(2)
+const search = ref<string>('')
 
 const save = async () => {
   const defaultAvata = avatars.find((i) => i.id === selectedId.value)
@@ -88,16 +90,18 @@ const getHeads = () => {
     return
   }
   thirdPartyApiGet('search', {
-    q: '',
+    q: search.value,
     userId: 'pinchat_v3_user_1589',
     lang: 'zh-tw',
     pageNumber: animatePage.value
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   }).then((res) => {
     const { stickerList, pageMap } = res.body
-    pageCount.value = pageMap.pageCount
-    animateHeads.value = [...animateHeads.value, ...stickerList]
-    animatePage.value++
+    if (stickerList && pageMap) {
+      pageCount.value = pageMap.pageCount
+      animateHeads.value = [...animateHeads.value, ...stickerList]
+      animatePage.value++
+    }
   })
 }
 
@@ -170,8 +174,18 @@ const uploadAvatar = async () => {
   localImg.value = url
 }
 
+const keywordClickHandler = (keyword: string) => {
+  search.value = keyword
+}
+
 watch(scale, () => {
   draw()
+})
+
+watch(search, () => {
+  animatePage.value = 1
+  animateHeads.value = []
+  debounce(getHeads, 200)()
 })
 </script>
 
@@ -267,6 +281,7 @@ watch(scale, () => {
         <template v-else>
           <InputGroup class="items-center rounded-lg border px-2">
             <FormInput
+              v-model="search"
               class="border-0 focus-visible:ring-transparent"
               :placeholder="$t('search')"
             />
@@ -278,11 +293,13 @@ watch(scale, () => {
               v-for="keyword in keywords"
               :key="keyword.keyword"
               class="mr-2 shrink-0 cursor-pointer rounded-full bg-primary px-4 py-2 text-white"
+              @click="() => keywordClickHandler(keyword.keyword)"
             >
               {{ keyword.keyword }}
             </li>
           </ul>
           <ul
+            v-if="animateHeads.length > 0"
             class="grid h-60 grid-cols-4 gap-6 overflow-auto"
             @scroll="scrollHandler"
           >
@@ -302,6 +319,10 @@ watch(scale, () => {
               />
             </li>
           </ul>
+          <EmptyList
+            :show="animateHeads.length === 0"
+            :content="$t('empty-sticker')"
+          />
         </template>
         <Button
           v-show="!isAnimate"

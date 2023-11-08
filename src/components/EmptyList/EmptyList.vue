@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import emptyListImage from '../../assets/images/svg/components_empty-img-simple.svg'
 
 interface Props {
