@@ -91,7 +91,7 @@ const getAnimate = () => {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function debounce<T extends Function>(cb: T, wait = 20) {
-  let h = 0
+  let h: number | ReturnType<typeof setTimeout> = 0
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let callable = (...args: any) => {
     clearTimeout(h)
