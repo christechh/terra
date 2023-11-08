@@ -9,7 +9,9 @@ import Button from '../../../base-components/Button/index'
 import { ref } from 'vue'
 import { FormInput, InputGroup } from '../../../base-components/Form'
 import { AuthType, postRequest } from '../../../api/api'
+import { getRequest as thirdPartyApiGet } from '../../../api/thirdPartyApi'
 import { watch } from 'vue'
+import { debounce } from 'lodash'
 
 interface Props {
   modelValue: boolean
@@ -63,21 +65,13 @@ const save = async () => {
 }
 
 const getKeyWords = () => {
-  fetch(
-    'https://messenger.stipop.io/v1/search/keyword?userId=pinchat_v3_user_1589&lang=zh-tw',
-    {
-      headers: {
-        Apikey: '604e1ad4d75ae2f9cd29f00d49093378'
-      }
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  )
-    .then((res) => {
-      return res.json()
-    })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    .then((r) => {
-      const { keywordList } = r.body
+  thirdPartyApiGet('search/keyword', {
+    userId: 'pinchat_v3_user_1589',
+    lang: 'zh-tw'
+  })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .then((res: any) => {
+      const { keywordList } = res.body
       keywords.value = keywordList
     })
 }
@@ -89,37 +83,22 @@ const getAnimate = () => {
   isAnimate.value = true
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function debounce<T extends Function>(cb: T, wait = 20) {
-  let h: number | ReturnType<typeof setTimeout> = 0
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let callable = (...args: any) => {
-    clearTimeout(h)
-    h = setTimeout(() => cb(...args), wait)
-  }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <T>(<any>callable)
-}
-
 const getHeads = () => {
   if (animateHeads.value.length > 0 && animatePage.value > pageCount.value) {
     return
   }
-  fetch(
-    `https://messenger.stipop.io/v1/search?q=&userId=pinchat_v3_user_1589&lang=zh-tw&pageNumber=${animatePage.value}`,
-    {
-      headers: {
-        Apikey: '604e1ad4d75ae2f9cd29f00d49093378'
-      }
-    }
-  )
-    .then((res) => res.json())
-    .then((r) => {
-      const { stickerList, pageMap } = r.body
-      pageCount.value = pageMap.pageCount
-      animateHeads.value = [...animateHeads.value, ...stickerList]
-      animatePage.value++
-    })
+  thirdPartyApiGet('search', {
+    q: '',
+    userId: 'pinchat_v3_user_1589',
+    lang: 'zh-tw',
+    pageNumber: animatePage.value
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  }).then((res) => {
+    const { stickerList, pageMap } = res.body
+    pageCount.value = pageMap.pageCount
+    animateHeads.value = [...animateHeads.value, ...stickerList]
+    animatePage.value++
+  })
 }
 
 const scrollHandler = (event: Event) => {
@@ -127,7 +106,7 @@ const scrollHandler = (event: Event) => {
   const target = event.target as HTMLElement
   console.log(target.scrollHeight - target.scrollTop - 5, target.clientHeight)
   if (target.scrollHeight - target.scrollTop - 5 <= target.clientHeight) {
-    debounce(getHeads, 20)()
+    debounce(getHeads, 200)()
   }
 }
 
@@ -174,9 +153,6 @@ const draw = (file?: Blob) => {
           img.height * scale.value
         )
     }
-    // const h = (img.height / img.width) * 196
-    // img.width = 196
-    // img.height = h
     img.src = event.target?.result as string
   }
   reader.readAsDataURL(file as Blob)
@@ -193,10 +169,6 @@ const uploadAvatar = async () => {
   selectedId.value = id
   localImg.value = url
 }
-
-// const file2Src = (file: File) => {
-//   return URL.createObjectURL(file)
-// }
 
 watch(scale, () => {
   draw()
