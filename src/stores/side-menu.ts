@@ -20,6 +20,17 @@ export const useSideMenuStore = defineStore('sideMenu', {
         icon: 'BookOpen',
         pageName: 'links',
         title: i18n.global.t('my-links')
+      },
+      {
+        icon: 'Settings',
+        title: '個人設定',
+        subMenu: [
+          {
+            icon: 'UserCircle2',
+            pageName: 'settings-account',
+            title: '我的帳號'
+          }
+        ]
       }
     ]
   })

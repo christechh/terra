@@ -237,7 +237,7 @@ const computedClass = computed(() =>
     v-bind="_.omit(attrs, 'class')"
     :is="as"
     :class="computedClass"
-    :disabled="loading"
+    :disabled="loading || attrs.disabled"
   >
     <slot></slot>
     <LoadingIcon v-if="loading" icon="oval" color="#fff" class="ml-2" />

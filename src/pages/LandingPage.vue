@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DarkModeSwitcher from '../components/DarkModeSwitcher'
 import { getColor } from '../utils/colors'
 const primaryColor = getColor('primary', 0.9)
 import designImg1 from '../assets/images/design-template/design-template1.png'
@@ -11,7 +10,6 @@ import designImg3 from '../assets/images/design-template/design-template3.png'
   <div>
     <div>{{ $t('hello') }} landing</div>
     <br />
-    <DarkModeSwitcher />
     <div :style="{ color: primaryColor }">
       store取得顏色方式: primaryColor = getColor('primary', 0.9) =>
       {{ primaryColor }}

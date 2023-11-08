@@ -21,6 +21,17 @@ const routes = [
         meta: {
           title: i18n.global.t('my-links')
         }
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        children: [
+          {
+            path: '',
+            name: 'settings-account',
+            component: () => import('@/pages/settings/account.vue')
+          }
+        ]
       }
     ]
   },
