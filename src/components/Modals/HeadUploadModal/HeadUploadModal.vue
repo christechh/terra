@@ -206,6 +206,7 @@ watch(scale, () => {
             style="transform: translate(-50%, -236px)"
           />
           <input
+            v-if="localImg"
             id="meter--ranger"
             class="absolute h-1 w-48 focus-visible:outline-none"
             type="range"
