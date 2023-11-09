@@ -29,7 +29,7 @@ const routes = [
           {
             path: '',
             name: 'settings-account',
-            component: () => import('@/pages/settings/account.vue')
+            component: () => import('@/pages/settings/Account.vue')
           }
         ]
       }
