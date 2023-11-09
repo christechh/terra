@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { useWaningModalStore } from '../stores/modals/warrningModal'
 import { useRedirectToStore } from '../stores/redirect-to'
-import { useUserStore } from '../stores/user'
+// import { useUserStore } from '../stores/user'
 import { get } from 'lodash'
 
 import { useNotificationsStore } from '../stores/notifications'
@@ -182,8 +182,8 @@ const getAuthorization = (authType: AuthType) => {
   if (authType === AuthType.CMS) {
     return import.meta.env.VITE_BASIC_TOKEN_CMS
   } else if (authType === AuthType.JWT) {
-    const token = useUserStore().getToken
-    return 'Bearer ' + token
+    // const token = useUserStore().getToken
+    return 'Bearer 1c06e56c786f5e0871a19ce9093dcec841eef34e'
   } else {
     return ''
   }
