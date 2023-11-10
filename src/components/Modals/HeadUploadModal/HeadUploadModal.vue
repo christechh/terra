@@ -47,11 +47,12 @@ const save = async () => {
   if (localImg.value) {
     await uploadAvatar()
   }
+  const a = animateHeads.value.find((i) => i.stickerId === selectedGIFId.value)
+  // ts-ignore
+  console.log(isAnimate.value, a?.stickerImg)
+  // eslint-disable-next-line no-debugger
+  debugger
   emit('save', {
-    ...(isAnimate.value && {
-      img: animateHeads.value.find((i) => i.stickerId === selectedGIFId.value)
-        ?.stickerImg
-    }),
     ...(!isAnimate.value && defaultAvata
       ? {
           ...avatars.find((i) => i.id === selectedId.value)
@@ -59,7 +60,12 @@ const save = async () => {
       : {
           id: selectedId.value,
           img: localImg.value
-        })
+        }),
+    ...(isAnimate.value && {
+      img: animateHeads.value.find((i) => i.stickerId === selectedGIFId.value)
+        ?.stickerImg,
+      id: ''
+    })
   })
   emit('update:modelValue', false)
 }
@@ -194,32 +200,32 @@ watch(search, () => {
 <template>
   <Dialog :open="modelValue">
     <Dialog.Panel class="rounded-xl p-3">
-      <Dialog.Title>
-        <Lucide
-          icon="ChevronLeft"
-          class="cursor-pointer"
-          :class="isAnimate ? 'visible' : 'invisible'"
-          @click="isAnimate = false"
-        />
-        <div class="mx-auto">{{ $t('editHead') }}</div>
-        <Lucide
-          icon="X"
-          class="cursor-pointer"
-          @click="
-            () => {
-              emit('update:modelValue', false)
-            }
-          "
-        />
-      </Dialog.Title>
       <Dialog.Description class="pt-0">
+        <div class="flex items-center justify-between">
+          <Lucide
+            icon="ChevronLeft"
+            class="cursor-pointer"
+            :class="isAnimate ? 'visible' : 'invisible'"
+            @click="isAnimate = false"
+          />
+          <div class="mx-auto text-base font-bold">{{ $t('editHead') }}</div>
+          <Lucide
+            icon="X"
+            class="cursor-pointer"
+            @click="
+              () => {
+                emit('update:modelValue', false)
+              }
+            "
+          />
+        </div>
         <template v-if="!isAnimate">
           <canvas
             ref="canvas"
             width="250"
             height="250"
             class="absolute left-1/2 top-1/2"
-            style="transform: translate(-50%, -236px)"
+            style="transform: translate(-50%, -225px)"
           />
           <input
             v-if="localImg"
@@ -229,7 +235,7 @@ watch(search, () => {
             v-model="scale"
             min="1"
             max="4"
-            style="top: 340px; left: 50%; transform: translateX(-50%)"
+            style="top: 325px; left: 50%; transform: translateX(-50%)"
           />
           <div
             class="relative mx-auto mb-28 rounded-full border-2 border-dashed text-center"
@@ -237,7 +243,7 @@ watch(search, () => {
               width: 200px;
               height: 200px;
               border-color: #c0c0c0;
-              transform: translateY(20px);
+              transform: translateY(45px);
             "
           >
             <template v-if="!localImg">
@@ -281,11 +287,12 @@ watch(search, () => {
           </div>
         </template>
         <template v-else>
-          <InputGroup class="items-center rounded-lg border px-2">
+          <InputGroup class="input-group mt-3 items-center rounded-lg px-2">
             <FormInput
               v-model="search"
               class="border-0 focus-visible:ring-transparent"
               :placeholder="$t('search')"
+              type="text"
             />
             <Lucide icon="Search" width="16" height="16" />
           </InputGroup>
@@ -329,7 +336,7 @@ watch(search, () => {
         <Button
           v-show="!isAnimate"
           variant="outline-primary"
-          class="mt-3 w-full"
+          class="mt-6 w-full"
           @click="getAnimate"
           >{{ $t('select-animated-avatar') }}</Button
         >

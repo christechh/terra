@@ -16,9 +16,15 @@ const { activeLogs } = defineProps<Props>()
 const emit = defineEmits(['update:modelValue'])
 </script>
 <template>
-  <Dialog :open="modelValue" @close="() => emit('update:modelValue', false)">
+  <Dialog
+    :open="modelValue"
+    size="xl"
+    @close="() => emit('update:modelValue', false)"
+  >
     <Dialog.Panel>
-      <div class="grid grid-cols-4 gap-y-3 p-4 text-xs">
+      <div
+        class="grid h-[600px] grid-cols-4 gap-x-3 gap-y-3 overflow-auto p-4 text-xs"
+      >
         <span>{{ $t('browser') }}</span>
         <span>{{ $t('device') }}</span>
         <span>{{ $t('IP') }}</span>

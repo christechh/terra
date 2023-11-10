@@ -170,6 +170,7 @@ getUserActiveLog()
           <FormInput
             v-model="userInfo.name"
             class="col-span-3"
+            type="text"
             @input="accountSettingChange = true"
           />
           <FormLabel
@@ -179,7 +180,7 @@ getUserActiveLog()
           <FormInput v-model="userInfo.email" class="col-span-3" disabled />
         </div>
       </div>
-      <div class="mt-3 rounded-xl bg-white dark:bg-darkmode-600">
+      <div class="mt-4 rounded-xl bg-white dark:bg-darkmode-600">
         <div
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
@@ -211,21 +212,27 @@ getUserActiveLog()
             :placeholder="$t('inputNewPSD')"
             class="col-span-3"
             type="password"
+            :class="resetPsdError ? 'border border-danger' : ''"
           />
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('email') }}</FormLabel
+            >{{ $t('edit-confirm-new-password-label') }}</FormLabel
           >
-          <div class="col-span-3">
-            <FormInput
-              v-model="newPsdAgain"
-              :placeholder="$t('inputNewPSDAgain')"
-              type="password"
+          <FormInput
+            v-model="newPsdAgain"
+            :placeholder="$t('inputNewPSDAgain')"
+            type="password"
+            class="col-span-3"
+            :class="resetPsdError ? 'border border-danger' : ''"
+          />
+          <template v-if="resetPsdError">
+            <FormLabel
+              class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             />
-            <div v-if="resetPsdError" class="mt-2 text-xs text-danger">
+            <div class="col-span-3 mt-2 text-xs text-danger">
               {{ resetPsdError }}
             </div>
-          </div>
+          </template>
         </div>
       </div>
     </div>
@@ -260,6 +267,7 @@ getUserActiveLog()
             v-model="userInfo.notify_email"
             class="col-span-3"
             @input="nofityChange = true"
+            type="text"
           />
           <FormCheck class="col-span-1">
             <FormCheck.Input
@@ -278,10 +286,11 @@ getUserActiveLog()
             <FormInput
               v-model="userInfo.notify_phone"
               @input="nofityChange = true"
+              type="number"
             />
           </InputGroup>
           <FormLabel
-            class="col-span-1 mb-0 mr-2 flex items-center justify-end"
+            class="col-span-1 mb-0 mr-2 flex items-center justify-start"
             >{{ $t('switch') }}</FormLabel
           >
           <div class="mt-2">
@@ -296,7 +305,7 @@ getUserActiveLog()
           </div>
         </div>
       </div>
-      <div class="mt-3 rounded-xl bg-white dark:bg-darkmode-600">
+      <div class="mt-4 rounded-xl bg-white dark:bg-darkmode-600">
         <div
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
@@ -318,12 +327,12 @@ getUserActiveLog()
           </template>
         </div>
       </div>
-      <div class="mt-3 rounded-xl bg-white dark:bg-darkmode-600">
-        <div class="flex items-center justify-between p-4">
+      <div class="mt-4 rounded-xl bg-white dark:bg-darkmode-600">
+        <div class="flex items-center justify-between px-4 pt-4">
           <div>{{ $t('deleteAccount') }}</div>
         </div>
-        <div class="flex items-center justify-between p-4">
-          <span class="text-xs">{{ $t('deleteAlert') }}</span>
+        <div class="flex items-center justify-between px-4 pb-4">
+          <span class="desc-font text-xs">{{ $t('deleteAlert') }}</span>
           <Button variant="danger" @click="confirmDeleteAccout">{{
             $t('delete')
           }}</Button>
