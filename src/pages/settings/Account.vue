@@ -6,11 +6,11 @@ import { FormSwitch, FormCheck, InputGroup } from '../../base-components/Form'
 import Lucide from '../../base-components/Lucide/index'
 import HeadUploadModal from '../../components/Modals/HeadUploadModal'
 import { reactive, ref } from 'vue'
-import { AuthType, getRequest, postRequest, putRequest } from '../../api/api'
 import { useNotificationsStore } from '../../stores/notifications'
 import ActiveLogsModal from '../../components/Modals/ActiveLogsModal/'
 import { useDeleteModalStore } from '../../stores/modals/deleteModal'
 import { useI18n } from 'vue-i18n'
+import axios from '../../axios'
 
 const { t } = useI18n()
 
@@ -28,15 +28,15 @@ const newPsd = ref('')
 const newPsdAgain = ref('')
 const resetPsdError = ref('')
 
-const getUserInfo = () => {
-  getRequest('auth/setting', {}, AuthType.JWT).then((res) => {
+const getUserInfo = async () => {
+  await axios.get('/auth/setting').then((res) => {
     const { data } = res.data
     Object.assign(userInfo, data)
   })
 }
 
-const getLogs = (page: number, pageSize: number) => {
-  return getRequest('user/login', { page, pageSize }, AuthType.JWT)
+const getLogs = async (page: number, pageSize: number) => {
+  return axios.get('/user/login', { params: { page, pageSize } })
 }
 
 const getUserActiveLog = () => {
@@ -48,15 +48,11 @@ const getUserActiveLog = () => {
 
 const updateAccountSetting = async () => {
   try {
-    const res = await postRequest(
-      'auth/setting',
-      {
-        image_id: userInfo.image_id,
-        ...(!userInfo.image_id && { avatar: userInfo.avatar }),
-        name: userInfo.name
-      },
-      AuthType.JWT
-    )
+    const res = await axios.post('/auth/setting', {
+      image_id: userInfo.image_id,
+      ...(!userInfo.image_id && { avatar: userInfo.avatar }),
+      name: userInfo.name
+    })
     const { data } = res.data
     Object.assign(userInfo, data)
     useNotificationsStore().showSaveSuccess()
@@ -69,15 +65,11 @@ const updateAccountSetting = async () => {
 
 const updatePassword = async () => {
   try {
-    await putRequest(
-      'auth/updatePassword',
-      {
-        new_password: newPsd.value,
-        new_password_confirmation: newPsdAgain.value,
-        old_password: oldPsd.value
-      },
-      AuthType.JWT
-    )
+    await axios.put('/auth/updatePassword', {
+      new_password: newPsd.value,
+      new_password_confirmation: newPsdAgain.value,
+      old_password: oldPsd.value
+    })
     oldPsd.value = ''
     newPsd.value = ''
     newPsdAgain.value = ''
@@ -90,16 +82,12 @@ const updatePassword = async () => {
 
 const updateNotification = async () => {
   try {
-    await putRequest(
-      'user/notify',
-      {
-        email: userInfo.notify_email,
-        is_open_notify: userInfo.is_open_notify,
-        phone: userInfo.notify_phone,
-        type: userInfo.notify_type
-      },
-      AuthType.JWT
-    )
+    await axios.put('/user/notify', {
+      email: userInfo.notify_email,
+      is_open_notify: userInfo.is_open_notify,
+      phone: userInfo.notify_phone,
+      type: userInfo.notify_type
+    })
     nofityChange.value = false
     useNotificationsStore().showSaveSuccess()
   } catch (e) {

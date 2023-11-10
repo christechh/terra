@@ -1,31 +1,25 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useUserStore } from '../stores/user'
+import { useLinkStore } from '../stores/link'
+import { computed } from 'vue'
 const searchKeyword = ref('')
-const links = [
-  {
-    id: 1,
-    name: '91APP 05.22.2023 創建',
-    avatar:
-      'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/user/e2669806e2830fc502f8835f2e6e4abe.png'
-  },
-  {
-    id: 2,
-    name: 'test group',
-    avatar:
-      'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/user/e2669806e2830fc502f8835f2e6e4abe.png'
-  },
-  {
-    id: 3,
-    name: '藥局',
-    avatar:
-      'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/user/e2669806e2830fc502f8835f2e6e4abe.png'
-  }
-]
+const userStore = useUserStore()
+const linkStore = useLinkStore()
+const links = computed(
+  (): {
+    id: string
+    title: string
+    imageUrl: string
+  }[] => linkStore.links
+)
+userStore.fetchSetting()
+linkStore.fetchLinks()
 </script>
 
 <template>
   <div class="min-h-screen rounded-xl bg-white p-6">
-    <div class="space-y-3">
+    <div class="space-y-5">
       <div class="flex flex-wrap gap-3">
         <div class="flex gap-3">
           <button
@@ -69,10 +63,17 @@ const links = [
         class="flex flex-col flex-wrap items-start justify-center gap-6 rounded-xl border border-gray-200 p-5 dark:border-darkmode-700 sm:flex-row sm:items-center sm:justify-between"
       >
         <div class="flex items-center space-x-3">
-          <img :src="link.avatar" alt="" class="h-10 w-10 rounded-full" />
+          <img
+            :src="
+              link.imageUrl ??
+              'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/enterpoint/1b2c230b653c274f793ec60dc50704ad.png'
+            "
+            alt=""
+            class="h-10 w-10 rounded-full"
+          />
           <span
             class="overflow-hidden text-ellipsis whitespace-nowrap font-bold text-gray-800"
-            >{{ link.name }}</span
+            >{{ link.title }}</span
           >
           <img width="18" height="18" src="@/assets/images/copy.png" alt="" />
         </div>

@@ -9,7 +9,7 @@ import { TransitionRoot } from '@headlessui/vue'
 import headPickUrl from '../../assets/images/logo.png'
 import { useUserStore } from '../../stores/user'
 import { useRoute } from 'vue-router'
-const account = computed(() => useUserStore().getAccount)
+const account = computed(() => useUserStore().email)
 const route = useRoute()
 const searchDropdown = ref(false)
 const doLogout = () => {

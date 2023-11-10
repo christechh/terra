@@ -4,9 +4,8 @@ import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import Button from '../../../base-components/Button'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
-import { AuthType, deleteRequest } from '../../../api/api'
 import { useNotificationsStore } from '../../../stores/notifications'
-
+import axios from '../../../axios'
 const deleteModalStore = useDeleteModalStore()
 
 const status = computed(() => deleteModalStore.status)
@@ -17,13 +16,12 @@ const setOpen = (value: boolean) => {
   deleteModalStore.setOpen({ status: value })
 }
 
-const deleteExec = () => {
+const deleteExec = async () => {
   const { deleteType } = deleteModalStore
   switch (deleteType) {
     case 'account':
-      deleteRequest('user', AuthType.JWT).then(() => {
-        useNotificationsStore().showDeleteSuccess()
-      })
+      await axios.delete('/user')
+      useNotificationsStore().showDeleteSuccess()
       break
     case 'course':
       break

@@ -1,52 +1,38 @@
 import { defineStore } from 'pinia'
-import { postRequest, AuthType, handleError } from '../api/api'
-import { AxiosError } from 'axios'
 import { useRedirectToStore } from './redirect-to'
-
-export interface User {
-  account: string | null
-  token: string
-}
+import axios from '../axios'
 
 export const useUserStore = defineStore('user', {
-  state: (): User => ({
-    account: localStorage.getItem('admin_account') || '',
-    token: localStorage.getItem('admin_token') || ''
+  state: () => ({
+    email: localStorage.getItem('email') || '',
+    token: localStorage.getItem('token') || ''
   }),
-  getters: {
-    getToken(state) {
-      return state.token
-    },
-
-    getAccount(state) {
-      return state.account
-    }
-  },
   actions: {
     async login(credentials: { account: string; password: string }) {
       try {
-        const response = await postRequest(
-          '/auth/login',
-          credentials,
-          AuthType.CMS
-        )
-
-        const { token } = response.data
-
-        this.account = credentials.account
-        this.token = token
-        localStorage.setItem('admin_token', token)
-        localStorage.setItem('admin_account', credentials.account)
-        useRedirectToStore().redirect({ path: '/' })
+        const resp = await axios.post('/auth/login', credentials)
+        this.email = credentials.account
+        this.token = resp.data.data.data.access_token
+        localStorage.setItem('token', this.token)
+        localStorage.setItem('email', credentials.account)
+        useRedirectToStore().redirect({ path: '/dashboard' })
       } catch (error) {
-        const axiosError = error as AxiosError
-        // console.log("error : ",error)
-        handleError(axiosError)
+        console.log(error)
+      }
+    },
+    async fetchSetting() {
+      try {
+        const {
+          data: { data }
+        } = await axios.get('/auth/setting')
+        console.log(data)
+      } catch (error) {
+        console.log(error)
       }
     },
     async logout() {
-      localStorage.removeItem('admin_token')
-      localStorage.removeItem('admin_account')
+      localStorage.removeItem('token')
+      localStorage.removeItem('email')
       useRedirectToStore().redirect({ path: '/login' })
     }
   }

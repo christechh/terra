@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-//@ts-ignore
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
-import BlotFormatter from 'quill-blot-formatter'
 //@ts-ignore
 import ImageUploader from 'quill-image-uploader'
-import axios, { AxiosError } from 'axios'
-import { fileUploadRequest, AuthType } from '../../api/api'
+import axios from '../../axios'
 
 interface Props {
   editorType: string
@@ -27,8 +23,15 @@ const modules: ModuleOptions = {
   options: {
     //@ts-ignore
     upload: (file) => {
-      return new Promise((resolve, reject) => {
-        fileUploadRequest('/editor/image', file, AuthType.JWT, resolve)
+      return new Promise(async (resolve, reject) => {
+        const formData = new FormData()
+        formData.append('file', file)
+        const response = await axios.post('/editor/image', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        resolve(response.data.data.url)
       })
     }
   }

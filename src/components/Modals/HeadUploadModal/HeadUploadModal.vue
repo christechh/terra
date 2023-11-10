@@ -7,12 +7,10 @@ import avatar3 from '../../../assets/images/head/avatar3.png'
 import avatar4 from '../../../assets/images/head/avatar4.png'
 import EmptyList from '../../EmptyList'
 import Button from '../../../base-components/Button/index'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { FormInput, InputGroup } from '../../../base-components/Form'
-import { AuthType, postRequest } from '../../../api/api'
-import { getRequest as thirdPartyApiGet } from '../../../api/thirdPartyApi'
-import { watch } from 'vue'
 import { debounce } from 'lodash'
+import axios from '../../../axios'
 
 interface Props {
   modelValue: boolean
@@ -67,15 +65,15 @@ const save = async () => {
 }
 
 const getKeyWords = () => {
-  thirdPartyApiGet('search/keyword', {
-    userId: 'pinchat_v3_user_1589',
-    lang: 'zh-tw'
-  })
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .then((res: any) => {
-      const { keywordList } = res.body
-      keywords.value = keywordList
-    })
+  // thirdPartyApiGet('search/keyword', {
+  //   userId: 'pinchat_v3_user_1589',
+  //   lang: 'zh-tw'
+  // })
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   .then((res: any) => {
+  //     const { keywordList } = res.body
+  //     keywords.value = keywordList
+  //   })
 }
 const getAnimate = () => {
   if (keywords.value.length === 0) {
@@ -89,20 +87,20 @@ const getHeads = () => {
   if (animateHeads.value.length > 0 && animatePage.value > pageCount.value) {
     return
   }
-  thirdPartyApiGet('search', {
-    q: search.value,
-    userId: 'pinchat_v3_user_1589',
-    lang: 'zh-tw',
-    pageNumber: animatePage.value
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  }).then((res) => {
-    const { stickerList, pageMap } = res.body
-    if (stickerList && pageMap) {
-      pageCount.value = pageMap.pageCount
-      animateHeads.value = [...animateHeads.value, ...stickerList]
-      animatePage.value++
-    }
-  })
+  // thirdPartyApiGet('search', {
+  //   q: search.value,
+  //   userId: 'pinchat_v3_user_1589',
+  //   lang: 'zh-tw',
+  //   pageNumber: animatePage.value
+  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // }).then((res) => {
+  //   const { stickerList, pageMap } = res.body
+  //   if (stickerList && pageMap) {
+  //     pageCount.value = pageMap.pageCount
+  //     animateHeads.value = [...animateHeads.value, ...stickerList]
+  //     animatePage.value++
+  //   }
+  // })
 }
 
 const scrollHandler = (event: Event) => {
@@ -168,7 +166,11 @@ const uploadAvatar = async () => {
   form.append('file', blob as Blob)
   form.append('setAvatar', 'false')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const res = await postRequest('user/image', form, AuthType.JWT)
+  const res = await axios.post('/user/image', form, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
   const { id, url } = res.data.data
   selectedId.value = id
   localImg.value = url
