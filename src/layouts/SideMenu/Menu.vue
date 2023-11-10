@@ -39,10 +39,11 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState
           })(props.menu.pageName)
     "
     :class="[
-      'relative mb-1 flex h-[50px] items-center rounded-full pl-5 text-white',
+      'relative mb-1 flex h-[50px] items-center rounded-full pl-5',
       {
-        'dark:text-slate-300': props.menu.active && props.level != 'first',
-        'text-white/70 dark:text-slate-400':
+        'text-primary dark:text-slate-300':
+          props.menu.active && props.level != 'first',
+        'text-black dark:text-slate-400':
           !props.menu.active && props.level != 'first',
         'z-10 bg-slate-100 dark:bg-darkmode-700':
           props.menu.active && props.level == 'first',
@@ -68,8 +69,9 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState
     <div
       :class="{
         'text-primary dark:text-slate-300':
-          props.menu.active && props.level == 'first',
-        'dark:text-slate-400': !props.menu.active && props.level == 'first',
+          props.menu.active && props.level == 'first' && !props.menu.subMenu,
+        'text-black dark:text-slate-400':
+          !props.menu.active && props.level == 'first',
         'before:absolute before:right-0 before:top-0 before:z-[-1] before:-mr-5 before:h-full before:w-12 before:bg-slate-100 before:content-[\'\'] before:dark:bg-darkmode-700':
           props.menu.active && props.level == 'first',
         'before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-[230px] before:rounded-l-full before:transition before:duration-100 before:ease-in before:content-[\'\']':
@@ -85,8 +87,8 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState
         'ml-3 hidden w-full items-center xl:flex',
         { 'font-medium': props.menu.active && props.level != 'first' },
         {
-          'font-medium text-slate-800 dark:text-slate-300':
-            props.menu.active && props.level == 'first'
+          'font-medium text-primary dark:text-slate-300':
+            props.menu.active && props.level == 'first' && !props.menu.subMenu
         },
         { 'dark:text-slate-400': !props.menu.active && props.level == 'first' }
       ]"

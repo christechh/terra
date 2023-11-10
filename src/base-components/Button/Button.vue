@@ -72,7 +72,7 @@ const large = ['text-lg py-1.5 px-4']
 
 // Main Colors
 const primary = [
-  'bg-primary border-primary text-white dark:border-primary' // Default
+  'bg-primary border-primary text-white dark:border-primary disabled:border-transparent' // Default
 ]
 const secondary = [
   'bg-secondary/70 border-secondary/70 text-slate-500', // Default

@@ -71,6 +71,7 @@ html {
     background-color: theme('colors.disabled_bg');
   }
 
+  .input-group,
   input[type='text'],
   input[type='password'],
   input[type='number'] {

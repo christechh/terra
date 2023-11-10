@@ -61,7 +61,7 @@ onMounted(() => {
     <div class="mt-[4.7rem] flex md:mt-0">
       <!-- BEGIN: Side Menu -->
       <nav
-        class="hidden w-[85px] overflow-x-hidden pb-16 pr-5 md:block xl:w-[230px]"
+        class="hidden w-[85px] overflow-x-hidden pb-16 pr-2 md:block xl:w-[230px]"
       >
         <RouterLink
           :to="{ name: 'landing-page' }"
@@ -102,7 +102,7 @@ onMounted(() => {
               <Transition @enter="() => enter" @leave="() => leave">
                 <ul
                   v-if="menu.subMenu && menu.activeDropdown"
-                  class="rounded-lg bg-black/10 dark:bg-darkmode-900/30"
+                  class="mt-2 rounded-lg bg-slate-100 dark:bg-darkmode-900/30"
                 >
                   <li
                     v-for="(subMenu, subMenuKey) in menu.subMenu"
