@@ -11,8 +11,8 @@ import RedirectTo from '../components/RedirectTo'
 import Lucide from '../base-components/Lucide'
 import { useUserStore } from '../stores/user'
 
-const account = ref('howardsun@csie.io')
-const password = ref('91931905')
+const account = ref('')
+const password = ref('')
 const passwordType = ref('password')
 const isEyeOffVisible = ref(false)
 const isEyeVisible = ref(true)
