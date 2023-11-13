@@ -1,9 +1,8 @@
 import axios from 'axios'
 import { useRedirectToStore } from './stores/redirect-to'
 import { useWaningModalStore } from './stores/modals/warrningModal'
-
+import i18n from './i18n'
 const instance = axios.create({
-  baseURL: 'https://pinchat-beta-api.funtek.dev/api/zh-tw',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -16,6 +15,7 @@ instance.interceptors.request.use(
     } else {
       config.headers.Authorization = 'Basic cGluY2hhdC11c2VyOnNlY3JldA=='
     }
+    config.baseURL = import.meta.env.VITE_API_URL + i18n.global.locale.value
     return config
   },
   (error) => {
@@ -25,7 +25,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response.status === 401) {
+    if (error?.response?.status === 403) {
       useRedirectToStore().redirect({ path: '/login' })
     } else {
       useWaningModalStore().showModal({ text: error.message })
