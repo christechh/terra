@@ -11,6 +11,8 @@ import ActiveLogsModal from '../../components/Modals/ActiveLogsModal/'
 import { useDeleteModalStore } from '../../stores/modals/deleteModal'
 import { useI18n } from 'vue-i18n'
 import axios from '../../axios'
+import ContryCodePicker from '../../components/ContryCodePicker'
+import { AsYouType } from 'libphonenumber-js'
 
 const { t } = useI18n()
 
@@ -27,11 +29,17 @@ const oldPsd = ref('')
 const newPsd = ref('')
 const newPsdAgain = ref('')
 const resetPsdError = ref('')
+const phoneCode = ref('+886')
 
 const getUserInfo = async () => {
   await axios.get('/auth/setting').then((res) => {
-    const { data } = res.data
+    const { data } = res.data.data
     Object.assign(userInfo, data)
+    const ast = new AsYouType()
+    ast.input(userInfo.notify_phone)
+    console.log(ast.getNumber())
+    phoneCode.value = `+${ast.getCallingCode() as string}`
+    userInfo.notify_phone = ast.getNationalNumber()
   })
 }
 
@@ -41,7 +49,7 @@ const getLogs = async (page: number, pageSize: number) => {
 
 const getUserActiveLog = () => {
   getLogs(0, 5).then((res) => {
-    const { data } = res.data
+    const { data } = res.data.data
     activeLogs.value = data
   })
 }
@@ -85,7 +93,7 @@ const updateNotification = async () => {
     await axios.put('/user/notify', {
       email: userInfo.notify_email,
       is_open_notify: userInfo.is_open_notify,
-      phone: userInfo.notify_phone,
+      phone: `${phoneCode.value}${userInfo.notify_phone}`,
       type: userInfo.notify_type
     })
     nofityChange.value = false
@@ -128,7 +136,7 @@ getUserInfo()
 getUserActiveLog()
 </script>
 <template>
-  <div class="flex">
+  <div class="block lg:flex">
     <div class="flex-1">
       <div class="rounded-xl bg-white dark:bg-darkmode-600">
         <div
@@ -236,7 +244,7 @@ getUserActiveLog()
         </div>
       </div>
     </div>
-    <div class="ml-3 flex-1">
+    <div class="mt-3 flex-1 lg:ml-3 lg:mt-0">
       <div class="rounded-xl bg-white dark:bg-darkmode-600">
         <div
           class="flex items-center justify-between border-b border-slate-200 p-4"
@@ -283,10 +291,11 @@ getUserActiveLog()
             </FormCheck.Label>
           </FormCheck>
           <InputGroup class="col-span-3">
+            <ContryCodePicker v-model="phoneCode" />
             <FormInput
               v-model="userInfo.notify_phone"
               @input="nofityChange = true"
-              type="number"
+              type="text"
             />
           </InputGroup>
           <FormLabel
