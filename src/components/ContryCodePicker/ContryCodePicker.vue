@@ -47,8 +47,6 @@ window.addEventListener('click', close)
 window.addEventListener('keydown', (e: KeyboardEvent) => {
   const char = e.key.toUpperCase()
   const c = countriesCodeList.find((c) => c.name.startsWith(char))?.country
-  // eslint-disable-next-line no-debugger
-  debugger
   document.getElementById(c as string)?.scrollIntoView({ behavior: 'smooth' })
 })
 onBeforeUnmount(() => {
