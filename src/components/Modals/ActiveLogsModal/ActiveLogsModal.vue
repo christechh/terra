@@ -23,7 +23,7 @@ const emit = defineEmits(['update:modelValue'])
   >
     <Dialog.Panel>
       <div
-        class="grid h-[600px] grid-cols-4 gap-x-3 gap-y-3 overflow-auto p-4 text-xs"
+        class="grid h-[600px] grid-cols-4 gap-x-3 gap-y-3 overflow-auto p-4 text-center text-xs"
       >
         <span>{{ $t('browser') }}</span>
         <span>{{ $t('device') }}</span>
