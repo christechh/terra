@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { Dialog } from '../../../base-components/Headless'
-import Lucide from '../../../base-components/Lucide'
+import { debounce } from 'lodash'
+import { ref, watch } from 'vue'
 import avatar1 from '../../../assets/images/head/avatar1.png'
 import avatar2 from '../../../assets/images/head/avatar2.png'
 import avatar3 from '../../../assets/images/head/avatar3.png'
 import avatar4 from '../../../assets/images/head/avatar4.png'
-import EmptyList from '../../EmptyList'
-import Button from '../../../base-components/Button/index'
-import { ref, watch } from 'vue'
-import { FormInput, InputGroup } from '../../../base-components/Form'
-import { debounce } from 'lodash'
 import axios from '../../../axios'
+import Button from '../../../base-components/Button/index'
+import { FormInput, InputGroup } from '../../../base-components/Form'
+import { Dialog } from '../../../base-components/Headless'
+import Lucide from '../../../base-components/Lucide'
+import EmptyList from '../../EmptyList'
 
 interface Props {
   modelValue: boolean
-  imageId: number
+  imageId: number | null
 }
 
 const { modelValue, imageId } = defineProps<Props>()
@@ -47,11 +47,6 @@ const save = async () => {
   if (localImg.value) {
     await uploadAvatar()
   }
-  const a = animateHeads.value.find((i) => i.stickerId === selectedGIFId.value)
-  // ts-ignore
-  console.log(isAnimate.value, a?.stickerImg)
-  // eslint-disable-next-line no-debugger
-  debugger
   emit('save', {
     ...(!isAnimate.value && defaultAvata
       ? {
@@ -110,9 +105,7 @@ const getHeads = () => {
 }
 
 const scrollHandler = (event: Event) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const target = event.target as HTMLElement
-  console.log(target.scrollHeight - target.scrollTop - 5, target.clientHeight)
   if (target.scrollHeight - target.scrollTop - 5 <= target.clientHeight) {
     debounce(getHeads, 200)()
   }
@@ -171,7 +164,6 @@ const uploadAvatar = async () => {
   const blob = await new Promise((resolve) => canvas.value.toBlob(resolve))
   form.append('file', blob as Blob)
   form.append('setAvatar', 'false')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const res = await axios.post('/user/image', form, {
     headers: {
       'Content-Type': 'multipart/form-data'
