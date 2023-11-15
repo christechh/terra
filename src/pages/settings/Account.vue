@@ -105,7 +105,7 @@ const updateNotification = async () => {
 
 const viewMore = async () => {
   const res = await getLogs(0, 999)
-  const { data } = res.data
+  const { data } = res.data.data
   allLogs.value = data
   showActiveLogPopup.value = true
 }
@@ -237,7 +237,7 @@ getUserActiveLog()
             <FormLabel
               class="col-span-1 mb-0 mr-2 flex items-center justify-end"
             />
-            <div class="col-span-3 mt-2 text-xs text-danger">
+            <div class="col-span-3 text-xs text-danger">
               {{ resetPsdError }}
             </div>
           </template>
