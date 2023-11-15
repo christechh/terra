@@ -222,10 +222,9 @@ getUserActiveLog()
             type="password"
             :class="resetPsdError ? 'border border-danger' : ''"
           />
-          <FormLabel
-            class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('edit-confirm-new-password-label') }}</FormLabel
-          >
+          <FormLabel class="col-span-1 mb-0 mr-2 mt-2 text-end">{{
+            $t('edit-confirm-new-password-label')
+          }}</FormLabel>
           <FormInput
             v-model="newPsdAgain"
             :placeholder="$t('inputNewPSDAgain')"
