@@ -3,6 +3,7 @@ variables:
   HUSKY: 0
 
 stages:
+  - semantic-release
   - build-deploy
 
 cache:
@@ -14,6 +15,18 @@ cache:
 before_script:
   - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
   - pnpm config set store-dir .pnpm-store
+
+semantic-release:
+  stage: semantic-release
+  script:
+    - pnpm install --no-frozen-lockfile
+    - pnpm test
+    - pnpm exec semantic-release
+  only:
+    refs:
+      - dev
+    variables:
+      - $CI_PROJECT_ID == "287"
 
 build-deploy:
   stage: build-deploy
