@@ -1,136 +1,36 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Button from '../../base-components/Button'
-import FormLabel from '../../base-components/Form/FormLabel.vue'
+import { FormCheck, FormSwitch, InputGroup } from '../../base-components/Form'
 import FormInput from '../../base-components/Form/FormInput.vue'
-import { FormSwitch, FormCheck, InputGroup } from '../../base-components/Form'
+import FormLabel from '../../base-components/Form/FormLabel.vue'
 import Lucide from '../../base-components/Lucide/index'
-import HeadUploadModal from '../../components/Modals/HeadUploadModal'
-import { reactive, ref } from 'vue'
-import { useNotificationsStore } from '../../stores/notifications'
-import ActiveLogsModal from '../../components/Modals/ActiveLogsModal/'
-import { useDeleteModalStore } from '../../stores/modals/deleteModal'
-import { useI18n } from 'vue-i18n'
-import axios from '../../axios'
 import ContryCodePicker from '../../components/ContryCodePicker'
-import { AsYouType } from 'libphonenumber-js'
-
-const { t } = useI18n()
+import ActiveLogsModal from '../../components/Modals/ActiveLogsModal/'
+import HeadUploadModal from '../../components/Modals/HeadUploadModal'
+import useActiveLog from './composables/useActiveLog'
+import usePassword from './composables/usePassword'
+import useUserInfo from './composables/useUserInfo'
 
 const showHeadUploadPopup = ref(false)
-const showActiveLogPopup = ref(false)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const userInfo: any = reactive({})
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const activeLogs: any = ref([])
-const allLogs = ref([])
-const accountSettingChange = ref(false)
-const nofityChange = ref(false)
-const oldPsd = ref('')
-const newPsd = ref('')
-const newPsdAgain = ref('')
-const resetPsdError = ref('')
-const phoneCode = ref('+886')
 
-const getUserInfo = async () => {
-  await axios.get('/auth/setting').then((res) => {
-    const { data } = res.data.data
-    Object.assign(userInfo, data)
-    const ast = new AsYouType()
-    ast.input(userInfo.notify_phone)
-    console.log(ast.getNumber())
-    phoneCode.value = `+${ast.getCallingCode() as string}`
-    userInfo.notify_phone = ast.getNationalNumber()
-  })
-}
+const {
+  userInfo,
+  phoneCode,
+  accountSettingChange,
+  nofityChange,
+  getUserInfo,
+  updateAccountSetting,
+  updateNotification,
+  confirmDeleteAccout,
+  headChangehandler
+} = useUserInfo()
 
-const getLogs = async (page: number, pageSize: number) => {
-  return axios.get('/user/login', { params: { page, pageSize } })
-}
+const { oldPsd, newPsd, newPsdAgain, resetPsdError, updatePassword } =
+  usePassword()
 
-const getUserActiveLog = () => {
-  getLogs(0, 5).then((res) => {
-    const { data } = res.data.data
-    activeLogs.value = data
-  })
-}
-
-const updateAccountSetting = async () => {
-  try {
-    const res = await axios.post('/auth/setting', {
-      image_id: userInfo.image_id,
-      ...(!userInfo.image_id && { avatar: userInfo.avatar }),
-      name: userInfo.name
-    })
-    const { data } = res.data
-    Object.assign(userInfo, data)
-    useNotificationsStore().showSaveSuccess()
-  } catch (e) {
-    console.log(e)
-  } finally {
-    accountSettingChange.value = false
-  }
-}
-
-const updatePassword = async () => {
-  try {
-    await axios.put('/auth/updatePassword', {
-      new_password: newPsd.value,
-      new_password_confirmation: newPsdAgain.value,
-      old_password: oldPsd.value
-    })
-    oldPsd.value = ''
-    newPsd.value = ''
-    newPsdAgain.value = ''
-    useNotificationsStore().showSaveSuccess()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
-    resetPsdError.value = e.response.data.message
-  }
-}
-
-const updateNotification = async () => {
-  try {
-    await axios.put('/user/notify', {
-      email: userInfo.notify_email,
-      is_open_notify: userInfo.is_open_notify,
-      phone: `${phoneCode.value}${userInfo.notify_phone}`,
-      type: userInfo.notify_type
-    })
-    nofityChange.value = false
-    useNotificationsStore().showSaveSuccess()
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-const viewMore = async () => {
-  const res = await getLogs(0, 999)
-  const { data } = res.data.data
-  allLogs.value = data
-  showActiveLogPopup.value = true
-}
-
-const confirmDeleteAccout = () => {
-  useDeleteModalStore().showModal({
-    deleteType: 'account',
-    title: '',
-    content: t('delete-account-modal-desc'),
-    deleteData: { id: userInfo.id }
-  })
-}
-
-const headChangehandler = (img: { img: string; id: number }) => {
-  // eslint-disable-next-line no-debugger
-  debugger
-  userInfo.image_id = ''
-  if (img.id) {
-    userInfo.image_id = img.id
-  }
-  if (img.img) {
-    userInfo.avatar = img.img
-  }
-  accountSettingChange.value = true
-}
+const { activeLogs, allLogs, showActiveLogPopup, getUserActiveLog, viewMore } =
+  useActiveLog()
 
 getUserInfo()
 getUserActiveLog()
