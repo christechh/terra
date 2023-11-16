@@ -222,7 +222,7 @@ getUserActiveLog()
             $t('viewAll')
           }}</Button>
         </div>
-        <div class="grid grid-cols-4 gap-y-3 p-4 text-xs">
+        <div class="grid grid-cols-4 gap-y-3 p-4 text-center text-xs">
           <span>{{ $t('browser') }}</span>
           <span>{{ $t('device') }}</span>
           <span>{{ $t('IP') }}</span>

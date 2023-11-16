@@ -193,7 +193,7 @@ watch(search, () => {
   <Dialog :open="modelValue">
     <Dialog.Panel class="rounded-xl p-3">
       <Dialog.Description class="pt-0">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between pt-5">
           <Lucide
             icon="ChevronLeft"
             class="cursor-pointer"

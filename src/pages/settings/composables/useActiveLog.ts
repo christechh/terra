@@ -19,7 +19,7 @@ export default function useActiveLog() {
   }
 
   const viewMore = async () => {
-    const res = await getLogs(0, 999)
+    const res = await getLogs(0, 50)
     const { data } = res.data.data
     allLogs.value = data
     showActiveLogPopup.value = true
