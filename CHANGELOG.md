@@ -1,3 +1,10 @@
+## [1.0.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.0...v1.0.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* 優化 ([a4ef7bc](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a4ef7bc60ea446f975058eedf465b822e0876357))
+
 # 1.0.0 (2023-11-15)
 
 
