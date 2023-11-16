@@ -223,10 +223,10 @@ getUserActiveLog()
           }}</Button>
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4 text-center text-xs">
-          <span>{{ $t('browser') }}</span>
-          <span>{{ $t('device') }}</span>
-          <span>{{ $t('IP') }}</span>
-          <span>{{ $t('time') }}</span>
+          <span class="font-medium">{{ $t('browser') }}</span>
+          <span class="font-medium">{{ $t('device') }}</span>
+          <span class="font-medium">{{ $t('IP') }}</span>
+          <span class="font-medium">{{ $t('time') }}</span>
           <template v-for="log in activeLogs" :key="log">
             <span>{{ log.browser }}</span>
             <span>{{ log.os }}</span>
