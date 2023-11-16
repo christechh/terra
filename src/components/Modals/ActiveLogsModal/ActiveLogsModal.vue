@@ -18,17 +18,17 @@ const emit = defineEmits(['update:modelValue'])
 <template>
   <Dialog
     :open="modelValue"
-    size="xl"
+    size="lg"
     @close="() => emit('update:modelValue', false)"
   >
     <Dialog.Panel>
       <div
-        class="grid h-[600px] grid-cols-4 gap-x-3 gap-y-3 overflow-auto p-4 text-center text-xs"
+        class="grid h-[600px] grid-cols-4 gap-x-3 gap-y-3 overflow-auto p-7 text-center"
       >
-        <span>{{ $t('browser') }}</span>
-        <span>{{ $t('device') }}</span>
-        <span>{{ $t('IP') }}</span>
-        <span>{{ $t('time') }}</span>
+        <span class="font-bold">{{ $t('browser') }}</span>
+        <span class="font-bold">{{ $t('device') }}</span>
+        <span class="font-bold">{{ $t('IP') }}</span>
+        <span class="font-bold">{{ $t('time') }}</span>
         <template v-for="log in activeLogs" :key="log">
           <span>{{ log.browser }}</span>
           <span>{{ log.os }}</span>
