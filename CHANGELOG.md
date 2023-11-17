@@ -1,3 +1,11 @@
+## [1.0.4](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.3...v1.0.4) (2023-11-17)
+
+
+### Bug Fixes
+
+* animate avatar, i18n ([6497600](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/6497600bb2b11102a33817d03513b277ee1aab2b))
+* wrong i18n ([e200eff](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e200eff30fe6208e95d4b129983b30cadba2bcef))
+
 ## [1.0.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.2...v1.0.3) (2023-11-17)
 
 
