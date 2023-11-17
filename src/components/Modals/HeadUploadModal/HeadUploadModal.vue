@@ -11,6 +11,7 @@ import { FormInput, InputGroup } from '../../../base-components/Form'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import EmptyList from '../../EmptyList'
+import useAvatar from './composables/useAvatar'
 
 interface Props {
   modelValue: boolean
@@ -30,17 +31,14 @@ const avatars = [
 const selectedId = ref(imageId)
 const isChange = ref(false)
 const isAnimate = ref(false)
-const keywords = ref<{ keyword: string }[]>([])
-const animatePage = ref(1)
-const pageCount = ref(0)
-const animateHeads = ref<{ stickerImg: string; stickerId: number }[]>([])
+const { keywords, animatePage, search, animateHeads, getAnimate, getHeads } =
+  useAvatar()
 const selectedGIFId = ref(0)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const localImg = ref<any>(null)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const canvas: any = ref(null)
 const scale = ref<number>(2)
-const search = ref<string>('')
 
 const save = async () => {
   const defaultAvata = avatars.find((i) => i.id === selectedId.value)
@@ -63,45 +61,6 @@ const save = async () => {
     })
   })
   emit('update:modelValue', false)
-}
-
-const getKeyWords = () => {
-  // thirdPartyApiGet('search/keyword', {
-  //   userId: 'pinchat_v3_user_1589',
-  //   lang: 'zh-tw'
-  // })
-  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //   .then((res: any) => {
-  //     const { keywordList } = res.body
-  //     keywords.value = keywordList
-  //   })
-}
-const getAnimate = () => {
-  if (keywords.value.length === 0) {
-    getKeyWords()
-  }
-  getHeads()
-  isAnimate.value = true
-}
-
-const getHeads = () => {
-  if (animateHeads.value.length > 0 && animatePage.value > pageCount.value) {
-    return
-  }
-  // thirdPartyApiGet('search', {
-  //   q: search.value,
-  //   userId: 'pinchat_v3_user_1589',
-  //   lang: 'zh-tw',
-  //   pageNumber: animatePage.value
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // }).then((res) => {
-  //   const { stickerList, pageMap } = res.body
-  //   if (stickerList && pageMap) {
-  //     pageCount.value = pageMap.pageCount
-  //     animateHeads.value = [...animateHeads.value, ...stickerList]
-  //     animatePage.value++
-  //   }
-  // })
 }
 
 const scrollHandler = (event: Event) => {
@@ -187,6 +146,12 @@ watch(search, () => {
   animateHeads.value = []
   debounce(getHeads, 200)()
 })
+
+watch(isAnimate, () => {
+  if (isAnimate.value) {
+    getAnimate()
+  }
+})
 </script>
 
 <template>
@@ -252,7 +217,6 @@ watch(search, () => {
                 <div>{{ $t('click-to-upload-image') }}</div>
               </div>
             </template>
-            <!-- <img v-else :src="file2Src(localImg)" alt="" /> -->
             <input
               class="absolute left-0 top-0 opacity-0"
               type="file"
@@ -329,7 +293,7 @@ watch(search, () => {
           v-show="!isAnimate"
           variant="outline-primary"
           class="mt-6 w-full"
-          @click="getAnimate"
+          @click="() => (isAnimate = true)"
           >{{ $t('select-animated-avatar') }}</Button
         >
         <Button
