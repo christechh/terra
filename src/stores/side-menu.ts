@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
+import { Icon } from '../base-components/Lucide/Lucide.vue'
 import i18n from '../i18n'
 export interface Menu {
-  icon: string
+  icon: Icon
   title: string
   pageName?: string
   subMenu?: Menu[]
