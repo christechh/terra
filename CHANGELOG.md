@@ -1,3 +1,10 @@
+## [1.0.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.2...v1.0.3) (2023-11-17)
+
+
+### Bug Fixes
+
+* fs and i18n ([40be00a](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/40be00a13cf2d0a6ca0bbf02ca52437808461683))
+
 ## [1.0.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.1...v1.0.2) (2023-11-16)
 
 
