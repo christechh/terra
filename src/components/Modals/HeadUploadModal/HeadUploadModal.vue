@@ -200,7 +200,7 @@ watch(search, () => {
             :class="isAnimate ? 'visible' : 'invisible'"
             @click="isAnimate = false"
           />
-          <div class="mx-auto text-base font-bold">{{ $t('editHead') }}</div>
+          <div class="mx-auto text-base font-bold">{{ $t('edit-avatar') }}</div>
           <Lucide
             icon="X"
             class="cursor-pointer"
@@ -247,7 +247,7 @@ watch(search, () => {
                 color="#c0c0c0"
               />
               <div class="text-gray mt-4">
-                <div>{{ $t('dropImgHere') }}</div>
+                <div>{{ $t('drag-and-drop') }}</div>
                 <div>{{ $t('or') }}</div>
                 <div>{{ $t('click-to-upload-image') }}</div>
               </div>

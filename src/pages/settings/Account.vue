@@ -42,18 +42,18 @@ getUserActiveLog()
         <div
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
-          <div>{{ $t('accountSetting') }}</div>
+          <div class="text-base font-medium">{{ $t('edit-account') }}</div>
           <Button
             variant="primary"
             :disabled="!accountSettingChange"
             @click="updateAccountSetting"
-            >{{ $t('save') }}</Button
+            >{{ $t('chatbot-save-btn') }}</Button
           >
         </div>
         <div class="grid cursor-pointer grid-cols-4 gap-y-3 p-4">
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('head') }}</FormLabel
+            >{{ $t('qrcode-page-avatar') }}</FormLabel
           >
           <div class="col-span-3">
             <div class="relative h-32 w-32" @click="showHeadUploadPopup = true">
@@ -73,7 +73,7 @@ getUserActiveLog()
           </div>
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('displayName') }}</FormLabel
+            >{{ $t('analytics-display-name') }}</FormLabel
           >
           <FormInput
             v-model="userInfo.name"
@@ -83,7 +83,7 @@ getUserActiveLog()
           />
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('email') }}</FormLabel
+            >{{ $t('signup-email-label') }}</FormLabel
           >
           <FormInput v-model="userInfo.email" class="col-span-3" disabled />
         </div>
@@ -92,32 +92,32 @@ getUserActiveLog()
         <div
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
-          <div>{{ $t('changePassword') }}</div>
+          <div class="text-base font-medium">{{ $t('edit-password') }}</div>
           <Button
             variant="primary"
             :disabled="[newPsd, newPsdAgain, oldPsd].some((i) => !i)"
             @click="updatePassword"
-            >{{ $t('confirmEdit') }}</Button
+            >{{ $t('edit-password-btn') }}</Button
           >
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4">
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('oldPassword') }}</FormLabel
+            >{{ $t('edit-old-password-label') }}</FormLabel
           >
           <FormInput
             v-model="oldPsd"
-            :placeholder="$t('inputOldPSD')"
+            :placeholder="$t('edit-old-password-label-placeholder')"
             class="col-span-3"
             type="password"
           />
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('newPassword') }}</FormLabel
+            >{{ $t('password-confirm') }}</FormLabel
           >
           <FormInput
             v-model="newPsd"
-            :placeholder="$t('inputNewPSD')"
+            :placeholder="$t('edit-new-password-label-placeholder')"
             class="col-span-3"
             type="password"
             :class="resetPsdError ? 'border border-danger' : ''"
@@ -127,7 +127,7 @@ getUserActiveLog()
           }}</FormLabel>
           <FormInput
             v-model="newPsdAgain"
-            :placeholder="$t('inputNewPSDAgain')"
+            :placeholder="$t('edit-confirm-new-password-label-placeholder')"
             type="password"
             class="col-span-3"
             :class="resetPsdError ? 'border border-danger' : ''"
@@ -148,12 +148,14 @@ getUserActiveLog()
         <div
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
-          <div>{{ $t('notifySetting') }}</div>
+          <div class="text-base font-medium">
+            {{ $t('notification-Setting') }}
+          </div>
           <Button
             variant="primary"
             :disabled="!nofityChange"
             @click="updateNotification"
-            >{{ $t('save') }}</Button
+            >{{ $t('chatbot-save-btn') }}</Button
           >
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4">
@@ -167,7 +169,7 @@ getUserActiveLog()
               @change="nofityChange = true"
             />
             <FormCheck.Label htmlFor="radio-switch-6">
-              {{ $t('email') }}
+              {{ $t('sub-account-table-email') }}
             </FormCheck.Label>
           </FormCheck>
           <FormInput
@@ -186,7 +188,7 @@ getUserActiveLog()
               @change="nofityChange = true"
             />
             <FormCheck.Label htmlFor="radio-switch-6">
-              {{ $t('phone') }}
+              {{ $t('client-list-phone-number') }}
             </FormCheck.Label>
           </FormCheck>
           <InputGroup class="col-span-3">
@@ -199,7 +201,7 @@ getUserActiveLog()
           </InputGroup>
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-start"
-            >{{ $t('switch') }}</FormLabel
+            >{{ $t('notification-Setting-onoff') }}</FormLabel
           >
           <div class="mt-2">
             <FormSwitch>
@@ -217,16 +219,16 @@ getUserActiveLog()
         <div
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
-          <div>{{ $t('activeLog') }}</div>
+          <div class="text-base font-medium">{{ $t('user-login-log') }}</div>
           <Button variant="outline-primary" @click="viewMore">{{
-            $t('viewAll')
+            $t('user-login-all-list-btn')
           }}</Button>
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4 text-center text-xs">
-          <span class="font-medium">{{ $t('browser') }}</span>
-          <span class="font-medium">{{ $t('device') }}</span>
-          <span class="font-medium">{{ $t('IP') }}</span>
-          <span class="font-medium">{{ $t('time') }}</span>
+          <span class="font-medium">{{ $t('user-login-browser-title') }}</span>
+          <span class="font-medium">{{ $t('user-login-device-title') }}</span>
+          <span class="font-medium">{{ $t('user-login-ip-title') }}</span>
+          <span class="font-medium">{{ $t('user-login-time-title') }}</span>
           <template v-for="log in activeLogs" :key="log">
             <span>{{ log.browser }}</span>
             <span>{{ log.os }}</span>
@@ -237,12 +239,14 @@ getUserActiveLog()
       </div>
       <div class="mt-4 rounded-xl bg-white dark:bg-darkmode-600">
         <div class="flex items-center justify-between px-4 pt-4">
-          <div>{{ $t('deleteAccount') }}</div>
+          <div class="text-base font-medium">
+            {{ $t('delete-account-title') }}
+          </div>
         </div>
         <div class="flex items-center justify-between px-4 pb-4">
-          <span class="desc-font text-xs">{{ $t('deleteAlert') }}</span>
+          <span class="desc-font text-xs">{{ $t('delete-account-desc') }}</span>
           <Button variant="danger" @click="confirmDeleteAccout">{{
-            $t('delete')
+            $t('delete-btn')
           }}</Button>
         </div>
       </div>
