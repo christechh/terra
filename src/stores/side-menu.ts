@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
-import { Icon } from '../base-components/Lucide/Lucide.vue'
 import i18n from '../i18n'
 export interface Menu {
-  icon: Icon
+  icon: string
   title: string
   pageName?: string
   subMenu?: Menu[]
@@ -23,12 +22,12 @@ export const useSideMenuStore = defineStore('sideMenu', {
       },
       {
         icon: 'Settings',
-        title: '個人設定',
+        title: i18n.global.t('breadcrumbs-label2'),
         subMenu: [
           {
             icon: 'UserCircle2',
             pageName: 'settings-account',
-            title: '我的帳號'
+            title: i18n.global.t('account-management')
           }
         ]
       }
