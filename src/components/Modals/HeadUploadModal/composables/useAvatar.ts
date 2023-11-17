@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { ref } from 'vue'
+import i18n from '../../../../i18n'
 
 interface AnimAvatar {
   stickerImg: string
@@ -28,7 +29,7 @@ const getKeyWords = () => {
     .get('search/keyword', {
       params: {
         userId: 'pinchat_v3_user_1589',
-        lang: 'zh-tw'
+        lang: i18n.global.locale.value
       }
     })
     .then((res: AxiosResponse) => {
@@ -52,7 +53,7 @@ const getHeads = () => {
       params: {
         q: search.value,
         userId: 'pinchat_v3_user_1589',
-        lang: 'zh-tw',
+        lang: i18n.global.locale.value,
         pageNumber: animatePage.value
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

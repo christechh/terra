@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import i18n from '../i18n'
 
 export interface Notifications {
   type: 'success' | 'error' | 'warning' | 'info'
@@ -36,10 +37,16 @@ export const useNotificationsStore = defineStore('notifications', {
       this.showError({ title: message || '儲存失敗', content: content || '' })
     },
     showSaveSuccess(message?: string) {
-      this.showSuccess({ title: message || '儲存成功', content: '' })
+      this.showSuccess({
+        title: message || i18n.global.t('save-notify'),
+        content: ''
+      })
     },
     showDeleteSuccess() {
-      this.showSuccess({ title: '刪除成功', content: '' })
+      this.showSuccess({
+        title: i18n.global.t('delete-success-notify'),
+        content: ''
+      })
     }
   }
 })
