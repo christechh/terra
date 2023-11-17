@@ -113,7 +113,7 @@ getUserActiveLog()
           />
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('password-confirm') }}</FormLabel
+            >{{ $t('edit-new-password-label') }}</FormLabel
           >
           <FormInput
             v-model="newPsd"
