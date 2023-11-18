@@ -101,20 +101,18 @@ getUserActiveLog()
           >
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4">
-          <FormLabel
-            class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('edit-old-password-label') }}</FormLabel
-          >
+          <FormLabel class="col-span-1 mb-0 mr-2 mt-2 flex text-end">{{
+            $t('edit-old-password-label')
+          }}</FormLabel>
           <FormInput
             v-model="oldPsd"
             :placeholder="$t('edit-old-password-label-placeholder')"
             class="col-span-3"
             type="password"
           />
-          <FormLabel
-            class="col-span-1 mb-0 mr-2 flex items-center justify-end"
-            >{{ $t('edit-new-password-label') }}</FormLabel
-          >
+          <FormLabel class="col-span-1 mb-0 mr-2 mt-2 text-end">{{
+            $t('edit-new-password-label')
+          }}</FormLabel>
           <FormInput
             v-model="newPsd"
             :placeholder="$t('edit-new-password-label-placeholder')"
