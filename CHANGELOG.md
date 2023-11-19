@@ -1,3 +1,10 @@
+# [1.1.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.6...v1.1.0) (2023-11-19)
+
+
+### Features
+
+* update dependencies ([dbde1e1](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/dbde1e1776613544ebb02285a2292d5c11ed437b))
+
 ## [1.0.6](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.5...v1.0.6) (2023-11-18)
 
 
