@@ -24,6 +24,7 @@ const pageCount = ref(0)
 const search = ref<string>('')
 const animateHeads = ref<AnimAvatar[]>([])
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getKeyWords = () => {
   api
     .get('search/keyword', {
@@ -33,6 +34,7 @@ const getKeyWords = () => {
       }
     })
     .then((res: AxiosResponse) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { keywordList } = res.data.body
       keywords.value = keywordList
     })
