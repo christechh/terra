@@ -252,20 +252,22 @@ watch(isAnimate, () => {
             />
             <Lucide icon="Search" width="16" height="16" />
           </InputGroup>
-          <div class="my-4 text-sm">{{ $t('trending-keywords') }}</div>
-          <ul class="flex overflow-x-auto pb-3">
-            <li
-              v-for="keyword in keywords"
-              :key="keyword.keyword"
-              class="mr-2 shrink-0 cursor-pointer rounded-full bg-primary px-4 py-2 text-white"
-              @click="() => keywordClickHandler(keyword.keyword)"
-            >
-              {{ keyword.keyword }}
-            </li>
-          </ul>
+          <template v-if="keywords.length > 0">
+            <div class="my-4 text-sm">{{ $t('trending-keywords') }}</div>
+            <ul class="flex overflow-x-auto pb-3">
+              <li
+                v-for="keyword in keywords"
+                :key="keyword.keyword"
+                class="mr-2 shrink-0 cursor-pointer rounded-full bg-primary px-4 py-2 text-white"
+                @click="() => keywordClickHandler(keyword.keyword)"
+              >
+                {{ keyword.keyword }}
+              </li>
+            </ul>
+          </template>
           <ul
             v-if="animateHeads.length > 0"
-            class="grid h-60 grid-cols-4 gap-6 overflow-auto"
+            class="mt-4 grid h-60 grid-cols-4 gap-6 overflow-auto"
             @scroll="scrollHandler"
           >
             <li
