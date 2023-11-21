@@ -1,3 +1,10 @@
+# [1.2.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.1.0...v1.2.0) (2023-11-21)
+
+
+### Features
+
+* if no keywords hidden ([17197ad](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/17197ad08f190ee70552c71b4aa2e6655ba8edbf))
+
 # [1.1.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.0.6...v1.1.0) (2023-11-19)
 
 
