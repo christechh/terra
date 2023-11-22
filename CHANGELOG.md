@@ -1,3 +1,10 @@
+## [1.2.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.2.0...v1.2.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* old password label ([a939cec](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a939cec73dba46560d77a3e1ac43ac5edd1c4b01))
+
 # [1.2.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.1.0...v1.2.0) (2023-11-21)
 
 
