@@ -17,17 +17,20 @@ import {
   enter,
   leave
 } from './side-menu'
-import { watch, reactive, computed, onMounted, provide } from 'vue'
+import { watch, ref, computed, onMounted, provide } from 'vue'
 import CommonModal from '../../components/Modals/CommonModal'
 import RedirectTo from '../../components/RedirectTo'
 import CommonNotifications from '../../components/Notifications/CommonNotifications'
 
 const route: Route = useRoute()
-let formattedMenu = reactive<Array<FormattedMenu | 'divider'>>([])
+let formattedMenu = ref<Array<FormattedMenu | 'divider'>>([])
+
+// TODO: Check if this is needed
 const setFormattedMenu = (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   computedFormattedMenu: Array<FormattedMenu | 'divider'>
 ) => {
-  Object.assign(formattedMenu, computedFormattedMenu)
+  // formattedMenu.value = computedFormattedMenu
 }
 const sideMenuStore = useSideMenuStore()
 const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route))
@@ -38,7 +41,8 @@ provide<ProvideForceActiveMenu>('forceActiveMenu', (pageName: string) => {
 })
 
 watch(sideMenu, () => {
-  setFormattedMenu(sideMenu.value)
+  formattedMenu.value = sideMenu.value
+  // setFormattedMenu(sideMenu.value)
 })
 
 watch(
@@ -49,7 +53,8 @@ watch(
 )
 
 onMounted(() => {
-  setFormattedMenu(sideMenu.value)
+  formattedMenu.value = sideMenu.value
+  // setFormattedMenu(sideMenu.value)
 })
 </script>
 

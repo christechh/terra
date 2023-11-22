@@ -3,20 +3,18 @@ import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, TableHTMLAttributes, useAttrs, provide } from 'vue'
 defineOptions({
-  inheritAttrs: false
+  inheritAttrs: false,
+  name: 'CTable'
 })
+
 export type ProvideTable = {
   dark: boolean
   bordered: boolean
   hover: boolean
   striped: boolean
   sm: boolean
-  onSort: (key: string, order: 'asc' | 'desc' | '') => void
+  onSort?: (key: string, order: 'asc' | 'desc' | '') => void
 }
-
-defineOptions({
-  name: 'CTable'
-})
 
 interface TableProps extends /* @vue-ignore */ TableHTMLAttributes {
   dark?: boolean
@@ -36,6 +34,7 @@ const { dark, bordered, hover, striped, sm } = withDefaults(
     sm: false
   }
 )
+
 const emits = defineEmits(['sort'])
 
 const attrs = useAttrs()

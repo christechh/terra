@@ -1,20 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useUserStore } from '../stores/user'
 import { useLinkStore } from '../stores/link'
-import { computed } from 'vue'
+
+import IconButton from '../components/IconButton/index.vue'
+
+interface ILink {
+  id: string
+  title: string
+  imageUrl: string
+  token: string
+}
+
 const searchKeyword = ref('')
 const userStore = useUserStore()
 const linkStore = useLinkStore()
-const links = computed(
-  (): {
-    id: string
-    title: string
-    imageUrl: string
-  }[] => linkStore.links
-)
+const links = computed((): ILink[] => linkStore.links)
 userStore.fetchSetting()
 linkStore.fetchLinks()
+
+const getSettingLink = (link: ILink): string => {
+  return `/dashboard/enterpoint_customer?token=${link.token}&type=direct`
+}
 </script>
 
 <template>
@@ -85,12 +92,7 @@ linkStore.fetchLinks()
             alt=""
           />
           <img width="20" height="20" src="@/assets/images/chat.png" alt="" />
-          <img
-            width="20"
-            height="20"
-            src="@/assets/images/setting.png"
-            alt=""
-          />
+          <IconButton :link="getSettingLink(link)" icon="Settings" />
         </div>
       </div>
     </div>

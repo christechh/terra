@@ -11,8 +11,7 @@ const table = inject<ProvideTable>('table', {
   bordered: false,
   hover: false,
   striped: false,
-  sm: false,
-  onSort: (key: string, order: 'asc' | 'desc' | '') => {}
+  sm: false
 })
 
 const attrs = useAttrs()

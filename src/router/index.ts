@@ -23,6 +23,22 @@ const routes = [
         }
       },
       {
+        path: 'enterpoint',
+        name: 'enterpoint-setting',
+        component: () => import('@/pages/LinkDetail/BaseSettingPage.vue'),
+        meta: {
+          title: i18n.global.t('menu-enterpoint2')
+        }
+      },
+      {
+        path: 'enterpoint_customer',
+        name: 'enterpoint-customer',
+        component: () => import('@/pages/LinkDetail/CustomerPage.vue'),
+        meta: {
+          title: i18n.global.t('menu-enterpoint4')
+        }
+      },
+      {
         path: 'settings',
         name: 'settings',
         children: [

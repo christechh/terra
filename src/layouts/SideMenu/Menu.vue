@@ -23,21 +23,7 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState
 
 <template>
   <SideMenuTooltip
-    as="a"
     :content="props.menu.title"
-    :href="
-      props.menu.subMenu
-        ? '#'
-        : ((pageName) => {
-            try {
-              return router.resolve({
-                name: pageName
-              }).fullPath
-            } catch (err) {
-              return ''
-            }
-          })(props.menu.pageName)
-    "
     :class="[
       'relative mb-1 flex h-[50px] items-center rounded-full pl-5',
       {
