@@ -1,3 +1,10 @@
+# [1.3.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.2.1...v1.3.0) (2023-11-22)
+
+
+### Features
+
+* client list ([8458020](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/84580202533c1798981c4ee7a5312f3cf9ec85ce))
+
 ## [1.2.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.2.0...v1.2.1) (2023-11-22)
 
 
