@@ -41,6 +41,10 @@ const nestedMenu = (menu: Array<Menu | 'divider'>, route: Route) => {
   const formattedMenu: Array<FormattedMenu | 'divider'> = []
   menu.forEach((item) => {
     if (typeof item !== 'string') {
+      if (!showLinkDetailSubMenu(item, route)) {
+        return
+      }
+
       const menuItem: FormattedMenu = {
         icon: item.icon,
         title: item.title,
@@ -76,16 +80,58 @@ const nestedMenu = (menu: Array<Menu | 'divider'>, route: Route) => {
   return formattedMenu
 }
 
-const linkTo = (menu: FormattedMenu, router: Router) => {
-  if (menu.subMenu) {
-    menu.activeDropdown = !menu.activeDropdown
-  } else {
-    if (menu.pageName !== undefined) {
-      router.push({
-        name: menu.pageName
-      })
-    }
+// TODO: Add all link detail routes here
+/**
+ * All routes that need to show the LinkDetail sub menu.
+ */
+const linkDetailRoutes = [
+  'enterpoint-root',
+  'enterpoint-customer',
+  'enterpoint-setting'
+]
+
+/**
+ * Control the dynamic side menu with 'enterpoint'.
+ */
+const showLinkDetailSubMenu = (menu: FormattedMenu, route: Route) => {
+  const { pageName } = menu
+  if (!pageName) {
+    return true
   }
+
+  if (!linkDetailRoutes.includes(pageName)) {
+    return true
+  }
+
+  return !!route.query.token
+}
+
+const linkTo = (menu: FormattedMenu, router: Router) => {
+  const { pageName, subMenu } = menu
+  if (subMenu) {
+    menu.activeDropdown = !menu.activeDropdown
+    return
+  }
+
+  if (!pageName) {
+    return ''
+  }
+
+  // Handle the link with enterpoint token
+  const { token } = router.currentRoute.value.query
+  if (linkDetailRoutes.includes(pageName) && token) {
+    return router.push({
+      name: pageName,
+      query: {
+        token,
+        type: 'direct'
+      }
+    })
+  }
+
+  return router.push({
+    name: pageName
+  })
 }
 
 const enter = (el: HTMLElement) => {

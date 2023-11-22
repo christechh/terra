@@ -58,6 +58,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        light_yellow: '#f3fab6',
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         success: 'rgb(var(--color-success) / <alpha-value>)',

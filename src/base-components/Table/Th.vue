@@ -7,9 +7,7 @@ import { ProvideThead } from './Thead.vue'
 import Lucide from '../Lucide/index'
 // import { requiredUnless } from "@vuelidate/validators";
 defineOptions({
-  inheritAttrs: false
-})
-defineOptions({
+  inheritAttrs: false,
   name: 'CTh'
 })
 
@@ -18,8 +16,7 @@ const table = inject<ProvideTable>('table', {
   bordered: false,
   hover: false,
   striped: false,
-  sm: false,
-  onSort: (key: string, order: 'asc' | 'desc' | '') => {}
+  sm: false
 })
 const thead = inject<ProvideThead>('thead', {
   variant: 'default'
@@ -31,7 +28,7 @@ const props = defineProps<{
 
 const attrs = useAttrs()
 
-const isSort = ref<any>('')
+const isSort = ref<'asc' | 'desc' | ''>('')
 const stepIndex = ref(0)
 const step = ref<['', 'asc', 'desc']>(['', 'asc', 'desc'])
 const computedClass = computed(() =>
@@ -59,7 +56,10 @@ const nextSort = () => {
 
   stepIndex.value = (stepIndex.value + 1) % step.value.length
   isSort.value = step.value[stepIndex.value]
-  table.onSort(props.sortableKey, isSort.value)
+
+  if (table.onSort) {
+    table.onSort(props.sortableKey, isSort.value)
+  }
 }
 </script>
 

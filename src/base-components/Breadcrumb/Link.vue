@@ -10,7 +10,6 @@ interface LinkProps extends /* @vue-ignore */ LiHTMLAttributes {
 }
 
 const { to, active, index } = withDefaults(defineProps<LinkProps>(), {
-  to: '',
   active: false,
   index: 0
 })
@@ -30,16 +29,19 @@ const computedClass = computed(() => [
   index > 0 && 'dark:before:bg-bredcrumb-chevron-darkmode',
   breadcrumb &&
     !breadcrumb.light &&
-    active &&
+    !active &&
     'text-slate-800 cursor-text dark:text-slate-400',
-  breadcrumb && breadcrumb.light && active && 'text-white/70'
+  breadcrumb && breadcrumb.light && !active && 'text-white/70'
 ])
 </script>
 
 <template>
   <li :class="computedClass">
-    <RouterLink :to="to">
+    <RouterLink :to="to" v-if="to">
       <slot></slot>
     </RouterLink>
+    <span v-else>
+      <slot></slot>
+    </span>
   </li>
 </template>

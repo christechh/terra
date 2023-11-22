@@ -22,6 +22,23 @@ export const useSideMenuStore = defineStore('sideMenu', {
         title: i18n.global.t('my-links')
       },
       {
+        icon: 'AlignJustify',
+        title: i18n.global.t('menu-enterpoint1'),
+        pageName: 'enterpoint-root',
+        subMenu: [
+          {
+            icon: 'UserCog',
+            pageName: 'enterpoint-setting',
+            title: i18n.global.t('menu-enterpoint2')
+          },
+          {
+            icon: 'UserCog',
+            pageName: 'enterpoint-customer',
+            title: i18n.global.t('menu-enterpoint4')
+          }
+        ]
+      },
+      {
         icon: 'Settings',
         title: i18n.global.t('breadcrumbs-label2'),
         subMenu: [
