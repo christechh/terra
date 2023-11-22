@@ -101,7 +101,7 @@ getUserActiveLog()
           >
         </div>
         <div class="grid grid-cols-4 gap-y-3 p-4">
-          <FormLabel class="col-span-1 mb-0 mr-2 mt-2 flex text-end">{{
+          <FormLabel class="col-span-1 mb-0 mr-2 mt-2 text-end">{{
             $t('edit-old-password-label')
           }}</FormLabel>
           <FormInput
