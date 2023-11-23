@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import i18n from '../i18n'
 import SideMenu from '../layouts/SideMenu/SideMenu.vue'
-import LoginPage from '../pages/LoginPage.vue'
 import LandingPage from '../pages/LandingPage.vue'
 import LinksPage from '../pages/LinksPage.vue'
-import i18n from '../i18n'
+import LoginPage from '../pages/LoginPage.vue'
 const routes = [
   {
     path: '/',
@@ -46,6 +46,11 @@ const routes = [
             path: '',
             name: 'settings-account',
             component: () => import('@/pages/settings/Account.vue')
+          },
+          {
+            path: 'sub_account',
+            name: 'settings-sub_account',
+            component: () => import('@/pages/settings/subAccount.vue')
           }
         ]
       }

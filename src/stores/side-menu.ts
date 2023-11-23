@@ -46,6 +46,11 @@ export const useSideMenuStore = defineStore('sideMenu', {
             icon: 'UserCircle2',
             pageName: 'settings-account',
             title: i18n.global.t('account-management')
+          },
+          {
+            icon: 'Users',
+            pageName: 'settings-sub_account',
+            title: i18n.global.t('subaccount-section1-title')
           }
         ]
       }
