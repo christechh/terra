@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { ICustomer } from '@/pages/LinkDetail/CustomerPage.vue'
 import { defineProps, defineEmits, PropType, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -9,7 +8,19 @@ import Avatar from '../Avatar/index.vue'
 import FormInput from '../../base-components/Form/FormInput.vue'
 import FormTextarea from '../../base-components/Form/FormTextarea.vue'
 import FormLabel from '../../base-components/Form/FormLabel.vue'
-import axios from '@/axios'
+import axios from '../../axios'
+import { ICustomer } from '../../pages/LinkDetail/CustomerPage.vue'
+
+interface IInput {
+  label: string
+  component?: string | typeof FormInput | typeof FormTextarea
+  componentProps: {
+    modelValue: string
+    name: string
+    type?: string
+  }
+  class: string
+}
 
 const props = defineProps({
   open: {
@@ -29,7 +40,7 @@ const route = useRoute()
 const token = computed(() => {
   return route.query.token as string
 })
-const inputs = computed(() => {
+const inputs = computed<IInput[]>(() => {
   return [
     {
       label: t('client-list-email'),
@@ -79,17 +90,13 @@ const inputs = computed(() => {
   ]
 })
 
-const getComponent = (input: string) => {
+const getComponent = (input: IInput) => {
   return input.component || FormInput
 }
 const handleClose = () => {
   emit('close')
 }
-// const handleChange = (key, value) => {
-//   console.log('key, value', key, value)
-// }
-const handleBlur = (key, value) => {
-  console.log('handleBlur key, value', key, value)
+const handleBlur = (key: string, value: string) => {
   if (!value) return
 
   axios({
@@ -101,13 +108,9 @@ const handleBlur = (key, value) => {
       token: token.value,
       type: key
     }
+  }).catch(() => {
+    // TODO: handle error
   })
-    .then((res) => {
-      console.log('res', res)
-    })
-    .catch((err) => {
-      console.log('err', err)
-    })
 }
 </script>
 
