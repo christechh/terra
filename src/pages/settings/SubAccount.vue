@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Button from '../../base-components/Button'
 import Lucide from '../../base-components/Lucide'
+import CreateSubAccountModal from '../../components/Modals/CreateSubAccountModal'
 import useSubAccount from './composables/useSubAccount'
 
 const { accounts, fetchSubAccounts } = useSubAccount()
+const showCreateSubAccountModal = ref(true)
 
 fetchSubAccounts()
 </script>
@@ -46,5 +49,9 @@ fetchSubAccounts()
         </template>
       </div>
     </div>
+    <CreateSubAccountModal
+      v-if="showCreateSubAccountModal"
+      @close="showCreateSubAccountModal = false"
+    />
   </div>
 </template>
