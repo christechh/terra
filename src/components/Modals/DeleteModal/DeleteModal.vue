@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import axios from '../../../axios'
+import Button from '../../../base-components/Button'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
-import Button from '../../../base-components/Button'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useNotificationsStore } from '../../../stores/notifications'
-import axios from '../../../axios'
+import { useSubAccountStore } from '../../../stores/sub-account'
 const deleteModalStore = useDeleteModalStore()
 
 const status = computed(() => deleteModalStore.status)
@@ -17,15 +18,19 @@ const setOpen = (value: boolean) => {
 }
 
 const deleteExec = async () => {
-  const { deleteType } = deleteModalStore
+  const { deleteType, deleteData } = deleteModalStore
   switch (deleteType) {
     case 'account':
       await axios.delete('/user')
-      useNotificationsStore().showDeleteSuccess()
+      break
+    case 'subAccount':
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      useSubAccountStore().deleteSubAccount((deleteData as any).id)
       break
     case 'course':
       break
   }
+  useNotificationsStore().showDeleteSuccess()
   setOpen(false)
 }
 </script>

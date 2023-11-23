@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+import { AsYouType } from 'libphonenumber-js'
 import { parseColor } from 'tailwindcss/lib/util/color'
 
 dayjs.extend(duration)
@@ -191,19 +192,29 @@ const slideDown = (el: HTMLElement, duration = 300, callback = () => {}) => {
   }, duration)
 }
 
+const parsePhone = (phone: string) => {
+  const ast = new AsYouType()
+  ast.input(phone)
+  return {
+    phoneCode: ast.getCallingCode(),
+    phone: ast.getNationalNumber()
+  }
+}
+
 export {
-  cutText,
-  formatDate,
   capitalizeFirstLetter,
-  onlyNumber,
-  formatCurrency,
-  timeAgo,
+  cutText,
   diffTimeByNow,
+  formatCurrency,
+  formatDate,
   isset,
-  toRaw,
+  onlyNumber,
+  parsePhone,
   randomNumbers,
-  toRGB,
-  stringToHTML,
+  slideDown,
   slideUp,
-  slideDown
+  stringToHTML,
+  timeAgo,
+  toRGB,
+  toRaw
 }
