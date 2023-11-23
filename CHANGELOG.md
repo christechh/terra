@@ -1,3 +1,10 @@
+## [1.6.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.0...v1.6.1) (2023-11-23)
+
+
+### Bug Fixes
+
+* case issue ([9f3f6ba](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/9f3f6ba0fb4e86874e8b2babb22a20eb9f175a92))
+
 # [1.6.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.5.0...v1.6.0) (2023-11-23)
 
 
