@@ -1,16 +1,33 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
+import Button from '../../../base-components/Button'
 import {
   FormCheck,
   FormInput,
   FormLabel,
   InputGroup
 } from '../../../base-components/Form'
-import { Dialog } from '../../../base-components/Headless'
+import { Dialog, Slideover } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import ContryCodePicker from '../../ContryCodePicker'
 import useCreateSubAccount from './useCreateSubAccount'
 
+interface Props {
+  subAccount?: {
+    id?: number
+    name: string
+    account: string
+    password?: string
+    notifyType: string
+    notifyOpen: boolean
+    notifyEmail: string
+    notifyPhone: string
+  }
+  idx: number
+}
+
 const emit = defineEmits(['close'])
+const { subAccount } = defineProps<Props>()
 
 const {
   account,
@@ -19,15 +36,39 @@ const {
   notifyType,
   notifyEmail,
   phoneCode,
-  notifyPhone
-} = useCreateSubAccount()
+  notifyPhone,
+  canSubmit,
+  isEdit,
+  submit
+} = useCreateSubAccount(subAccount)
+
+const component = computed(() => {
+  return isEdit.value ? Slideover : Dialog
+})
+
+const childComponet = computed(() => {
+  return isEdit.value ? Slideover.Panel : Dialog.Panel
+})
+
+const reset = () => {
+  notifyEmail.value = ''
+  notifyPhone.value = ''
+  phoneCode.value = '+886'
+}
 </script>
 
 <template>
-  <Dialog :open="true" size="md">
-    <Dialog.Panel class="p-4 md:w-[400px]">
-      <div class="relative mb-5 text-center text-xl">
-        {{ $t('sub-account-add-btn-text') }}
+  <component :is="component" :open="true" size="md">
+    <component :is="childComponet" class="p-4 md:w-[400px]">
+      <div
+        class="relative mb-5"
+        :class="isEdit ? 'text-primary' : 'text-center text-xl'"
+      >
+        {{
+          isEdit
+            ? $t('feature-section8-title') + (idx + 1)
+            : $t('sub-account-add-btn-text')
+        }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer"
@@ -35,7 +76,7 @@ const {
         />
       </div>
       <div class="mb-4 flex items-center">
-        <FormLabel class="w-[100px]">{{ $t('sub-account-name') }}</FormLabel>
+        <FormLabel class="w-[120px]">{{ $t('sub-account-name') }}</FormLabel>
         <FormInput
           class="flex-1"
           type="text"
@@ -44,7 +85,7 @@ const {
         />
       </div>
       <div class="mb-4 flex items-center">
-        <FormLabel class="w-[100px]">{{
+        <FormLabel class="w-[120px]">{{
           $t('sub-account-account-label')
         }}</FormLabel>
         <FormInput
@@ -55,61 +96,63 @@ const {
         />
       </div>
       <div class="mb-4 flex items-center">
-        <FormLabel class="w-[100px]">{{
-          $t('sub-account-pwd-label')
+        <FormLabel class="w-[120px]">{{
+          isEdit
+            ? $t('edit-sub-account-pwd-label')
+            : $t('sub-account-pwd-label')
         }}</FormLabel>
         <FormInput
           class="flex-1"
-          type="text"
+          type="password"
           :placeholder="$t('error-message36')"
           v-model="password"
         />
       </div>
       <div class="mb-4 flex items-center">
-        <FormLabel class="w-[100px]">{{
+        <FormLabel class="w-[120px]">{{
           $t('sub-account-notify-setting')
         }}</FormLabel>
         <div>
           <FormCheck>
             <FormCheck.Input
-              id="radio-switch-6"
+              id="notify-switch-email"
               type="radio"
-              name="horizontal_radio_button"
               v-model="notifyType"
               :value="20"
+              @click="reset"
             />
-            <FormCheck.Label htmlFor="radio-switch-6">
+            <FormCheck.Label htmlFor="notify-switch-email">
               {{ $t('sub-account-table-email') }}
             </FormCheck.Label>
           </FormCheck>
           <FormCheck>
             <FormCheck.Input
-              id="radio-switch-6"
+              id="notify-switch-phone"
               type="radio"
-              name="horizontal_radio_button"
               v-model="notifyType"
               :value="10"
+              @click="reset"
             />
-            <FormCheck.Label htmlFor="radio-switch-6">
+            <FormCheck.Label htmlFor="notify-switch-phone">
               {{ $t('sub-account-table-phone') }}
             </FormCheck.Label>
           </FormCheck>
           <FormCheck>
             <FormCheck.Input
-              id="radio-switch-6"
+              id="notify-switch-none"
               type="radio"
-              name="horizontal_radio_button"
               v-model="notifyType"
               value="none"
+              @click="reset"
             />
-            <FormCheck.Label htmlFor="radio-switch-6">
+            <FormCheck.Label htmlFor="notify-switch-none">
               {{ $t('sub-account-no-notify') }}
             </FormCheck.Label>
           </FormCheck>
         </div>
       </div>
       <div class="mb-4 flex items-center">
-        <FormLabel class="w-[100px]" v-if="notifyType !== 'none'">{{
+        <FormLabel class="w-[120px]" v-if="notifyType !== 'none'">{{
           notifyType === 20
             ? $t('sub-account-table-email')
             : $t('sub-account-table-phone')
@@ -121,11 +164,27 @@ const {
           :placeholder="$t('error-message36')"
           v-model="notifyEmail"
         />
-        <InputGroup v-if="notifyType === 10">
+        <InputGroup v-if="notifyType === 10" class="flex-1">
           <ContryCodePicker v-model="phoneCode" />
           <FormInput v-model="notifyPhone" type="text" />
         </InputGroup>
       </div>
-    </Dialog.Panel>
-  </Dialog>
+      <div class="flex justify-center">
+        <Button
+          v-if="isEdit"
+          variant="outline-primary"
+          @click="() => emit('close')"
+          >{{ $t('cancel-btn') }}</Button
+        >
+        <Button
+          class="ml-3"
+          :class="{ 'flex-1': !isEdit }"
+          :disabled="!canSubmit"
+          variant="primary"
+          @click="() => submit(isEdit, () => emit('close'))"
+          >{{ $t('save-btn') }}</Button
+        >
+      </div>
+    </component>
+  </component>
 </template>
