@@ -1,31 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import axios from '../../axios'
 import Button from '../../base-components/Button'
 import Lucide from '../../base-components/Lucide'
+import useSubAccount from './composables/useSubAccount'
 
-interface Account {
-  id: number
-  name: string
-  account: string
-  notifyOpen: boolean
-  notifyType: number
-}
-
-const accounts = ref<Account[]>([])
-
-const fetchSubAccounts = () => {
-  axios
-    .get('user/subAccount', {
-      params: {
-        page: 0,
-        pageSize: 100
-      }
-    })
-    .then((res) => {
-      accounts.value = res.data.data.data
-    })
-}
+const { accounts, fetchSubAccounts } = useSubAccount()
 
 fetchSubAccounts()
 </script>
