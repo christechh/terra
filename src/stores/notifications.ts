@@ -21,10 +21,10 @@ export const useNotificationsStore = defineStore('notifications', {
     }
   },
   actions: {
-    showSuccess(input: { title: string; content: string }) {
+    showSuccess(input: { title: string; content?: string }) {
       this.type = 'success'
       this.successTitle = input.title
-      this.successContent = input.content
+      this.successContent = input.content || ''
       this.successVersion = new Date().getTime()
     },
     showError(input: { title: string; content: string }) {

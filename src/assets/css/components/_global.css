@@ -72,11 +72,15 @@ html {
   }
 
   .input-group,
+  textarea,
+  input[type='email'],
   input[type='text'],
   input[type='password'],
   input[type='number'] {
     background-color: theme('colors.input_bg');
   }
+  textarea::placeholder,
+  input[type='email']::placeholder,
   input[type='text']::placeholder,
   input[type='password']::placeholder,
   input[type='number']::placeholder {

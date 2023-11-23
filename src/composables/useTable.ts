@@ -88,6 +88,8 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
     if (val) {
       page.value = val
     }
+    // Reset first
+    list.value = []
     await fetch()
     return list.value
   }
