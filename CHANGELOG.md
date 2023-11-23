@@ -1,3 +1,12 @@
+# [1.6.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.5.0...v1.6.0) (2023-11-23)
+
+
+### Features
+
+* create sub account modal ([75443d8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/75443d8f0565c48bbd2e105d534ba5b56f2d63ba))
+* sub-account-list ([7e6c7ff](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7e6c7ff785afc944d2e130e5f4a4b97312ade258))
+* subaccount crud ([b2a49a8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/b2a49a8d7feea3935f026fb4a1e85871dc127968))
+
 # [1.5.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.4.0...v1.5.0) (2023-11-23)
 
 
