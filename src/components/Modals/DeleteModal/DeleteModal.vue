@@ -62,9 +62,9 @@ const deleteExec = async () => {
                 setOpen(false)
               }
             "
-            class="mr-1 w-24"
+            class="mr-1 w-24 border-slate-500 focus:ring-transparent dark:border-slate-300"
           >
-            取消
+            {{ $t('cancel-btn') }}
           </Button>
           <Button
             type="button"
@@ -72,7 +72,7 @@ const deleteExec = async () => {
             class="ml-5 w-24"
             @click="deleteExec"
           >
-            刪除
+            {{ $t('delete-btn') }}
           </Button>
         </div>
       </Dialog.Panel>

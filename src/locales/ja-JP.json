@@ -1054,7 +1054,7 @@
   "sub-account-table-phone": "携帯電話番号",
   "sub-account-table-type": "メッセージ通知方法",
   "sub-account-table-action": "アクション",
-  "sub-account-plan-limit-msg": "サブアカウントは[planSubaccountLimit]個までしか作成できませんが、それ以上追加したい場合は、",
+  "sub-account-plan-limit-msg": "サブアカウントは{planSubaccountLimit}個までしか作成できませんが、それ以上追加したい場合は、",
   "sub-account-plan-limit-contact": "<a style=\"color:#02B13F;font-weight: normal;\" href=\"https://pinchat.me/customersupport\" target=\"_blank\">お問い合わせください</a>。",
   "sub-account-notify-switch": "通知をオンにする",
   "api-message": "更新が完了しました。",
