@@ -166,7 +166,7 @@ const reset = () => {
         />
         <InputGroup
           v-if="notifyType === 10"
-          class="flex-1 overflow-hidden rounded shadow-sm"
+          class="dashboard-bg flex-1 rounded pl-1 shadow-sm"
         >
           <ContryCodePicker v-model="phoneCode" />
           <FormInput v-model="notifyPhone" type="text" class="shadow-none" />
