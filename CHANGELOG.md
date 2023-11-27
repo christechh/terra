@@ -1,3 +1,10 @@
+## [1.6.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.1...v1.6.2) (2023-11-27)
+
+
+### Bug Fixes
+
+* adjsut ([d4f5734](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/d4f5734ba36b1d9581934bbac192bf9269d3c262))
+
 ## [1.6.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.0...v1.6.1) (2023-11-23)
 
 
