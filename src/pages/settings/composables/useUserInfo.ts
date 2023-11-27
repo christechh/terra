@@ -15,6 +15,8 @@ interface UserInfo {
   name: string
   id?: number
   email: string
+  sub_accounts_limit: number
+  sub_accounts_count: number
 }
 
 export default function useUserInfo() {
@@ -27,7 +29,9 @@ export default function useUserInfo() {
     is_open_notify: false,
     notify_type: 20,
     name: '',
-    email: ''
+    email: '',
+    sub_accounts_limit: 0,
+    sub_accounts_count: 0
   })
   const phoneCode = ref('+886')
   const accountSettingChange = ref(false)

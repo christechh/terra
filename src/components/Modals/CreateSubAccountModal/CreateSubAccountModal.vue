@@ -71,7 +71,7 @@ const reset = () => {
         }}
         <Lucide
           icon="X"
-          class="absolute right-0 top-0 cursor-pointer"
+          class="absolute right-0 top-0 cursor-pointer text-[#939393]"
           @click="() => emit('close')"
         />
       </div>
@@ -125,7 +125,7 @@ const reset = () => {
               {{ $t('sub-account-table-email') }}
             </FormCheck.Label>
           </FormCheck>
-          <FormCheck>
+          <FormCheck class="mt-3">
             <FormCheck.Input
               id="notify-switch-phone"
               type="radio"
@@ -137,7 +137,7 @@ const reset = () => {
               {{ $t('sub-account-table-phone') }}
             </FormCheck.Label>
           </FormCheck>
-          <FormCheck>
+          <FormCheck class="mt-3">
             <FormCheck.Input
               id="notify-switch-none"
               type="radio"
@@ -151,7 +151,7 @@ const reset = () => {
           </FormCheck>
         </div>
       </div>
-      <div class="mb-4 flex items-center">
+      <div class="mb-5 flex items-center">
         <FormLabel class="w-[120px]" v-if="notifyType !== 'none'">{{
           notifyType === 20
             ? $t('sub-account-table-email')
@@ -164,9 +164,12 @@ const reset = () => {
           :placeholder="$t('error-message36')"
           v-model="notifyEmail"
         />
-        <InputGroup v-if="notifyType === 10" class="flex-1">
+        <InputGroup
+          v-if="notifyType === 10"
+          class="flex-1 overflow-hidden rounded shadow-sm"
+        >
           <ContryCodePicker v-model="phoneCode" />
-          <FormInput v-model="notifyPhone" type="text" />
+          <FormInput v-model="notifyPhone" type="text" class="shadow-none" />
         </InputGroup>
       </div>
       <div class="flex justify-center">
@@ -177,8 +180,7 @@ const reset = () => {
           >{{ $t('cancel-btn') }}</Button
         >
         <Button
-          class="ml-3"
-          :class="{ 'flex-1': !isEdit }"
+          :class="{ 'flex-1': !isEdit, 'ml-3': isEdit }"
           :disabled="!canSubmit"
           variant="primary"
           @click="() => submit(isEdit, () => emit('close'))"
