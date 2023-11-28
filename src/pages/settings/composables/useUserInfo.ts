@@ -15,6 +15,8 @@ interface UserInfo {
   name: string
   id?: number
   email: string
+  sub_accounts_limit: number
+  sub_accounts_count: number
 }
 
 export default function useUserInfo() {
@@ -27,7 +29,9 @@ export default function useUserInfo() {
     is_open_notify: false,
     notify_type: 20,
     name: '',
-    email: ''
+    email: '',
+    sub_accounts_limit: 0,
+    sub_accounts_count: 0
   })
   const phoneCode = ref('+886')
   const accountSettingChange = ref(false)
@@ -38,9 +42,11 @@ export default function useUserInfo() {
       const { data } = res.data.data
       Object.assign(userInfo, data)
       const ast = new AsYouType()
-      ast.input(userInfo.notify_phone)
-      phoneCode.value = `+${ast.getCallingCode() as string}`
-      userInfo.notify_phone = ast.getNationalNumber()
+      if (userInfo.notify_type === 10) {
+        ast.input(userInfo.notify_phone)
+        phoneCode.value = `+${ast.getCallingCode() as string}`
+        userInfo.notify_phone = ast.getNationalNumber()
+      }
     })
   }
 
