@@ -41,7 +41,7 @@ const getSettingLink = (link: ILink): string => {
             />
           </button>
           <button
-            class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary bg-primary px-5 text-base font-bold text-primary text-white"
+            class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary bg-primary px-5 text-base font-bold text-white"
           >
             {{ $t('all-chat-rooms') }}
             <img

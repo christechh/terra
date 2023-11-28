@@ -10,12 +10,23 @@ import { inject, useAttrs, computed } from 'vue'
 defineOptions({
   inheritAttrs: false
 })
+
+interface IOptions {
+  enter: string
+  enterFrom: string
+  enterTo: string
+  entered: string
+  leave: string
+  leaveFrom: string
+  leaveTo: string
+}
 interface PanelProps
   extends /* @vue-ignore */ ExtractProps<typeof HeadlessDialogPanel> {
   as?: string | object
+  options?: IOptions
 }
 
-const { as } = withDefaults(defineProps<PanelProps>(), {
+const { as, options } = withDefaults(defineProps<PanelProps>(), {
   as: 'div'
 })
 
@@ -33,6 +44,17 @@ const computedClass = computed(() =>
     typeof attrs.class === 'string' && attrs.class
   ])
 )
+const panelOptions = computed<IOptions>(() => {
+  return {
+    enter: options?.enter || 'ease-in-out duration-500',
+    enterFrom: options?.enterFrom || 'opacity-0 -mt-16',
+    enterTo: options?.enterTo || 'opacity-100 mt-16',
+    entered: options?.entered || 'opacity-100 mt-16',
+    leave: options?.leave || 'ease-in-out duration-[400ms]',
+    leaveFrom: options?.leaveFrom || 'opacity-100 mt-16',
+    leaveTo: options?.leaveTo || 'opacity-0 -mt-16'
+  }
+})
 </script>
 
 <template>
@@ -49,13 +71,13 @@ const computedClass = computed(() =>
   />
   <TransitionChild
     as="div"
-    enter="ease-in-out duration-500"
-    enterFrom="opacity-0 -mt-16"
-    enterTo="opacity-100 mt-16"
-    entered="opacity-100 mt-16"
-    leave="ease-in-out duration-[400ms]"
-    leaveFrom="opacity-100 mt-16"
-    leaveTo="opacity-0 -mt-16"
+    :enter="panelOptions.enter"
+    :enterFrom="panelOptions.enterFrom"
+    :enterTo="panelOptions.enterTo"
+    :entered="panelOptions.entered"
+    :leave="panelOptions.leave"
+    :leaveFrom="panelOptions.leaveFrom"
+    :leaveTo="panelOptions.leaveTo"
     class="fixed inset-0"
   >
     <HeadlessDialogPanel as="template">
