@@ -17,13 +17,15 @@ const props = defineProps({
         class="absolute right-2 top-2 text-[#939393]"
         @click="() => $emit('close')"
       />
-      <div class="font-bold">
+      <div>
         <span>{{
           $t('sub-account-plan-limit-msg', {
             planSubaccountLimit: props.limit
           })
         }}</span>
-        <a class="text-blue-500">{{ $t('contact_us_text') }}</a>
+        <a href="/customersupport" class="text-blue-500"
+          >{{ $t('paymnet_upgrade391') }}.</a
+        >
       </div>
       <div class="mt-3 text-end">
         <Button variant="primary" @click="$emit('close')">{{
