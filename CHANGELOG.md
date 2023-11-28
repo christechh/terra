@@ -1,3 +1,10 @@
+## [1.6.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.2...v1.6.3) (2023-11-28)
+
+
+### Bug Fixes
+
+* adjsut ui and fix country picker ([c887a49](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/c887a498a2b51861482650f8cf582c2f66aba124))
+
 ## [1.6.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.1...v1.6.2) (2023-11-27)
 
 
