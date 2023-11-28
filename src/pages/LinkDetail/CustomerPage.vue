@@ -186,7 +186,7 @@ watch(
         <div>
           <button
             id="customer-data-download"
-            class="flex items-center rounded-[12px] bg-theme1 px-8 py-2 font-semibold text-white"
+            class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary bg-primary px-5 text-base font-bold text-white"
             @click="() => (openExportDialog = true)"
           >
             <img
@@ -200,14 +200,28 @@ watch(
       </div>
     </div>
     <div class="mt-1 rounded-b-lg bg-white p-4">
-      <FormInput
-        type="text"
-        v-model="form.keyword"
-        class="w-full max-w-[320px]"
-        :placeholder="$t('search')"
-      />
+      <div class="w-full max-w-[320px]">
+        <FormInput
+          clearable
+          type="text"
+          v-model="form.keyword"
+          class="pl-10"
+          :placeholder="$t('search')"
+        >
+          <template #prefix>
+            <img
+              width="15"
+              height="15"
+              id="search-button"
+              style="opacity: 0.3"
+              class="absolute inset-y-0 left-0 my-auto ml-3"
+              src="@/assets/images/search.png"
+            />
+          </template>
+        </FormInput>
+      </div>
       <!-- Optimize Table component with using config. This way is bad. -->
-      <div class="overflow-x-auto">
+      <div class="mt-4 overflow-x-auto">
         <Table>
           <Table.Thead>
             <Table.Tr>
@@ -225,7 +239,7 @@ watch(
                 v-for="(customer, index) in list"
                 :key="customer.chat_room_id"
               >
-                <Table.Td class="w-[90px]">
+                <Table.Td class="w-[90px] text-center">
                   <Avatar :name="customer.nickname" :avatar="customer.avatar" />
                   <!-- <div
                     class="h-[40px] w-[40px] overflow-hidden rounded-full bg-slate-100"
@@ -233,10 +247,12 @@ watch(
                     <img :src="customer.avatar" />
                   </div> -->
                 </Table.Td>
-                <Table.Td class="w-[140px]">{{ customer.nickname }}</Table.Td>
-                <Table.Td class="text-center">{{
-                  customer.joined_at
-                }}</Table.Td>
+                <Table.Td class="w-[140px] text-center">
+                  {{ customer.nickname }}
+                </Table.Td>
+                <Table.Td class="text-center">
+                  {{ customer.joined_at }}
+                </Table.Td>
                 <Table.Td class="text-center">{{ customer.sent_at }}</Table.Td>
                 <Table.Td class="text-center">
                   <span v-for="tag in customer.tags" :key="tag.id">

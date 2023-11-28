@@ -73,14 +73,18 @@ html {
 
   .input-group,
   textarea,
+  .c-date-picker input,
   input[type='email'],
+  input[type='tel'],
   input[type='text'],
   input[type='password'],
   input[type='number'] {
     background-color: theme('colors.input_bg');
   }
   textarea::placeholder,
+  .c-date-picker input::placeholder,
   input[type='email']::placeholder,
+  input[type='tel']::placeholder,
   input[type='text']::placeholder,
   input[type='password']::placeholder,
   input[type='number']::placeholder {

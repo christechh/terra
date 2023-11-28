@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
-import { computed, InputHTMLAttributes, useAttrs, inject } from 'vue'
+import {
+  computed,
+  InputHTMLAttributes,
+  useAttrs,
+  inject,
+  defineProps,
+  defineEmits
+} from 'vue'
+import Lucide from '../Lucide/Lucide.vue'
 import { ProvideFormInline } from './FormInline.vue'
 import { ProvideInputGroup } from './InputGroup/InputGroup.vue'
 defineOptions({
@@ -11,6 +19,7 @@ interface FormInputProps extends /* @vue-ignore */ InputHTMLAttributes {
   modelValue?: InputHTMLAttributes['value']
   formInputSize?: 'sm' | 'lg'
   rounded?: boolean
+  clearable?: boolean
 }
 
 interface FormInputEmit {
@@ -35,6 +44,7 @@ const computedClass = computed(() =>
     props.rounded && 'rounded-full',
     formInline && 'flex-1',
     inputGroup && 'rounded-none first:rounded-l last:rounded-r z-10',
+    props.clearable && 'pr-7',
     typeof attrs.class === 'string' && attrs.class
   ])
 )
@@ -52,11 +62,20 @@ const localValue = computed({
 </script>
 
 <template>
-  <input
-    :class="computedClass"
-    :type="props.type"
-    v-bind="_.omit(attrs, 'class')"
-    v-model="localValue"
-    @change="emit('change')"
-  />
+  <div class="relative flex">
+    <slot name="prefix" />
+    <input
+      :class="computedClass"
+      :type="props.type"
+      v-bind="_.omit(attrs, 'class')"
+      v-model="localValue"
+      @change="emit('change')"
+    />
+    <Lucide
+      v-if="clearable && localValue"
+      icon="XCircle"
+      class="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 cursor-pointer text-desc_font"
+      @click="localValue = ''"
+    />
+  </div>
 </template>

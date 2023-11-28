@@ -8,12 +8,19 @@ import Avatar from '../Avatar/index.vue'
 import FormInput from '../../base-components/Form/FormInput.vue'
 import FormTextarea from '../../base-components/Form/FormTextarea.vue'
 import FormLabel from '../../base-components/Form/FormLabel.vue'
+import FormTelInput from '../../base-components/Form/FormTelInput.vue'
+import FormDatepicker from '../../base-components/Form/FormDatepicker.vue'
 import axios from '../../axios'
 import { ICustomer } from '../../pages/LinkDetail/CustomerPage.vue'
 
 interface IInput {
   label: string
-  component?: string | typeof FormInput | typeof FormTextarea
+  component?:
+    | string
+    | typeof FormInput
+    | typeof FormTextarea
+    | typeof FormTelInput
+    | typeof FormDatepicker
   componentProps: {
     modelValue: string
     name: string
@@ -53,15 +60,16 @@ const inputs = computed<IInput[]>(() => {
     },
     {
       label: t('client-list-phone-number'),
+      component: FormTelInput,
       componentProps: {
         modelValue: props.form.phone,
-        name: 'phone',
-        type: 'text'
+        name: 'phone'
       },
       class: ''
     },
     {
       label: t('client-list-appointment'),
+      component: FormDatepicker,
       componentProps: {
         modelValue: props.form.date,
         name: 'date',
@@ -73,7 +81,7 @@ const inputs = computed<IInput[]>(() => {
       label: t('client-list-company-name'),
       componentProps: {
         modelValue: props.form.other,
-        name: 'other',
+        name: 'text',
         type: 'text'
       },
       class: ''
@@ -88,6 +96,17 @@ const inputs = computed<IInput[]>(() => {
       class: 'col-span-2'
     }
   ]
+})
+const panelOptions = computed(() => {
+  return {
+    enter: 'ease-in-out duration-500',
+    enterFrom: 'opacity-0 -mr-16',
+    enterTo: 'opacity-100',
+    entered: 'opacity-100',
+    leave: 'ease-in-out duration-[400ms]',
+    leaveFrom: 'opacity-100',
+    leaveTo: 'opacity-0 -mr-16'
+  }
 })
 
 const getComponent = (input: IInput) => {
@@ -116,7 +135,10 @@ const handleBlur = (key: string, value: string) => {
 
 <template>
   <Dialog :open="open" @close="handleClose">
-    <Dialog.Panel class="-mt-16 mr-0 h-screen sm:w-[720px]">
+    <Dialog.Panel
+      class="mr-0 h-screen rounded-br-none rounded-tr-none sm:w-[720px]"
+      :options="panelOptions"
+    >
       <Dialog.Description class="relative">
         <div class="absolute right-4 top-4 flex justify-end">
           <img
@@ -126,11 +148,14 @@ const handleBlur = (key: string, value: string) => {
           />
         </div>
         <div>
-          <Avatar
-            :name="form.nickname"
-            :avatar="form.avatar"
-            class="h-[60px] w-[60px]"
-          />
+          <div class="flex items-center">
+            <Avatar
+              :name="form.nickname"
+              :avatar="form.avatar"
+              class="h-[60px] w-[60px]"
+            />
+            <p class="ml-4 text-base font-bold">{{ form.nickname }}</p>
+          </div>
           <section class="mb-4 mt-4 grid grid-cols-2 gap-4">
             <div
               v-for="input in inputs"

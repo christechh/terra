@@ -6,7 +6,7 @@ import Lucide from '../../../base-components/Lucide'
 // import Button from "../../../base-components/Button";
 import { useNotificationsStore } from '../../../stores/notifications'
 import { NotificationElement } from '../../../base-components/Notification'
-import Notification from '../../..//base-components/Notification'
+import Notification from '../../../base-components/Notification'
 import Alert from '../../../base-components/Alert'
 
 const notificationsStore = useNotificationsStore()
@@ -109,6 +109,6 @@ watch(
 .toastify-center {
   left: 50% !important;
   right: auto !important;
-  transform: translateX();
+  transform: translateX(-50%) !important;
 }
 </style>
