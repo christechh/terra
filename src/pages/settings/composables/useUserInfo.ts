@@ -42,9 +42,11 @@ export default function useUserInfo() {
       const { data } = res.data.data
       Object.assign(userInfo, data)
       const ast = new AsYouType()
-      ast.input(userInfo.notify_phone)
-      phoneCode.value = `+${ast.getCallingCode() as string}`
-      userInfo.notify_phone = ast.getNationalNumber()
+      if (userInfo.notify_type === 10) {
+        ast.input(userInfo.notify_phone)
+        phoneCode.value = `+${ast.getCallingCode() as string}`
+        userInfo.notify_phone = ast.getNationalNumber()
+      }
     })
   }
 

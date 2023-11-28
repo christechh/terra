@@ -120,16 +120,16 @@ onMounted(() => {
         </template>
       </div>
     </div>
-    <CreateSubAccountModal
-      v-if="showCreateSubAccountModal"
-      @close="showCreateSubAccountModal = false"
-      :sub-account="selectedSubAccount"
-      :idx="selectedSubAccountIndex"
-    />
-    <ConfirmSubAccountLimitModal
-      v-if="showSubAccountLimitAlert"
-      @close="showSubAccountLimitAlert = false"
-      :limit="userInfo.sub_accounts_limit"
-    />
   </div>
+  <CreateSubAccountModal
+    v-if="showCreateSubAccountModal"
+    @close="showCreateSubAccountModal = false"
+    :sub-account="selectedSubAccount"
+    :idx="selectedSubAccountIndex"
+  />
+  <ConfirmSubAccountLimitModal
+    v-if="showSubAccountLimitAlert"
+    @close="showSubAccountLimitAlert = false"
+    :limit="userInfo.sub_accounts_limit"
+  />
 </template>
