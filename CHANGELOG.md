@@ -1,3 +1,11 @@
+## [1.6.4](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.3...v1.6.4) (2023-11-28)
+
+
+### Bug Fixes
+
+* create modal not work ([aad05ef](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/aad05ef949eec650ad809adc8d0a416edaea075a))
+* fix console error ([62d7ff8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/62d7ff87489314ff588f8a8030bdbb2fe3d497e8))
+
 ## [1.6.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.2...v1.6.3) (2023-11-28)
 
 
