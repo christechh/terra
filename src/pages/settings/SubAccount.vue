@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import noSubAccount from '../../assets/images/no-subAccount.png'
 import Button from '../../base-components/Button'
 import Lucide from '../../base-components/Lucide'
 import ConfirmSubAccountLimitModal from '../../components/Modals/ConfirmSubAccountLimitModal'
@@ -20,7 +21,7 @@ const selectedSubAccount: any = computed(
 
 const creatOredit = (idx?: number) => {
   if (!idx && userInfo.sub_accounts_count >= userInfo.sub_accounts_limit) {
-    return
+    return (showSubAccountLimitAlert.value = true)
   }
   selectedSubAccountIndex.value = -1
   if (idx !== undefined) {
@@ -35,7 +36,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="">
+  <div v-if="!accounts.length" class="text-center">
+    <img :src="noSubAccount" class="mx-auto block" width="50" />
+    <div class="mt-4 text-center">{{ $t('sub-account-empty-desc') }}</div>
+    <Button
+      variant="primary"
+      class="mx-auto mt-5 h-10 whitespace-nowrap"
+      @click="() => creatOredit()"
+      ><Lucide icon="Plus" />{{ $t('sub-account-add-btn-text') }}</Button
+    >
+  </div>
+  <div v-else class="">
     <div
       class="flex items-center justify-between rounded-t-xl bg-white p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
     >
@@ -50,8 +61,9 @@ onMounted(() => {
         ><Lucide icon="Plus" />{{ $t('sub-account-add-btn-text') }}</Button
       >
     </div>
+
     <div class="mt-1 rounded-b-xl bg-white p-4 dark:bg-darkmode-600">
-      <div class="grid grid-cols-8 gap-y-5 text-center">
+      <div class="grid grid-cols-8 gap-y-3 text-center">
         <b class="border-b-2 border-solid border-[#e2e8f0] pb-2">{{
           $t('sub-account-table-no')
         }}</b>
@@ -68,17 +80,30 @@ onMounted(() => {
           $t('sub-account-table-action')
         }}</b>
         <template v-for="(account, key) in accounts" :key="account.id">
-          <span>{{ key + 1 }}</span>
-          <span class="col-span-2">{{ account.name }}</span>
-          <span class="col-span-2">{{ account.account }}</span>
-          <span class="col-span-2">{{
-            account.notifyOpen
-              ? account.notifyType === 20
-                ? $t('sub-account-email-notify')
-                : $t('sub-account-messenger')
-              : $t('sub-account-no-notify')
+          <span class="border-b-2 border-solid border-[#e2e8f0] pb-2">{{
+            key + 1
           }}</span>
-          <div class="flex items-center justify-center">
+          <span
+            class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2"
+            >{{ account.name }}</span
+          >
+          <span
+            class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2"
+            >{{ account.account }}</span
+          >
+          <span
+            class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2"
+            >{{
+              account.notifyOpen
+                ? account.notifyType === 20
+                  ? $t('sub-account-email-notify')
+                  : $t('sub-account-messenger')
+                : $t('sub-account-no-notify')
+            }}</span
+          >
+          <div
+            class="flex items-center justify-center border-b-2 border-solid border-[#e2e8f0] pb-2"
+          >
             <Lucide
               :size="20"
               class="cursor-pointer"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import countryCodes, { CountryProperty } from 'country-codes-list'
 import * as FlagIcon from 'country-flag-icons/string/3x2'
-import { computed, ref, onBeforeUnmount } from 'vue'
+import { computed, onBeforeUnmount, ref } from 'vue'
 import Lucide from '../../base-components/Lucide'
 
 interface Props {
