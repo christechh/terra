@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import noSubAccount from '../../assets/images/no-subAccount.png'
 import Button from '../../base-components/Button'
 import Lucide from '../../base-components/Lucide'
@@ -20,7 +20,12 @@ const selectedSubAccount: any = computed(
 )
 
 const creatOredit = (idx?: number) => {
-  if (!idx && userInfo.sub_accounts_count >= userInfo.sub_accounts_limit) {
+  if (
+    !idx &&
+    idx !== 0 &&
+    userInfo.sub_accounts_limit !== 0 &&
+    userInfo.sub_accounts_count >= userInfo.sub_accounts_limit
+  ) {
     return (showSubAccountLimitAlert.value = true)
   }
   selectedSubAccountIndex.value = -1
@@ -31,6 +36,10 @@ const creatOredit = (idx?: number) => {
 }
 
 onMounted(() => {
+  getUserInfo()
+})
+
+watch(accounts, () => {
   getUserInfo()
 })
 </script>
@@ -63,36 +72,62 @@ onMounted(() => {
     </div>
 
     <div class="mt-1 rounded-b-xl bg-white p-4 dark:bg-darkmode-600">
-      <div class="grid grid-cols-8 gap-y-3 text-center">
-        <b class="border-b-2 border-solid border-[#e2e8f0] pb-2">{{
-          $t('sub-account-table-no')
-        }}</b>
-        <b class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2">{{
-          $t('sub-account-name')
-        }}</b>
-        <b class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2">{{
-          $t('sub-account-login-label')
-        }}</b>
-        <b class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2">{{
-          $t('sub-account-notify-setting')
-        }}</b>
-        <b class="border-b-2 border-solid border-[#e2e8f0] pb-2">{{
-          $t('sub-account-table-action')
-        }}</b>
+      <div class="grid grid-cols-8 text-center">
+        <b
+          class="flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('sub-account-table-no') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('sub-account-name') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('sub-account-login-label') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('sub-account-notify-setting') }}</b
+        >
+        <b
+          class="flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('sub-account-table-action') }}</b
+        >
         <template v-for="(account, key) in accounts" :key="account.id">
-          <span class="border-b-2 border-solid border-[#e2e8f0] pb-2">{{
-            key + 1
-          }}</span>
           <span
-            class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2"
+            class="flex h-[60px] items-center"
+            :class="
+              key === accounts.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
+            >{{ key + 1 }}</span
+          >
+          <span
+            class="col-span-2 flex h-[60px] items-center"
+            :class="
+              key === accounts.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{ account.name }}</span
           >
           <span
-            class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2"
+            class="col-span-2 flex h-[60px] items-center"
+            :class="
+              key === accounts.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{ account.account }}</span
           >
           <span
-            class="col-span-2 border-b-2 border-solid border-[#e2e8f0] pb-2"
+            class="col-span-2 flex h-[60px] items-center"
+            :class="
+              key === accounts.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{
               account.notifyOpen
                 ? account.notifyType === 20
@@ -102,7 +137,12 @@ onMounted(() => {
             }}</span
           >
           <div
-            class="flex items-center justify-center border-b-2 border-solid border-[#e2e8f0] pb-2"
+            class="flex items-center justify-center"
+            :class="
+              key === accounts.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
           >
             <Lucide
               :size="20"
