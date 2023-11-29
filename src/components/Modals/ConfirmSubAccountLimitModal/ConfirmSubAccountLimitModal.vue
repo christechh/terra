@@ -23,7 +23,7 @@ const props = defineProps({
             planSubaccountLimit: props.limit
           })
         }}</span>
-        <a href="/customersupport" class="text-blue-500"
+        <a href="/customersupport" target="_blank" class="text-blue-500"
           >{{ $t('paymnet_upgrade391') }}.</a
         >
       </div>
