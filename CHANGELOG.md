@@ -1,3 +1,10 @@
+## [1.7.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.7.1...v1.7.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* open support with blank tab ([2af36dc](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/2af36dcec279550a3686f13cd21176210514c327))
+
 ## [1.7.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.7.0...v1.7.1) (2023-11-29)
 
 
