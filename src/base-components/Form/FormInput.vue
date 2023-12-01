@@ -9,7 +9,6 @@ import {
   defineProps,
   defineEmits
 } from 'vue'
-import Lucide from '../Lucide/Lucide.vue'
 import { ProvideFormInline } from './FormInline.vue'
 import { ProvideInputGroup } from './InputGroup/InputGroup.vue'
 defineOptions({
@@ -20,6 +19,7 @@ interface FormInputProps extends /* @vue-ignore */ InputHTMLAttributes {
   formInputSize?: 'sm' | 'lg'
   rounded?: boolean
   clearable?: boolean
+  inputClass?: string
 }
 
 interface FormInputEmit {
@@ -45,7 +45,7 @@ const computedClass = computed(() =>
     formInline && 'flex-1',
     inputGroup && 'rounded-none first:rounded-l last:rounded-r z-10',
     props.clearable && 'pr-7',
-    typeof attrs.class === 'string' && attrs.class
+    typeof props.inputClass === 'string' && props.inputClass
   ])
 )
 
@@ -62,7 +62,10 @@ const localValue = computed({
 </script>
 
 <template>
-  <div class="relative flex">
+  <div
+    class="relative flex w-full"
+    :class="typeof attrs.class === 'string' && attrs.class"
+  >
     <slot name="prefix" />
     <input
       :class="computedClass"
@@ -71,11 +74,25 @@ const localValue = computed({
       v-model="localValue"
       @change="emit('change')"
     />
-    <Lucide
+    <div
       v-if="clearable && localValue"
-      icon="XCircle"
-      class="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 cursor-pointer text-desc_font"
       @click="localValue = ''"
-    />
+      class="absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 cursor-pointer text-desc_font"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        fill="currentColor"
+        aria-hidden="true"
+        class="dp__icon dp__clear_icon dp__input_icons"
+      >
+        <path
+          d="M23.057 7.057l-16 16c-0.52 0.52-0.52 1.365 0 1.885s1.365 0.52 1.885 0l16-16c0.52-0.52 0.52-1.365 0-1.885s-1.365-0.52-1.885 0z"
+        ></path>
+        <path
+          d="M7.057 8.943l16 16c0.52 0.52 1.365 0.52 1.885 0s0.52-1.365 0-1.885l-16-16c-0.52-0.52-1.365-0.52-1.885 0s-0.52 1.365 0 1.885z"
+        ></path>
+      </svg>
+    </div>
   </div>
 </template>

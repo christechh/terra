@@ -31,6 +31,14 @@ const routes = [
         }
       },
       {
+        path: 'enterpoint_advanced',
+        name: 'enterpoint-advanced',
+        component: () => import('@/pages/LinkDetail/AdvancedSettingPage.vue'),
+        meta: {
+          title: i18n.global.t('menu-enterpoint3')
+        }
+      },
+      {
         path: 'enterpoint_customer',
         name: 'enterpoint-customer',
         component: () => import('@/pages/LinkDetail/CustomerPage.vue'),

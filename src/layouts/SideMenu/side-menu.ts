@@ -87,7 +87,8 @@ const nestedMenu = (menu: Array<Menu | 'divider'>, route: Route) => {
 const linkDetailRoutes = [
   'enterpoint-root',
   'enterpoint-customer',
-  'enterpoint-setting'
+  'enterpoint-setting',
+  'enterpoint-advanced'
 ]
 
 /**

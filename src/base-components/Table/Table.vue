@@ -41,7 +41,7 @@ const attrs = useAttrs()
 
 const computedClass = computed(() =>
   twMerge([
-    'w-full text-left',
+    'w-full text-left c-table',
     dark && 'bg-dark text-white dark:bg-black/30',
     typeof attrs.class === 'string' && attrs.class
   ])
@@ -64,3 +64,9 @@ provide<ProvideTable>('table', {
     <slot></slot>
   </table>
 </template>
+
+<style>
+.c-table tr:last-child td {
+  border-bottom: none !important;
+}
+</style>
