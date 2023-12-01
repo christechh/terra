@@ -1053,7 +1053,7 @@
   "sub-account-table-phone": "手機號碼",
   "sub-account-table-type": "訊息通知方式",
   "sub-account-table-action": "動作",
-  "sub-account-plan-limit-msg": "您的方案內容僅包含 [planSubaccountLimit] 個子帳號，若想新增更多子帳號，請",
+  "sub-account-plan-limit-msg": "您的方案內容僅包含 {planSubaccountLimit} 個子帳號，若想新增更多子帳號，請",
   "sub-account-plan-limit-contact": "<a style=\"color:#02B13F;font-weight: normal;\" href=\"https://pinchat.me/customersupport\" target=\"_blank\">聯繫我們</a>。",
   "api-message": "更新成功",
   "api-message1": "建立成功",

@@ -1,3 +1,46 @@
+## [1.7.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.7.1...v1.7.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* open support with blank tab ([2af36dc](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/2af36dcec279550a3686f13cd21176210514c327))
+
+## [1.7.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.7.0...v1.7.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* [#3](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/3)#note_55212 ([984a8fb](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/984a8fbf847bdc16b9257bc3a3443dad3fd8fc3e)), closes [#note_55212](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/note_55212)
+
+# [1.7.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.4...v1.7.0) (2023-11-28)
+
+
+### Features
+
+* [#2](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/2) ([64ac587](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/64ac587010bf54804430e32cf701aff7bbe1d8da))
+
+## [1.6.4](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.3...v1.6.4) (2023-11-28)
+
+
+### Bug Fixes
+
+* create modal not work ([aad05ef](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/aad05ef949eec650ad809adc8d0a416edaea075a))
+* fix console error ([62d7ff8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/62d7ff87489314ff588f8a8030bdbb2fe3d497e8))
+
+## [1.6.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.2...v1.6.3) (2023-11-28)
+
+
+### Bug Fixes
+
+* adjsut ui and fix country picker ([c887a49](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/c887a498a2b51861482650f8cf582c2f66aba124))
+
+## [1.6.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.1...v1.6.2) (2023-11-27)
+
+
+### Bug Fixes
+
+* adjsut ([d4f5734](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/d4f5734ba36b1d9581934bbac192bf9269d3c262))
+
 ## [1.6.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.6.0...v1.6.1) (2023-11-23)
 
 

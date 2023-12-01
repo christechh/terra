@@ -1053,7 +1053,7 @@
   "sub-account-table-phone": "Phone number",
   "sub-account-table-type": "Notification",
   "sub-account-table-action": "Action",
-  "sub-account-plan-limit-msg": "Your plan only includes [planSubaccountLimit] sub-accounts. If you want to add more sub-accounts, please ",
+  "sub-account-plan-limit-msg": "Your plan only includes {planSubaccountLimit} sub-accounts. If you want to add more sub-accounts, please ",
   "sub-account-plan-limit-contact": "<a style=\"color:#02B13F;font-weight: normal;\" href=\"https://pinchat.me/customersupport\" target=\"_blank\">contact us</a>.",
   "sub-account-notify-switch": "Turn on notification",
   "api-message": "Update completed",
