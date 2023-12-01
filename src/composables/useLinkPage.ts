@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import axios from '../axios'
 
 export const useLinkPage = () => {
   const route = useRoute()
@@ -13,9 +14,21 @@ export const useLinkPage = () => {
     return route.meta.title
   })
 
+  const fetchConfig = async () => {
+    try {
+      const response = await axios.get(
+        `/chat/enterpoints/config/${token.value}`
+      )
+      return response?.data?.data?.data
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+
   return {
     token,
     routeTitle,
-    linkDetailBaseSetting
+    linkDetailBaseSetting,
+    fetchConfig
   }
 }
