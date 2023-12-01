@@ -1,0 +1,141 @@
+<script setup lang="ts">
+import { computed, ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+import axios from '../../../../axios'
+import CButton from '../../../../base-components/Button'
+import Steps from '../../../../components/Steps/index.vue'
+import WidgetSelectType from './WidgetSelectType.vue'
+import WidgetCustomTheme from './WidgetCustomTheme/index.vue'
+import WidgetCopyScript from './WidgetCopyScript.vue'
+import { useLinkPage } from '../../../../composables/useLinkPage'
+import { useNotificationsStore } from '../../../../stores/notifications'
+
+export type WidgetType = 'circle' | 'rectangle' | 'rectangle_left' | 'full'
+export interface IForm {
+  widgetType: WidgetType
+  buttonColor: string
+  buttonImageUrl?: string
+  buttonText: string
+  buttonTextColor?: string
+}
+interface IConfig {
+  id: number
+  chatToken: string
+  name: string
+  widget_type: WidgetType
+  float_button_color: string
+  widget_logo?: string
+  float_button_text: string
+  float_button_text_color?: string
+}
+export type IFormKey = keyof IForm
+
+const { t } = useI18n()
+const { token } = useLinkPage()
+const notificationsStore = useNotificationsStore()
+
+const form = ref<IForm>({
+  widgetType: 'circle',
+  buttonColor: '#02b13f',
+  buttonText: t('contact_us_text'),
+  buttonTextColor: '#ffffff'
+})
+const config = ref<IConfig>()
+const steps = computed(() => {
+  return [
+    {
+      title: t('widget-select-type'),
+      component: WidgetSelectType,
+      componentProps: {
+        form: form.value,
+        updateForm
+      }
+    },
+    {
+      title: t('widget-custom-theme'),
+      component: WidgetCustomTheme,
+      componentProps: {
+        form: form.value,
+        updateForm
+      }
+    },
+    {
+      title: t('widget-copy-script'),
+      component: WidgetCopyScript
+    }
+  ]
+})
+
+const updateForm = (key: IFormKey, value: string | WidgetType) => {
+  if (key === 'widgetType') {
+    form.value.widgetType = value as WidgetType
+    return
+  }
+
+  form.value[key] = value
+}
+const fetchConfig = async () => {
+  try {
+    const response = await axios.get(`/chat/enterpoints/config/${token.value}`)
+    config.value = response?.data?.data?.data
+
+    form.value = {
+      widgetType: config.value?.widget_type || 'circle',
+      buttonColor: config.value?.float_button_color || '#02b13f',
+      buttonImageUrl: config.value?.widget_logo,
+      buttonTextColor: config.value?.float_button_text_color || '#ffffff',
+      buttonText: config.value?.float_button_text || t('contact_us_text')
+    }
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+const submitConfig = async () => {
+  try {
+    await axios.post('/dashboard/enterpoint', {
+      id: config.value?.id,
+      token: token.value,
+      name: config.value?.name,
+      widget_type: form.value.widgetType,
+      float_button_color: form.value.buttonColor,
+      float_button_text_color: form.value.buttonTextColor,
+      float_button_text: form.value.buttonText,
+      widget_logo: form.value.buttonImageUrl,
+      is_valid: true
+    })
+    notificationsStore.showSuccess({
+      title: t('api-message')
+    })
+  } catch (error) {
+    console.log('error', error)
+  }
+}
+
+onMounted(() => {
+  fetchConfig()
+})
+</script>
+
+<template>
+  <div>
+    <div
+      class="flex flex-col items-center border-b border-gray-200 p-5 sm:flex-row"
+    >
+      <h2 class="mr-auto text-base font-semibold">
+        {{ $t('edit-float-button') }}
+      </h2>
+      <div class="ml-auto mt-0 flex w-auto items-center">
+        <CButton
+          variant="primary"
+          class="w-24 text-white disabled:opacity-50"
+          @click="submitConfig"
+          >{{ $t('save-btn') }}</CButton
+        >
+      </div>
+    </div>
+    <div class="p-5">
+      <Steps :items="steps" />
+    </div>
+  </div>
+</template>

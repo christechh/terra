@@ -20,6 +20,7 @@ const DesignTemplate = {
     input_bg: '#F6F6F6',
     font: '#2D3748',
     desc_font: '#939393',
+    text_dark: '#3c3c3c',
     placeholder_font: '#000000' // opactiy 25%
   },
   dark: {
@@ -38,6 +39,7 @@ const DesignTemplate = {
     input_bg: '#1D2539',
     font: '#FFFFFF', // opactiy 87%
     desc_font: '#939393',
+    text_dark: '#3c3c3c',
     placeholder_font: '#000000' // opactiy 25%
   }
 }

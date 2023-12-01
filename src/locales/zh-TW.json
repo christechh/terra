@@ -1504,6 +1504,7 @@
   "widget-preview": "用戶預覽",
   "widget-copy-script": "複製程式碼",
   "widget-header-desc": "三步驟即可讓用戶使用在你的網站登入的會員名稱加入聊天",
+  "widget-copy-new-script": "試用新版聊天室介面",
   "widget-body-desc": "在第一步驟設定完網域後，請將第二三步驟資訊提供給您的工程人員",
   "widget-step1-title": "請設定你要將此網頁插件放在哪個網域之下",
   "widget-step2-title": "使用此 Secret ，且 JWT Header 使用 HS256 演算法加密，生成 JWT Token",
