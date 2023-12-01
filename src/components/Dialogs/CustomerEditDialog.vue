@@ -128,16 +128,16 @@ const handleBlur = (key: string, value: string) => {
       type: key
     }
   })
-  .then(() => {
-    emit('update', {
-      roomId: props.form.chat_room_id,
-      key,
-      value
+    .then(() => {
+      emit('update', {
+        roomId: props.form.chat_room_id,
+        key,
+        value
+      })
     })
-  })
-  .catch(() => {
-    // TODO: handle error
-  })
+    .catch(() => {
+      // TODO: handle error
+    })
 }
 </script>
 
