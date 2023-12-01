@@ -1,3 +1,10 @@
+# [1.8.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.7.2...v1.8.0) (2023-12-01)
+
+
+### Features
+
+* 網頁插件、clientlist修改 ([94b73b7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/94b73b7927e145e2ede28baa72a127eb8c167615))
+
 ## [1.7.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.7.1...v1.7.2) (2023-11-29)
 
 
