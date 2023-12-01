@@ -45,6 +45,8 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
     return page.value >= lastPage.value && lastPage.value !== -1
   })
 
+  type TKeys = keyof T | 'id'
+
   const fetch = async () => {
     try {
       loading.value = true
@@ -79,6 +81,21 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
     }
 
     return list
+  }
+  const updateItem = (item: any, key: TKeys = 'id') => {
+    const index = list.value.findIndex(
+      (i) => (i as any)[key] === (item as any)[key]
+    )
+    if (index !== -1) {
+      console.log('new data', {
+        ...list.value[index],
+        ...item
+      })
+      list.value[index] = {
+        ...list.value[index],
+        ...item
+      }
+    }
   }
   const toPage = async (val?: number) => {
     // If no next page
@@ -138,6 +155,7 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
 
   return {
     list,
+    updateItem,
     page,
     perPage,
     total,

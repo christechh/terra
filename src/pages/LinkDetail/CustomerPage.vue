@@ -21,7 +21,13 @@ interface ITag {
   color: string
   text: string
 }
+interface IUpdateData {
+  roomId: string
+  key: ICustomerKeys
+  value: string
+}
 export interface ICustomer {
+  token: string
   chat_room_id: string
   avatar: string
   email: string
@@ -34,6 +40,8 @@ export interface ICustomer {
   sent_at: string
   tags: ITag[]
 }
+// get ICustomer keys
+type ICustomerKeys = keyof ICustomer
 
 const { t } = useI18n()
 const route = useRoute()
@@ -58,22 +66,25 @@ const itemClass = computed(() => {
   return 'flex h-[40px] w-[40px] items-center justify-center rounded-full bg-light_yellow [&.active]:bg-light_yellow'
 })
 
-const { list, pageLoading, setQuery, toPage } = useTable<ICustomer>({
-  url: `/chat/enterpoints/customer/${token.value}`,
-  query: {
-    token: route.query.token as string
-  },
-  listTransformer: (list) => {
-    return list.map((item) => {
-      return {
-        ...item,
-        joined_at:
-          item.joined_at && formatDate(item.joined_at, 'YYYY-MM-DD HH:mm:ss'),
-        sent_at: item.sent_at && formatDate(item.sent_at, 'YYYY-MM-DD HH:mm:ss')
-      }
-    })
+const { list, pageLoading, setQuery, toPage, updateItem } = useTable<ICustomer>(
+  {
+    url: `/chat/enterpoints/customer/${token.value}`,
+    query: {
+      token: route.query.token as string
+    },
+    listTransformer: (list) => {
+      return list.map((item) => {
+        return {
+          ...item,
+          joined_at:
+            item.joined_at && formatDate(item.joined_at, 'YYYY-MM-DD HH:mm:ss'),
+          sent_at:
+            item.sent_at && formatDate(item.sent_at, 'YYYY-MM-DD HH:mm:ss')
+        }
+      })
+    }
   }
-})
+)
 const isEmpty = computed(() => {
   return list.value.length === 0
 })
@@ -147,9 +158,16 @@ const handleCloseExportDialog = () => {
 }
 const handleCloseCustomerEditDialog = () => {
   customerEditForm.value = undefined
-  toPage()
 }
-
+const handleUpdateCustomer = (updatedData: IUpdateData) => {
+  updateItem(
+    {
+      chat_room_id: updatedData.roomId,
+      [updatedData.key]: updatedData.value
+    },
+    'chat_room_id'
+  )
+}
 const handleSearchDebounce = debounce(() => {
   setQuery({
     keyword: form.keyword
@@ -448,6 +466,7 @@ watch(
         :open="showCustomerEditDialog"
         :form="customerEditForm"
         @close="handleCloseCustomerEditDialog"
+        @update="handleUpdateCustomer"
       />
     </div>
   </section>
