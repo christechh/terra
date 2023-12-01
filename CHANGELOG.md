@@ -1,3 +1,15 @@
+# [1.9.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.8.0...v1.9.0) (2023-12-01)
+
+
+### Bug Fixes
+
+* 移除舊link，動態token ([2c6a80e](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/2c6a80e1d94ea7ea735c84b5b5aeeeef2270728f))
+
+
+### Features
+
+* 優化剛進頁面時user體驗 ([528e678](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/528e678e52f41845410aac2ec738e08104f9e91a))
+
 # [1.8.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.7.2...v1.8.0) (2023-12-01)
 
 
