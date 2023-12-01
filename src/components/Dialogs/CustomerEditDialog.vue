@@ -39,7 +39,7 @@ const props = defineProps({
     default: () => ({})
   }
 })
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'update'])
 
 const { t } = useI18n()
 const route = useRoute()
@@ -127,7 +127,15 @@ const handleBlur = (key: string, value: string) => {
       token: token.value,
       type: key
     }
-  }).catch(() => {
+  })
+  .then(() => {
+    emit('update', {
+      roomId: props.form.chat_room_id,
+      key,
+      value
+    })
+  })
+  .catch(() => {
     // TODO: handle error
   })
 }
