@@ -1,3 +1,10 @@
+## [1.9.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.9.0...v1.9.1) (2023-12-01)
+
+
+### Bug Fixes
+
+* CICD format ([9deea3e](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/9deea3eb5d3da6fda6834d03c822feda7c0213c4))
+
 # [1.9.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.8.0...v1.9.0) (2023-12-01)
 
 
