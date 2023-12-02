@@ -2109,10 +2109,9 @@
   "facebook-url": "https://www.facebook.com/pinchat.global",
   "instagram-url": "http://instagram.com/pinchat.global",
   "company-intro": "Company Overview",
-  "company-intro-detail": "Inspiree every corner of the world by providing better communication and engagement.",
+  "company-intro-detail": "Become an instant messaging application and technology development software company serving global users.",
   "company-vission": "Vission",
   "company-vission-detail": "Become an instant messaging application and technology development software company serving global users.",
-  "company-intro-detail": "Become an instant messaging application and technology development software company serving global users.",
   "company-mission": "Mission",
   "company-value": "Core Value",
   "company-abstract": "PinChat Inc., founded in 2020, is a software company providing messenger services. PinChat aims to provide a simpler way to make user connection and engagement easier in each scenario.<br/><br/>Over the past ten years, an increasing percentage of users have begun to use instant messaging software for workplace communication instead of just personal use, which resulted in a mix of workplace and personal messages, including text and files. However, the traditional IM has been unable to facilitate users to switch between private and work/business scenarios smoothly, making it difficult for users to manage conversations with others.<br/><br/>In addition, today’s IM software and social networking service (SNS) have been tied together. Once you add friends and start a chat with people you aren’t familiar with, your data, such as photos, names, videos, etc., are also exposed on these social platforms.<br/><br/>We realized this problem and built PinChat.",
@@ -2597,5 +2596,6 @@
   "helpdesk-feature-item3-title": "Live customer service",
   "helpdesk-feature-item3-content": "If customers encounter issues that cannot be resolved by the FAQ or require further consultation, they can be seamlessly transferred to a live agent service.",
   "helpdesk-feature-item4-title": "Collect customer lists and information",
-  "helpdesk-feature-item4-content": "Send messages in the chat room to collect customer information such as email and phone numbers, and quickly create customer profiles."
+  "helpdesk-feature-item4-content": "Send messages in the chat room to collect customer information such as email and phone numbers, and quickly create customer profiles.",
+  "connent-info": "Link information"
 }

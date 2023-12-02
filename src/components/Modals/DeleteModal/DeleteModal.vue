@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from '../../../axios'
 import Button from '../../../base-components/Button'
 import { Dialog } from '../../../base-components/Headless'
@@ -8,6 +9,7 @@ import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useSubAccountStore } from '../../../stores/sub-account'
 const deleteModalStore = useDeleteModalStore()
+const router = useRouter()
 
 const status = computed(() => deleteModalStore.status)
 const title = computed(() => deleteModalStore.title)
@@ -27,6 +29,13 @@ const deleteExec = async () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       useSubAccountStore().deleteSubAccount((deleteData as any).id)
       break
+    case 'chatLink': {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { token, id } = deleteData as any
+      await axios.post('/dashboard/enterpoint', { id, token, is_valid: false })
+      router.push('/dashboard')
+      break
+    }
     case 'course':
       break
   }

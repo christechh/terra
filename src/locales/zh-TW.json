@@ -2110,10 +2110,9 @@
   "facebook-url": "https://www.facebook.com/pinchat.tw",
   "instagram-url": "https://www.instagram.com/pinchat.me",
   "company-intro": "Company Overview",
-  "company-intro-detail": "Inspiree every corner of the world by providing better communication and engagement.",
+  "company-intro-detail": "Become an instant messaging application and technology development software company serving global users.",
   "company-vission": "Vission",
   "company-vission-detail": "Become an instant messaging application and technology development software company serving global users.",
-  "company-intro-detail": "Become an instant messaging application and technology development software company serving global users.",
   "company-mission": "Mission",
   "company-value": "Core Value",
   "company-abstract": "PinChat Inc., founded in 2020, is a software company providing messenger services. PinChat aims to provide a simpler way to make user connection and engagement easier in each scenario.<br/><br/>Over the past ten years, an increasing percentage of users have begun to use instant messaging software for workplace communication instead of just personal use, which resulted in a mix of workplace and personal messages, including text and files. However, the traditional IM has been unable to facilitate users to switch between private and work/business scenarios smoothly, making it difficult for users to manage conversations with others.<br/><br/>In addition, today’s IM software and social networking service (SNS) have been tied together. Once you add friends and start a chat with people you aren’t familiar with, your data, such as photos, names, videos, etc., are also exposed on these social platforms.<br/><br/>We realized this problem and built PinChat.",
@@ -2599,5 +2598,9 @@
   "helpdesk-feature-item3-title": "真人客服",
   "helpdesk-feature-item3-content": "若客戶遇到的問題 FAQ 無法解決，或需進一步諮詢，可隨時轉接專人服務。",
   "helpdesk-feature-item4-title": "收集客戶名單與資訊",
-  "helpdesk-feature-item4-content": "在聊天室中發送填寫 email、手機號碼等資訊的訊息，收集客戶資訊並快速建檔。"
+  "helpdesk-feature-item4-content": "在聊天室中發送填寫 email、手機號碼等資訊的訊息，收集客戶資訊並快速建檔。",
+  "connent-info": "連結資訊",
+  "chat-link": "聊天連結網址",
+  "delete-chat-link": "刪除聊天連結",
+  "delete-chat-link-tip": "刪除聊天連結後，所有在此連結下的聊天室將無法再被其他聊天室成員存取。您在後台還是可以看到聊天室對話內容，但將無法再與對方互動。"
 }

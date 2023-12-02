@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useUserStore } from '../stores/user'
+import { computed, ref } from 'vue'
 import { useLinkStore } from '../stores/link'
+import { useUserStore } from '../stores/user'
 
 import IconButton from '../components/IconButton/index.vue'
 
@@ -20,7 +20,7 @@ userStore.fetchSetting()
 linkStore.fetchLinks()
 
 const getSettingLink = (link: ILink): string => {
-  return `/dashboard/enterpoint_customer?token=${link.token}&type=direct`
+  return `/dashboard/enterpoint?token=${link.token}&type=direct`
 }
 </script>
 
