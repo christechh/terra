@@ -3,7 +3,6 @@ import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import Breadcrumb from '../../base-components/Breadcrumb'
-import Lucide from '../../base-components/Lucide'
 import { useLinkPage } from '../../composables/useLinkPage'
 import { useDeleteModalStore } from '../../stores/modals/deleteModal'
 
@@ -81,7 +80,6 @@ const deleteHandler = () => {
           </span>
           <div class="flex items-center">
             <span>{{ $t('chatbot-message-action-type') }}</span>
-            <Lucide icon="HelpCircle" width="14" class="ml-1" />
           </div>
           <div class="mt-3 text-[#939393]">
             {{
@@ -97,7 +95,6 @@ const deleteHandler = () => {
           </span>
           <div class="flex items-center">
             <span>{{ $t('chat-link') }}</span>
-            <Lucide icon="HelpCircle" width="14" class="ml-1" />
           </div>
           <div class="mt-3 text-[#939393]">
             {{ chatUrl }}
@@ -111,7 +108,6 @@ const deleteHandler = () => {
           </span>
           <div class="flex items-center">
             <span>{{ $t('delete-chat-link') }}</span>
-            <Lucide icon="HelpCircle" width="14" class="ml-1" />
           </div>
           <div class="mt-3 text-[#939393]">
             {{ $t('delete-chat-link-tip') }}
