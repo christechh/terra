@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useLinkStore } from '../stores/link'
 import { useUserStore } from '../stores/user'
-
+import { useNotificationsStore } from '../stores/notifications'
 import IconButton from '../components/IconButton/index.vue'
+import { useI18n } from 'vue-i18n'
 
 interface ILink {
   id: string
@@ -15,17 +16,37 @@ interface ILink {
 const searchKeyword = ref('')
 const userStore = useUserStore()
 const linkStore = useLinkStore()
-const links = computed((): ILink[] => linkStore.links)
-userStore.fetchSetting()
-linkStore.fetchLinks()
-
+const notificationStore = useNotificationsStore()
+const { t } = useI18n()
+const links = computed((): ILink[] =>
+  linkStore.links.filter((link: { title: string }) =>
+    link.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
+  )
+)
 const getSettingLink = (link: ILink): string => {
   return `/dashboard/enterpoint?token=${link.token}&type=direct`
 }
+const copyToPasteboard = async (text: string) => {
+  const el = document.createElement('textarea')
+  const domain = import.meta.env.VITE_DOMAIN as string
+  el.value = `${domain}/${text}`
+  el.setAttribute('readonly', '')
+  el.style.position = 'absolute'
+  el.style.left = '-9999px'
+  document.body.appendChild(el)
+  el.select()
+  document.execCommand('copy')
+  document.body.removeChild(el)
+  notificationStore.showSuccess({ title: t('copy-notify'), content: '' })
+}
+onMounted(() => {
+  userStore.fetchSetting()
+  linkStore.fetchLinks()
+})
 </script>
 
 <template>
-  <div class="min-h-screen rounded-xl bg-white p-6">
+  <div class="min-h-screen rounded-xl bg-white p-6 dark:bg-darkmode-600">
     <div class="space-y-5">
       <div class="flex flex-wrap gap-3">
         <div class="flex gap-3">
@@ -57,7 +78,7 @@ const getSettingLink = (link: ILink): string => {
         >
           <input
             ref="searchInput"
-            class="rounded-lg border-none bg-gray-100 outline-none"
+            class="rounded-lg border-none bg-gray-100 outline-none focus:border-none focus:ring-0"
             v-model="searchKeyword"
             :placeholder="$t('search')"
           />
@@ -79,20 +100,38 @@ const getSettingLink = (link: ILink): string => {
             class="h-10 w-10 rounded-full"
           />
           <span
-            class="overflow-hidden text-ellipsis whitespace-nowrap font-bold text-gray-800"
+            class="overflow-hidden text-ellipsis whitespace-nowrap font-bold text-gray-800 dark:text-slate-100"
             >{{ link.title }}</span
           >
-          <img width="18" height="18" src="@/assets/images/copy.png" alt="" />
-        </div>
-        <div class="flex items-center space-x-5">
           <img
-            width="20"
-            height="20"
-            src="@/assets/images/qr-code_1.svg"
+            class="cursor-pointer"
+            width="18"
+            height="18"
+            src="@/assets/images/copy.png"
             alt=""
+            @click="copyToPasteboard(link.token)"
           />
-          <img width="20" height="20" src="@/assets/images/chat.png" alt="" />
-          <IconButton :link="getSettingLink(link)" icon="Settings" />
+        </div>
+        <div class="flex items-center">
+          <IconButton class="dark:bg-darkmode-600" :link="getSettingLink(link)">
+            <img
+              width="20"
+              height="20"
+              src="@/assets/images/qr-code_1.svg"
+              alt=""
+            />
+          </IconButton>
+          <IconButton class="dark:bg-darkmode-600" :link="getSettingLink(link)">
+            <img width="20" height="20" src="@/assets/images/chat.png" alt="" />
+          </IconButton>
+          <IconButton class="dark:bg-darkmode-600" :link="getSettingLink(link)">
+            <img
+              width="20"
+              height="20"
+              src="@/assets/images/setting.png"
+              alt=""
+            />
+          </IconButton>
         </div>
       </div>
     </div>
