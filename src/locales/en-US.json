@@ -2597,5 +2597,7 @@
   "helpdesk-feature-item3-content": "If customers encounter issues that cannot be resolved by the FAQ or require further consultation, they can be seamlessly transferred to a live agent service.",
   "helpdesk-feature-item4-title": "Collect customer lists and information",
   "helpdesk-feature-item4-content": "Send messages in the chat room to collect customer information such as email and phone numbers, and quickly create customer profiles.",
-  "connent-info": "Link information"
+  "connent-info": "Link information",
+  "delete-chat-link": "Delete Chat Link",
+  "delete-chat-link-tip": "After deleting the chat link, all chat rooms associated with this link will no longer be accessible to other chat room members. You will still be able to view the conversation in the dashboard, but interaction with the  chatroom members will no longer be possible."
 }
