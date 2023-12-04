@@ -1,3 +1,10 @@
+## [1.11.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.11.0...v1.11.1) (2023-12-04)
+
+
+### Bug Fixes
+
+* 連結設定調整 ([ae1e2b8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/ae1e2b8883cade50b33d60855d28981541882beb))
+
 # [1.11.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.10.0...v1.11.0) (2023-12-03)
 
 
