@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router'
 import { defineProps, defineEmits, PropType, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import Lucide from '../../base-components/Lucide'
 import Dialog from '../../base-components/Headless/Dialog'
 import Avatar from '../Avatar/index.vue'
 import FormInput from '../../base-components/Form/FormInput.vue'
@@ -148,12 +149,11 @@ const handleBlur = (key: string, value: string) => {
       :options="panelOptions"
     >
       <Dialog.Description class="relative">
-        <div class="absolute right-4 top-4 flex justify-end">
-          <img
-            class="export-modal-close cursor-pointer"
-            src="@/assets/images/modal-close.png"
-            @click="handleClose"
-          />
+        <div
+          class="absolute right-4 top-4 flex h-[24px] w-[24px] cursor-pointer justify-end transition duration-200 ease-in-out hover:opacity-50"
+          @click="handleClose"
+        >
+          <Lucide icon="X" />
         </div>
         <div>
           <div class="flex items-center">

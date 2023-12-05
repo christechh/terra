@@ -10,6 +10,7 @@ interface IUseTableParams<T> {
   isStack?: boolean
   perPage?: number
   listTransformer?: (item: T[]) => T[]
+  fetchOnMound?: () => void
 }
 
 interface Response<T> {
@@ -30,9 +31,11 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
   isFetchOnMount = true,
   isStack = false,
   perPage: initPerPage = 10,
-  listTransformer
+  listTransformer,
+  fetchOnMound
 }: IUseTableParams<T>) => {
   const page = ref(1)
+  const isInit = ref(false)
   const lastPage = ref(-1)
   const perPage = ref(initPerPage)
   const total = ref(0)
@@ -73,6 +76,10 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
       /* empty */
     } finally {
       loading.value = false
+      if (isFetchOnMount && fetchOnMound && !isInit.value) {
+        fetchOnMound()
+      }
+      isInit.value = true
     }
   }
   const getList = (list: T[]) => {
@@ -87,10 +94,6 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
       (i) => (i as any)[key] === (item as any)[key]
     )
     if (index !== -1) {
-      console.log('new data', {
-        ...list.value[index],
-        ...item
-      })
       list.value[index] = {
         ...list.value[index],
         ...item

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isEqual } from 'lodash'
 import { computed, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -35,12 +36,14 @@ const { t } = useI18n()
 const { token } = useLinkPage()
 const notificationsStore = useNotificationsStore()
 
+const originForm = ref<IForm>()
 const form = ref<IForm>({
   widgetType: 'circle',
   buttonColor: '#02b13f',
   buttonText: t('contact_us_text'),
   buttonTextColor: '#ffffff'
 })
+const isLoading = ref(true)
 const config = ref<IConfig>()
 const steps = computed(() => {
   return [
@@ -66,6 +69,9 @@ const steps = computed(() => {
     }
   ]
 })
+const isDiffWithOrigin = computed(() => {
+  return !isEqual(originForm.value, form.value)
+})
 
 const updateForm = (key: IFormKey, value: string | WidgetType) => {
   if (key === 'widgetType') {
@@ -77,6 +83,7 @@ const updateForm = (key: IFormKey, value: string | WidgetType) => {
 }
 const fetchConfig = async () => {
   try {
+    isLoading.value = true
     const response = await axios.get(`/chat/enterpoints/config/${token.value}`)
     config.value = response?.data?.data?.data
 
@@ -87,8 +94,11 @@ const fetchConfig = async () => {
       buttonTextColor: config.value?.float_button_text_color || '#ffffff',
       buttonText: config.value?.float_button_text || t('contact_us_text')
     }
+    originForm.value = { ...form.value }
   } catch (error) {
     console.log('error', error)
+  } finally {
+    isLoading.value = false
   }
 }
 const submitConfig = async () => {
@@ -107,6 +117,7 @@ const submitConfig = async () => {
     notificationsStore.showSuccess({
       title: t('api-message')
     })
+    originForm.value = { ...form.value }
   } catch (error) {
     console.log('error', error)
   }
@@ -118,7 +129,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div v-if="!isLoading" class="intro-y">
     <div
       class="flex flex-col items-center border-b border-gray-200 p-5 sm:flex-row"
     >
@@ -129,6 +140,7 @@ onMounted(() => {
         <CButton
           variant="primary"
           class="w-24 text-white disabled:opacity-50"
+          :disabled="!isDiffWithOrigin"
           @click="submitConfig"
           >{{ $t('save-btn') }}</CButton
         >

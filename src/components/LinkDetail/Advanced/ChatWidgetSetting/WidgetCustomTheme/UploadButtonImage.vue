@@ -105,7 +105,7 @@ watch(
               type="file"
               name="widget_logo"
               id="widget_logo"
-              class="absolute left-0 top-0 h-full w-full opacity-0"
+              class="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
               accept="image/png, image/jpeg"
               title=""
               @change="handleUpload"
