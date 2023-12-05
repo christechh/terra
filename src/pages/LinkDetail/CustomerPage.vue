@@ -51,6 +51,8 @@ const form = reactive({
   keyword: ''
 })
 
+const isInit = ref(false)
+const isInitAndEmpty = ref(false)
 const isExporting = ref(false)
 const exportType = ref('')
 const exportEmail = ref('')
@@ -82,6 +84,10 @@ const { list, pageLoading, setQuery, toPage, updateItem } = useTable<ICustomer>(
             item.sent_at && formatDate(item.sent_at, 'YYYY-MM-DD HH:mm:ss')
         }
       })
+    },
+    fetchOnMound: () => {
+      isInitAndEmpty.value = list.value.length === 0
+      isInit.value = true
     }
   }
 )
@@ -168,6 +174,7 @@ const handleUpdateCustomer = (updatedData: IUpdateData) => {
     'chat_room_id'
   )
 }
+
 const handleSearchDebounce = debounce(() => {
   setQuery({
     keyword: form.keyword
@@ -185,10 +192,25 @@ watch(
 
 <template>
   <section>
+    <Breadcrumb class="">
+      <Breadcrumb.Link to="/dashboard">
+        {{ $t('my-pages') }}
+      </Breadcrumb.Link>
+      <Breadcrumb.Link active :to="linkDetailBaseSetting">
+        {{ token }}
+      </Breadcrumb.Link>
+      <Breadcrumb.Link>{{ routeTitle }}</Breadcrumb.Link>
+    </Breadcrumb>
+    <div v-if="pageLoading && !isInit" class="mb-4 mt-12">
+      <div class="flex justify-center">
+        <LoadingIcon icon="three-dots" class="w-[60px]" />
+      </div>
+    </div>
+
     <div
       id="client-share-container"
       class="intro-y mt-2 p-4 text-center"
-      v-if="isEmpty"
+      v-if="isInitAndEmpty"
     >
       <div>
         <img
@@ -203,16 +225,7 @@ watch(
         {{ $t('share-link-wording') }}
       </CButton>
     </div>
-    <div v-else>
-      <Breadcrumb class="">
-        <Breadcrumb.Link to="/dashboard">
-          {{ $t('my-pages') }}
-        </Breadcrumb.Link>
-        <Breadcrumb.Link active :to="linkDetailBaseSetting">
-          {{ token }}
-        </Breadcrumb.Link>
-        <Breadcrumb.Link>{{ routeTitle }}</Breadcrumb.Link>
-      </Breadcrumb>
+    <div v-if="isInit && !isInitAndEmpty">
       <div class="mt-6 rounded-t-lg bg-white p-4">
         <div class="flex justify-between">
           <div>
@@ -245,7 +258,6 @@ watch(
             clearable
             type="text"
             v-model="form.keyword"
-            class="pl-10"
             :placeholder="$t('search')"
           >
             <template #prefix>
@@ -275,7 +287,7 @@ watch(
                 <Table.Th>{{ $t('client-enter-chat') }}</Table.Th>
               </Table.Tr>
             </Table.Thead>
-            <Table.Tbody v-show="!pageLoading">
+            <Table.Tbody v-show="!pageLoading && !isEmpty">
               <TransitionGroup name="list">
                 <Table.Tr
                   v-for="(customer, index) in list"
@@ -287,10 +299,10 @@ watch(
                       :avatar="customer.avatar"
                     />
                     <!-- <div
-                      class="h-[40px] w-[40px] overflow-hidden rounded-full bg-slate-100"
-                    >
-                      <img :src="customer.avatar" />
-                    </div> -->
+                        class="h-[40px] w-[40px] overflow-hidden rounded-full bg-slate-100"
+                      >
+                        <img :src="customer.avatar" />
+                      </div> -->
                   </Table.Td>
                   <Table.Td class="w-[140px] text-center">
                     {{ customer.nickname }}
@@ -346,6 +358,15 @@ watch(
               </TransitionGroup>
             </Table.Tbody>
           </Table>
+          <div
+            v-if="!pageLoading && isEmpty"
+            class="flex flex-col items-center justify-center pb-10 pt-12"
+          >
+            <img src="@/assets/images/empty-img-simple.png" class="h-[40px]" />
+            <div class="mt-4 text-center">
+              {{ $t('data-not-found') }}
+            </div>
+          </div>
         </div>
         <div v-if="pageLoading" class="mb-4 mt-8">
           <div class="flex justify-center">

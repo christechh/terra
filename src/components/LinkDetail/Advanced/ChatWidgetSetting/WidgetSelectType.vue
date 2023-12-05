@@ -78,7 +78,7 @@ watch(
       style="background-color: #f6f6f6; border-radius: 10px; padding: 20px"
     >
       <div
-        class="flex flex-row"
+        class="flex cursor-pointer flex-row"
         v-for="option in options"
         :key="option.value"
         @click="updateValue(option.value)"

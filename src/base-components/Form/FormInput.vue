@@ -6,6 +6,7 @@ import {
   InputHTMLAttributes,
   useAttrs,
   inject,
+  useSlots,
   defineProps,
   defineEmits
 } from 'vue'
@@ -30,10 +31,13 @@ interface FormInputEmit {
 const props = defineProps<FormInputProps>()
 
 const attrs = useAttrs()
+const slots = useSlots()
+console.log('slots', slots)
 
 const formInline = inject<ProvideFormInline>('formInline', false)
 const inputGroup = inject<ProvideInputGroup>('inputGroup', false)
 
+const hasPrefixSlot = computed(() => !!slots.prefix)
 const computedClass = computed(() =>
   twMerge([
     'disabled:bg-[#F6F6F6] disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent disabled:text-[#939393]',
@@ -45,6 +49,7 @@ const computedClass = computed(() =>
     formInline && 'flex-1',
     inputGroup && 'rounded-none first:rounded-l last:rounded-r z-10',
     props.clearable && 'pr-7',
+    hasPrefixSlot.value && 'pl-10',
     typeof props.inputClass === 'string' && props.inputClass
   ])
 )
@@ -66,7 +71,9 @@ const localValue = computed({
     class="relative flex w-full"
     :class="typeof attrs.class === 'string' && attrs.class"
   >
-    <slot name="prefix" />
+    <div class="absolute bottom-0 left-0 top-0 w-10">
+      <slot name="prefix" />
+    </div>
     <input
       :class="computedClass"
       :type="props.type"
