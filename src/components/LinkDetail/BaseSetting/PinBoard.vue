@@ -6,8 +6,8 @@ import {
   Upload
 } from '../../../base-components/Form'
 import FormSwitch from '../../../base-components/Form/FormSwitch'
-import Lucide from '../../../base-components/Lucide'
 import usePinBoard from '../../../composables/LinkDetail/BaseSetting/usePinBoard'
+import ThemePicker from '../../ThemePicker'
 import VerticalSteps from '../../VerticalSteps'
 
 const {
@@ -17,10 +17,8 @@ const {
   nicknamePlaceholder,
   isNicknameRequired,
   logo,
-  isColorExpand,
   localBGImgs,
   removePowerBy,
-  colors,
   theme,
   nicknameFormat,
   welcomeBGType,
@@ -133,33 +131,7 @@ const {
               {{ $t('choose-theme-color') }}
             </div>
             <div class="mt-2 bg-[#F6F6F6] p-5 dark:bg-darkmode-700">
-              <div class="flex items-center justify-between">
-                <div
-                  v-for="color in colors"
-                  :key="color"
-                  :class="`flex h-8 w-8 cursor-pointer items-center justify-center rounded`"
-                  :style="`background-color: ${color}`"
-                  @click="theme = color"
-                >
-                  <Lucide
-                    v-if="theme.toLocaleLowerCase() === color"
-                    icon="Check"
-                    color="white"
-                    width="28"
-                  />
-                </div>
-
-                <button @click="isColorExpand = !isColorExpand">
-                  <Lucide
-                    icon="ChevronDown"
-                    width="20"
-                    class="cursor-pointer transition-all"
-                    :class="{ 'rotate-180': isColorExpand }"
-                  />
-                </button>
-              </div>
-              <div v-if="isColorExpand">
-                <hr class="my-5 px-0" />
+              <ThemePicker v-model="theme">
                 <div>
                   <div class="flex items-center justify-between">
                     {{ $t('edit-welcome-text-color') }}
@@ -174,7 +146,7 @@ const {
                     <input
                       type="color"
                       class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
-                      v-model="floatButtonColor"
+                      v-model="theme"
                     />
                   </div>
                   <div class="mt-3 flex items-center justify-between">
@@ -186,7 +158,7 @@ const {
                     />
                   </div>
                 </div>
-              </div>
+              </ThemePicker>
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="7" class="pb-9">
@@ -265,33 +237,7 @@ const {
           <VerticalSteps.Step :step="2">
             <div class="font-bold">{{ $t('choose-theme-color') }}</div>
             <div class="mt-2 bg-[#F6F6F6] p-5 dark:bg-darkmode-700">
-              <div class="flex items-center justify-between">
-                <div
-                  v-for="color in colors"
-                  :key="color"
-                  :class="`flex h-8 w-8 cursor-pointer items-center justify-center rounded`"
-                  :style="`background-color: ${color}`"
-                  @click="floatButtonColor = color"
-                >
-                  <Lucide
-                    v-if="floatButtonColor.toLocaleLowerCase() === color"
-                    icon="Check"
-                    color="white"
-                    width="28"
-                  />
-                </div>
-
-                <button @click="isColorExpand = !isColorExpand">
-                  <Lucide
-                    icon="ChevronDown"
-                    width="20"
-                    class="cursor-pointer transition-all"
-                    :class="{ 'rotate-180': isColorExpand }"
-                  />
-                </button>
-              </div>
-              <div v-if="isColorExpand">
-                <hr class="my-5 px-0" />
+              <ThemePicker v-model="floatButtonColor">
                 <div>
                   <div class="flex items-center justify-between">
                     {{ $t('welcome-hr-color-input') }}
@@ -318,7 +264,7 @@ const {
                     />
                   </div>
                 </div>
-              </div>
+              </ThemePicker>
             </div>
           </VerticalSteps.Step>
         </VerticalSteps>

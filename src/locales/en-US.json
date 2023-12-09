@@ -2604,5 +2604,9 @@
   "pinboard-welecome-message": "PinBoard welcome message",
   "nickname-setting": "Nickname settings",
   "set-required": "Make required",
-  "nickname-placeholder-text": "Nickname input box description text"
+  "nickname-placeholder-text": "Nickname input box description text",
+  "basic-info": "Basic information",
+  "chat-room-nickname": "Chat room nickname",
+  "chat-room-avatar": "Chat room avatar",
+  "welcome-message-setting": "Welcome message settings"
 }

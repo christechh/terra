@@ -14,17 +14,8 @@ export default function usePinBoard() {
   const isNicknameRequired = ref(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const logo = ref<any[] | null>(null)
-  const isColorExpand = ref(false)
   const localBGImgs = ref<{ data: string }[]>([])
   const removePowerBy = ref(false)
-  const colors = [
-    '#02b13f',
-    '#007abf',
-    '#ffa01a',
-    '#ff85B0',
-    '#cf93e6',
-    '#e0eb76'
-  ]
   const nicknameFormat = ref('')
   const welcomeBGType = ref('image')
   const currentTab = ref(0)
@@ -32,6 +23,16 @@ export default function usePinBoard() {
   const floatButtonColor = ref('')
   const welcomeBG = ref('')
   const additionBtnColor = ref('')
+  const chatHeaderColor = ref('')
+  const chatHeaderTextColor = ref('')
+  const chatBubbleColor = ref('')
+  const chatBubbleBorderColor = ref('')
+  const chatBubbleTextColor = ref('')
+  const title = ref('')
+  const avatar = ref('')
+  const image_id = ref('')
+  const welcome_message = ref('')
+
   const bgList = [
     'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/enterpoint/1f77b4ff50d6279648b27a42ed999826.png',
     'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/enterpoint/dae136ba5563fa48cd4472c9867167e4.png',
@@ -66,6 +67,15 @@ export default function usePinBoard() {
       logo.value = [{ data: data.chat_logo ? data.chat_logo : logoImg }]
       id = data.id
       name = data.name
+      chatHeaderColor.value = data.chat_header_color
+      chatHeaderTextColor.value = data.chat_header_text_color
+      chatBubbleColor.value = data.chat_bubble_color
+      chatBubbleBorderColor.value = data.chat_bubble_border_color
+      chatBubbleTextColor.value = data.chat_bubble_text_color
+      title.value = data.title
+      avatar.value = data.avatar
+      image_id.value = data.image_id
+      welcome_message.value = data.welcome_message
     })
   }
   const save = () => {
@@ -106,10 +116,8 @@ export default function usePinBoard() {
     nicknamePlaceholder,
     isNicknameRequired,
     logo,
-    isColorExpand,
     localBGImgs,
     removePowerBy,
-    colors,
     theme,
     nicknameFormat,
     welcomeBGType,
@@ -119,6 +127,15 @@ export default function usePinBoard() {
     bgList,
     welcomeBG,
     additionBtnColor,
+    chatHeaderColor,
+    chatHeaderTextColor,
+    chatBubbleColor,
+    chatBubbleBorderColor,
+    chatBubbleTextColor,
+    title,
+    avatar,
+    image_id,
+    welcome_message,
     save
   }
 }

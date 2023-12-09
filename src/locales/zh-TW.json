@@ -2607,5 +2607,9 @@
   "pinboard-welecome-message": "PinBoard 歡迎訊息",
   "nickname-setting": "暱稱設定",
   "set-required": "設為必填",
-  "nickname-placeholder-text": "暱稱輸入框說明文字"
+  "nickname-placeholder-text": "暱稱輸入框說明文字",
+  "basic-info": "基本資訊",
+  "chat-room-nickname": "聊天室暱稱",
+  "chat-room-avatar": "聊天室頭像",
+  "welcome-message-setting": "歡迎訊息設定"
 }

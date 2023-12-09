@@ -2605,5 +2605,9 @@
   "pinboard-welecome-message": "ピンボードのウェルカムメッセージ",
   "nickname-setting": "ニックネームの設定",
   "set-required": "必須にする",
-  "nickname-placeholder-text": "ニックネーム入力ボックスの説明テキスト"
+  "nickname-placeholder-text": "ニックネーム入力ボックスの説明テキスト",
+  "basic-info": "基本情報",
+  "chat-room-nickname": "チャットルームのニックネーム",
+  "chat-room-avatar": "チャットルームのアバター",
+  "welcome-message-setting": "ウェルカムメッセージの設定"
 }

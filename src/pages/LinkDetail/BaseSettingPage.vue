@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import Breadcrumb from '../../base-components/Breadcrumb'
+import ChatSetting from '../../components/LinkDetail/BaseSetting/ChatSetting.vue'
 import LinkInfo from '../../components/LinkDetail/BaseSetting/LinkInfo.vue'
 import PinBoard from '../../components/LinkDetail/BaseSetting/PinBoard.vue'
 import { useLinkPage } from '../../composables/useLinkPage'
@@ -9,7 +10,7 @@ const currentTab = ref(1)
 const { token, routeTitle } = useLinkPage()
 
 const tabContent = computed(() => {
-  const map = [LinkInfo, PinBoard]
+  const map = [LinkInfo, PinBoard, ChatSetting]
   return map[currentTab.value]
 })
 </script>
