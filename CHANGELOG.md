@@ -1,3 +1,11 @@
+# [1.12.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.11.1...v1.12.0) (2023-12-09)
+
+
+### Features
+
+* add chat vue sdk ([4182307](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/418230722199d6e6097ee6ee80587d17672ae8f3))
+* integrate with imkit vue sdk ([c6bf9a4](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/c6bf9a411ce7ec51d7faf8770b50fb350027c24c))
+
 ## [1.11.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.11.0...v1.11.1) (2023-12-04)
 
 
