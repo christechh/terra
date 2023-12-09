@@ -84,7 +84,7 @@ const resetFiles = (event: Event) => {
 </script>
 <template>
   <div>
-    <div class="flex items-center">
+    <div class="flex items-center bg-input_bg">
       <input
         type="file"
         hidden

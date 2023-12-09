@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 interface Props {
   step: number
-  isFinal: boolean
+  isFinal?: boolean
 }
 
 const props = defineProps<Props>()

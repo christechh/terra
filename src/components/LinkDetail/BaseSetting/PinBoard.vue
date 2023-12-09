@@ -1,7 +1,12 @@
 <script lang="ts" setup>
-import { FormInput, FormTextarea, Upload } from '../../../base-components/Form'
+import {
+  FormInput,
+  FormSelect,
+  FormTextarea,
+  Upload
+} from '../../../base-components/Form'
 import FormSwitch from '../../../base-components/Form/FormSwitch'
-import ColorPicker from '../../../components/ColorPicker'
+import Lucide from '../../../base-components/Lucide'
 import usePinBoard from '../../../composables/LinkDetail/BaseSetting/usePinBoard'
 import VerticalSteps from '../../VerticalSteps'
 
@@ -9,9 +14,16 @@ const {
   showPinBoard,
   welecomeMessage,
   btnText,
-  nickname,
+  nicknamePlaceholder,
   isNicknameRequired,
-  logo
+  logo,
+  isColorExpand,
+  localBGImgs,
+  removePowerBy,
+  colors,
+  theme,
+  nicknameFormat,
+  welcomeBGType
 } = usePinBoard()
 </script>
 
@@ -66,9 +78,13 @@ const {
                 />
               </FormSwitch>
             </div>
-            <div>{{ $t('nickname-placeholder-text') }}</div>
+            <div class="mt-3">{{ $t('nickname-format') }}</div>
             <div class="mt-2">
-              <FormInput v-model="nickname" />
+              <FormInput v-model="nicknameFormat" type="text" />
+            </div>
+            <div class="mt-3">{{ $t('nickname-placeholder-text') }}</div>
+            <div class="mt-2">
+              <FormInput v-model="nicknamePlaceholder" type="text" />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="5" class="pb-9">
@@ -83,11 +99,88 @@ const {
             <div class="font-bold">
               {{ $t('choose-theme-color') }}
             </div>
-            <ColorPicker />
+            <div class="mt-2 bg-[#F6F6F6] p-5 dark:bg-darkmode-700">
+              <div class="flex items-center justify-between">
+                <div
+                  v-for="color in colors"
+                  :key="color"
+                  :class="`flex h-8 w-8 items-center justify-center rounded bg-[${color}] cursor-pointer`"
+                >
+                  <Lucide
+                    v-if="theme === color"
+                    icon="Check"
+                    color="white"
+                    width="28"
+                  />
+                </div>
+
+                <button @click="isColorExpand = !isColorExpand">
+                  <Lucide
+                    icon="ChevronDown"
+                    width="20"
+                    class="cursor-pointer transition-all"
+                    :class="{ 'rotate-180': isColorExpand }"
+                  />
+                </button>
+              </div>
+              <div v-if="isColorExpand">
+                <hr class="my-5 px-0" />
+                <div>
+                  <div class="flex items-center justify-between">
+                    {{ $t('edit-welcome-text-color') }}
+                    <input
+                      type="color"
+                      class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
+                    />
+                  </div>
+                  <div class="mt-3 flex items-center justify-between">
+                    {{ $t('edit-welcome-btn-color') }}
+                    <input
+                      type="color"
+                      class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
+                    />
+                  </div>
+                  <div class="mt-3 flex items-center justify-between">
+                    {{ $t('edit-welcome-btn-text-color') }}
+                    <input
+                      type="color"
+                      class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="7" class="pb-9">
             <div class="font-bold">
               {{ $t('edit-welcome-bak-color') }}
+            </div>
+            <div class="mt-3">
+              <div>
+                <FormSelect v-model="welcomeBGType">
+                  <option value="color">
+                    {{ $t('edit-welcome-choose-color') }}
+                  </option>
+                  <option value="image">
+                    {{ $t('edit-welcome-choose-image') }}
+                  </option>
+                </FormSelect>
+              </div>
+              <!-- img -->
+              <div class="mt-3">
+                <Upload v-model="localBGImgs" type="img" :limit="2" />
+              </div>
+            </div>
+          </VerticalSteps.Step>
+          <VerticalSteps.Step :step="8" class="pb-9" is-final>
+            <div class="font-bold">{{ $t('other-settings') }}</div>
+            <div class="flex items-center justify-between">
+              <div class="mt-3">
+                {{ $t('edit-welcome-remove-pinboard-footer-title') }}
+              </div>
+              <FormSwitch>
+                <FormSwitch.Input v-model="removePowerBy" type="checkbox" />
+              </FormSwitch>
             </div>
           </VerticalSteps.Step>
         </VerticalSteps>
