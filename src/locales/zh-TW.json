@@ -2602,5 +2602,10 @@
   "connent-info": "連結資訊",
   "chat-link": "聊天連結網址",
   "delete-chat-link": "刪除聊天連結",
-  "delete-chat-link-tip": "刪除聊天連結後，所有在此連結下的聊天室將無法再被其他聊天室成員存取。您在後台還是可以看到聊天室對話內容，但將無法再與對方互動。"
+  "delete-chat-link-tip": "刪除聊天連結後，所有在此連結下的聊天室將無法再被其他聊天室成員存取。您在後台還是可以看到聊天室對話內容，但將無法再與對方互動。",
+  "show-pinboard-page": "顯示 PinBoard 頁面",
+  "pinboard-welecome-message": "PinBoard 歡迎訊息",
+  "nickname-setting": "暱稱設定",
+  "set-required": "設為必填",
+  "nickname-placeholder-text": "暱稱輸入框說明文字"
 }

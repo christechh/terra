@@ -1,14 +1,10 @@
 <script lang="ts" setup>
-const props = defineProps({
-  step: {
-    type: Number,
-    required: true
-  },
-  isFinal: {
-    type: Boolean,
-    default: false
-  }
-})
+interface Props {
+  step: number
+  isFinal: boolean
+}
+
+const props = defineProps<Props>()
 </script>
 <template>
   <li class="pb-5 ps-6" :class="{ 'border-s border-[#E3F2A5]': !isFinal }">

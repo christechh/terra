@@ -5,7 +5,7 @@ import LinkInfo from '../../components/LinkDetail/BaseSetting/LinkInfo.vue'
 import PinBoard from '../../components/LinkDetail/BaseSetting/PinBoard.vue'
 import { useLinkPage } from '../../composables/useLinkPage'
 
-const currentTab = ref(0)
+const currentTab = ref(1)
 const { token, routeTitle } = useLinkPage()
 
 const tabContent = computed(() => {
