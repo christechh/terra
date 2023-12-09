@@ -9,13 +9,16 @@ const instance = axios.create({
 })
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers.Authorization = 'Bearer ' + token
+    if (config.url === '/auth/login') {
+      config.headers.Authorization = import.meta.env.VITE_BASIC_TOKEN_CMS
     } else {
-      config.headers.Authorization = 'Basic cGluY2hhdC11c2VyOnNlY3JldA=='
+      const token = localStorage.getItem('token')
+      if (token) {
+        config.headers.Authorization = 'Bearer ' + token
+      }
     }
-    config.baseURL = import.meta.env.VITE_API_URL + i18n.global.locale.value
+    config.baseURL =
+      import.meta.env.VITE_API_URL + i18n.global.locale.value.toLowerCase()
     return config
   },
   (error) => {

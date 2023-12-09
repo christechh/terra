@@ -39,6 +39,12 @@ const copyToPasteboard = async (text: string) => {
   document.body.removeChild(el)
   notificationStore.showSuccess({ title: t('copy-notify'), content: '' })
 }
+const navigateToChatRoom = (link: ILink | null) => {
+  window.open(
+    `/chat/#/?token=${userStore.imkitToken}&roomTag=${link?.token ?? ''}`,
+    '_blank'
+  )
+}
 onMounted(() => {
   userStore.fetchSetting()
   linkStore.fetchLinks()
@@ -63,6 +69,7 @@ onMounted(() => {
           </button>
           <button
             class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary bg-primary px-5 text-base font-bold text-white"
+            @click="navigateToChatRoom(null)"
           >
             {{ $t('all-chat-rooms') }}
             <img
@@ -121,7 +128,10 @@ onMounted(() => {
               alt=""
             />
           </IconButton>
-          <IconButton class="dark:bg-darkmode-600" :link="getSettingLink(link)">
+          <IconButton
+            class="dark:bg-darkmode-600"
+            @click="navigateToChatRoom(link)"
+          >
             <img width="20" height="20" src="@/assets/images/chat.png" alt="" />
           </IconButton>
           <IconButton class="dark:bg-darkmode-600" :link="getSettingLink(link)">

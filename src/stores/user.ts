@@ -5,7 +5,8 @@ import axios from '../axios'
 export const useUserStore = defineStore('user', {
   state: () => ({
     email: localStorage.getItem('email') || '',
-    token: localStorage.getItem('token') || ''
+    token: localStorage.getItem('token') || '',
+    imkitToken: ''
   }),
   actions: {
     async login(credentials: { account: string; password: string }) {
@@ -25,7 +26,7 @@ export const useUserStore = defineStore('user', {
         const {
           data: { data }
         } = await axios.get('/auth/setting')
-        console.log(data)
+        this.imkitToken = data.data.chatToken
       } catch (error) {
         console.log(error)
       }
