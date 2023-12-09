@@ -6,11 +6,15 @@ export default function usePinBoard() {
   const btnText = ref('')
   const nickname = ref('')
   const isNicknameRequired = ref(false)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const logo = ref<any[] | null>(null)
+
   return {
     showPinBoard,
     welecomeMessage,
     btnText,
     nickname,
-    isNicknameRequired
+    isNicknameRequired,
+    logo
   }
 }

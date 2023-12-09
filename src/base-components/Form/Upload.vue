@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { computed, ComputedRef, ref } from 'vue'
-import UploadIcon from '../../components/Icons/UploadIcon.vue'
-import CloseIcon from '../../components/Icons/CloseIcon.vue'
 import ClipIcon from '../../components/Icons/ClipIcon.vue'
+import CloseIcon from '../../components/Icons/CloseIcon.vue'
+import UploadIcon from '../../components/Icons/UploadIcon.vue'
 
-import LoadingIcon from '../LoadingIcon'
 import { useNotificationsStore } from '../../stores/notifications'
 import Alert from '../Alert/Alert.vue'
+import LoadingIcon from '../LoadingIcon'
 import Lucide from '../Lucide/Lucide.vue'
 
 interface uploadFile {
@@ -16,7 +16,7 @@ interface uploadFile {
 
 interface Props {
   type: string
-  modelValue: Array<uploadFile>
+  modelValue: Array<uploadFile> | null
   limit: number
 }
 

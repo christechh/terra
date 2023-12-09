@@ -1,11 +1,18 @@
 <script lang="ts" setup>
-import { FormInput, FormTextarea } from '../../../base-components/Form'
+import { FormInput, FormTextarea, Upload } from '../../../base-components/Form'
 import FormSwitch from '../../../base-components/Form/FormSwitch'
+import ColorPicker from '../../../components/ColorPicker'
 import usePinBoard from '../../../composables/LinkDetail/BaseSetting/usePinBoard'
 import VerticalSteps from '../../VerticalSteps'
 
-const { showPinBoard, welecomeMessage, btnText, nickname, isNicknameRequired } =
-  usePinBoard()
+const {
+  showPinBoard,
+  welecomeMessage,
+  btnText,
+  nickname,
+  isNicknameRequired,
+  logo
+} = usePinBoard()
 </script>
 
 <template>
@@ -62,6 +69,25 @@ const { showPinBoard, welecomeMessage, btnText, nickname, isNicknameRequired } =
             <div>{{ $t('nickname-placeholder-text') }}</div>
             <div class="mt-2">
               <FormInput v-model="nickname" />
+            </div>
+          </VerticalSteps.Step>
+          <VerticalSteps.Step :step="5" class="pb-9">
+            <div class="font-bold">
+              {{ $t('edit-welcome-logo') }}
+            </div>
+            <div>
+              <Upload v-model="logo" type="img" :limit="2" />
+            </div>
+          </VerticalSteps.Step>
+          <VerticalSteps.Step :step="6" class="pb-9">
+            <div class="font-bold">
+              {{ $t('choose-theme-color') }}
+            </div>
+            <ColorPicker />
+          </VerticalSteps.Step>
+          <VerticalSteps.Step :step="7" class="pb-9">
+            <div class="font-bold">
+              {{ $t('edit-welcome-bak-color') }}
             </div>
           </VerticalSteps.Step>
         </VerticalSteps>
