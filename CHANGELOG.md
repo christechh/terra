@@ -1,3 +1,10 @@
+## [1.12.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.12.0...v1.12.1) (2023-12-10)
+
+
+### Bug Fixes
+
+* update title & favicon ([7b653e8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7b653e82555d0911b983c482572e4d88e114b49f))
+
 # [1.12.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.11.1...v1.12.0) (2023-12-09)
 
 
