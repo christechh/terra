@@ -1,15 +1,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
-import {
-  computed,
-  InputHTMLAttributes,
-  useAttrs,
-  inject,
-  useSlots,
-  defineProps,
-  defineEmits
-} from 'vue'
+import { InputHTMLAttributes, computed, inject, useAttrs, useSlots } from 'vue'
 import { ProvideFormInline } from './FormInline.vue'
 import { ProvideInputGroup } from './InputGroup/InputGroup.vue'
 defineOptions({

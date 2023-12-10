@@ -2608,5 +2608,8 @@
   "basic-info": "Basic information",
   "chat-room-nickname": "Chat room nickname",
   "chat-room-avatar": "Chat room avatar",
-  "welcome-message-setting": "Welcome message settings"
+  "welcome-message-setting": "Welcome message settings",
+  "input-of-customer-info": "Customer information input box",
+  "setting-to-online": "Set as online",
+  "message-notification-setting-pop": "Message notification setting prompt pop-up window"
 }

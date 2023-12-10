@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import logoImg from '../../../assets/images/logo_dark_v6.png'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
@@ -32,6 +32,21 @@ export default function usePinBoard() {
   const avatar = ref('')
   const image_id = ref('')
   const welcome_message = ref('')
+  const welcomeGetCustomerInfoType = ref('')
+  const showOnlineStatus = ref(false)
+  const isOnline = ref(false)
+  const offlineSendMsg = ref('')
+  const openNotifySetting = ref(false)
+  const showSavePopup = ref(false)
+  const showGuestSetting = ref(false)
+  const showExportLog = ref(false)
+  const showIsRead = ref(false)
+  const chatroomActionSetting = reactive({
+    file: false,
+    location: false,
+    voice: false,
+    vote: false
+  })
 
   const bgList = [
     'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/enterpoint/1f77b4ff50d6279648b27a42ed999826.png',
@@ -76,35 +91,80 @@ export default function usePinBoard() {
       avatar.value = data.avatar
       image_id.value = data.image_id
       welcome_message.value = data.welcome_message
+      welcomeGetCustomerInfoType.value = data.welcome_get_customer_info_type
+      showOnlineStatus.value = data.show_online_status
+      isOnline.value = data.is_online
+      offlineSendMsg.value = data.offline_send_msg
+      openNotifySetting.value = data.open_notify_setting
+      showSavePopup.value = data.show_save_popup
+      showGuestSetting.value = data.show_guest_setting
+      showExportLog.value = data.show_export_log
+      showIsRead.value = data.show_is_read
+      Object.assign(chatroomActionSetting, data.chatroom_action_setting)
     })
   }
   const save = () => {
-    axios.post('/dashboard/enterpoint', {
-      id,
-      name,
-      token: token.value,
-      is_valid: true,
-      show_landing: showPinBoard.value,
-      welcome: welecomeMessage.value,
-      start_btn_text: btnText.value,
-      nickname_input_placeholder: nicknamePlaceholder.value,
-      start_btn_color: theme.value,
-      nickname_required: isNicknameRequired.value,
-      welcome_bg_type: welcomeBGType.value,
-      remove_pinboard_footer: removePowerBy.value,
-      hr_text: hrText.value,
-      float_button_color: floatButtonColor.value,
-      nickname_type: nicknameFormat.value,
-      welcome_bg_image: localBGImgs.value[0]
-        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (localBGImgs.value[0] as any).data
-        : welcomeBG.value,
-      chat_logo:
-        logo.value && logo.value[0] && logo.value[0].data === logoImg
-          ? ''
-          : logo.value
-    })
-    useNotificationsStore().showSaveSuccess()
+    axios
+      .post('/dashboard/enterpoint', {
+        id,
+        name,
+        token: token.value,
+        is_valid: true,
+        show_landing: showPinBoard.value,
+        welcome: welecomeMessage.value,
+        start_btn_text: btnText.value,
+        nickname_input_placeholder: nicknamePlaceholder.value,
+        start_btn_color: theme.value,
+        nickname_required: isNicknameRequired.value,
+        welcome_bg_type: welcomeBGType.value,
+        remove_pinboard_footer: removePowerBy.value,
+        hr_text: hrText.value,
+        float_button_color: floatButtonColor.value,
+        nickname_type: nicknameFormat.value,
+        welcome_bg_image: localBGImgs.value[0]
+          ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (localBGImgs.value[0] as any).data
+          : welcomeBG.value,
+        chat_logo:
+          logo.value && logo.value[0] && logo.value[0].data === logoImg
+            ? ''
+            : logo.value
+      })
+      .then(() => {
+        useNotificationsStore().showSaveSuccess()
+      })
+  }
+
+  const saveChatSetting = () => {
+    axios
+      .post('/dashboard/enterpoint', {
+        id,
+        name,
+        token: token.value,
+        is_valid: true,
+        chat_header_color: chatHeaderColor.value,
+        chat_header_text_color: chatHeaderTextColor.value,
+        chat_bubble_color: chatBubbleColor.value,
+        chat_bubble_border_color: chatBubbleBorderColor.value,
+        chat_bubble_text_color: chatBubbleTextColor.value,
+        title: title.value,
+        avatar: avatar.value,
+        image_id: image_id.value,
+        welcome_message: welcome_message.value,
+        welcome_get_customer_info_type: welcomeGetCustomerInfoType.value,
+        show_online_status: showOnlineStatus.value,
+        is_online: isOnline.value,
+        offline_send_msg: offlineSendMsg.value,
+        open_notify_setting: openNotifySetting.value,
+        show_save_popup: showSavePopup.value,
+        show_guest_setting: showGuestSetting.value,
+        show_export_log: showExportLog.value,
+        show_is_read: showIsRead.value,
+        chatroom_action_setting: chatroomActionSetting
+      })
+      .then(() => {
+        useNotificationsStore().showSaveSuccess()
+      })
   }
 
   getPinboardSetting()
@@ -136,6 +196,17 @@ export default function usePinBoard() {
     avatar,
     image_id,
     welcome_message,
-    save
+    welcomeGetCustomerInfoType,
+    showOnlineStatus,
+    isOnline,
+    offlineSendMsg,
+    openNotifySetting,
+    showSavePopup,
+    showGuestSetting,
+    showExportLog,
+    showIsRead,
+    chatroomActionSetting,
+    save,
+    saveChatSetting
   }
 }

@@ -2611,5 +2611,8 @@
   "basic-info": "基本資訊",
   "chat-room-nickname": "聊天室暱稱",
   "chat-room-avatar": "聊天室頭像",
-  "welcome-message-setting": "歡迎訊息設定"
+  "welcome-message-setting": "歡迎訊息設定",
+  "input-of-customer-info": "客戶資料輸入框",
+  "setting-to-online": "設為上線中",
+  "message-notification-setting-pop": "訊息通知設定提示彈窗"
 }

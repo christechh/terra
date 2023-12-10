@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useAttrs } from 'vue'
 import Lucide from '../../base-components/Lucide'
 import HeadUploadModal from '../../components/Modals/HeadUploadModal'
 
@@ -9,6 +9,7 @@ interface Props {
   image_id: any
 }
 
+const attrs = useAttrs()
 const { avatar, image_id } = defineProps<Props>()
 const showHeadUploadPopup = ref(false)
 
@@ -26,7 +27,11 @@ const headChangehandler = (img: { img: string; id: number }) => {
 </script>
 
 <template>
-  <div class="relative h-32 w-32" @click="showHeadUploadPopup = true">
+  <div
+    class="relative h-32 w-32"
+    :class="attrs.class"
+    @click="showHeadUploadPopup = true"
+  >
     <img :src="avatar" width="128" height="128" alt="" class="rounded-full" />
     <div
       class="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary p-2"

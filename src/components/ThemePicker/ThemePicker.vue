@@ -31,7 +31,7 @@ const isColorExpand = ref(false)
         @click="emit('update:modelValue', color)"
       >
         <Lucide
-          v-if="modelValue.toLocaleLowerCase() === color"
+          v-if="modelValue?.toLocaleLowerCase() === color"
           icon="Check"
           color="white"
           width="28"

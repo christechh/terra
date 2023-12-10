@@ -2609,5 +2609,8 @@
   "basic-info": "基本情報",
   "chat-room-nickname": "チャットルームのニックネーム",
   "chat-room-avatar": "チャットルームのアバター",
-  "welcome-message-setting": "ウェルカムメッセージの設定"
+  "welcome-message-setting": "ウェルカムメッセージの設定",
+  "input-of-customer-info": "お客様情報入力欄",
+  "setting-to-online": "オンラインとして設定",
+  "message-notification-setting-pop": "メッセージ通知設定プロンプトポップアップウィンドウ"
 }
