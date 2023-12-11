@@ -59,6 +59,11 @@ const routes = [
             path: 'sub_account',
             name: 'settings-sub_account',
             component: () => import('@/pages/settings/SubAccount.vue')
+          },
+          {
+            path: 'payment',
+            name: 'settings-payment',
+            component: () => import('@/pages/settings/Payment.vue')
           }
         ]
       }
