@@ -1,3 +1,10 @@
+# [1.14.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.13.0...v1.14.0) (2023-12-11)
+
+
+### Features
+
+* [#5](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/5) ([c35b49b](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/c35b49ba27f3d930835c50417f290c48790afed7))
+
 # [1.13.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.12.1...v1.13.0) (2023-12-11)
 
 
