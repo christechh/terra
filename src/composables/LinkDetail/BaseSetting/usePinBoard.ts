@@ -41,6 +41,7 @@ export default function usePinBoard() {
   const showGuestSetting = ref(false)
   const showExportLog = ref(false)
   const showIsRead = ref(false)
+  const name = ref('')
   const chatroomActionSetting = reactive({
     file: false,
     location: false,
@@ -57,7 +58,6 @@ export default function usePinBoard() {
     'https://pinchat-prod.s3.ap-northeast-1.amazonaws.com/enterpoint/d30cb76255415d8e13f8563c05851354.png'
   ]
   let id = ''
-  let name = ''
 
   const getPinboardSetting = () => {
     axios.get(`/chat/enterpoints/config/${token.value}`).then((res) => {
@@ -81,12 +81,9 @@ export default function usePinBoard() {
       welcomeBG.value = data.welcome_bg_image
       logo.value = [{ data: data.chat_logo ? data.chat_logo : logoImg }]
       id = data.id
-      name = data.name
+      name.value = data.name
       chatHeaderColor.value = data.chat_header_color
-      chatHeaderTextColor.value = data.chat_header_text_color
-      chatBubbleColor.value = data.chat_bubble_color
-      chatBubbleBorderColor.value = data.chat_bubble_border_color
-      chatBubbleTextColor.value = data.chat_bubble_text_color
+      chatHeaderColorChangeHandler(data.chat_header_color)
       title.value = data.title
       avatar.value = data.avatar
       image_id.value = data.image_id
@@ -107,7 +104,7 @@ export default function usePinBoard() {
     axios
       .post('/dashboard/enterpoint', {
         id,
-        name,
+        name: name.value,
         token: token.value,
         is_valid: true,
         show_landing: showPinBoard.value,
@@ -139,7 +136,7 @@ export default function usePinBoard() {
     axios
       .post('/dashboard/enterpoint', {
         id,
-        name,
+        name: name.value,
         token: token.value,
         is_valid: true,
         chat_header_color: chatHeaderColor.value,
@@ -167,9 +164,65 @@ export default function usePinBoard() {
       })
   }
 
+  const changeShowGuestSetting = (event: Event) => {
+    if (!(event.target as HTMLInputElement).checked) {
+      showExportLog.value = false
+    }
+  }
+
+  const chatHeaderColorChangeHandler = (color: string) => {
+    const m = {
+      '#02b13f': {
+        headerText: '#ffffff',
+        msgBubble: '#DDEFE0',
+        bubbleBorder: 'DDEFE0',
+        bubbleText: '#000000'
+      },
+      '#007abf': {
+        headerText: '#ffffff',
+        msgBubble: '#B4CEDC',
+        bubbleBorder: '#B4CEDC',
+        bubbleText: '#000000'
+      },
+      '#ffa01a': {
+        headerText: '#000000',
+        msgBubble: '#FFE4BC',
+        bubbleBorder: '#FFE4BC',
+        bubbleText: '#000000'
+      },
+      '#ff85b0': {
+        headerText: '#ffffff',
+        msgBubble: '#FFE9F1',
+        bubbleBorder: '#FFE9F1',
+        bubbleText: '#7B7B7B'
+      },
+      '#cf93e6': {
+        headerText: '#ffffff',
+        msgBubble: '#E7D0F0',
+        bubbleBorder: '#E7D0F0',
+        bubbleText: '#616081'
+      },
+      '#e0eb76': {
+        headerText: '#000000',
+        msgBubble: '#39701E',
+        bubbleBorder: '#39701E',
+        bubbleText: '#ffffff'
+      }
+    }
+    const theme = m[color as keyof typeof m]
+    if (theme) {
+      chatHeaderColor.value = color
+      chatHeaderTextColor.value = theme.headerText
+      chatBubbleColor.value = theme.msgBubble
+      chatBubbleBorderColor.value = theme.bubbleBorder
+      chatBubbleTextColor.value = theme.bubbleText
+    }
+  }
+
   getPinboardSetting()
 
   return {
+    name,
     showPinBoard,
     welecomeMessage,
     btnText,
@@ -206,7 +259,9 @@ export default function usePinBoard() {
     showExportLog,
     showIsRead,
     chatroomActionSetting,
+    changeShowGuestSetting,
     save,
-    saveChatSetting
+    saveChatSetting,
+    chatHeaderColorChangeHandler
   }
 }
