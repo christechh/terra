@@ -63,7 +63,7 @@ watch(
     <div class="flex flex-col gap-3 sm:flex-row">
       <div
         class="item-center relative flex w-full flex-1 justify-center rounded-md"
-        style="background-color: #ececec"
+        :style="currentImageUrl ? '' : 'background-color: #ececec'"
       >
         <div class="relative">
           <img
