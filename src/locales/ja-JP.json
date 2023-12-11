@@ -2600,5 +2600,17 @@
   "helpdesk-feature-item4-content": "チャットでメールや携帯電話番号などの情報を添えてメッセージを送り、顧客情報を収集し、簡易ファイルを作成する。",
   "connent-info": "リンク情報",
   "delete-chat-link": "チャットリンクを削除",
-  "delete-chat-link-tip": "チャット リンクを削除すると、このリンクの下にあるすべてのチャット ルームに他のチャット ルーム メンバーはアクセスできなくなります。\nチャット ルームの会話はバックグラウンドで引き続き表示されますが、相手と対話することはできなくなります。"
+  "delete-chat-link-tip": "チャット リンクを削除すると、このリンクの下にあるすべてのチャット ルームに他のチャット ルーム メンバーはアクセスできなくなります。\nチャット ルームの会話はバックグラウンドで引き続き表示されますが、相手と対話することはできなくなります。",
+  "show-pinboard-page": "ピンボードページを表示",
+  "pinboard-welecome-message": "ピンボードのウェルカムメッセージ",
+  "nickname-setting": "ニックネームの設定",
+  "set-required": "必須にする",
+  "nickname-placeholder-text": "ニックネーム入力ボックスの説明テキスト",
+  "basic-info": "基本情報",
+  "chat-room-nickname": "チャットルームのニックネーム",
+  "chat-room-avatar": "チャットルームのアバター",
+  "welcome-message-setting": "ウェルカムメッセージの設定",
+  "input-of-customer-info": "お客様情報入力欄",
+  "setting-to-online": "オンラインとして設定",
+  "message-notification-setting-pop": "メッセージ通知設定プロンプトポップアップウィンドウ"
 }

@@ -2599,5 +2599,17 @@
   "helpdesk-feature-item4-content": "Send messages in the chat room to collect customer information such as email and phone numbers, and quickly create customer profiles.",
   "connent-info": "Link information",
   "delete-chat-link": "Delete Chat Link",
-  "delete-chat-link-tip": "After deleting the chat link, all chat rooms associated with this link will no longer be accessible to other chat room members. You will still be able to view the conversation in the dashboard, but interaction with the  chatroom members will no longer be possible."
+  "delete-chat-link-tip": "After deleting the chat link, all chat rooms associated with this link will no longer be accessible to other chat room members. You will still be able to view the conversation in the dashboard, but interaction with the  chatroom members will no longer be possible.",
+  "show-pinboard-page": "Show PinBoard page",
+  "pinboard-welecome-message": "PinBoard welcome message",
+  "nickname-setting": "Nickname settings",
+  "set-required": "Make required",
+  "nickname-placeholder-text": "Nickname input box description text",
+  "basic-info": "Basic information",
+  "chat-room-nickname": "Chat room nickname",
+  "chat-room-avatar": "Chat room avatar",
+  "welcome-message-setting": "Welcome message settings",
+  "input-of-customer-info": "Customer information input box",
+  "setting-to-online": "Set as online",
+  "message-notification-setting-pop": "Message notification setting prompt pop-up window"
 }

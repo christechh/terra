@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import { useRouter } from 'vue-router'
 import * as lucideIcons from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 import Lucide from '../../base-components/Lucide'
 
 export type Icon = keyof typeof lucideIcons
