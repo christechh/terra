@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useAttrs } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
 import Lucide from '../../base-components/Lucide'
 import HeadUploadModal from '../../components/Modals/HeadUploadModal'
 
@@ -12,12 +12,8 @@ interface Props {
 }
 
 const attrs = useAttrs()
-const { avatar, image_id, readOnly, size } = withDefaults(
-  defineProps<Props>(),
-  {
-    size: 128
-  }
-)
+const { avatar, image_id, readOnly, size } = defineProps<Props>()
+
 const showHeadUploadPopup = ref(false)
 
 const emit = defineEmits(['update:avatar', 'update:image_id', 'change'])
@@ -37,6 +33,8 @@ const clickHandler = () => {
     showHeadUploadPopup.value = true
   }
 }
+
+const sizeComputed = computed(() => (size ? size + 'px' : '128px'))
 </script>
 
 <template>
@@ -58,7 +56,7 @@ const clickHandler = () => {
 </template>
 <style>
 .head-shots {
-  width: v-bind(size + 'px');
-  height: v-bind(size + 'px');
+  width: v-bind(sizeComputed);
+  height: v-bind(sizeComputed);
 }
 </style>
