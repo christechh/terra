@@ -1,3 +1,15 @@
+# [1.13.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.12.1...v1.13.0) (2023-12-11)
+
+
+### Features
+
+* adjust upload function ([dd40123](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/dd40123021c919621eba89bc2b12b523100a6c62))
+* chat setting done ([44e12c7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/44e12c7d96b0dcbd5543803c04020d45d8db6f39))
+* chat setting init ([0d88f59](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0d88f5932551a3083b3064e07f6783801a91426e))
+* color picker and pinboard ui ([e95fd96](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e95fd96c483d6d2c858e83eb14b6d48b9cde2203))
+* pinboard init ([688d95c](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/688d95cfd211348af1906aca48468ab066ff0ff5))
+* pinboard with api ([5779db2](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/5779db25e659dabfbcb1326237891b39e599ebd4))
+
 ## [1.12.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.12.0...v1.12.1) (2023-12-10)
 
 
