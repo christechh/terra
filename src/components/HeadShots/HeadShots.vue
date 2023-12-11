@@ -12,7 +12,12 @@ interface Props {
 }
 
 const attrs = useAttrs()
-const { avatar, image_id, readOnly = false, size = 32 } = defineProps<Props>()
+const { avatar, image_id, readOnly, size } = withDefaults(
+  defineProps<Props>(),
+  {
+    size: 128
+  }
+)
 const showHeadUploadPopup = ref(false)
 
 const emit = defineEmits(['update:avatar', 'update:image_id', 'change'])
