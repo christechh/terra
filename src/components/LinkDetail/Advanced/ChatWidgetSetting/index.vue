@@ -11,6 +11,7 @@ import WidgetCustomTheme from './WidgetCustomTheme/index.vue'
 import WidgetCopyScript from './WidgetCopyScript.vue'
 import { useLinkPage } from '../../../../composables/useLinkPage'
 import { useNotificationsStore } from '../../../../stores/notifications'
+import BoxHead from '@/components/Box/BoxHead.vue'
 
 export type WidgetType = 'circle' | 'rectangle' | 'rectangle_left' | 'full'
 export interface IForm {
@@ -130,13 +131,8 @@ onMounted(() => {
 
 <template>
   <div v-if="!isLoading" class="intro-y">
-    <div
-      class="flex flex-col items-center border-b border-gray-200 p-5 sm:flex-row"
-    >
-      <h2 class="mr-auto text-base font-semibold">
-        {{ $t('edit-float-button') }}
-      </h2>
-      <div class="ml-auto mt-0 flex w-auto items-center">
+    <BoxHead :title="$t('edit-float-button')">
+      <template #right>
         <CButton
           variant="primary"
           class="w-24 text-white disabled:opacity-50"
@@ -144,8 +140,8 @@ onMounted(() => {
           @click="submitConfig"
           >{{ $t('save-btn') }}</CButton
         >
-      </div>
-    </div>
+      </template>
+    </BoxHead>
     <div class="p-5">
       <Steps :items="steps" />
     </div>

@@ -88,7 +88,8 @@ const linkDetailRoutes = [
   'enterpoint-root',
   'enterpoint-customer',
   'enterpoint-setting',
-  'enterpoint-advanced'
+  'enterpoint-advanced',
+  'enterpoint-thirds'
 ]
 
 /**
