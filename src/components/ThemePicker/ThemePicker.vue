@@ -26,7 +26,7 @@ const isColorExpand = ref(false)
       <div
         v-for="color in colors"
         :key="color"
-        :class="`flex h-8 w-8 cursor-pointer items-center justify-center rounded`"
+        :class="`flex h-8 w-8 cursor-pointer items-center justify-center rounded-md`"
         :style="`background-color: ${color}`"
         @click="emit('update:modelValue', color)"
       >
