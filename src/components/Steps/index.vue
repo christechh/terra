@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { PropType, computed } from 'vue'
 
-interface StepItem {
+export interface StepItem {
   title: string
   component?: any
   componentProps?: any
@@ -61,7 +61,10 @@ const isLastItem = (index: number) => index === itemsLength.value - 1
           {{ index + 1 }}
         </div>
       </div>
-      <div class="w-full flex-1">
+      <div class="w-full flex-1 pb-[28px]">
+        <div class="mb-2 mt-1 font-semibold">
+          {{ item.title }}
+        </div>
         <component
           :is="getCurrentComponent(item)"
           v-bind="getCurrentComponentProps(item)"

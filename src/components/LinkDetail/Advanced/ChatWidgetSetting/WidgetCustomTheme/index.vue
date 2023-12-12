@@ -98,9 +98,8 @@ watch(
 </script>
 
 <template>
-  <div class="mb-[28px] flex flex-col gap-6 sm:flex-row">
+  <div class="flex flex-col gap-6 sm:flex-row">
     <div class="flex-1">
-      <div class="mb-5 mt-1 font-semibold">{{ props.title }}</div>
       <div
         class="flex-1 p-5"
         style="background-color: #f6f6f6; border-radius: 10px; padding: 20px"
@@ -120,7 +119,8 @@ watch(
             />
           </div>
           <img
-            class="theme-colors-toggle cursor-pointer"
+            class="theme-colors-toggle transform cursor-pointer transition-all duration-300"
+            :class="collapsed && 'rotate-180'"
             src="@/assets/images/down-arrow.png"
             width="20"
             @click="collapsed = !collapsed"
