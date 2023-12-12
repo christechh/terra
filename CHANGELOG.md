@@ -1,3 +1,12 @@
+## [1.14.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.14.0...v1.14.1) (2023-12-12)
+
+
+### Bug Fixes
+
+* [#7](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/7): tooltip, emulator ([09b79ed](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/09b79eded0d731c7e3952eecb59d101523056acb))
+* fix head shots size ([82d7a48](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/82d7a48fe6e2480750a18ef6f08a04996b684ef6))
+* head shots would broken with `withDefaults` ([a6926c9](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a6926c96ce49cece985490291cc92dba466854d7))
+
 # [1.14.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.13.0...v1.14.0) (2023-12-11)
 
 
