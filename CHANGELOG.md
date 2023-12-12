@@ -1,3 +1,10 @@
+# [1.15.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.14.1...v1.15.0) (2023-12-12)
+
+
+### Features
+
+* 修正箭頭點擊動畫沒改變、第三方整合部分 ([79d4ef7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/79d4ef7d61e4d1dce309249c98f9a89cb863d270))
+
 ## [1.14.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.14.0...v1.14.1) (2023-12-12)
 
 
