@@ -1898,6 +1898,7 @@
   "payment-flow-tooltip-stripe-locale": "設定 Stripe 顯示語系",
   "payment-flow-tooltip-turn-on-paypal": "若開啟此開關，你可以在聊天室內要求對方以 PayPal 支付款項",
   "payment-flow-tooltip-paypal-email": "輸入你的 PayPay 電子信箱",
+  "payment-flow-paypal-live-mode": "Live Mode",
   "payment-flow-paypal-client-id": "PayPal Client ID",
   "payment-flow-paypal-secret": "PayPal Secret",
   "payment-flow-paypal-sandbox-mode": "PayPal Sandbox Mode",

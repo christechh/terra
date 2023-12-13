@@ -8,7 +8,7 @@ import {
 export default function usePayment() {
   const paymentStore = usePaymentStore()
 
-  const { fetchAllPayments, setPaymentDetail } = paymentStore
+  const { fetchAllPayments, setPaymentByMethod } = paymentStore
 
   const payments = computed(() => paymentStore.payments)
   const payment = computed(() => paymentStore.payment)
@@ -18,7 +18,7 @@ export default function usePayment() {
   return {
     payments,
     payment,
-    setPaymentDetail,
+    setPaymentByMethod,
     fetchAllPayments,
     getPaymentStatus: (status: PaymentStatus) => {
       switch (status) {

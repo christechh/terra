@@ -64,6 +64,11 @@ const routes = [
             path: 'payment',
             name: 'settings-payment',
             component: () => import('@/pages/settings/Payment.vue')
+          },
+          {
+            path: 'payment/paypal',
+            name: 'settings-payment-paypal',
+            component: () => import('@/pages/settings/SettingPayPal.vue')
           }
         ]
       }
