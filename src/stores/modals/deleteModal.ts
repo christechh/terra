@@ -8,7 +8,7 @@ export interface DeleteModal {
   status: boolean
   cancelButtonText: string
   confirmButtonText: string
-  onSubmit: () => void
+  onSubmit?: () => void
 }
 
 export const useDeleteModalStore = defineStore('delete_modal', {
@@ -36,7 +36,7 @@ export const useDeleteModalStore = defineStore('delete_modal', {
       title: string
       content: string
       deleteData?: T
-      onSubmit: () => void
+      onSubmit?: () => void
       cancelButtonText?: string
       confirmButtonText?: string
     }) {
