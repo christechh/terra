@@ -8,6 +8,8 @@ export interface StepItem {
   componentProps?: any
   render?: () => any
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ITitle = string | (() => any)
 
 defineOptions({
   name: 'Steps'
@@ -44,7 +46,16 @@ const getCurrentComponentProps = (item: StepItem) => {
   return defaultProps
 }
 const itemsLength = computed(() => props.items.length)
+
 const isLastItem = (index: number) => index === itemsLength.value - 1
+
+const getTitle = (title: ITitle) => {
+  if (typeof title === 'function') {
+    return title()
+  }
+
+  return title
+}
 </script>
 
 <template>
@@ -63,7 +74,12 @@ const isLastItem = (index: number) => index === itemsLength.value - 1
       </div>
       <div class="w-full flex-1 pb-[28px]">
         <div class="mb-2 mt-1 font-semibold">
-          {{ item.title }}
+          <span v-if="typeof item.title === 'string'">
+            {{ item.title }}
+          </span>
+          <span v-else>
+            <component :is="getTitle(item.title)" />
+          </span>
         </div>
         <component
           :is="getCurrentComponent(item)"

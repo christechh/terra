@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, PropType, ref, computed, defineComponent } from 'vue'
+import { defineProps, PropType, ref, defineComponent, computed } from 'vue'
 
 export interface ITab {
   id: string
@@ -7,6 +7,8 @@ export interface ITab {
   component: typeof defineComponent
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   componentProps: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render?: () => any
 }
 
 defineOptions({
@@ -19,21 +21,25 @@ const props = defineProps({
   }
 })
 
-const isSwitching = ref(true)
 const currentTab = ref(props.tabs[0])
-const currentTabId = computed(() => currentTab.value.id)
-const currentTabComponent = computed(() => currentTab.value.component)
+const currentTabComponent = computed(() => {
+  if (currentTab.value.component) {
+    return currentTab.value.component
+  }
+
+  if (currentTab.value.render) {
+    return currentTab.value.render()
+  }
+
+  return null
+})
 const currentComponentProps = computed(() => currentTab.value.componentProps)
 
 const handleClick = (tab: ITab) => {
-  if (currentTabId.value === tab.id) {
+  if (currentTab.value.id === tab.id) {
     return
   }
-  isSwitching.value = false
   currentTab.value = tab
-  setTimeout(() => {
-    isSwitching.value = true
-  }, 0)
 }
 </script>
 
@@ -48,7 +54,7 @@ const handleClick = (tab: ITab) => {
           :key="tab.id"
           class="text-text_dark cursor-pointer border-b-[3px] border-transparent py-3 transition-all duration-300 hover:border-primary hover:text-primary"
           :class="{
-            '!border-primary !text-primary': currentTabId === tab.id
+            '!border-primary !text-primary': currentTab.id === tab.id
           }"
           @click="handleClick(tab)"
         >
@@ -56,7 +62,7 @@ const handleClick = (tab: ITab) => {
         </button>
       </div>
     </div>
-    <div class="box" v-if="isSwitching">
+    <div class="box" :key="currentTab.id">
       <component :is="currentTabComponent" v-bind="currentComponentProps" />
     </div>
   </section>

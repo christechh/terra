@@ -2,8 +2,9 @@
 import { computed, ref, PropType, watch } from 'vue'
 import { IForm } from '../index.vue'
 import UploadButtonImage from './UploadButtonImage.vue'
-import FormInput from '../../../../../base-components/Form/FormInput.vue'
-import FormLabel from '../../../../../base-components/Form/FormLabel.vue'
+import FormInput from '@/base-components/Form/FormInput.vue'
+import FormLabel from '@/base-components/Form/FormLabel.vue'
+import Lucide from '@/base-components/Lucide/Lucide.vue'
 
 const props = defineProps({
   title: {
@@ -89,6 +90,8 @@ const handleTextColorPicker = (event: Event) => {
   props.updateForm('buttonTextColor', target.value)
 }
 
+console.log('currentValue.value', currentValue.value)
+
 watch(
   () => props.form.buttonColor,
   (value) => {
@@ -112,19 +115,24 @@ watch(
             :key="color.color"
             @click="selectColor(color.color)"
           >
-            <img
-              v-if="currentValue === color.color"
-              src="@/assets/images/check_solid.png"
-              class="h-4 w-4"
+            <Lucide
+              v-if="
+                currentValue.toLocaleLowerCase() ===
+                color.color.toLocaleLowerCase()
+              "
+              icon="Check"
+              color="white"
+              width="28"
             />
           </div>
-          <img
-            class="theme-colors-toggle transform cursor-pointer transition-all duration-300"
-            :class="collapsed && 'rotate-180'"
-            src="@/assets/images/down-arrow.png"
-            width="20"
-            @click="collapsed = !collapsed"
-          />
+          <button @click="collapsed = !collapsed">
+            <Lucide
+              icon="ChevronDown"
+              width="20"
+              class="cursor-pointer transition-all"
+              :class="{ 'rotate-180': !collapsed }"
+            />
+          </button>
         </div>
         <div class="theme-colors" v-if="!collapsed">
           <hr class="my-5 px-0" />
