@@ -14,13 +14,15 @@ const router = useRouter()
 const status = computed(() => deleteModalStore.status)
 const title = computed(() => deleteModalStore.title)
 const content = computed(() => deleteModalStore.content)
+const cancelButtonText = computed(() => deleteModalStore.cancelButtonText)
+const confirmButtonText = computed(() => deleteModalStore.confirmButtonText)
 
 const setOpen = (value: boolean) => {
   deleteModalStore.setOpen({ status: value })
 }
 
 const deleteExec = async () => {
-  const { deleteType, deleteData } = deleteModalStore
+  const { deleteType, deleteData, onSubmit } = deleteModalStore
   switch (deleteType) {
     case 'account':
       await axios.delete('/user')
@@ -35,6 +37,11 @@ const deleteExec = async () => {
       await axios.post('/dashboard/enterpoint', { id, token, is_valid: false })
       router.push('/dashboard')
       break
+    }
+    case 'callback': {
+      onSubmit && onSubmit()
+      setOpen(false)
+      return // Break here
     }
     case 'course':
       break
@@ -73,7 +80,7 @@ const deleteExec = async () => {
             "
             class="mr-1 w-24 border-slate-500 focus:ring-transparent dark:border-slate-300"
           >
-            {{ $t('cancel-btn') }}
+            {{ cancelButtonText || $t('cancel-btn') }}
           </Button>
           <Button
             type="button"
@@ -81,7 +88,7 @@ const deleteExec = async () => {
             class="ml-5 w-24"
             @click="deleteExec"
           >
-            {{ $t('delete-btn') }}
+            {{ confirmButtonText || $t('delete-btn') }}
           </Button>
         </div>
       </Dialog.Panel>
