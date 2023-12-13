@@ -1,17 +1,31 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue'
-// import noSubAccount from '../../assets/images/no-subAccount.png'
-// import Button from '../../base-components/Button'
+import { onMounted, ref, watch } from 'vue'
 import Lucide from '../../base-components/Lucide'
-// import { Payment, PaymentStatus, PaymentStatusText } from '../../stores/payment'
 import usePayment from './composables/usePayment'
+import { convertYmdHis } from '../../lib/timeLib'
+import SidebarModal from '../../components/Modals/SidebarModal'
+import { Payment } from '../../stores/payment'
 
-const { payments, fetchAllPayments } = usePayment()
+const { payments, fetchAllPayments, getPaymentStatus, getPaymentMethod } =
+  usePayment()
+const detail = ref<Record<string, unknown>>({} as Payment)
 
-// const selectedPaymentIndex = ref(-1)
-// const selectedPayment: ref<Payment> = computed(
-//   () => payments.value[selectedPaymentIndex.value] || null
-// )
+const childComponentRef = ref<InstanceType<typeof SidebarModal> | null>(null)
+
+const controlModal = (payment: Payment) => {
+  childComponentRef.value?.setOpen(true)
+  detail.value = {
+    enterPointName: payment.enterpoint.name,
+    paymentUserName: payment.payment_user.name,
+    amount: payment.amount,
+    requestAt: convertYmdHis(payment.request_at as string),
+    paymentAt: convertYmdHis(payment.payment_at as string),
+    paymentStatus: getPaymentStatus(payment.status),
+    paymentMethod: getPaymentMethod(payment.method),
+    currency: payment.currency,
+    paymentNote: payment.note
+  }
+}
 
 onMounted(() => {
   fetchAllPayments()
@@ -23,12 +37,13 @@ watch(payments, () => {
 </script>
 
 <template>
+  <SidebarModal ref="childComponentRef" :detail="detail" />
   <div class="">
     <div
       class="flex items-center justify-between rounded-t-xl p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
     >
       <div class="grid w-full grid-cols-12 text-center">
-        <Button
+        <button
           variant="primary"
           class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
         >
@@ -36,10 +51,10 @@ watch(payments, () => {
             class="h-4/6 w-full"
             src="https://logos-world.net/wp-content/uploads/2020/08/PayPal-Symbol.png"
           />
-          {{ $t('payment-setting-btn') }}
+          {{ $t('payment-flow-go-to-settings') }}
           <Lucide icon="ChevronRight" />
-        </Button>
-        <Button
+        </button>
+        <button
           variant="primary"
           class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
         >
@@ -47,10 +62,10 @@ watch(payments, () => {
             class="h-4/6 w-full"
             src="https://i0.wp.com/jimfitzpatrick.com/wp-content/uploads/2016/11/Stripe-Logo-blue-copy.png?ssl=1"
           />
-          {{ $t('payment-setting-btn') }}
+          {{ $t('payment-flow-go-to-settings') }}
           <Lucide icon="ChevronRight" />
-        </Button>
-        <Button
+        </button>
+        <button
           variant="primary"
           class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
         >
@@ -58,9 +73,9 @@ watch(payments, () => {
             class="h-4/6 w-full"
             src="https://cpok.tw/wp-content/uploads/2020/10/line-pay-1.png"
           />
-          {{ $t('payment-setting-btn') }}
+          {{ $t('payment-flow-go-to-settings') }}
           <Lucide icon="ChevronRight" />
-        </Button>
+        </button>
       </div>
     </div>
 
@@ -68,63 +83,70 @@ watch(payments, () => {
       class="flex items-center justify-between rounded-t-xl bg-white p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
     >
       <div>
-        <b class="text-base">{{ $t('payment-list') }}</b>
+        <b class="text-base">{{ $t('payment-flow-history-record') }}</b>
       </div>
     </div>
     <div class="mt-1 rounded-b-xl bg-white p-4 dark:bg-darkmode-600">
       <div class="grid grid-cols-12 text-center">
         <b
+          class="col-span-1 flex h-[60px] items-center justify-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('payment-flow-payers-profile') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center justify-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('payment-flow-chatrooms-name') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center justify-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('payment-flow-payers-nickname') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center justify-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('payment-flow-request-time') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center justify-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('payment-flow-payment-time') }}</b
+        >
+        <b
+          class="col-span-2 flex h-[60px] items-center justify-center border-b-2 border-solid border-[#e2e8f0]"
+          >{{ $t('payment-flow-status') }}</b
+        >
+        <b
           class="col-span-1 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
-          >{{ $t('payment-avatar') }}</b
-        >
-        <b
-          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
-          >{{ $t('payment-chat-room') }}</b
-        >
-        <b
-          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
-          >{{ $t('payment-username') }}</b
-        >
-        <b
-          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
-          >{{ $t('payment-request-at') }}</b
-        >
-        <b
-          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
-          >{{ $t('payment-payment-at') }}</b
-        >
-        <b
-          class="col-span-2 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
-          >{{ $t('payment-status') }}</b
-        >
-        <b
-          class="col-span-1 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
-          >{{ $t('payment-table-action') }}</b
+          >{{ $t('payment-flow-check-details') }}</b
         >
         <template v-for="payment in payments" :key="payment.id">
           <span
-            class="col-span-1 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
-            >{{ payment.payment_user.avatar || '' }}</span
+            class="col-span-1 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+          >
+            <img
+              class="h-10 w-10 rounded-full"
+              :src="
+                payment?.payment_user?.avatar ||
+                'https://pinchat.me/images/avatar1.png'
+              "
+            />
+          </span>
+          <span
+            class="col-span-2 flex h-[60px] items-center justify-center overflow-hidden text-ellipsis border-b border-solid border-[#e2e8f0] p-2"
+            >{{ payment.enterpoint.name }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
-            >{{ payment.chatRoomId }}</span
-          >
-          <span
-            class="col-span-2 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
+            class="col-span-2 flex h-[60px] items-center justify-center overflow-hidden text-ellipsis border-b border-solid border-[#e2e8f0] p-2"
             >{{ payment.payment_user.name }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
-            >{{ payment.request_at }}</span
+            class="col-span-2 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+            >{{ convertYmdHis(payment.request_at) }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
-            >{{ payment.payment_at }}</span
+            class="col-span-2 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+            >{{ convertYmdHis(payment.payment_at) }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
-            >{{ '完成' }}</span
+            class="col-span-2 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+            >{{ $t(`${getPaymentStatus(payment.status)}`) }}</span
           >
           <span
             class="justify-content col-span-1 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
@@ -133,6 +155,7 @@ watch(payments, () => {
               :size="20"
               class="-rotate-90 cursor-pointer"
               icon="CircleEllipsis"
+              @click="() => controlModal(payment)"
             />
           </span>
         </template>

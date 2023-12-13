@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import axios from '../axios'
 
-export enum PaymentStatusText {
-  pending = 'pending',
-  paid = 'paid',
-  refund = 'refund',
-  unauthorized = 'unauthorized'
+export enum PaymentMethod {
+  unpaid = -1,
+  Line,
+  Stripe,
+  PayPal
 }
 
 export enum PaymentStatus {
@@ -32,18 +32,20 @@ export type Payment = {
   amount: number
   currency: string
   note: string | null
+  method: PaymentMethod
   status: PaymentStatus
-  request_at: string | Date
-  payment_at: string | Date | null
-  createdAt: string | Date
-  updatedAt: string | Date | null
+  request_at: string
+  payment_at: string | null
+  createdAt: string
+  updatedAt: string | null
   payment_user: PaymentUser
-  enter_point: EnterPoint
+  enterpoint: EnterPoint
 }
 
 export const usePaymentStore = defineStore('payment', {
   state: () => ({
-    payments: [] as Payment[]
+    payments: [] as Payment[],
+    payment: {} as Payment
   }),
   actions: {
     async fetchAllPayments() {
@@ -74,6 +76,9 @@ export const usePaymentStore = defineStore('payment', {
         }
       }
       return payments
+    },
+    setPaymentDetail(payment: Payment) {
+      this.payment = payment
     }
   }
 })
