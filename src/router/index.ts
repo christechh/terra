@@ -69,6 +69,16 @@ const routes = [
             path: 'payment/paypal',
             name: 'settings-payment-paypal',
             component: () => import('@/pages/settings/SettingPayPal.vue')
+          },
+          {
+            path: 'payment/stripe',
+            name: 'settings-payment-stripe',
+            component: () => import('@/pages/settings/SettingStripe.vue')
+          },
+          {
+            path: 'payment/linepay',
+            name: 'settings-line-pay-stripe',
+            component: () => import('@/pages/settings/SettingLinePay.vue')
           }
         ]
       }
