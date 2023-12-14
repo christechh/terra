@@ -5,6 +5,7 @@ import usePayment from './composables/usePayment'
 import { convertYmdHis } from '../../lib/timeLib'
 import SidebarModal from '../../components/Modals/SidebarModal'
 import { Payment } from '../../stores/payment'
+import { useRedirectToStore } from '../../stores/redirect-to'
 
 const { payments, fetchAllPayments, getPaymentStatus, getPaymentMethod } =
   usePayment()
@@ -27,6 +28,12 @@ const controlModal = (payment: Payment) => {
   }
 }
 
+const directToPaymentSetting = (method: 'LinePay' | 'Stripe' | 'PayPal') => {
+  useRedirectToStore().redirect({
+    path: `/dashboard/settings/payment/${method.toLowerCase()}`
+  })
+}
+
 onMounted(() => {
   fetchAllPayments()
 })
@@ -45,7 +52,9 @@ watch(payments, () => {
       <div class="grid w-full grid-cols-12 text-center">
         <button
           variant="primary"
+          type="button"
           class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
+          @click="() => directToPaymentSetting('PayPal')"
         >
           <img
             class="h-4/6 w-full"
@@ -56,7 +65,9 @@ watch(payments, () => {
         </button>
         <button
           variant="primary"
+          type="button"
           class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
+          @click="() => directToPaymentSetting('Stripe')"
         >
           <img
             class="h-4/6 w-full"
@@ -67,7 +78,9 @@ watch(payments, () => {
         </button>
         <button
           variant="primary"
+          type="button"
           class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
+          @click="() => directToPaymentSetting('LinePay')"
         >
           <img
             class="h-4/6 w-full"
