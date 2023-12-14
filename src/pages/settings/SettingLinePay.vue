@@ -26,81 +26,91 @@ const submit = () => {
 <template>
   <div class="">
     <div
-      class="mb-4 flex items-center justify-between rounded-xl bg-white p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
+      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-10"
+      style="border-radius: 20px"
     >
-      <div class="flex">
-        <b class="text-base">{{ $t('payment-flow-turn-on-line-pay') }}</b>
-        <div
-          class="ml-2"
-          v-tooltip:top.tooltip="$t('payment-flow-tooltip-turn-on-line-pay')"
-        >
-          <Lucide icon="HelpCircle" width="14" />
-        </div>
-        <FormSwitch>
-          <FormSwitch.Input
-            class="ml-8"
-            v-model="form.line_pay_open"
-            id="checkbox-switch-7"
-            type="checkbox"
-          />
-        </FormSwitch>
+      <div class="text-base">{{ $t('payment-flow-turn-on-line-pay') }}</div>
+      <div
+        class="ml-2"
+        v-tooltip:top.tooltip="$t('payment-flow-tooltip-turn-on-line-pay')"
+      >
+        <Lucide icon="HelpCircle" width="14" />
       </div>
+      <FormSwitch class="ml-5 text-gray-700">
+        <FormSwitch.Input
+          class="ml-8"
+          v-model="form.line_pay_open"
+          id="checkbox-switch-7"
+          type="checkbox"
+        />
+      </FormSwitch>
     </div>
     <div
-      class="flex items-center justify-between rounded-t-xl bg-white p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
+      class="relative mt-5 flex flex-col border-0 bg-white pl-5"
+      style="border-radius: 20px"
     >
-      <b class="text-base">{{ $t('payment-flow-line-pay-settings') }}</b>
-      <Button
-        class="w-1/12"
-        variant="primary"
-        :disabled="submitChange"
-        @click="submit"
-        >{{ $t('chatbot-save-btn') }}</Button
+      <div
+        class="flex flex-row content-between items-center border-b border-gray-200 p-5 text-black"
       >
-    </div>
-    <div class="mt-0.5 rounded-b-xl bg-white p-4 dark:bg-darkmode-600">
-      <div class="block lg:flex">
-        <div class="flex-1">
-          <div class="mt-2 rounded-xl bg-white dark:bg-darkmode-600">
-            <div class="grid grid-cols-4 gap-y-4 pb-6 pl-4 pr-4 pt-2">
-              <div class="col-span-4">
-                <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
-                  >{{ $t('payment-flow-line-pay-channel-id') }}
-                  <div
-                    class="ml-2"
-                    v-tooltip:top.tooltip="
-                      $t('payment-flow-tooltip-channel-id')
-                    "
-                  >
-                    <Lucide icon="HelpCircle" width="14" />
-                  </div>
-                </FormLabel>
-                <FormInput
-                  v-model="form.line_pay_channel_id"
-                  class="w-6/12"
-                  type="text"
-                />
-              </div>
-              <div class="col-span-4">
-                <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
-                  >{{ $t('payment-flow-line-pay-channel-secret-key') }}
-                  <div
-                    class="ml-2"
-                    v-tooltip:top.tooltip="
-                      $t('payment-flow-tooltip-channel-secret-key')
-                    "
-                  >
-                    <Lucide icon="HelpCircle" width="14" />
-                  </div>
-                </FormLabel>
-                <FormInput
-                  v-model="form.line_pay_channel_secret_key_id"
-                  type="text"
-                  class="w-6/12"
-                />
-              </div>
+        <h2 class="mr-auto">{{ $t('payment-flow-line-pay-settings') }}</h2>
+        <Button
+          class="w-1/12"
+          variant="primary"
+          :disabled="submitChange"
+          @click="submit"
+          >{{ $t('chatbot-save-btn') }}</Button
+        >
+      </div>
+      <div class="text-m p-5 pb-0 text-gray-600">
+        <div>
+          {{ $t('payment-flow-for-the-line-pay-collection') }}
+          <a
+            style="text-decoration: underline"
+            href="https://funtek.notion.site/LINE-Pay-269803b912c2417991b99978e1a5e6fb"
+            target="_blank"
+          >
+            {{ $t('payment-flow-please-refer-to-this-article-for-teaching') }}
+          </a>
+        </div>
+      </div>
+      <div class="p-5 text-black">
+        <div class="flex items-center py-1">
+          <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
+            >{{ $t('payment-flow-line-pay-channel-id') }}
+            <div
+              class="ml-2"
+              v-tooltip:top.tooltip="$t('payment-flow-tooltip-channel-id')"
+            >
+              <Lucide icon="HelpCircle" width="14" />
             </div>
-          </div>
+          </FormLabel>
+        </div>
+        <div class="pb-3 pt-1">
+          <FormInput
+            v-model="form.line_pay_channel_id"
+            class="w-6/12"
+            type="text"
+          />
+        </div>
+        <div class="flex items-center py-1">
+          <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
+            >{{ $t('payment-flow-line-pay-channel-secret-key') }}
+            <div
+              class="ml-2"
+              v-tooltip:top.tooltip="
+                $t('payment-flow-tooltip-channel-secret-key')
+              "
+            >
+              <Lucide icon="HelpCircle" width="14" />
+            </div>
+          </FormLabel>
+        </div>
+        <div class="pb-3 pt-1">
+          <FormInput
+            v-model="form.line_pay_channel_secret_key_id"
+            type="text"
+            class="w-6/12"
+          />
         </div>
       </div>
     </div>

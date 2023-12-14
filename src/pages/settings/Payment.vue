@@ -5,7 +5,7 @@ import usePayment from './composables/usePayment'
 import { convertYmdHis } from '../../lib/timeLib'
 import SidebarModal from '../../components/Modals/SidebarModal'
 import { Payment } from '../../stores/payment'
-import { useRedirectToStore } from '../../stores/redirect-to'
+// import { useRedirectToStore } from '../../stores/redirect-to'
 
 const { payments, fetchAllPayments, getPaymentStatus, getPaymentMethod } =
   usePayment()
@@ -28,12 +28,6 @@ const controlModal = (payment: Payment) => {
   }
 }
 
-const directToPaymentSetting = (method: 'LinePay' | 'Stripe' | 'PayPal') => {
-  useRedirectToStore().redirect({
-    path: `/dashboard/settings/payment/${method.toLowerCase()}`
-  })
-}
-
 onMounted(() => {
   fetchAllPayments()
 })
@@ -46,54 +40,59 @@ watch(payments, () => {
 <template>
   <SidebarModal ref="childComponentRef" :detail="detail" />
   <div class="">
-    <div
-      class="flex items-center justify-between rounded-t-xl p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
-    >
-      <div class="grid w-full grid-cols-12 text-center">
-        <button
-          variant="primary"
-          type="button"
-          class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
-          @click="() => directToPaymentSetting('PayPal')"
+    <div class="mt-5 grid grid-cols-12 gap-5">
+      <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-4">
+        <a
+          class="item-pay menu relative mt-5 flex flex-col items-center rounded-lg border-0 bg-white p-8 pl-10"
+          href="/dashboard/settings/settings_payment_flow_paypal"
         >
-          <img
-            class="h-4/6 w-full"
-            src="https://logos-world.net/wp-content/uploads/2020/08/PayPal-Symbol.png"
-          />
-          {{ $t('payment-flow-go-to-settings') }}
-          <Lucide icon="ChevronRight" />
-        </button>
-        <button
-          variant="primary"
-          type="button"
-          class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
-          @click="() => directToPaymentSetting('Stripe')"
+          <div>
+            <img src="@/assets/images/svg/pay_logo/logo_paypal.svg" />
+          </div>
+          <div class="mt-5">
+            <div class="text-pay-16 flex">
+              {{ $t('payment-flow-go-to-settings') }}
+              <Lucide icon="ChevronRight" />
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-4">
+        <a
+          class="item-pay menu relative mt-5 flex flex-col items-center rounded-lg border-0 bg-white p-8 pl-10"
+          href="/dashboard/settings/settings_payment_flow_stripe"
         >
-          <img
-            class="h-4/6 w-full"
-            src="https://i0.wp.com/jimfitzpatrick.com/wp-content/uploads/2016/11/Stripe-Logo-blue-copy.png?ssl=1"
-          />
-          {{ $t('payment-flow-go-to-settings') }}
-          <Lucide icon="ChevronRight" />
-        </button>
-        <button
-          variant="primary"
-          type="button"
-          class="col-span-4 m-4 flex h-40 flex-wrap items-center justify-center whitespace-nowrap rounded-lg bg-white"
-          @click="() => directToPaymentSetting('LinePay')"
+          <div>
+            <img src="@/assets/images/svg/pay_logo/logo_stripe.svg" />
+          </div>
+          <div class="mt-5">
+            <div class="text-pay-16 flex">
+              {{ $t('payment-flow-go-to-settings') }}
+              <Lucide icon="ChevronRight" />
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-4">
+        <a
+          class="item-pay menu relative mt-5 flex flex-col items-center rounded-lg border-0 bg-white p-8 pl-10"
+          href="/dashboard/settings/settings_payment_flow_line_pay"
         >
-          <img
-            class="h-4/6 w-full"
-            src="https://cpok.tw/wp-content/uploads/2020/10/line-pay-1.png"
-          />
-          {{ $t('payment-flow-go-to-settings') }}
-          <Lucide icon="ChevronRight" />
-        </button>
+          <div>
+            <img src="@/assets/images/svg/pay_logo/logo_linepay.png" />
+          </div>
+          <div class="mt-5">
+            <div class="text-pay-16 flex">
+              {{ $t('payment-flow-go-to-settings') }}
+              <Lucide icon="ChevronRight" />
+            </div>
+          </div>
+        </a>
       </div>
     </div>
 
     <div
-      class="flex items-center justify-between rounded-t-xl bg-white p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
+      class="mt-4 flex items-center justify-between rounded-t-xl bg-white p-4 dark:bg-darkmode-600 dark:bg-darkmode-600"
     >
       <div>
         <b class="text-base">{{ $t('payment-flow-history-record') }}</b>

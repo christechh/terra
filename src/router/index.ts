@@ -69,22 +69,22 @@ const routes = [
             component: () => import('@/pages/settings/SubAccount.vue')
           },
           {
-            path: 'payment',
+            path: 'settings_payment_flow',
             name: 'settings-payment',
             component: () => import('@/pages/settings/Payment.vue')
           },
           {
-            path: 'payment/paypal',
+            path: 'settings_payment_flow_paypal',
             name: 'settings-payment-paypal',
             component: () => import('@/pages/settings/SettingPayPal.vue')
           },
           {
-            path: 'payment/stripe',
+            path: 'settings_payment_flow_stripe',
             name: 'settings-payment-stripe',
             component: () => import('@/pages/settings/SettingStripe.vue')
           },
           {
-            path: 'payment/linepay',
+            path: 'settings_payment_flow_line_pay',
             name: 'settings-line-pay-stripe',
             component: () => import('@/pages/settings/SettingLinePay.vue')
           }

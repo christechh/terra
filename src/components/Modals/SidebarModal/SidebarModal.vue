@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue'
 import { Dialog } from '../../../base-components/Headless'
+import Button from '../../../base-components/Button'
 import CloseIcon from '../../Icons/CloseIcon.vue'
 import { Colors } from '../../../utils/design-patterns'
 
@@ -124,6 +125,11 @@ defineExpose({
               </li>
             </template>
           </ul>
+          <div class="mt-4 flex">
+            <Button class="m-auto w-4/12" variant="primary">{{
+              $t('payment-flow-details-go-to-chat-room')
+            }}</Button>
+          </div>
         </Dialog.Description>
       </Dialog.Panel>
     </Dialog>
