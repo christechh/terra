@@ -27,11 +27,7 @@ const copyCode = () => {
 </script>
 
 <template>
-  <div class="w-full" style="margin-bottom: 28px">
-    <div class="font-semibold" style="margin-bottom: 4px; margin-top: 4px">
-      {{ $t('widget-copy-script') }}
-    </div>
-
+  <div class="w-full">
     <div class="text-xs" style="color: #939393; margin-bottom: 10px">
       {{ $t('float-button-desc') }}
     </div>

@@ -1,26 +1,27 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
-import {
-  computed,
-  InputHTMLAttributes,
-  useAttrs,
-  inject,
-  useSlots,
-  defineProps,
-  defineEmits
-} from 'vue'
+import { InputHTMLAttributes, computed, inject, useAttrs, useSlots } from 'vue'
 import { ProvideFormInline } from './FormInline.vue'
 import { ProvideInputGroup } from './InputGroup/InputGroup.vue'
 defineOptions({
   inheritAttrs: false
 })
-interface FormInputProps extends /* @vue-ignore */ InputHTMLAttributes {
+
+export interface FormInputOnInputParams {
+  name?: string
+  value: string
+}
+
+interface FormInputProps {
   modelValue?: InputHTMLAttributes['value']
   formInputSize?: 'sm' | 'lg'
   rounded?: boolean
   clearable?: boolean
   inputClass?: string
+  name?: string
+  onInput?: (data: FormInputOnInputParams) => void
+  type?: InputHTMLAttributes['type']
 }
 
 interface FormInputEmit {
@@ -32,7 +33,6 @@ const props = defineProps<FormInputProps>()
 
 const attrs = useAttrs()
 const slots = useSlots()
-console.log('slots', slots)
 
 const formInline = inject<ProvideFormInline>('formInline', false)
 const inputGroup = inject<ProvideInputGroup>('inputGroup', false)
@@ -64,6 +64,14 @@ const localValue = computed({
     emit('update:modelValue', newValue)
   }
 })
+
+const handleInput = (e: Event) => {
+  const { value } = e.target as HTMLInputElement
+  props.onInput?.({
+    name: props.name,
+    value
+  })
+}
 </script>
 
 <template>
@@ -80,6 +88,7 @@ const localValue = computed({
       v-bind="_.omit(attrs, 'class')"
       v-model="localValue"
       @change="emit('change')"
+      @input="handleInput"
     />
     <div
       v-if="clearable && localValue"

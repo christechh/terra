@@ -1,3 +1,53 @@
+# [1.16.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.15.0...v1.16.0) (2023-12-13)
+
+
+### Features
+
+* 修正箭頭點擊動畫沒改變、第三方整合部分 ([43f8b13](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/43f8b131448862bcc217b8b077b19c04f55ce97a))
+* 修正箭頭點擊動畫沒改變、第三方整合部分 ([accbcc7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/accbcc7086b6bd795ed108bbd5b8cf95bc5c4e39))
+
+# [1.15.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.14.1...v1.15.0) (2023-12-12)
+
+
+### Features
+
+* 修正箭頭點擊動畫沒改變、第三方整合部分 ([79d4ef7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/79d4ef7d61e4d1dce309249c98f9a89cb863d270))
+
+## [1.14.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.14.0...v1.14.1) (2023-12-12)
+
+
+### Bug Fixes
+
+* [#7](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/7): tooltip, emulator ([09b79ed](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/09b79eded0d731c7e3952eecb59d101523056acb))
+* fix head shots size ([82d7a48](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/82d7a48fe6e2480750a18ef6f08a04996b684ef6))
+* head shots would broken with `withDefaults` ([a6926c9](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a6926c96ce49cece985490291cc92dba466854d7))
+
+# [1.14.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.13.0...v1.14.0) (2023-12-11)
+
+
+### Features
+
+* [#5](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/5) ([c35b49b](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/c35b49ba27f3d930835c50417f290c48790afed7))
+
+# [1.13.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.12.1...v1.13.0) (2023-12-11)
+
+
+### Features
+
+* adjust upload function ([dd40123](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/dd40123021c919621eba89bc2b12b523100a6c62))
+* chat setting done ([44e12c7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/44e12c7d96b0dcbd5543803c04020d45d8db6f39))
+* chat setting init ([0d88f59](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0d88f5932551a3083b3064e07f6783801a91426e))
+* color picker and pinboard ui ([e95fd96](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e95fd96c483d6d2c858e83eb14b6d48b9cde2203))
+* pinboard init ([688d95c](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/688d95cfd211348af1906aca48468ab066ff0ff5))
+* pinboard with api ([5779db2](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/5779db25e659dabfbcb1326237891b39e599ebd4))
+
+## [1.12.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.12.0...v1.12.1) (2023-12-10)
+
+
+### Bug Fixes
+
+* update title & favicon ([7b653e8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7b653e82555d0911b983c482572e4d88e114b49f))
+
 # [1.12.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.11.1...v1.12.0) (2023-12-09)
 
 

@@ -71,29 +71,26 @@ watch(
 </script>
 
 <template>
-  <div class="mb-[28px]">
-    <div class="mb-2 mt-1 font-semibold">{{ props.title }}</div>
+  <div
+    class="flex w-full flex-row items-start justify-between"
+    style="background-color: #f6f6f6; border-radius: 10px; padding: 20px"
+  >
     <div
-      class="flex w-full flex-row items-start justify-between"
-      style="background-color: #f6f6f6; border-radius: 10px; padding: 20px"
+      class="flex cursor-pointer flex-row"
+      v-for="option in options"
+      :key="option.value"
+      @click="updateValue(option.value)"
     >
-      <div
-        class="flex cursor-pointer flex-row"
-        v-for="option in options"
-        :key="option.value"
-        @click="updateValue(option.value)"
-      >
-        <input
-          type="radio"
-          :checked="currentValue === option.value"
-          class="input mr-3 border text-primary"
-          name="widget_type"
-          value="circle"
-        />
-        <div class="type_right">
-          <div class="" style="">{{ option.label }}</div>
-          <img :src="option.img" width="200" height="135" />
-        </div>
+      <input
+        type="radio"
+        :checked="currentValue === option.value"
+        class="input mr-3 border text-primary"
+        name="widget_type"
+        value="circle"
+      />
+      <div class="type_right">
+        <div class="" style="">{{ option.label }}</div>
+        <img :src="option.img" width="200" height="135" />
       </div>
     </div>
   </div>

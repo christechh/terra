@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import { computed, ComputedRef, ref } from 'vue'
-import UploadIcon from '../../components/Icons/UploadIcon.vue'
-import CloseIcon from '../../components/Icons/CloseIcon.vue'
+import axios from '../../axios'
 import ClipIcon from '../../components/Icons/ClipIcon.vue'
-
-import LoadingIcon from '../LoadingIcon'
+import CloseIcon from '../../components/Icons/CloseIcon.vue'
 import { useNotificationsStore } from '../../stores/notifications'
 import Alert from '../Alert/Alert.vue'
+import LoadingIcon from '../LoadingIcon'
 import Lucide from '../Lucide/Lucide.vue'
 
 interface uploadFile {
@@ -16,16 +15,24 @@ interface uploadFile {
 
 interface Props {
   type: string
-  modelValue: Array<uploadFile>
+  modelValue: Array<uploadFile | { data: string }> | null
   limit: number
+  showClose?: boolean
 }
 
-const { type = 'img', modelValue, limit } = defineProps<Props>()
-const emit = defineEmits(['update:modelValue'])
+const {
+  type = 'img',
+  modelValue,
+  limit,
+  showClose = true
+} = defineProps<Props>()
+const emit = defineEmits(['update:modelValue', 'clear'])
 
 const fileRef = ref(null)
 const isUploading = ref(false)
 const fileSize = ref(0)
+const imgRef = ref<HTMLImageElement>()
+const verOrHor = ref('')
 const typeName = computed(() => {
   const m = {
     img: '圖片',
@@ -34,6 +41,17 @@ const typeName = computed(() => {
   }
   return m[type as keyof typeof m]
 })
+
+const imgVerOrHor = (event: Event) => {
+  const img = event.target as HTMLImageElement
+  const h = img?.naturalHeight as number
+  const w = img?.naturalWidth as number
+  if (h > w) {
+    verOrHor.value = 'ver'
+  } else {
+    verOrHor.value = 'hor'
+  }
+}
 
 const accept: ComputedRef<string> = computed(() => {
   const m = {
@@ -60,9 +78,15 @@ const fileChangeHandler = async (e: Event) => {
       if (size > limit) {
         return
       }
-      // const url = await store.uploadSectionVideo(file);
-      // const name = url.split('/').pop().replace('.mp4', '')
-      // emit('update:modelValue', [{ name: name, data: url }]);
+      const formData = new FormData()
+      formData.append('file', file)
+      const res = await axios.post('/dashboard/enterpoint/logo', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      const url = res.data.data.data.url
+      emit('update:modelValue', [{ name: '', data: url }])
       useNotificationsStore().showSuccess({ title: '上傳成功', content: '' })
     }
   } catch (e) {
@@ -75,6 +99,7 @@ const fileChangeHandler = async (e: Event) => {
 const removeImgHandler = (index: number) => {
   console.log(index)
   emit('update:modelValue', [])
+  emit('clear')
 }
 
 const resetFiles = (event: Event) => {
@@ -93,39 +118,50 @@ const resetFiles = (event: Event) => {
         @change="fileChangeHandler($event)"
         @click="resetFiles($event)"
       />
-      <div v-for="(file, k) in modelValue" :key="k" class="relative mr-10">
-        <img
-          v-if="type === 'img'"
-          :src="file.data"
-          alt=""
-          style="height: 109px"
-        />
-        <div v-else class="flex w-36">
-          <ClipIcon />
-          <span class="ml-2 overflow-hidden text-ellipsis whitespace-nowrap">{{
-            file.name
-          }}</span>
-        </div>
-        <div
-          class="absolute right-0 top-0 flex h-4 w-4 -translate-y-1/2 translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-danger"
-          @click="removeImgHandler(k)"
-        >
-          <CloseIcon />
+      <div v-for="(file, k) in modelValue" :key="k">
+        <div class="relative">
+          <img
+            ref="imgRef"
+            v-if="type === 'img'"
+            :src="file.data"
+            alt=""
+            class="mr-3 rounded object-cover"
+            :class="{
+              'w-[140px]': verOrHor === 'hor',
+              'h-[110px] w-[180px]': verOrHor === 'ver'
+            }"
+            @load="imgVerOrHor"
+          />
+          <div v-else class="flex w-36">
+            <ClipIcon />
+            <!-- <span
+              class="ml-2 overflow-hidden text-ellipsis whitespace-nowrap"
+              >{{ file.name }}</span -->
+            >
+          </div>
+          <div
+            v-if="showClose"
+            class="absolute right-0 top-0 flex h-4 w-4 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#e2e8f0]"
+            @click="removeImgHandler(k)"
+          >
+            <CloseIcon />
+          </div>
         </div>
       </div>
       <div
-        class="flex flex-1 cursor-pointer items-center justify-center rounded border border-dashed border-slate-200"
+        class="flex flex-1 cursor-pointer items-center justify-center rounded rounded-lg border-2 border-dashed border-slate-200 bg-input_bg"
         style="height: 110px"
         @click="clickHandler"
       >
-        <div class="flex items-center" style="color: #7b7b7b">
+        <div class="text-center" style="color: #7b7b7b">
           <template v-if="isUploading">
             <LoadingIcon icon="tail-spin" class="mr-2" />
             <span>{{ typeName }}上傳中</span>
           </template>
           <template v-else>
-            <UploadIcon class="mr-2" />
-            <span> 上傳{{ typeName }} </span>
+            <Lucide icon="UploadCloud" width="48" class="mx-auto" />
+            <span> {{ $t('edit-choose-file') }} </span>
+            <div class="ml-2">{{ typeName }}大小超過 {{ limit }}MB</div>
           </template>
         </div>
       </div>

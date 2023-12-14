@@ -1,34 +1,18 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
 import Breadcrumb from '../../base-components/Breadcrumb'
+import ChatSetting from '../../components/LinkDetail/BaseSetting/ChatSetting.vue'
+import LinkInfo from '../../components/LinkDetail/BaseSetting/LinkInfo.vue'
+import PinBoard from '../../components/LinkDetail/BaseSetting/PinBoard.vue'
 import { useLinkPage } from '../../composables/useLinkPage'
-import { useDeleteModalStore } from '../../stores/modals/deleteModal'
 
-const route = useRoute()
-const { t } = useI18n()
-const currentTab = ref(0)
-const { type } = route.query
-const { token, routeTitle, fetchConfig } = useLinkPage()
-const linkId = ref<number>()
+const currentTab = ref(1)
+const { token, routeTitle } = useLinkPage()
 
-fetchConfig().then((res) => {
-  linkId.value = res.id
+const tabContent = computed(() => {
+  const map = [LinkInfo, PinBoard, ChatSetting]
+  return map[currentTab.value]
 })
-
-const chatUrl = computed(() => {
-  return `${location.origin}/${token.value}`
-})
-
-const deleteHandler = () => {
-  useDeleteModalStore().showModal({
-    deleteType: 'chatLink',
-    title: t('delete-alert-title'),
-    content: t('qrcode-page-delete-check-message'),
-    deleteData: { token: token.value, id: linkId.value }
-  })
-}
 </script>
 
 <template>
@@ -66,61 +50,6 @@ const deleteHandler = () => {
       {{ $t('edit-chat-room-title') }}
     </nav>
   </header>
-  <main class="mt-2 rounded rounded-lg bg-white dark:bg-darkmode-600">
-    <header class="border-b border-[#EDF2F7] p-5 text-base">
-      {{ $t('connent-info') }}
-    </header>
-    <div class="p-5 ps-11">
-      <ol class="relative dark:border-gray-700">
-        <li class="border-s border-[#E3F2A5] pb-5 ps-6">
-          <span
-            class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white ring-1 ring-white dark:bg-blue-900 dark:ring-gray-900"
-          >
-            1
-          </span>
-          <div class="flex items-center">
-            <span>{{ $t('chatbot-message-action-type') }}</span>
-          </div>
-          <div class="mt-3 text-[#939393]">
-            {{
-              type === 'direct' ? $t('edit-one-to-one') : $t('edit-group-chat')
-            }}
-          </div>
-        </li>
-        <li class="border-s border-[#E3F2A5] pb-5 ps-6">
-          <span
-            class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white ring-1 ring-white dark:bg-blue-900 dark:ring-gray-900"
-          >
-            2
-          </span>
-          <div class="flex items-center">
-            <span>{{ $t('chat-link') }}</span>
-          </div>
-          <div class="mt-3 text-[#939393]">
-            {{ chatUrl }}
-          </div>
-        </li>
-        <li class="ms-6">
-          <span
-            class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white ring-1 ring-white dark:bg-blue-900 dark:ring-gray-900"
-          >
-            3
-          </span>
-          <div class="flex items-center">
-            <span>{{ $t('delete-chat-link') }}</span>
-          </div>
-          <div class="mt-3 text-[#939393]">
-            {{ $t('delete-chat-link-tip') }}
-          </div>
-          <button
-            class="mt-5 rounded-lg bg-[#FF4D4F] px-5 py-2 text-white"
-            @click="deleteHandler"
-          >
-            {{ $t('delete-btn') }}
-          </button>
-        </li>
-      </ol>
-    </div>
-  </main>
+  <component :is="tabContent" />
 </template>
 1

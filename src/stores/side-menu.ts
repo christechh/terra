@@ -37,6 +37,11 @@ export const useSideMenuStore = defineStore('sideMenu', {
             title: i18n.global.t('menu-enterpoint3')
           },
           {
+            icon: 'Puzzle',
+            pageName: 'enterpoint-thirds',
+            title: i18n.global.t('menu-enterpoint5')
+          },
+          {
             icon: 'UserCog',
             pageName: 'enterpoint-customer',
             title: i18n.global.t('menu-enterpoint4')

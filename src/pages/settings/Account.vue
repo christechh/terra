@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import Button from '../../base-components/Button'
 import { FormCheck, FormSwitch, InputGroup } from '../../base-components/Form'
 import FormInput from '../../base-components/Form/FormInput.vue'
 import FormLabel from '../../base-components/Form/FormLabel.vue'
-import Lucide from '../../base-components/Lucide/index'
 import ContryCodePicker from '../../components/ContryCodePicker'
+import HeadShots from '../../components/HeadShots'
 import ActiveLogsModal from '../../components/Modals/ActiveLogsModal/'
-import HeadUploadModal from '../../components/Modals/HeadUploadModal'
 import useActiveLog from './composables/useActiveLog'
 import usePassword from './composables/usePassword'
 import useUserInfo from './composables/useUserInfo'
-
-const showHeadUploadPopup = ref(false)
 
 const {
   userInfo,
@@ -22,8 +18,7 @@ const {
   getUserInfo,
   updateAccountSetting,
   updateNotification,
-  confirmDeleteAccout,
-  headChangehandler
+  confirmDeleteAccout
 } = useUserInfo()
 
 const { oldPsd, newPsd, newPsdAgain, resetPsdError, updatePassword } =
@@ -56,20 +51,11 @@ getUserActiveLog()
             >{{ $t('qrcode-page-avatar') }}</FormLabel
           >
           <div class="col-span-3">
-            <div class="relative h-32 w-32" @click="showHeadUploadPopup = true">
-              <img
-                :src="userInfo.avatar"
-                width="128"
-                height="128"
-                alt=""
-                class="rounded-full"
-              />
-              <div
-                class="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary p-2"
-              >
-                <Lucide icon="Camera" color="white" />
-              </div>
-            </div>
+            <HeadShots
+              v-model:avatar="userInfo.avatar"
+              v-model:image_id="userInfo.image_id"
+              @change="accountSettingChange = true"
+            />
           </div>
           <FormLabel
             class="col-span-1 mb-0 mr-2 flex items-center justify-end"
@@ -249,12 +235,6 @@ getUserActiveLog()
         </div>
       </div>
     </div>
-    <HeadUploadModal
-      v-if="showHeadUploadPopup"
-      v-model="showHeadUploadPopup"
-      :image-id="userInfo.image_id"
-      @save="headChangehandler"
-    />
     <ActiveLogsModal :active-logs="allLogs" v-model="showActiveLogPopup" />
   </div>
 </template>
