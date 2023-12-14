@@ -63,9 +63,11 @@ const toggleSecretKeyTooltip = () => {
           @mouseenter="toggleTurnOnTooltip()"
           @mouseleave="toggleTurnOnTooltip()"
         />
-        <div class="absolute top-10 mx-2 mb-4 w-44">
+        <div
+          :class="{ hidden: !turnOnTooltipShow }"
+          class="absolute top-10 mx-2 mb-4 w-44"
+        >
           <div
-            :class="{ invisible: !turnOnTooltipShow }"
             class="bottom-full right-0 rounded bg-gray-600 px-4 py-1 text-xs text-white"
           >
             {{ $t('payment-flow-tooltip-turn-on-stripe') }}
@@ -116,9 +118,12 @@ const toggleSecretKeyTooltip = () => {
                     @mouseenter="togglePublicKeyTooltip()"
                     @mouseleave="togglePublicKeyTooltip()"
                   />
-                  <div class="absolute z-50 mx-2 mb-4 w-44" style="top: 14rem">
+                  <div
+                    :class="{ hidden: !publicKeyTooltipShow }"
+                    class="absolute z-50 mx-2 mb-4 w-44"
+                    style="top: 14rem"
+                  >
                     <div
-                      :class="{ invisible: !publicKeyTooltipShow }"
                       class="bottom-full right-0 rounded bg-gray-600 px-4 py-1 text-xs text-white"
                     >
                       {{ $t('payment-flow-tooltip-stripe-public-key') }}
@@ -141,7 +146,6 @@ const toggleSecretKeyTooltip = () => {
                   v-model="form.stripe_api_secret"
                   class="w-6/12"
                   type="text"
-                  :class="resetPsdError ? 'border border-danger' : ''"
                 />
               </div>
               <div class="col-span-4">
@@ -153,9 +157,12 @@ const toggleSecretKeyTooltip = () => {
                     @mouseenter="toggleSecretKeyTooltip()"
                     @mouseleave="toggleSecretKeyTooltip()"
                   />
-                  <div class="absolute z-50 mx-2 mb-4 w-44" style="top: 19rem">
+                  <div
+                    :class="{ hidden: !secretKeyTooltipShow }"
+                    class="absolute z-50 mx-2 mb-4 w-44"
+                    style="top: 19rem"
+                  >
                     <div
-                      :class="{ invisible: !secretKeyTooltipShow }"
                       class="bottom-full right-0 rounded bg-gray-600 px-4 py-1 text-xs text-white"
                     >
                       {{ $t('payment-flow-tooltip-stripe-secret-key') }}
