@@ -17,11 +17,12 @@ import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 export type ConnectType =
   | 'line'
   | 'what-app'
+  | 'what-app-2'
   | 'messenger'
   | 'instagram'
   | 'slack'
 
-export const useThird = (type: ConnectType) => {
+export const useThird = (type?: ConnectType) => {
   const { t, locale } = useI18n()
   const { token } = useLinkPage()
   const notificationsStore = useNotificationsStore()
@@ -221,6 +222,26 @@ export const useThird = (type: ConnectType) => {
           }
         ]
       },
+      'what-app-2': {
+        title: t('what-app-txt12'),
+        subtitle: h(
+          'div',
+          {
+            class: 'text-[#939393]'
+          },
+          h('span', null, t('what-app-txt13'))
+        ),
+        steps: [
+          {
+            title: t('what-app-txt14'),
+            render: () => h('div', null, [h('span', null, t('what-app-txt15'))])
+          },
+          {
+            title: t('what-app-txt16'),
+            render: () => h('div', null, [h('span', null, t('what-app-txt17'))])
+          }
+        ]
+      },
       messenger: {
         title: t('messenger-txt1'),
         subtitle: h(
@@ -417,7 +438,7 @@ export const useThird = (type: ConnectType) => {
               ])
           },
           {
-            title: t('slack-txt9')
+            title: t('slack-txt8')
           }
         ]
       }
@@ -428,6 +449,9 @@ export const useThird = (type: ConnectType) => {
         steps?: StepItem[]
       }
     }
+  })
+  const whatApp2Config = computed(() => {
+    return dictionary.value['what-app-2']
   })
 
   const fetchConfig = () => {
@@ -478,7 +502,7 @@ export const useThird = (type: ConnectType) => {
       notificationsStore.showSuccess({
         title: t('api-message')
       })
-      fetchConfig()
+      await fetchConfig()
     } catch (error) {
       console.log('error', error)
     } finally {
@@ -499,6 +523,21 @@ export const useThird = (type: ConnectType) => {
       onSubmit: () => {
         saveConfig({
           line_messaging_channel_access_token: ''
+        })
+      }
+    })
+  }
+  const disconnectWhatAppToken = () => {
+    useDeleteModalStore().showModal({
+      deleteType: 'callback',
+      title: t('disconnect-line-modal-title'),
+      content: t('disconnect-line-modal-message'),
+      cancelButtonText: t('disconnect-line-modal-cancel-btn'),
+      confirmButtonText: t('disconnect-line-modal-confirm-btn'),
+      onSubmit: () => {
+        saveConfig({
+          whatsapp_phone_number_id: '',
+          whatsapp_access_token: ''
         })
       }
     })
@@ -549,16 +588,27 @@ export const useThird = (type: ConnectType) => {
   }
 
   return {
-    title: computed(() => dictionary.value[type].title),
-    subtitle: computed(() => dictionary.value[type].subtitle),
-    steps: computed(() => dictionary.value[type].steps),
+    title: computed(() => {
+      if (!type) return ''
+      return dictionary.value[type].title
+    }),
+    subtitle: computed(() => {
+      if (!type) return ''
+      return dictionary.value[type].subtitle
+    }),
+    steps: computed(() => {
+      if (!type) return []
+      return dictionary.value[type].steps
+    }),
     config,
     originalConfig: computed(() => enterpointsConfigStore.originData),
+    whatApp2Config,
     fetchConfig,
     isDifferent: computed(() => enterpointsConfigStore.isDifferent),
     onSubmit,
     btnLoading,
     disconnectLineToken,
+    disconnectWhatAppToken,
     disconnectMessageToken,
     disconnectIgToken,
     disconnectSlackToken
