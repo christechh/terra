@@ -8,10 +8,6 @@ import usePayment from './composables/usePayment'
 
 const { setPaymentByMethod } = usePayment()
 const submitChange = ref(false)
-const turnOnTooltipShow = ref(false)
-const sandboxTooltipShow = ref(false)
-const publicKeyTooltipShow = ref(false)
-const secretKeyTooltipShow = ref(false)
 const form = ref<CreatePayPalDTO>({
   paypal_open: false,
   paypal_sandbox_mode: import.meta.env.NODE_ENV !== 'production',
@@ -27,38 +23,6 @@ const submit = () => {
     paypal_secret: form.value.paypal_secret
   })
 }
-
-const toggleTurnOnTooltip = () => {
-  if (turnOnTooltipShow.value) {
-    turnOnTooltipShow.value = false
-  } else {
-    turnOnTooltipShow.value = true
-  }
-}
-
-const toggleSandBoxTooltip = () => {
-  if (sandboxTooltipShow.value) {
-    sandboxTooltipShow.value = false
-  } else {
-    sandboxTooltipShow.value = true
-  }
-}
-
-const togglePublicKeyTooltip = () => {
-  if (publicKeyTooltipShow.value) {
-    publicKeyTooltipShow.value = false
-  } else {
-    publicKeyTooltipShow.value = true
-  }
-}
-
-const toggleSecretKeyTooltip = () => {
-  if (secretKeyTooltipShow.value) {
-    secretKeyTooltipShow.value = false
-  } else {
-    secretKeyTooltipShow.value = true
-  }
-}
 </script>
 
 <template>
@@ -68,30 +32,11 @@ const toggleSecretKeyTooltip = () => {
     >
       <div class="flex">
         <b class="text-base">{{ $t('payment-flow-turn-on-paypal') }}</b>
-        <Lucide
-          icon="HelpCircle"
-          class="ml-2 mr-2 mt-1 h-4 w-4"
-          @mouseenter="toggleTurnOnTooltip()"
-          @mouseleave="toggleTurnOnTooltip()"
-        />
         <div
-          :class="{ hidden: !turnOnTooltipShow }"
-          class="absolute top-10 mx-2 mb-4 w-44"
+          class="ml-2"
+          v-tooltip:top.tooltip="$t('payment-flow-tooltip-turn-on-paypal')"
         >
-          <div
-            class="bottom-full right-0 rounded bg-gray-600 px-4 py-1 text-xs text-white"
-          >
-            {{ $t('payment-flow-tooltip-turn-on-paypal') }}
-            <svg
-              class="absolute left-0 top-full h-2 w-full text-gray-600"
-              x="0px"
-              y="0px"
-              viewBox="0 0 255 255"
-              xml:space="preserve"
-            >
-              <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
-            </svg>
-          </div>
+          <Lucide icon="HelpCircle" width="14" />
         </div>
         <FormSwitch>
           <FormSwitch.Input
@@ -124,34 +69,13 @@ const toggleSecretKeyTooltip = () => {
                 <FormLabel class="mb-0 text-start">{{
                   $t('payment-flow-paypal-live-mode')
                 }}</FormLabel>
-                <Lucide
-                  icon="HelpCircle"
-                  class="ml-2 mr-2 mt-0.5 h-4 w-4"
-                  @mouseenter="toggleSandBoxTooltip()"
-                  @mouseleave="toggleSandBoxTooltip()"
-                />
                 <div
-                  :class="{ hidden: !sandboxTooltipShow }"
-                  class="absolute z-50 mx-2 mb-4 w-44"
-                  style="top: 14.5rem"
+                  class="ml-2"
+                  v-tooltip:top.tooltip="
+                    $t('payment-flow-tooltip-paypal-sandbox-mode')
+                  "
                 >
-                  <div
-                    class="bottom-full right-0 rounded bg-gray-600 px-4 py-1 text-xs text-white"
-                  >
-                    {{ $t('payment-flow-tooltip-paypal-sandbox-mode') }}
-                    <svg
-                      class="absolute left-0 top-full h-2 w-full text-gray-600"
-                      x="0px"
-                      y="0px"
-                      viewBox="0 0 255 255"
-                      xml:space="preserve"
-                    >
-                      <polygon
-                        class="fill-current"
-                        points="0,0 127.5,127.5 255,0"
-                      />
-                    </svg>
-                  </div>
+                  <Lucide icon="HelpCircle" width="14" />
                 </div>
                 <FormSwitch>
                   <FormSwitch.Input
@@ -165,34 +89,13 @@ const toggleSecretKeyTooltip = () => {
               <div class="col-span-4">
                 <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
                   >{{ $t('payment-flow-paypal-client-id') }}
-                  <Lucide
-                    icon="HelpCircle"
-                    class="ml-2 mr-2 mt-0.5 h-4 w-4"
-                    @mouseenter="togglePublicKeyTooltip()"
-                    @mouseleave="togglePublicKeyTooltip()"
-                  />
                   <div
-                    :class="{ hidden: !publicKeyTooltipShow }"
-                    class="absolute z-50 mx-2 mb-4 w-44"
-                    style="top: 16.5rem"
+                    class="ml-2"
+                    v-tooltip:top.tooltip="
+                      $t('payment-flow-tooltip-paypal-client-id')
+                    "
                   >
-                    <div
-                      class="bottom-full right-0 rounded bg-gray-600 px-4 py-1 text-xs text-white"
-                    >
-                      {{ $t('payment-flow-tooltip-paypal-client-id') }}
-                      <svg
-                        class="absolute left-0 top-full h-2 w-full text-gray-600"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 255 255"
-                        xml:space="preserve"
-                      >
-                        <polygon
-                          class="fill-current"
-                          points="0,0 127.5,127.5 255,0"
-                        />
-                      </svg>
-                    </div>
+                    <Lucide icon="HelpCircle" width="14" />
                   </div>
                 </FormLabel>
                 <FormInput
@@ -204,34 +107,13 @@ const toggleSecretKeyTooltip = () => {
               <div class="col-span-4">
                 <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
                   >{{ $t('payment-flow-paypal-secret') }}
-                  <Lucide
-                    icon="HelpCircle"
-                    class="ml-2 mr-2 mt-0.5 h-4 w-4"
-                    @mouseenter="toggleSecretKeyTooltip()"
-                    @mouseleave="toggleSecretKeyTooltip()"
-                  />
                   <div
-                    :class="{ hidden: !secretKeyTooltipShow }"
-                    class="absolute z-50 mx-2 mb-4 w-44"
-                    style="top: 22rem"
+                    class="ml-2"
+                    v-tooltip:top.tooltip="
+                      $t('payment-flow-tooltip-paypal-secret')
+                    "
                   >
-                    <div
-                      class="bottom-full right-0 rounded bg-gray-600 px-4 py-1 text-xs text-white"
-                    >
-                      {{ $t('payment-flow-tooltip-paypal-secret') }}
-                      <svg
-                        class="absolute left-0 top-full h-2 w-full text-gray-600"
-                        x="0px"
-                        y="0px"
-                        viewBox="0 0 255 255"
-                        xml:space="preserve"
-                      >
-                        <polygon
-                          class="fill-current"
-                          points="0,0 127.5,127.5 255,0"
-                        />
-                      </svg>
-                    </div>
+                    <Lucide icon="HelpCircle" width="14" />
                   </div>
                 </FormLabel>
                 <FormInput
