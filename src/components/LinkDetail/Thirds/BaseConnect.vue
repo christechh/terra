@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, PropType, onMounted } from 'vue'
+import { ref, computed, PropType } from 'vue'
 
 import BoxHead from '@/components/Box/BoxHead.vue'
 import CButton from '@/base-components/Button/Button.vue'
@@ -22,7 +22,6 @@ const {
   subtitle,
   steps,
   originalConfig,
-  fetchConfig,
   isDifferent,
   onSubmit,
   btnLoading,
@@ -64,14 +63,10 @@ const handleLoadingSubmit = (target: string, callback?: () => void) => {
   loadingTarget.value = target
   callback && callback()
 }
-
-onMounted(() => {
-  fetchConfig && fetchConfig()
-})
 </script>
 
 <template>
-  <div v-if="type">
+  <div v-if="type" class="box">
     <BoxHead :title="title">
       <template #subtitle>
         <component :is="subtitle" />

@@ -21,6 +21,7 @@ const props = defineProps({
   }
 })
 
+const renderCount = ref(0)
 const currentTab = ref(props.tabs[0])
 const currentTabComponent = computed(() => {
   if (currentTab.value.component) {
@@ -39,6 +40,7 @@ const handleClick = (tab: ITab) => {
   if (currentTab.value.id === tab.id) {
     return
   }
+  renderCount.value++
   currentTab.value = tab
 }
 </script>
@@ -62,7 +64,7 @@ const handleClick = (tab: ITab) => {
         </button>
       </div>
     </div>
-    <div class="box" :key="currentTab.id">
+    <div :key="renderCount">
       <component :is="currentTabComponent" v-bind="currentComponentProps" />
     </div>
   </section>
