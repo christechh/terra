@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
 import {
   FormInput,
   FormSelect,
@@ -6,6 +7,7 @@ import {
   Upload
 } from '../../../base-components/Form'
 import FormSwitch from '../../../base-components/Form/FormSwitch'
+import Lucide from '../../../base-components/Lucide'
 import usePinBoard from '../../../composables/LinkDetail/BaseSetting/usePinBoard'
 import ThemePicker from '../../ThemePicker'
 import VerticalSteps from '../../VerticalSteps'
@@ -27,8 +29,15 @@ const {
   bgList,
   welcomeBG,
   floatButtonColor,
-  save
+  chatLogoSize,
+  withoutSeoNoIndex,
+  save,
+  nickNameFormatTypeChange
 } = usePinBoard()
+
+const btnColr = computed(() => {
+  return theme.value === '#e0eb76' ? '#39701f' : '#ffffff'
+})
 </script>
 
 <template>
@@ -37,9 +46,12 @@ const {
       class="flex items-center justify-between border-b border-[#EDF2F7] p-5 text-base"
     >
       <span>
-        {{ $t('menu-features-pinpage') }}
+        {{ $t('edit-welcome-pinboard-setting') }}
       </span>
-      <button class="rounded-lg bg-primary px-5 py-2 text-white" @click="save">
+      <button
+        class="rounded-lg bg-primary px-5 py-2 text-sm text-white"
+        @click="save"
+      >
         {{ $t('save-btn') }}
       </button>
     </header>
@@ -72,19 +84,43 @@ const {
             :step="1"
             class="flex items-center justify-between pb-9"
           >
-            <span class="font-bold">{{ $t('show-pinboard-page') }}</span>
+            <div class="flex items-center">
+              <span class="font-bold">{{ $t('show-pinboard-page') }}</span>
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-switch')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
+            </div>
             <FormSwitch>
               <FormSwitch.Input v-model="showPinBoard" type="checkbox" />
             </FormSwitch>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2" class="pb-9">
-            <div class="font-bold">{{ $t('pinboard-welecome-message') }}</div>
+            <div class="flex items-center font-bold">
+              {{ $t('pinboard-welecome-message') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-msg')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
+            </div>
             <div class="mt-2">
               <FormTextarea v-model="welecomeMessage" class="resize-none" />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="3" class="pb-9">
-            <div>{{ $t('edit-welcome_start_btn_text') }}</div>
+            <div class="flex items-center font-bold">
+              {{ $t('edit-welcome_start_btn_text') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-button')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
+            </div>
             <div class="mt-2">
               <FormTextarea v-model="btnText" class="resize-none" />
             </div>
@@ -94,8 +130,14 @@ const {
               {{ $t('nickname-setting') }}
             </div>
             <div class="flex items-center justify-between">
-              <div class="mt-3">
+              <div class="mt-3 flex items-center">
                 {{ $t('set-required') }}
+                <div
+                  class="ml-1"
+                  v-tooltip:top.tootip="$t('nickname-require-desc')"
+                >
+                  <Lucide icon="HelpCircle" width="14" />
+                </div>
               </div>
               <FormSwitch>
                 <FormSwitch.Input
@@ -104,20 +146,57 @@ const {
                 />
               </FormSwitch>
             </div>
-            <div class="mt-3">{{ $t('nickname-format') }}</div>
-            <div class="mt-2">
-              <FormInput v-model="nicknameFormat" type="text" />
+            <template v-if="isNicknameRequired">
+              <div class="mt-5 flex items-center">
+                {{ $t('nickname-format') }}
+                <div
+                  class="ml-1"
+                  v-tooltip:top.tootip="$t('nickname-format-desc')"
+                >
+                  <Lucide icon="HelpCircle" width="14" />
+                </div>
+              </div>
+              <div class="mt-2">
+                <FormSelect
+                  v-model="nicknameFormat"
+                  @change="nickNameFormatTypeChange"
+                >
+                  <option value="none">{{ $t('nickname-type-none') }}</option>
+                  <option value="email">{{ $t('nickname-type-email') }}</option>
+                  <option value="id">{{ $t('nickname-type-id') }}</option>
+                  <option value="number">
+                    {{ $t('nickname-type-number') }}
+                  </option>
+                  <option value="mobile">
+                    {{ $t('nickname-type-mobile') }}
+                  </option>
+                </FormSelect>
+              </div>
+            </template>
+            <div class="mt-5 flex items-center">
+              {{ $t('nickname-placeholder-text') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-nickname')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
             </div>
-            <div class="mt-3">{{ $t('nickname-placeholder-text') }}</div>
             <div class="mt-2">
               <FormInput v-model="nicknamePlaceholder" type="text" />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="5" class="pb-9">
-            <div class="font-bold">
+            <div class="flex items-center font-bold">
               {{ $t('edit-welcome-logo') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-logo')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
             </div>
-            <div>
+            <div class="mt-5">
               <Upload
                 v-model="logo"
                 type="img"
@@ -125,45 +204,85 @@ const {
                 :show-close="false"
               />
             </div>
+            <div class="mt-5 flex items-center">
+              {{ $t('setting-chat-logo-size') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-setting-chat-logo-size')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
+            </div>
+            <div
+              class="h-38 mt-2 flex flex h-[38px] w-[90px] items-center overflow-hidden rounded-xl border"
+            >
+              <input
+                v-model="chatLogoSize"
+                class="w-[40px] flex-1 border-0 bg-white px-0 py-0 text-center focus:ring-[transparent] dark:bg-darkmode-600"
+                max="100"
+              />
+              <div>%</div>
+              <div class="ml-2 flex flex-col border-l">
+                <button @click="() => (chatLogoSize = chatLogoSize + 1)">
+                  <Lucide icon="ChevronUp" width="20" height="20" />
+                </button>
+                <button @click="() => (chatLogoSize = chatLogoSize - 1)">
+                  <Lucide icon="ChevronDown" width="20" height="20" />
+                </button>
+              </div>
+            </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="6" class="pb-9">
             <div class="font-bold">
               {{ $t('choose-theme-color') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-theme')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
             </div>
-            <div class="mt-2 bg-[#F6F6F6] p-5 dark:bg-darkmode-700">
-              <ThemePicker v-model="theme">
-                <div>
-                  <div class="flex items-center justify-between">
-                    {{ $t('edit-welcome-text-color') }}
-                    <input
-                      type="color"
-                      class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
-                      :value="'#939393'"
-                    />
-                  </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    {{ $t('edit-welcome-btn-color') }}
-                    <input
-                      type="color"
-                      class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
-                      v-model="theme"
-                    />
-                  </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    {{ $t('edit-welcome-btn-text-color') }}
-                    <input
-                      type="color"
-                      class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
-                      value="#39701f"
-                    />
-                  </div>
+            <ThemePicker v-model="theme">
+              <div>
+                <div class="flex items-center justify-between">
+                  {{ $t('edit-welcome-text-color') }}
+                  <input
+                    type="color"
+                    class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
+                    :value="'#939393'"
+                    disabled
+                  />
                 </div>
-              </ThemePicker>
-            </div>
+                <div class="mt-3 flex items-center justify-between">
+                  {{ $t('edit-welcome-btn-color') }}
+                  <input
+                    type="color"
+                    class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
+                    v-model="theme"
+                    disabled
+                  />
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                  {{ $t('edit-welcome-btn-text-color') }}
+                  <input
+                    type="color"
+                    class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
+                    :value="btnColr"
+                    disabled
+                  />
+                </div>
+              </div>
+            </ThemePicker>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="7" class="pb-9">
-            <div class="font-bold">
+            <div class="flex items-center font-bold">
               {{ $t('edit-welcome-bak-color') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-background')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
             </div>
             <div class="mt-3">
               <div>
@@ -217,9 +336,31 @@ const {
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="8" class="pb-9" is-final>
             <div class="font-bold">{{ $t('other-settings') }}</div>
-            <div class="flex items-center justify-between">
-              <div class="mt-3">
+            <div class="mt-5 flex items-center justify-between">
+              <div class="flex items-center">
+                {{ $t('should-include-in-seo') }}
+                <div
+                  class="ml-1"
+                  v-tooltip:top.tootip="$t('should-include-in-seo-tip')"
+                >
+                  <Lucide icon="HelpCircle" width="14" />
+                </div>
+              </div>
+              <FormSwitch>
+                <FormSwitch.Input v-model="withoutSeoNoIndex" type="checkbox" />
+              </FormSwitch>
+            </div>
+            <div class="mt-5 flex items-center justify-between">
+              <div class="flex items-center">
                 {{ $t('edit-welcome-remove-pinboard-footer-title') }}
+                <div
+                  class="ml-1"
+                  v-tooltip:top.tootip="
+                    $t('edit-welcome-remove-pinboard-footer-desc')
+                  "
+                >
+                  <Lucide icon="HelpCircle" width="14" />
+                </div>
               </div>
               <FormSwitch>
                 <FormSwitch.Input v-model="removePowerBy" type="checkbox" />
@@ -229,16 +370,32 @@ const {
         </VerticalSteps>
         <VerticalSteps v-else>
           <VerticalSteps.Step :step="1">
-            <div class="font-bold">{{ $t('welcome-hr-text-input') }}</div>
+            <div class="flex items-center font-bold">
+              {{ $t('welcome-hr-text-input') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-hr')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
+            </div>
             <div class="mt-3">
               <FormInput type="text" v-model="hrText" />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2">
-            <div class="font-bold">{{ $t('choose-theme-color') }}</div>
-            <div class="mt-2 bg-[#F6F6F6] p-5 dark:bg-darkmode-700">
+            <div class="flex items-center font-bold">
+              {{ $t('choose-theme-color') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-theme')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
+            </div>
+            <div class="mt-2 bg-[#F6F6F6] dark:bg-darkmode-700">
               <ThemePicker v-model="floatButtonColor">
-                <div>
+                <div class="flex items-center">
                   <div class="flex items-center justify-between">
                     {{ $t('welcome-hr-color-input') }}
                     <input
@@ -267,11 +424,48 @@ const {
               </ThemePicker>
             </div>
           </VerticalSteps.Step>
+          <VerticalSteps.Step :step="3" class="pb-9" is-final>
+            <div class="font-bold">{{ $t('welcome-link-button-setting') }}</div>
+          </VerticalSteps.Step>
         </VerticalSteps>
       </div>
       <div class="flex-1 px-10 py-5">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
+        <div
+          class="mt-5 h-[700px] rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
+          :style="`background: url(${welcomeBG}) center center / cover;`"
+        >
+          <img
+            :src="logo && logo[0].data"
+            class="mx-auto mb-4"
+            alt=""
+            :style="{ width: `${chatLogoSize}%` }"
+          />
+          <div class="mb-[50px] text-center text-[#939393]">
+            {{ welecomeMessage }}
+          </div>
+          <input
+            type="text"
+            class="emulator-input mb-[10px] h-[48px] w-full rounded-[15px] px-4 py-[10px] text-xs"
+            :style="{ borderColor: theme }"
+            :placeholder="nicknamePlaceholder"
+          />
+          <button class="enter-btn h-[48px] w-full rounded-[15px]">
+            {{ btnText }}
+          </button>
+        </div>
       </div>
     </div>
   </main>
 </template>
+
+<style>
+.emulator-input:focus {
+  border-color: v-bind(theme);
+  outline: none;
+  box-shadow: none;
+}
+.enter-btn {
+  background-color: v-bind(theme);
+}
+</style>
