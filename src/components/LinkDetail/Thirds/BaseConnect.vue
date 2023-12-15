@@ -74,47 +74,43 @@ const handleLoadingSubmit = (target: string, callback?: () => void) => {
       <template #right>
         <div class="flex items-center gap-2">
           <CButton
-            v-if="showBlockLineConnectionBtn"
+            v-if="showBlockLineConnectionBtn && !btnLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
-            :loading="btnLoading && loadingTarget === 'disconnectLine'"
             @click="handleLoadingSubmit('disconnectLine', disconnectLineToken)"
           >
-            <Lucide icon="Trash2" class="mr-2 h-4" />
+            <Lucide icon="Trash2" class="mr-1 h-4" />
             <span>{{ $t('what-app-txt18') }}</span>
           </CButton>
           <CButton
-            v-if="showMessageDisconnectBtn"
+            v-if="showMessageDisconnectBtn && !btnLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
-            :loading="btnLoading && loadingTarget === 'disconnectMessage'"
             @click="
               handleLoadingSubmit('disconnectMessage', disconnectMessageToken)
             "
           >
-            <Lucide icon="Trash2" class="mr-2 h-4" />
+            <Lucide icon="Trash2" class="mr-1 h-4" />
             <span>{{ $t('what-app-txt18') }}</span>
           </CButton>
           <CButton
-            v-if="showIgDisconnectBtn"
+            v-if="showIgDisconnectBtn && !btnLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
-            :loading="btnLoading && loadingTarget === 'disconnectIg'"
             @click="handleLoadingSubmit('disconnectIg', disconnectIgToken)"
           >
-            <Lucide icon="Trash2" class="mr-2 h-4" />
+            <Lucide icon="Trash2" class="mr-1 h-4" />
             <span>{{ $t('what-app-txt18') }}</span>
           </CButton>
           <CButton
-            v-if="showSlackDisconnectBtn"
+            v-if="showSlackDisconnectBtn && !btnLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
-            :loading="btnLoading && loadingTarget === 'disconnectSlack'"
             @click="
               handleLoadingSubmit('disconnectSlack', disconnectSlackToken)
             "
           >
-            <Lucide icon="Trash2" class="mr-2 h-4" />
+            <Lucide icon="Trash2" class="mr-1 h-4" />
             <span>{{ $t('what-app-txt18') }}</span>
           </CButton>
 

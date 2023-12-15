@@ -372,7 +372,7 @@ export const useThird = (type?: ConnectType) => {
                 h(CopyText, {
                   type: 'gray',
                   class: 'w-full h-[36px]',
-                  text: `https://api.pinchat.me/api/fbmsg/webhook/${token.value}`
+                  text: `https://api.pinchat.me/api/instagram/webhook/${token.value}`
                 })
               ])
             }

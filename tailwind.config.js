@@ -76,8 +76,7 @@ module.exports = {
         theme4: 'rgb(var(--color-theme4) / <alpha-value>)',
         theme5: 'rgb(var(--color-theme5) / <alpha-value>)',
         html_bg: 'rgb(var(--color-html_bg) / <alpha-value>)',
-        disabled_bg:
-          'rgb(var(--color-disabled_bg) / var(--opacity-disabled_bg))',
+        disabled_bg: 'var(--opacity-disabled_bg))',
         disabled_font: 'rgb(var(--color-disabled_font) / <alpha-value>)',
         dashboard_bg: 'rgb(var(--color-dashboard_bg) / <alpha-value>)',
         content_bg: 'rgb(var(--color-content_bg) / <alpha-value>)',
@@ -178,7 +177,7 @@ module.exports = {
           '--color-theme4': toRGB(DesignTemplate.main.theme4),
           '--color-theme5': toRGB(DesignTemplate.main.theme5),
           '--color-disabled_bg': toRGB(DesignTemplate.main.disabled_bg),
-          '--opacity-disabled_bg': '0.3',
+          '--opacity-disabled_bg': '0.8',
           '--color-disabled_font': toRGB(DesignTemplate.main.disabled_font),
           '--color-dashboard_bg': toRGB(DesignTemplate.main.dashboard_bg),
           '--color-content_bg': toRGB(DesignTemplate.main.content_bg),

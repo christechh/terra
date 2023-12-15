@@ -45,12 +45,12 @@ onErrorCaptured((callback) => {
         <Steps :items="steps" />
         <CButton
           variant="danger"
-          class="text-white disabled:opacity-50"
+          class="text-white disabled:opacity-80"
           @click="
             handleLoadingSubmit('disconnectWhatApp', disconnectWhatAppToken)
           "
         >
-          <Lucide icon="Trash2" class="mr-2 h-4" />
+          <Lucide icon="Trash2" class="mr-1 h-4" />
           <span>{{ $t('what-app-txt18') }}</span>
         </CButton>
       </div>
