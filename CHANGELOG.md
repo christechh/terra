@@ -1,3 +1,10 @@
+## [1.17.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.17.0...v1.17.1) (2023-12-15)
+
+
+### Bug Fixes
+
+* pindboard adjust ([f265580](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/f2655806c5f29ed3122eaddfe8624ab29b5a3b15))
+
 # [1.17.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.16.0...v1.17.0) (2023-12-14)
 
 
