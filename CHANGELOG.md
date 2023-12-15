@@ -1,3 +1,10 @@
+# [1.18.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.17.1...v1.18.0) (2023-12-15)
+
+
+### Features
+
+* 按鈕樣式修正、第三方整合互動優化 ([26bc436](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/26bc4365f7143fc5257823f0f2415cf86da43875))
+
 ## [1.17.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.17.0...v1.17.1) (2023-12-15)
 
 
