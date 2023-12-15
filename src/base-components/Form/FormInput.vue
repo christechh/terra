@@ -79,7 +79,7 @@ const handleInput = (e: Event) => {
     class="relative flex w-full"
     :class="typeof attrs.class === 'string' && attrs.class"
   >
-    <div class="absolute bottom-0 left-0 top-0 w-10">
+    <div class="absolute bottom-0 left-0 top-0">
       <slot name="prefix" />
     </div>
     <input

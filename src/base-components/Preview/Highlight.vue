@@ -96,7 +96,7 @@ onMounted(() => {
         }
       "
     >
-      <Lucide icon="File" class="mr-2 h-4 w-4" /> {{ copyText }}
+      <Lucide icon="File" class="mr-1 h-4 w-4" /> {{ copyText }}
     </Button>
     <div ref="highlightRef" :class="highlightComputedClass">
       <pre class="relative grid">
