@@ -87,7 +87,10 @@ export const usePaymentStore = defineStore('payment', {
         pageSize: number
       }
       if (typeof pagedData === 'object') {
-        const finalPage = Math.ceil(Number(pagedData.count) / pageSize)
+        const finalPage =
+          Math.ceil(Number(pagedData.count) / pageSize) - 1 >= 0
+            ? Math.ceil(Number(pagedData.count) / pageSize) - 1
+            : 0
         payments.push(...pagedData.data)
         if (page < finalPage) {
           return this.fetchPaymentsByPage(payments, page + 1, pageSize)

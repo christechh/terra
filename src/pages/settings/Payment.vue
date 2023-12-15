@@ -5,7 +5,7 @@ import usePayment from './composables/usePayment'
 import { convertYmdHis } from '../../lib/timeLib'
 import SidebarModal from '../../components/Modals/SidebarModal'
 import { Payment } from '../../stores/payment'
-// import { useRedirectToStore } from '../../stores/redirect-to'
+import EmptyList from '../../components/EmptyList'
 
 const { payments, fetchAllPayments, getPaymentStatus, getPaymentMethod } =
   usePayment()
@@ -39,7 +39,7 @@ onMounted(() => {
     <div class="mt-5 grid grid-cols-12 gap-5">
       <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-4">
         <a
-          class="item-pay menu relative mt-5 flex flex-col items-center rounded-lg border-0 bg-white p-8 pl-10"
+          class="item-pay menu relative mt-5 flex flex-col items-center rounded-xl border-0 bg-white p-8 pl-10"
           href="/dashboard/settings/settings_payment_flow_paypal"
         >
           <div>
@@ -48,14 +48,14 @@ onMounted(() => {
           <div class="mt-5">
             <div class="text-pay-16 flex">
               {{ $t('payment-flow-go-to-settings') }}
-              <Lucide icon="ChevronRight" />
+              <Lucide icon="ChevronRight" class="mt-0.5 h-4 w-4" />
             </div>
           </div>
         </a>
       </div>
       <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-4">
         <a
-          class="item-pay menu relative mt-5 flex flex-col items-center rounded-lg border-0 bg-white p-8 pl-10"
+          class="item-pay menu relative mt-5 flex flex-col items-center rounded-xl border-0 bg-white p-8 pl-10"
           href="/dashboard/settings/settings_payment_flow_stripe"
         >
           <div>
@@ -64,23 +64,23 @@ onMounted(() => {
           <div class="mt-5">
             <div class="text-pay-16 flex">
               {{ $t('payment-flow-go-to-settings') }}
-              <Lucide icon="ChevronRight" />
+              <Lucide icon="ChevronRight" class="mt-0.5 h-4 w-4" />
             </div>
           </div>
         </a>
       </div>
       <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-4">
         <a
-          class="item-pay menu relative mt-5 flex flex-col items-center rounded-lg border-0 bg-white p-8 pl-10"
+          class="item-pay menu relative mt-5 flex flex-col items-center rounded-xl border-0 bg-white p-8 pl-10"
           href="/dashboard/settings/settings_payment_flow_line_pay"
         >
-          <div>
-            <img src="@/assets/images/svg/pay_logo/logo_linepay.png" />
+          <div class="mr-3">
+            <img src="@/assets/images/svg/pay_logo/logo_linepay.svg" />
           </div>
           <div class="mt-5">
             <div class="text-pay-16 flex">
               {{ $t('payment-flow-go-to-settings') }}
-              <Lucide icon="ChevronRight" />
+              <Lucide icon="ChevronRight" class="mt-0.5 h-4 w-4" />
             </div>
           </div>
         </a>
@@ -95,7 +95,11 @@ onMounted(() => {
       </div>
     </div>
     <div class="mt-1 rounded-b-xl bg-white p-4 dark:bg-darkmode-600">
-      <div class="grid grid-cols-12 text-center">
+      <EmptyList
+        :show="payments.length === 0"
+        :content="$t('payment-flow-history-empty')"
+      />
+      <div v-if="payments.length > 0" class="grid grid-cols-12 text-center">
         <b
           class="col-span-1 flex h-[60px] items-center justify-center border-b-2 border-solid border-[#e2e8f0]"
           >{{ $t('payment-flow-payers-profile') }}</b
