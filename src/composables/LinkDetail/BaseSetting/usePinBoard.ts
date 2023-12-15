@@ -46,6 +46,8 @@ export default function usePinBoard() {
   const name = ref('')
   const chatLogoSize = ref(0) // chat_logo_size
   const withoutSeoNoIndex = ref(false)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const welcomeLinkSetting = ref<any[]>([])
   const chatroomActionSetting = reactive({
     file: false,
     location: false,
@@ -103,6 +105,10 @@ export default function usePinBoard() {
       showIsRead.value = data.show_is_read
       chatLogoSize.value = data.chat_logo_size
       withoutSeoNoIndex.value = data.without_seo_no_index
+      welcomeLinkSetting.value = data.welcome_link_setting.filter(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (l: any) => l.open
+      )
       Object.assign(chatroomActionSetting, data.chatroom_action_setting)
     })
   }
@@ -126,6 +132,7 @@ export default function usePinBoard() {
         nickname_type: nicknameFormat.value,
         chat_logo_size: chatLogoSize.value,
         without_seo_no_index: withoutSeoNoIndex.value,
+        welcome_link_setting: welcomeLinkSetting.value,
         welcome_bg_image: localBGImgs.value[0]
           ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (localBGImgs.value[0] as any).data
@@ -236,6 +243,18 @@ export default function usePinBoard() {
     nicknamePlaceholder.value = m[value as keyof typeof m]
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleCreateActionBtn = (action: any, index?: number) => {
+    if (index !== undefined && index !== null) {
+      return welcomeLinkSetting.value.splice(index, 1, action)
+    }
+    welcomeLinkSetting.value.push(action)
+  }
+
+  const deleteActionBtn = (key: number) => {
+    welcomeLinkSetting.value.splice(key, 1)
+  }
+
   getPinboardSetting()
 
   return {
@@ -278,6 +297,9 @@ export default function usePinBoard() {
     chatroomActionSetting,
     chatLogoSize,
     withoutSeoNoIndex,
+    welcomeLinkSetting,
+    handleCreateActionBtn,
+    deleteActionBtn,
     changeShowGuestSetting,
     save,
     saveChatSetting,
