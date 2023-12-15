@@ -1,4 +1,4 @@
-export const convertYmdHis = (date: string) => {
+export const convertYmdHis = (date?: string | null) => {
   if (!date) {
     return ''
   }

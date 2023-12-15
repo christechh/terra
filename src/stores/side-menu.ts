@@ -61,6 +61,11 @@ export const useSideMenuStore = defineStore('sideMenu', {
             icon: 'Users',
             pageName: 'settings-sub_account',
             title: i18n.global.t('subaccount-section1-title')
+          },
+          {
+            icon: 'BadgeDollarSign',
+            pageName: 'settings-payment',
+            title: i18n.global.t('payment-flow')
           }
         ]
       }
