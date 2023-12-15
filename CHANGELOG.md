@@ -1,3 +1,10 @@
+# [1.20.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.19.0...v1.20.0) (2023-12-15)
+
+
+### Features
+
+* add link page ([8df7c6b](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/8df7c6b85b8823647dee71f294727574365d21bc))
+
 # [1.19.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.18.0...v1.19.0) (2023-12-15)
 
 
