@@ -446,10 +446,10 @@ getTypes()
       <div class="flex-1 px-10 py-5">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
         <div
-          class="mt-5 h-[700px] rounded-[55px] border-[16px] border-[#5b5b5b] py-9"
+          class="mt-5 flex h-[700px] flex-col rounded-[55px] border-[16px] border-[#5b5b5b] py-9"
         >
           <header class="chat-header py-2 pl-5">chatbot 4</header>
-          <main class="p-2">
+          <main class="flex-1 p-2 text-xs">
             <div class="flex">
               <HeadShots
                 read-only
@@ -468,6 +468,38 @@ getTypes()
                 </div>
               </div>
             </div>
+            <div class="flex">
+              <HeadShots
+                read-only
+                class="m-1"
+                :avatar="avatar"
+                :image_id="image_id"
+                :size="24"
+              />
+              <div>
+                <div class="text-[10px] text-[#8d8d8d]">{{ name }}</div>
+                <div class="flex items-end">
+                  <div class="rounded-[10px] bg-[#eeeff0] p-2 text-[#1a1a1a]">
+                    手機號碼
+                    <div class="mt-1 flex items-center bg-white pr-2">
+                      <input
+                        class="h-[26px] w-[130px] overflow-hidden overflow-ellipsis whitespace-nowrap border-0 bg-white text-xs"
+                        :placeholder="$t('nickname-type-mobile-placeholder')"
+                        disabled
+                      />
+                      <Lucide
+                        icon="Send"
+                        width="15"
+                        class="ml-1"
+                        color="#02b13f"
+                        fill="#02b13f"
+                      />
+                    </div>
+                  </div>
+                  <div class="ml-1 text-[10px] text-[#8d8d8d]">01:00</div>
+                </div>
+              </div>
+            </div>
             <div class="flex justify-end">
               <div>
                 <div class="flex items-end">
@@ -479,6 +511,25 @@ getTypes()
               </div>
             </div>
           </main>
+          <footer class="flex items-center px-3 py-[10px]">
+            <Lucide icon="ChevronUpCircle" width="18" />
+            <div
+              class="ml-2 flex flex-1 items-center rounded-lg bg-[#f2f2f2] pr-2"
+            >
+              <input
+                class="h-[30px] flex-1 border-0 bg-[#f2f2f2]"
+                :placeholder="$t('type-something')"
+                disabled
+              />
+              <img
+                src="@/assets/images/icon_sticker_w24_h24@2x.png"
+                alt=""
+                width="18"
+                height="18"
+              />
+            </div>
+            <Lucide icon="Mic" width="18" class="ml-2" />
+          </footer>
         </div>
       </div>
     </div>

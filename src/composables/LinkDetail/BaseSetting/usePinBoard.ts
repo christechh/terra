@@ -1,4 +1,5 @@
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import logoImg from '../../../assets/images/logo_dark_v6.png'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
@@ -6,6 +7,7 @@ import { useLinkPage } from '../../useLinkPage'
 
 export default function usePinBoard() {
   const { token } = useLinkPage()
+  const { t } = useI18n()
   const showPinBoard = ref(false)
   const welecomeMessage = ref('')
   const btnText = ref('')
@@ -42,6 +44,8 @@ export default function usePinBoard() {
   const showExportLog = ref(false)
   const showIsRead = ref(false)
   const name = ref('')
+  const chatLogoSize = ref(0) // chat_logo_size
+  const withoutSeoNoIndex = ref(false)
   const chatroomActionSetting = reactive({
     file: false,
     location: false,
@@ -97,6 +101,8 @@ export default function usePinBoard() {
       showGuestSetting.value = data.show_guest_setting
       showExportLog.value = data.show_export_log
       showIsRead.value = data.show_is_read
+      chatLogoSize.value = data.chat_logo_size
+      withoutSeoNoIndex.value = data.without_seo_no_index
       Object.assign(chatroomActionSetting, data.chatroom_action_setting)
     })
   }
@@ -118,14 +124,13 @@ export default function usePinBoard() {
         hr_text: hrText.value,
         float_button_color: floatButtonColor.value,
         nickname_type: nicknameFormat.value,
+        chat_logo_size: chatLogoSize.value,
+        without_seo_no_index: withoutSeoNoIndex.value,
         welcome_bg_image: localBGImgs.value[0]
           ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (localBGImgs.value[0] as any).data
           : welcomeBG.value,
-        chat_logo:
-          logo.value && logo.value[0] && logo.value[0].data === logoImg
-            ? ''
-            : logo.value
+        chat_logo: ''
       })
       .then(() => {
         useNotificationsStore().showSaveSuccess()
@@ -219,6 +224,18 @@ export default function usePinBoard() {
     }
   }
 
+  const nickNameFormatTypeChange = (event: Event) => {
+    const value = (event.target as HTMLInputElement).value
+    const m = {
+      none: t('nickname-type-none-placeholder'),
+      email: t('nickname-type-email-placeholder'),
+      mobile: t('nickname-type-mobile-placeholder'),
+      id: t('nickname-type-id-placeholder'),
+      number: t('nickname-type-number-placeholder')
+    }
+    nicknamePlaceholder.value = m[value as keyof typeof m]
+  }
+
   getPinboardSetting()
 
   return {
@@ -259,9 +276,12 @@ export default function usePinBoard() {
     showExportLog,
     showIsRead,
     chatroomActionSetting,
+    chatLogoSize,
+    withoutSeoNoIndex,
     changeShowGuestSetting,
     save,
     saveChatSetting,
-    chatHeaderColorChangeHandler
+    chatHeaderColorChangeHandler,
+    nickNameFormatTypeChange
   }
 }
