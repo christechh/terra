@@ -5,6 +5,8 @@ import { useUserStore } from '../stores/user'
 import { useNotificationsStore } from '../stores/notifications'
 import IconButton from '../components/IconButton/index.vue'
 import { useI18n } from 'vue-i18n'
+import { Dialog } from '../base-components/Headless'
+import QrcodeVue from 'qrcode.vue'
 
 interface ILink {
   id: string
@@ -45,6 +47,37 @@ const navigateToChatRoom = (link: ILink | null) => {
     '_blank'
   )
 }
+const tab = ref(0)
+const qrcode = ref('')
+const selectedLink = ref<ILink>()
+const qrcodeRef = ref<HTMLElement>()
+const showQRCodeModal = (link: ILink) => {
+  tab.value = 0
+  selectedLink.value = link
+  const domain = import.meta.env.VITE_DOMAIN as string
+  qrcode.value = `${domain}/${link?.token}`
+  dialogOpen.value = true
+}
+const downloadQrCode = () => {
+  if (qrcodeRef.value === undefined) return
+  let canvasImage = qrcodeRef.value
+    .getElementsByTagName('canvas')[0]
+    .toDataURL('image/png')
+  let xhr = new XMLHttpRequest()
+  xhr.responseType = 'blob'
+  xhr.onload = function () {
+    let a = document.createElement('a')
+    a.href = window.URL.createObjectURL(xhr.response)
+    a.download = `${selectedLink.value?.token}.png`
+    a.style.display = 'none'
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+  }
+  xhr.open('GET', canvasImage)
+  xhr.send()
+}
+const dialogOpen = ref(false)
 onMounted(() => {
   userStore.fetchSetting()
   linkStore.fetchLinks()
@@ -120,7 +153,10 @@ onMounted(() => {
           />
         </div>
         <div class="flex items-center">
-          <IconButton class="dark:bg-darkmode-600" :link="getSettingLink(link)">
+          <IconButton
+            class="dark:bg-darkmode-600"
+            @click="showQRCodeModal(link)"
+          >
             <img
               width="20"
               height="20"
@@ -146,9 +182,68 @@ onMounted(() => {
       </div>
     </div>
   </div>
+  <Dialog :open="dialogOpen" @close="dialogOpen = false">
+    <Dialog.Panel>
+      <div class="flex flex-col gap-5 p-6">
+        <div class="flex">
+          <div class="tab" :class="{ active: tab === 0 }" @click="tab = 0">
+            分享聊天 QR Code
+          </div>
+          <div class="tab" :class="{ active: tab === 1 }" @click="tab = 1">
+            分享聊天連結
+          </div>
+        </div>
+        <div v-if="tab === 0" class="flex items-center justify-center">
+          <div
+            ref="qrcodeRef"
+            class="flex flex-grow items-center justify-center"
+          >
+            <qrcode-vue :value="qrcode" :size="150" level="H" />
+          </div>
+
+          <div class="flex flex-grow flex-col gap-4 p-4">
+            <button
+              class="flex h-[40px] items-center justify-center gap-2 rounded-xl border border-primary px-5 text-base font-bold text-primary"
+            >
+              {{ $t('qrcode-display') }}
+            </button>
+            <button
+              class="flex h-[40px] items-center justify-center gap-2 rounded-xl border border-primary bg-primary px-5 text-base font-bold text-white"
+              @click="downloadQrCode"
+            >
+              {{ $t('qrcode-download') }}
+            </button>
+          </div>
+        </div>
+        <div
+          v-else-if="tab === 1"
+          class="flex flex-col items-center justify-center gap-5"
+        >
+          <div
+            class="flex gap-8 rounded-full bg-[#f0f0f0] p-2 pl-4 text-[16px]"
+          >
+            <span class="h-8 leading-8">{{ qrcode }}</span>
+            <span
+              class="h-8 cursor-pointer rounded-full bg-primary px-4 align-middle text-sm leading-8 text-white"
+              @click="copyToPasteboard(qrcode)"
+            >
+              {{ $t('qrcode-page-copy') }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </Dialog.Panel>
+  </Dialog>
 </template>
 <style>
 .table-border {
   border: 1px solid #000;
+}
+.tab {
+  @apply flex-grow cursor-pointer border-b-[2px] p-4 text-center text-[18px] font-medium;
+  &.active {
+    @apply border-[#d9e756] text-[#02b13f];
+  }
+  /* f0f0f0 */
 }
 </style>
