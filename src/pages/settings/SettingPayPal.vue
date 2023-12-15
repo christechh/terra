@@ -43,7 +43,9 @@ const setIsEdit = () => {
       class="relative mt-5 flex items-center border-0 bg-white p-5 pl-7"
       style="border-radius: 20px"
     >
-      <div class="text-base">{{ $t('payment-flow-turn-on-paypal') }}</div>
+      <div class="text-sm">
+        {{ $t('payment-flow-turn-on-paypal') }}
+      </div>
       <div
         class="ml-2"
         v-tooltip:top.tooltip="$t('payment-flow-tooltip-turn-on-paypal')"
@@ -67,7 +69,9 @@ const setIsEdit = () => {
       <div
         class="flex flex-row content-between items-center border-b border-gray-200 p-5 text-black"
       >
-        <h2 class="mr-auto">{{ $t('payment-flow-paypal-settings') }}</h2>
+        <div class="mr-auto text-base">
+          {{ $t('payment-flow-paypal-settings') }}
+        </div>
         <Button
           class="w-1/12"
           variant="primary"
@@ -78,7 +82,7 @@ const setIsEdit = () => {
       </div>
       <div class="px-5 pt-5 text-black">
         <div class="flex items-center py-1">
-          <FormLabel class="mb-0 text-start">{{
+          <FormLabel class="mb-0 items-center text-start">{{
             $t('payment-flow-paypal-live-mode')
           }}</FormLabel>
           <div
@@ -101,8 +105,8 @@ const setIsEdit = () => {
         </div>
       </div>
       <div class="p-5 text-black">
-        <div class="flex items-center py-1">
-          <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
+        <div class="flex items-center py-2.5">
+          <FormLabel class="mb-2 mr-2 mt-2 flex items-center text-start"
             >{{ $t('payment-flow-paypal-client-id') }}
             <div
               class="ml-2"
@@ -122,8 +126,8 @@ const setIsEdit = () => {
             @change="setIsEdit"
           />
         </div>
-        <div class="flex items-center py-1">
-          <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
+        <div class="flex items-center py-2.5">
+          <FormLabel class="mb-2 mr-2 mt-2 flex items-center text-start"
             >{{ $t('payment-flow-paypal-secret') }}
             <div
               class="ml-2"

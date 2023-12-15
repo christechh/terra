@@ -1897,6 +1897,7 @@
   "payment-flow-tooltip-stripe-locale": "Set Stripe display language",
   "payment-flow-tooltip-turn-on-paypal": "If this switch is on, you can ask the other party to pay with PayPal in the chat room",
   "payment-flow-tooltip-paypal-email": "Enter your PayPay email",
+  "payment-flow-paypal-live-mode": "Live Mode",
   "payment-flow-paypal-client-id": "PayPal Client ID",
   "payment-flow-paypal-secret": "PayPal Secret",
   "payment-flow-paypal-sandbox-mode": "PayPal Sandbox Mode",

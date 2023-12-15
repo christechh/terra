@@ -41,7 +41,7 @@ const setIsEdit = () => {
       class="relative mt-5 flex items-center border-0 bg-white p-5 pl-7"
       style="border-radius: 20px"
     >
-      <div class="text-base">{{ $t('payment-flow-turn-on-stripe') }}</div>
+      <div class="text-sm">{{ $t('payment-flow-turn-on-stripe') }}</div>
       <div
         class="ml-2"
         v-tooltip:top.tooltip="$t('payment-flow-tooltip-turn-on-stripe')"
@@ -65,7 +65,9 @@ const setIsEdit = () => {
       <div
         class="flex flex-row content-between items-center border-b border-gray-200 p-5 text-black"
       >
-        <h2 class="mr-auto">{{ $t('payment-flow-stripe-settings') }}</h2>
+        <h2 class="mr-auto text-base">
+          {{ $t('payment-flow-stripe-settings') }}
+        </h2>
         <Button
           class="w-1/12"
           variant="primary"
@@ -75,8 +77,8 @@ const setIsEdit = () => {
         >
       </div>
       <div class="p-5 text-black">
-        <div class="flex items-center py-1">
-          <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
+        <div class="flex items-center py-2.5">
+          <FormLabel class="mb-2 mr-2 mt-2 flex items-center text-start"
             >{{ $t('payment-flow-stripe-stripe-public-key') }}
             <div
               class="ml-2"
@@ -96,8 +98,8 @@ const setIsEdit = () => {
             @change="setIsEdit"
           />
         </div>
-        <div class="flex items-center py-1">
-          <FormLabel class="mb-2 mr-2 mt-2 flex text-start"
+        <div class="flex items-center py-2.5">
+          <FormLabel class="mb-2 mr-2 mt-2 flex items-center text-start"
             >{{ $t('payment-flow-stripe-stripe-secret-key') }}
             <div
               class="ml-2"
