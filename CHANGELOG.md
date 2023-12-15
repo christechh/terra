@@ -1,3 +1,20 @@
+# [1.19.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.18.0...v1.19.0) (2023-12-15)
+
+
+### Features
+
+* **payment_setting:** add direct to payment setting method ([85a7afe](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/85a7afe7f1a33cb9f017c87c16300f018f1823b9))
+* **payment_setting:** add payment history table and setting buttons ([16743ab](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/16743abaaaeea8352dbb648f2ca4395c2d26a12d))
+* **payment_setting:** add payment page ([d9fcb96](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/d9fcb96653afa31a86d930408d2cddd464048248))
+* **payment_setting:** add payment store ([e465525](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e4655253e437ccecdf4e30b7b52987c2f064a768))
+* **payment_setting:** adding payment paypal setting ([e9bf84e](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e9bf84e5612f1356bf6f43603e9122b2c6e0ccc5))
+* **payment_setting:** adding payment stripe and linepay setting ([0cb631f](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0cb631fbfdb97edf6ac5620c71804c28be8b6281))
+* **payment_setting:** adding payment stripe and linepay tooltip ([f5151a8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/f5151a809a18b141a41d9ef210dcb4a3ed2e8e0e))
+* **payment_setting:** change payment and setting payments layout ([21b4b23](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/21b4b238bd9361f92f9f5f8f22e75edc1272973d))
+* **payment_setting:** finish all type of payments tooltip ([12a8781](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/12a8781ec5e0143aa3904618ea4716372d40aa18))
+* **payment_setting:** finish first version of payment history ([a79c6c6](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a79c6c6d44db9653dc0aead9e284fb63e286e849))
+* **payment_setting:** update tooltip method ([185bf3a](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/185bf3a6d2d362f2ad380b835dcc6ed3e7c1bfc5))
+
 # [1.18.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.17.1...v1.18.0) (2023-12-15)
 
 
