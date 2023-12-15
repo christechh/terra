@@ -4,6 +4,7 @@ import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { FormInput, FormLabel, FormSwitch } from '../../base-components/Form'
 import { CreateStripeDTO } from '../../stores/payment'
+import { useNotificationsStore } from '../../stores/notifications'
 import usePayment from './composables/usePayment'
 
 const { setPaymentByMethod } = usePayment()
@@ -14,19 +15,30 @@ const form = ref<CreateStripeDTO>({
   stripe_webhook_secret: ''
 })
 
-const submit = () => {
-  setPaymentByMethod('Stripe', {
-    stripe_open: form.value.stripe_open,
-    stripe_api_secret: form.value.stripe_api_secret,
-    stripe_webhook_secret: form.value.stripe_webhook_secret
-  })
+const submit = async () => {
+  try {
+    await setPaymentByMethod('Stripe', {
+      stripe_open: form.value.stripe_open,
+      stripe_api_secret: form.value.stripe_api_secret,
+      stripe_webhook_secret: form.value.stripe_webhook_secret
+    })
+    useNotificationsStore().showSaveSuccess()
+  } catch (error) {
+    useNotificationsStore().showSaveError()
+  } finally {
+    submitChange.value = false
+  }
+}
+
+const setIsEdit = () => {
+  submitChange.value = true
 }
 </script>
 
 <template>
   <div class="">
     <div
-      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-10"
+      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-7"
       style="border-radius: 20px"
     >
       <div class="text-base">{{ $t('payment-flow-turn-on-stripe') }}</div>
@@ -42,11 +54,12 @@ const submit = () => {
           v-model="form.stripe_open"
           id="checkbox-switch-7"
           type="checkbox"
+          @change="setIsEdit"
         />
       </FormSwitch>
     </div>
     <div
-      class="relative mt-5 flex flex-col border-0 bg-white pl-5"
+      class="relative mt-5 flex flex-col border-0 bg-white pl-2.5"
       style="border-radius: 20px"
     >
       <div
@@ -56,7 +69,7 @@ const submit = () => {
         <Button
           class="w-1/12"
           variant="primary"
-          :disabled="submitChange"
+          :disabled="!submitChange"
           @click="submit"
           >{{ $t('chatbot-save-btn') }}</Button
         >
@@ -80,6 +93,7 @@ const submit = () => {
             v-model="form.stripe_api_secret"
             class="w-6/12"
             type="text"
+            @change="setIsEdit"
           />
         </div>
         <div class="flex items-center py-1">
@@ -100,6 +114,7 @@ const submit = () => {
             v-model="form.stripe_webhook_secret"
             type="text"
             class="w-6/12"
+            @change="setIsEdit"
           />
         </div>
       </div>

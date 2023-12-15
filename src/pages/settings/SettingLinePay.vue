@@ -4,6 +4,7 @@ import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { FormInput, FormLabel, FormSwitch } from '../../base-components/Form'
 import { CreateLinePayDTO } from '../../stores/payment'
+import { useNotificationsStore } from '../../stores/notifications'
 import usePayment from './composables/usePayment'
 
 const { setPaymentByMethod } = usePayment()
@@ -15,18 +16,29 @@ const form = ref<CreateLinePayDTO>({
 })
 
 const submit = () => {
-  setPaymentByMethod('LinePay', {
-    line_pay_open: form.value.line_pay_open,
-    line_pay_channel_id: form.value.line_pay_channel_id,
-    line_pay_channel_secret_key_id: form.value.line_pay_channel_secret_key_id
-  })
+  try {
+    setPaymentByMethod('LinePay', {
+      line_pay_open: form.value.line_pay_open,
+      line_pay_channel_id: form.value.line_pay_channel_id,
+      line_pay_channel_secret_key_id: form.value.line_pay_channel_secret_key_id
+    })
+    useNotificationsStore().showSaveSuccess()
+  } catch (error) {
+    useNotificationsStore().showSaveError()
+  } finally {
+    submitChange.value = false
+  }
+}
+
+const setIsEdit = () => {
+  submitChange.value = true
 }
 </script>
 
 <template>
   <div class="">
     <div
-      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-10"
+      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-7"
       style="border-radius: 20px"
     >
       <div class="text-base">{{ $t('payment-flow-turn-on-line-pay') }}</div>
@@ -42,11 +54,12 @@ const submit = () => {
           v-model="form.line_pay_open"
           id="checkbox-switch-7"
           type="checkbox"
+          @change="setIsEdit"
         />
       </FormSwitch>
     </div>
     <div
-      class="relative mt-5 flex flex-col border-0 bg-white pl-5"
+      class="relative mt-5 flex flex-col border-0 bg-white pl-2.5"
       style="border-radius: 20px"
     >
       <div
@@ -56,7 +69,7 @@ const submit = () => {
         <Button
           class="w-1/12"
           variant="primary"
-          :disabled="submitChange"
+          :disabled="!submitChange"
           @click="submit"
           >{{ $t('chatbot-save-btn') }}</Button
         >
@@ -90,6 +103,7 @@ const submit = () => {
             v-model="form.line_pay_channel_id"
             class="w-6/12"
             type="text"
+            @change="setIsEdit"
           />
         </div>
         <div class="flex items-center py-1">
@@ -110,6 +124,7 @@ const submit = () => {
             v-model="form.line_pay_channel_secret_key_id"
             type="text"
             class="w-6/12"
+            @change="setIsEdit"
           />
         </div>
       </div>

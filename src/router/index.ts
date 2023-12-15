@@ -85,7 +85,7 @@ const routes = [
           },
           {
             path: 'settings_payment_flow_line_pay',
-            name: 'settings-line-pay-stripe',
+            name: 'settings-payment-line-pay',
             component: () => import('@/pages/settings/SettingLinePay.vue')
           }
         ]

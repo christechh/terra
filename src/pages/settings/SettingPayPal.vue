@@ -4,6 +4,7 @@ import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { FormInput, FormLabel, FormSwitch } from '../../base-components/Form'
 import { CreatePayPalDTO } from '../../stores/payment'
+import { useNotificationsStore } from '../../stores/notifications'
 import usePayment from './composables/usePayment'
 
 const { setPaymentByMethod } = usePayment()
@@ -16,19 +17,30 @@ const form = ref<CreatePayPalDTO>({
 })
 
 const submit = () => {
-  setPaymentByMethod('PayPal', {
-    paypal_open: form.value.paypal_open,
-    paypal_sandbox_mode: form.value.paypal_sandbox_mode,
-    paypal_client_id: form.value.paypal_client_id,
-    paypal_secret: form.value.paypal_secret
-  })
+  try {
+    setPaymentByMethod('PayPal', {
+      paypal_open: form.value.paypal_open,
+      paypal_sandbox_mode: form.value.paypal_sandbox_mode,
+      paypal_client_id: form.value.paypal_client_id,
+      paypal_secret: form.value.paypal_secret
+    })
+    useNotificationsStore().showSaveSuccess()
+  } catch (error) {
+    useNotificationsStore().showSaveError()
+  } finally {
+    submitChange.value = false
+  }
+}
+
+const setIsEdit = () => {
+  submitChange.value = true
 }
 </script>
 
 <template>
   <div class="">
     <div
-      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-10"
+      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-7"
       style="border-radius: 20px"
     >
       <div class="text-base">{{ $t('payment-flow-turn-on-paypal') }}</div>
@@ -44,11 +56,12 @@ const submit = () => {
           v-model="form.paypal_open"
           id="checkbox-switch-7"
           type="checkbox"
+          @change="setIsEdit"
         />
       </FormSwitch>
     </div>
     <div
-      class="relative mt-5 flex flex-col border-0 bg-white pl-5"
+      class="relative mt-5 flex flex-col border-0 bg-white pl-2.5"
       style="border-radius: 20px"
     >
       <div
@@ -58,7 +71,7 @@ const submit = () => {
         <Button
           class="w-1/12"
           variant="primary"
-          :disabled="submitChange"
+          :disabled="!submitChange"
           @click="submit"
           >{{ $t('chatbot-save-btn') }}</Button
         >
@@ -82,6 +95,7 @@ const submit = () => {
               v-model="form.paypal_sandbox_mode"
               id="checkbox-switch-7"
               type="checkbox"
+              @change="setIsEdit"
             />
           </FormSwitch>
         </div>
@@ -105,6 +119,7 @@ const submit = () => {
             v-model="form.paypal_client_id"
             class="w-6/12"
             type="text"
+            @change="setIsEdit"
           />
         </div>
         <div class="flex items-center py-1">
@@ -119,7 +134,12 @@ const submit = () => {
           </FormLabel>
         </div>
         <div class="pb-3 pt-1">
-          <FormInput v-model="form.paypal_secret" type="text" class="w-6/12" />
+          <FormInput
+            v-model="form.paypal_secret"
+            type="text"
+            class="w-6/12"
+            @change="setIsEdit"
+          />
         </div>
       </div>
     </div>
