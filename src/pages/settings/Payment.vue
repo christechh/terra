@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import Lucide from '../../base-components/Lucide'
 import usePayment from './composables/usePayment'
 import { convertYmdHis } from '../../lib/timeLib'
@@ -29,10 +29,6 @@ const controlModal = (payment: Payment) => {
 }
 
 onMounted(() => {
-  fetchAllPayments()
-})
-
-watch(payments, () => {
   fetchAllPayments()
 })
 </script>

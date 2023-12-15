@@ -63,12 +63,11 @@ export type CreatePayPalDTO = {
 
 export const usePaymentStore = defineStore('payment', {
   state: () => ({
-    payments: [] as Payment[],
-    payment: {} as Payment
+    payments: [] as Payment[]
   }),
   actions: {
     async fetchAllPayments() {
-      this.payments = await this.fetchPaymentsByPage([], 0, 50)
+      this.payments = await this.fetchPaymentsByPage([], 0, 100)
     },
     async fetchPaymentsByPage(
       payments: Payment[],
@@ -90,14 +89,11 @@ export const usePaymentStore = defineStore('payment', {
       if (typeof pagedData === 'object') {
         const finalPage = Math.ceil(Number(pagedData.count) / pageSize)
         payments.push(...pagedData.data)
-        if (page <= finalPage) {
+        if (page < finalPage) {
           return this.fetchPaymentsByPage(payments, page + 1, pageSize)
         }
       }
       return payments
-    },
-    setPaymentDetail(payment: Payment) {
-      this.payment = payment
     },
     async setPaymentByMethod<T>(method: string, dto: T) {
       switch (method) {
@@ -110,16 +106,13 @@ export const usePaymentStore = defineStore('payment', {
       }
     },
     async setLinePay(dto: CreateLinePayDTO) {
-      console.log('dto: ', dto)
-      // return axios.put('user/linePay', dto)
+      return axios.put('user/linePay', dto)
     },
     async setStripe(dto: CreateStripeDTO) {
-      console.log('dto: ', dto)
-      // return axios.put('user/stripe', dto)
+      return axios.put('user/stripe', dto)
     },
     async setPayPal(dto: CreatePayPalDTO) {
-      console.log('dto: ', dto)
-      // return axios.put('user/paypal', dto)
+      return axios.put('user/paypal', dto)
     }
   }
 })

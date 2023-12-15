@@ -11,13 +11,11 @@ export default function usePayment() {
   const { fetchAllPayments, setPaymentByMethod } = paymentStore
 
   const payments = computed(() => paymentStore.payments)
-  const payment = computed(() => paymentStore.payment)
 
   fetchAllPayments()
 
   return {
     payments,
-    payment,
     setPaymentByMethod,
     fetchAllPayments,
     getPaymentStatus: (status: PaymentStatus) => {
