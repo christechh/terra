@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, useAttrs } from 'vue'
 import Lucide from '../../base-components/Lucide'
-import HeadUploadModal from '../../components/Modals/HeadUploadModal'
+import AvatarUploadModal from '../../components/Modals/AvatarUploadModal'
 
 interface Props {
   avatar: string
@@ -47,7 +47,7 @@ const sizeComputed = computed(() => (size ? size + 'px' : '128px'))
       <Lucide icon="Camera" color="white" />
     </div>
   </div>
-  <HeadUploadModal
+  <AvatarUploadModal
     v-if="showHeadUploadPopup"
     v-model="showHeadUploadPopup"
     :image-id="image_id"
