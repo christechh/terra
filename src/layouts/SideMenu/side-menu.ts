@@ -62,7 +62,24 @@ const nestedMenu = (menu: Array<Menu | 'divider'>, route: Route) => {
 
       if (menuItem.subMenu) {
         menuItem.activeDropdown = findActiveMenu(menuItem.subMenu, route)
-
+        if (
+          document.URL.includes('settings_payment_flow_paypal') &&
+          menuItem.subMenu.find((menu) => menu.pageName === 'settings-payment')
+        ) {
+          menuItem.activeDropdown = true
+        }
+        if (
+          document.URL.includes('settings_payment_flow_stripe') &&
+          menuItem.subMenu.find((menu) => menu.pageName === 'settings-payment')
+        ) {
+          menuItem.activeDropdown = true
+        }
+        if (
+          document.URL.includes('settings_payment_flow_line_pay') &&
+          menuItem.subMenu.find((menu) => menu.pageName === 'settings-payment')
+        ) {
+          menuItem.activeDropdown = true
+        }
         // Nested menu
         const subMenu: Array<FormattedMenu> = []
         nestedMenu(menuItem.subMenu, route).map(
