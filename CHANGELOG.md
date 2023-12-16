@@ -1,3 +1,10 @@
+# [1.21.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.20.1...v1.21.0) (2023-12-16)
+
+
+### Features
+
+* add CreateLinkModal ([e9f7aac](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e9f7aac025572d193444d00626b0b677a9ecd56e))
+
 ## [1.20.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.20.0...v1.20.1) (2023-12-16)
 
 
