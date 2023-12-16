@@ -1,3 +1,10 @@
+## [1.20.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.20.0...v1.20.1) (2023-12-16)
+
+
+### Bug Fixes
+
+* rename HeadUploadModal to AvatarUploadModal ([c28733f](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/c28733f77001b4135ee3fc2c6e426341bf8f34e4))
+
 # [1.20.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.19.0...v1.20.0) (2023-12-15)
 
 
