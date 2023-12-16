@@ -7,6 +7,7 @@ import IconButton from '../components/IconButton/index.vue'
 import { useI18n } from 'vue-i18n'
 import { Dialog } from '../base-components/Headless'
 import QrcodeVue from 'qrcode.vue'
+import CreateLinkModal from '../components/Modals/CreateLinkModal.vue'
 
 interface ILink {
   id: string
@@ -78,6 +79,7 @@ const downloadQrCode = () => {
   xhr.send()
 }
 const dialogOpen = ref(false)
+const createLinkDialogOpen = ref(false)
 onMounted(() => {
   userStore.fetchSetting()
   linkStore.fetchLinks()
@@ -91,6 +93,7 @@ onMounted(() => {
         <div class="flex gap-3">
           <button
             class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary px-5 text-base font-bold text-primary"
+            @click="createLinkDialogOpen = true"
           >
             {{ $t('create-new-link') }}
             <img
@@ -234,6 +237,7 @@ onMounted(() => {
       </div>
     </Dialog.Panel>
   </Dialog>
+  <CreateLinkModal v-model="createLinkDialogOpen"></CreateLinkModal>
 </template>
 <style>
 .table-border {
