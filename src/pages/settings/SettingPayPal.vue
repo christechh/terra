@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { FormInput, FormLabel, FormSwitch } from '../../base-components/Form'
@@ -7,7 +7,7 @@ import { CreatePayPalDTO } from '../../stores/payment'
 import { useNotificationsStore } from '../../stores/notifications'
 import usePayment from './composables/usePayment'
 
-const { setPaymentByMethod } = usePayment()
+const { setPaymentByMethod, fetchSelfSetting, setting } = usePayment()
 const submitChange = ref(false)
 const form = ref<CreatePayPalDTO>({
   paypal_open: false,
@@ -32,6 +32,17 @@ const submit = () => {
   }
 }
 
+onMounted(async () => {
+  await fetchSelfSetting()
+  form.value.paypal_open = setting.value.paypal_open
+  form.value.paypal_sandbox_mode = setting.value.paypal_sandbox_mode
+  if (setting.value.paypal_client_id) {
+    form.value.paypal_client_id = setting.value.paypal_client_id
+  }
+  if (setting.value.paypal_secret) {
+    form.value.paypal_secret = setting.value.paypal_secret
+  }
+})
 const setIsEdit = () => {
   submitChange.value = true
 }

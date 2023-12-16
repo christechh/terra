@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { FormInput, FormLabel, FormSwitch } from '../../base-components/Form'
@@ -7,7 +7,7 @@ import { CreateLinePayDTO } from '../../stores/payment'
 import { useNotificationsStore } from '../../stores/notifications'
 import usePayment from './composables/usePayment'
 
-const { setPaymentByMethod } = usePayment()
+const { setPaymentByMethod, fetchSelfSetting, setting } = usePayment()
 const submitChange = ref(false)
 const form = ref<CreateLinePayDTO>({
   line_pay_open: false,
@@ -33,6 +33,18 @@ const submit = () => {
 const setIsEdit = () => {
   submitChange.value = true
 }
+
+onMounted(async () => {
+  await fetchSelfSetting()
+  form.value.line_pay_open = setting.value.line_pay_open
+  if (setting.value.line_pay_channel_id) {
+    form.value.line_pay_channel_id = setting.value.line_pay_channel_id
+  }
+  if (setting.value.line_pay_channel_secret_key_id) {
+    form.value.line_pay_channel_secret_key_id =
+      setting.value.line_pay_channel_secret_key_id
+  }
+})
 </script>
 
 <template>

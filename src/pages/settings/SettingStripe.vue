@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Lucide from '../../base-components/Lucide'
 import Button from '../../base-components/Button'
 import { FormInput, FormLabel, FormSwitch } from '../../base-components/Form'
@@ -7,7 +7,7 @@ import { CreateStripeDTO } from '../../stores/payment'
 import { useNotificationsStore } from '../../stores/notifications'
 import usePayment from './composables/usePayment'
 
-const { setPaymentByMethod } = usePayment()
+const { setPaymentByMethod, fetchSelfSetting, setting } = usePayment()
 const submitChange = ref(false)
 const form = ref<CreateStripeDTO>({
   stripe_open: false,
@@ -33,6 +33,17 @@ const submit = async () => {
 const setIsEdit = () => {
   submitChange.value = true
 }
+
+onMounted(async () => {
+  await fetchSelfSetting()
+  form.value.stripe_open = setting.value.stripe_open
+  if (setting.value.stripe_api_secret) {
+    form.value.stripe_api_secret = setting.value.stripe_api_secret
+  }
+  if (setting.value.stripe_webhook_secret) {
+    form.value.stripe_webhook_secret = setting.value.stripe_webhook_secret
+  }
+})
 </script>
 
 <template>
