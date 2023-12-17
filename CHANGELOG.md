@@ -1,3 +1,10 @@
+# [1.23.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.22.0...v1.23.0) (2023-12-17)
+
+
+### Features
+
+* button loading ([7f200b5](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7f200b5049e9eb0f64e8cc5a899b1694d3d84dc9))
+
 # [1.22.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.21.0...v1.22.0) (2023-12-17)
 
 
