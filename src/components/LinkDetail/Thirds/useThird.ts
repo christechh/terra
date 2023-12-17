@@ -29,6 +29,7 @@ export const useThird = (type?: ConnectType) => {
   const enterpointsConfigStore = useEnterpointsConfigStore()
 
   const btnLoading = ref(false)
+  const btnSaveLoading = ref(false)
 
   const config = computed(() => {
     return enterpointsConfigStore.data
@@ -507,9 +508,13 @@ export const useThird = (type?: ConnectType) => {
       console.log('error', error)
     } finally {
       btnLoading.value = false
+      btnSaveLoading.value = false
     }
   }
-  const onSubmit = () => {
+  const onSubmit = (type: string) => {
+    if (type) {
+      btnSaveLoading.value = true
+    }
     const form = getSubmitForm()
     saveConfig(form)
   }
@@ -607,6 +612,7 @@ export const useThird = (type?: ConnectType) => {
     isDifferent: computed(() => enterpointsConfigStore.isDifferent),
     onSubmit,
     btnLoading,
+    btnSaveLoading,
     disconnectLineToken,
     disconnectWhatAppToken,
     disconnectMessageToken,
