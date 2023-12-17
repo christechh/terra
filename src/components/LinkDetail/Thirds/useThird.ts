@@ -514,6 +514,7 @@ export const useThird = (type?: ConnectType) => {
   const onSubmit = (type: string) => {
     if (type) {
       btnSaveLoading.value = true
+      enterpointsConfigStore.isDifferent = false
     }
     const form = getSubmitForm()
     saveConfig(form)
