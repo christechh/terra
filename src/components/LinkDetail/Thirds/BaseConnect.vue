@@ -25,6 +25,7 @@ const {
   isDifferent,
   onSubmit,
   btnLoading,
+  btnSaveLoading,
   disconnectLineToken,
   disconnectMessageToken,
   disconnectIgToken,
@@ -57,7 +58,7 @@ const showSlackDisconnectBtn = computed(() => {
 })
 
 const saveConfig = () => {
-  onSubmit && onSubmit()
+  onSubmit && onSubmit('save')
 }
 const handleLoadingSubmit = (target: string, callback?: () => void) => {
   loadingTarget.value = target
@@ -74,18 +75,20 @@ const handleLoadingSubmit = (target: string, callback?: () => void) => {
       <template #right>
         <div class="flex items-center gap-2">
           <CButton
-            v-if="showBlockLineConnectionBtn && !btnLoading"
+            v-if="showBlockLineConnectionBtn && !btnSaveLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
+            :loading="btnLoading && loadingTarget === 'disconnectLine'"
             @click="handleLoadingSubmit('disconnectLine', disconnectLineToken)"
           >
             <Lucide icon="Trash2" class="mr-1 h-4" />
             <span>{{ $t('what-app-txt18') }}</span>
           </CButton>
           <CButton
-            v-if="showMessageDisconnectBtn && !btnLoading"
+            v-if="showMessageDisconnectBtn && !btnSaveLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
+            :loading="btnLoading && loadingTarget === 'disconnectMessage'"
             @click="
               handleLoadingSubmit('disconnectMessage', disconnectMessageToken)
             "
@@ -94,18 +97,20 @@ const handleLoadingSubmit = (target: string, callback?: () => void) => {
             <span>{{ $t('what-app-txt18') }}</span>
           </CButton>
           <CButton
-            v-if="showIgDisconnectBtn && !btnLoading"
+            v-if="showIgDisconnectBtn && !btnSaveLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
+            :loading="btnLoading && loadingTarget === 'disconnectIg'"
             @click="handleLoadingSubmit('disconnectIg', disconnectIgToken)"
           >
             <Lucide icon="Trash2" class="mr-1 h-4" />
             <span>{{ $t('what-app-txt18') }}</span>
           </CButton>
           <CButton
-            v-if="showSlackDisconnectBtn && !btnLoading"
+            v-if="showSlackDisconnectBtn && !btnSaveLoading"
             variant="danger"
             class="text-white disabled:opacity-50"
+            :loading="btnLoading && loadingTarget === 'disconnectSlack'"
             @click="
               handleLoadingSubmit('disconnectSlack', disconnectSlackToken)
             "

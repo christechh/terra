@@ -12,8 +12,15 @@ defineOptions({
 })
 
 // const type = 'what-app-2'
-const { title, subtitle, steps, originalConfig, disconnectWhatAppToken } =
-  useThird('what-app-2')
+const {
+  title,
+  subtitle,
+  steps,
+  originalConfig,
+  disconnectWhatAppToken,
+  btnLoading,
+  btnSaveLoading
+} = useThird('what-app-2')
 
 const loadingTarget = ref<string>('')
 const showDisconnectBtn = computed(() => {
@@ -35,7 +42,11 @@ onErrorCaptured((callback) => {
 
 <template>
   <div>
-    <div v-if="showDisconnectBtn" class="box" :key="`${showDisconnectBtn}`">
+    <div
+      v-if="showDisconnectBtn && !btnSaveLoading"
+      class="box"
+      :key="`${showDisconnectBtn}`"
+    >
       <BoxHead :title="title">
         <template #subtitle>
           <component :is="subtitle" />
@@ -46,6 +57,7 @@ onErrorCaptured((callback) => {
         <CButton
           variant="danger"
           class="text-white disabled:opacity-80"
+          :loading="btnLoading && loadingTarget === 'disconnectWhatApp'"
           @click="
             handleLoadingSubmit('disconnectWhatApp', disconnectWhatAppToken)
           "

@@ -240,6 +240,6 @@ const computedClass = computed(() =>
     :disabled="loading || attrs.disabled"
   >
     <slot></slot>
-    <LoadingIcon v-if="loading" icon="oval" color="#fff" class="ml-2 h-5" />
+    <LoadingIcon v-if="loading" icon="oval" color="#fff" class="ml-2 h-4" />
   </component>
 </template>
