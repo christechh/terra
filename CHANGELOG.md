@@ -1,3 +1,14 @@
+## [1.23.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.23.0...v1.23.1) (2023-12-18)
+
+
+### Bug Fixes
+
+* **payment-setting:** adding get user self setting ([f7f725b](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/f7f725bf51d7aaedd54737872d442432a3da023b))
+* **payment-setting:** fix 1-1 to 1-6 ([21fcb0c](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/21fcb0cd698860e7da7b08e61cc7678059a4a7bd))
+* **payment-setting:** fix 2-1, 2-2 2-4 ([9858c14](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/9858c148a0623572d87dafbcb29166453b06f1e0))
+* **payment-setting:** fix 2-5, 2-6, 2-7 ([02641c3](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/02641c3aeb6a504d1b3af4e7e8e9343319c30b0a))
+* 互動按鈕 ([21d7495](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/21d74956886a64cf1826010279d9f9314de67bc8))
+
 # [1.23.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.22.0...v1.23.0) (2023-12-17)
 
 
