@@ -21,11 +21,16 @@ const userStore = useUserStore()
 const linkStore = useLinkStore()
 const notificationStore = useNotificationsStore()
 const { t } = useI18n()
-const links = computed((): ILink[] =>
-  linkStore.links.filter((link: { title: string }) =>
-    link.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
-  )
-)
+const links = computed((): ILink[] => {
+  if (searchKeyword.value) {
+    return linkStore.links.filter(
+      (link: { title: string }) =>
+        link.title?.toLowerCase().includes(searchKeyword.value.toLowerCase())
+    )
+  } else {
+    return linkStore.links
+  }
+})
 const getSettingLink = (link: ILink): string => {
   return `/dashboard/enterpoint?token=${link.token}&type=direct`
 }
@@ -144,7 +149,7 @@ onMounted(() => {
           />
           <span
             class="overflow-hidden text-ellipsis whitespace-nowrap font-bold text-gray-800 dark:text-slate-100"
-            >{{ link.title }}</span
+            >{{ link.title ?? link.token }}</span
           >
           <img
             class="cursor-pointer"
