@@ -6,6 +6,8 @@ import Lucide from '../../base-components/Lucide'
 
 interface Props {
   modelValue: string
+  white?: boolean
+  disabled?: boolean
 }
 
 const props = defineProps<Props>()
@@ -52,14 +54,19 @@ window.addEventListener('keydown', (e: KeyboardEvent) => {
 onBeforeUnmount(() => {
   window.removeEventListener('click', close)
 })
+
+const toggleMenu = () => {
+  if (props.disabled) return
+  isOpen.value = !isOpen.value
+}
 </script>
 
 <template>
-  <div class="dashboard-bg relative flex items-center">
-    <div
-      class="flex cursor-pointer items-center"
-      @click.stop="isOpen = !isOpen"
-    >
+  <div
+    class="relative flex items-center"
+    :class="{ 'dashboard-bg': !props.white }"
+  >
+    <div class="flex cursor-pointer items-center" @click.stop="toggleMenu">
       <div v-html="selectedFlag" class="w-7 pl-2" />
       <Lucide icon="ChevronDown" width="12" class="ml-2" />
     </div>

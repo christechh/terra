@@ -21,7 +21,7 @@ const isColorExpand = ref(false)
 </script>
 
 <template>
-  <div class="mt-2 bg-[#F6F6F6] p-5 dark:bg-darkmode-700">
+  <div class="mt-2 rounded-md bg-[#F6F6F6] p-5 dark:bg-darkmode-700">
     <div class="flex items-center justify-between">
       <div
         v-for="color in colors"

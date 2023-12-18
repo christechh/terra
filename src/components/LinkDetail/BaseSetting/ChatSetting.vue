@@ -12,6 +12,7 @@ import Lucide from '../../../base-components/Lucide'
 import useChatSetting from '../../../composables/LinkDetail/BaseSetting/useChatSetting'
 import usePinBoard from '../../../composables/LinkDetail/BaseSetting/usePinBoard'
 import { useLinkPage } from '../../../composables/useLinkPage'
+import ContryCodePicker from '../../ContryCodePicker'
 import HeadShots from '../../HeadShots'
 import ThemePicker from '../../ThemePicker'
 import VerticalSteps from '../../VerticalSteps'
@@ -65,7 +66,15 @@ const typeTitle = computed({
       phone: phoneTitle
     }
     const tmp = m[welcomeGetCustomerInfoType.value as keyof typeof m]?.value
-    return tmp ? tmp : t(`reply-message-${welcomeGetCustomerInfoType.value}`)
+    return tmp
+      ? tmp
+      : t(
+          `reply-message-${
+            welcomeGetCustomerInfoType.value === 'other'
+              ? 'text'
+              : welcomeGetCustomerInfoType.value
+          }`
+        )
   },
   set(val: string) {
     const m = {
@@ -89,7 +98,13 @@ const typeText = computed({
     const tmp = m[welcomeGetCustomerInfoType.value as keyof typeof m]?.value
     return tmp
       ? tmp
-      : t(`reply-message-${welcomeGetCustomerInfoType.value}-text`)
+      : t(
+          `reply-message-${
+            welcomeGetCustomerInfoType.value === 'other'
+              ? 'text'
+              : welcomeGetCustomerInfoType.value
+          }-text`
+        )
   },
   set(val: string) {
     const m = {
@@ -119,20 +134,20 @@ const submit = () => {
 getTypes()
 </script>
 <template>
-  <div class="mt-2 bg-white dark:bg-darkmode-600">
+  <div class="mt-2 rounded-lg bg-white dark:bg-darkmode-600">
     <div
       class="flex items-center justify-between border-b border-[#EDF2F7] p-5 text-base"
     >
       {{ $t('qrcode-setting-tab-chat-setting') }}
       <button
-        class="rounded-lg bg-primary px-5 py-2 text-white"
+        class="rounded-lg bg-primary px-5 py-2 text-base text-sm text-white"
         @click="submit"
       >
         {{ $t('save-btn') }}
       </button>
     </div>
-    <div class="flex p-5">
-      <div class="flex-1 border-e pe-10">
+    <div class="p-5 lg:flex">
+      <div class="flex-1 pe-10 lg:border-e">
         <VerticalSteps>
           <VerticalSteps.Step :step="1" class="pb-9">
             <div class="flex items-center font-bold">
@@ -443,12 +458,12 @@ getTypes()
           </VerticalSteps.Step>
         </VerticalSteps>
       </div>
-      <div class="flex-1 px-10 py-5">
+      <div class="mt-[60px] flex-1 px-10 py-5 lg:mt-0">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
         <div
-          class="mx-auto mt-5 flex h-[700px] w-[325px] flex-col rounded-[55px] border-[16px] border-[#5b5b5b] py-9"
+          class="mx-auto mt-5 flex h-[700px] w-[350px] flex-col rounded-[55px] border-[16px] border-[#5b5b5b] py-9"
         >
-          <header class="chat-header py-2 pl-5">chatbot 4</header>
+          <header class="chat-header py-2 pl-5">{{ title }}</header>
           <main class="flex-1 p-2 text-xs">
             <div class="flex">
               <HeadShots
@@ -468,7 +483,7 @@ getTypes()
                 </div>
               </div>
             </div>
-            <div class="flex">
+            <div class="flex" v-if="welcomeGetCustomerInfoType !== 'none'">
               <HeadShots
                 read-only
                 class="m-1"
@@ -480,11 +495,12 @@ getTypes()
                 <div class="text-[10px] text-[#8d8d8d]">{{ name }}</div>
                 <div class="flex items-end">
                   <div class="rounded-[10px] bg-[#eeeff0] p-2 text-[#1a1a1a]">
-                    手機號碼
+                    {{ typeTitle }}
                     <div class="mt-1 flex items-center bg-white pr-2">
+                      <ContryCodePicker white model-value="+886" disabled />
                       <input
                         class="h-[26px] w-[130px] overflow-hidden overflow-ellipsis whitespace-nowrap border-0 bg-white text-xs"
-                        :placeholder="$t('nickname-type-mobile-placeholder')"
+                        :placeholder="typeText"
                         disabled
                       />
                       <Lucide
