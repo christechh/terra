@@ -446,7 +446,7 @@ getTypes()
       <div class="flex-1 px-10 py-5">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
         <div
-          class="mt-5 flex h-[700px] flex-col rounded-[55px] border-[16px] border-[#5b5b5b] py-9"
+          class="mx-auto mt-5 flex h-[700px] w-[325px] flex-col rounded-[55px] border-[16px] border-[#5b5b5b] py-9"
         >
           <header class="chat-header py-2 pl-5">chatbot 4</header>
           <main class="flex-1 p-2 text-xs">

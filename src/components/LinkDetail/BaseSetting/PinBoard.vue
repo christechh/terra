@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import {
   FormInput,
   FormSelect,
@@ -9,6 +9,7 @@ import {
 import FormSwitch from '../../../base-components/Form/FormSwitch'
 import Lucide from '../../../base-components/Lucide'
 import usePinBoard from '../../../composables/LinkDetail/BaseSetting/usePinBoard'
+import CreateActionBtn from '../../Modals/CreateActionBtn'
 import ThemePicker from '../../ThemePicker'
 import VerticalSteps from '../../VerticalSteps'
 
@@ -31,13 +32,55 @@ const {
   floatButtonColor,
   chatLogoSize,
   withoutSeoNoIndex,
+  welcomeLinkSetting,
+  handleCreateActionBtn,
+  deleteActionBtn,
   save,
   nickNameFormatTypeChange
 } = usePinBoard()
 
+const showCreateActionBtn = ref(false)
+
 const btnColr = computed(() => {
   return theme.value === '#e0eb76' ? '#39701f' : '#ffffff'
 })
+
+const floatBtnTextColor = computed(() => {
+  return floatButtonColor.value === '#e0eb76' ? '#39701f' : '#ffffff'
+})
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const selectActionBtns = ref<any>()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const selectActionIdx = ref<any>()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dragIdx = ref<any>(null)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dragItem = ref<any>(null)
+
+const editActionBtn = (i: number) => {
+  selectActionBtns.value = welcomeLinkSetting.value[i]
+  selectActionIdx.value = i
+  showCreateActionBtn.value = true
+}
+
+const createHandler = () => {
+  selectActionBtns.value = null
+  selectActionIdx.value = null
+  showCreateActionBtn.value = true
+}
+
+const onDrop = (idx: number) => {
+  welcomeLinkSetting.value.splice(
+    dragIdx.value > idx ? idx : idx + 1,
+    0,
+    dragItem.value
+  )
+  welcomeLinkSetting.value.splice(
+    dragIdx.value > idx ? dragIdx.value + 1 : dragIdx.value,
+    1
+  )
+}
 </script>
 
 <template>
@@ -395,7 +438,7 @@ const btnColr = computed(() => {
             </div>
             <div class="mt-2 bg-[#F6F6F6] dark:bg-darkmode-700">
               <ThemePicker v-model="floatButtonColor">
-                <div class="flex items-center">
+                <div class="">
                   <div class="flex items-center justify-between">
                     {{ $t('welcome-hr-color-input') }}
                     <input
@@ -417,7 +460,7 @@ const btnColr = computed(() => {
                     <input
                       type="color"
                       class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
-                      value="#39701f"
+                      :value="floatBtnTextColor"
                     />
                   </div>
                 </div>
@@ -425,14 +468,57 @@ const btnColr = computed(() => {
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="3" class="pb-9" is-final>
-            <div class="font-bold">{{ $t('welcome-link-button-setting') }}</div>
+            <div class="flex items-center font-bold">
+              {{ $t('welcome-link-button-setting') }}
+              <div
+                class="ml-1"
+                v-tooltip:top.tootip="$t('tip-pinboard-welcome-links')"
+              >
+                <Lucide icon="HelpCircle" width="14" />
+              </div>
+            </div>
+            <div
+              class="mt-3 flex items-center rounded border px-2"
+              v-for="(link, i) in welcomeLinkSetting"
+              :data-idx="i"
+              :key="i"
+              draggable="true"
+              @dragstart="(dragIdx = i), (dragItem = link)"
+              @dragend="(dragIdx = null), (dragItem = null)"
+              @dragenter="(e) => e.preventDefault()"
+              @dragover="(e) => e.preventDefault()"
+              @drop="() => onDrop(i)"
+            >
+              <button class="cursor-move">
+                <Lucide icon="MoreVertical" width="16" />
+              </button>
+              <input
+                class="flex-1 border-0 bg-white focus:ring-[transparent]"
+                :value="link.title"
+                disabled
+              />
+              <button class="mr-2" @click="editActionBtn(i)">
+                <Lucide icon="Pen" width="20" />
+              </button>
+              <button @click="deleteActionBtn(i)">
+                <Lucide icon="Trash" width="25" />
+              </button>
+            </div>
+            <button
+              class="mt-3 flex w-full items-center justify-center rounded border border-dashed bg-dashboard_bg p-4 text-primary"
+              @click="createHandler"
+            >
+              <Lucide icon="PlusCircle" color="#02b13f" class="mr-2" />{{
+                $t('chatbot-message-create-action')
+              }}
+            </button>
           </VerticalSteps.Step>
         </VerticalSteps>
       </div>
       <div class="flex-1 px-10 py-5">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
         <div
-          class="mt-5 h-[700px] rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
+          class="mx-auto mt-5 h-[700px] w-[325px] rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
           :style="`background: url(${welcomeBG}) center center / cover;`"
         >
           <img
@@ -453,9 +539,30 @@ const btnColr = computed(() => {
           <button class="enter-btn h-[48px] w-full rounded-[15px]">
             {{ btnText }}
           </button>
+          <div
+            v-if="welcomeLinkSetting.length > 0"
+            class="mb-[10px] mt-[34px] flex items-center justify-center text-[#939393]"
+          >
+            <hr class="mr-2 flex-1 bg-[#939393]" />
+            {{ $t('welcome-hr-text') }}
+            <hr class="ml-2 flex-1 bg-[#939393]" />
+          </div>
+          <button
+            class="float-btn mb-[10px] h-[48px] w-full rounded-[15px]"
+            v-for="(link, i) in welcomeLinkSetting"
+            :key="i"
+          >
+            {{ link.title }}
+          </button>
         </div>
       </div>
     </div>
+    <CreateActionBtn
+      v-if="showCreateActionBtn"
+      @close="showCreateActionBtn = false"
+      @save="(action) => handleCreateActionBtn(action, selectActionIdx)"
+      :selectActionBtns="selectActionBtns"
+    />
   </main>
 </template>
 
@@ -467,5 +574,10 @@ const btnColr = computed(() => {
 }
 .enter-btn {
   background-color: v-bind(theme);
+  color: v-bind(btnColr);
+}
+.float-btn {
+  background-color: v-bind(floatButtonColor);
+  color: v-bind(floatBtnTextColor);
 }
 </style>
