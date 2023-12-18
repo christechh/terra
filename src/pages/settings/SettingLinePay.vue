@@ -50,7 +50,7 @@ onMounted(async () => {
 <template>
   <div class="">
     <div
-      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-7"
+      class="relative mt-5 flex items-center border-0 bg-white p-5"
       style="border-radius: 20px"
     >
       <div class="text-sm">{{ $t('payment-flow-turn-on-line-pay') }}</div>
@@ -71,7 +71,7 @@ onMounted(async () => {
       </FormSwitch>
     </div>
     <div
-      class="relative mt-5 flex flex-col border-0 bg-white pl-2.5"
+      class="relative mt-5 flex flex-col border-0 bg-white"
       style="border-radius: 20px"
     >
       <div
@@ -81,7 +81,7 @@ onMounted(async () => {
           {{ $t('payment-flow-line-pay-settings') }}
         </h2>
         <Button
-          class="w-1/12"
+          class="w-1/12 disabled:opacity-50"
           variant="primary"
           :disabled="!submitChange"
           @click="submit"
@@ -112,12 +112,12 @@ onMounted(async () => {
             </div>
           </FormLabel>
         </div>
-        <div class="pb-3 pt-1">
+        <div>
           <FormInput
             v-model="form.line_pay_channel_id"
             class="w-6/12"
             type="text"
-            @change="setIsEdit"
+            @input="setIsEdit"
           />
         </div>
         <div class="flex items-center py-2.5">
@@ -133,12 +133,12 @@ onMounted(async () => {
             </div>
           </FormLabel>
         </div>
-        <div class="pb-3 pt-1">
+        <div>
           <FormInput
             v-model="form.line_pay_channel_secret_key_id"
             type="text"
             class="w-6/12"
-            @change="setIsEdit"
+            @input="setIsEdit"
           />
         </div>
       </div>

@@ -45,13 +45,14 @@ onMounted(async () => {
 })
 const setIsEdit = () => {
   submitChange.value = true
+  console.log('submitChange: ', submitChange.value)
 }
 </script>
 
 <template>
   <div class="">
     <div
-      class="relative mt-5 flex items-center border-0 bg-white p-5 pl-7"
+      class="relative mt-5 flex items-center border-0 bg-white p-5"
       style="border-radius: 20px"
     >
       <div class="text-sm">
@@ -74,7 +75,7 @@ const setIsEdit = () => {
       </FormSwitch>
     </div>
     <div
-      class="relative mt-5 flex flex-col border-0 bg-white pl-2.5"
+      class="relative mt-5 flex flex-col border-0 bg-white"
       style="border-radius: 20px"
     >
       <div
@@ -84,7 +85,7 @@ const setIsEdit = () => {
           {{ $t('payment-flow-paypal-settings') }}
         </div>
         <Button
-          class="w-1/12"
+          class="w-1/12 disabled:opacity-50"
           variant="primary"
           :disabled="!submitChange"
           @click="submit"
@@ -110,7 +111,7 @@ const setIsEdit = () => {
               v-model="form.paypal_sandbox_mode"
               id="checkbox-switch-7"
               type="checkbox"
-              @change="setIsEdit"
+              @input="setIsEdit"
             />
           </FormSwitch>
         </div>
@@ -129,12 +130,12 @@ const setIsEdit = () => {
             </div>
           </FormLabel>
         </div>
-        <div class="pb-3 pt-1">
+        <div>
           <FormInput
             v-model="form.paypal_client_id"
             class="w-6/12"
             type="text"
-            @change="setIsEdit"
+            @input="setIsEdit"
           />
         </div>
         <div class="flex items-center py-2.5">
@@ -148,12 +149,12 @@ const setIsEdit = () => {
             </div>
           </FormLabel>
         </div>
-        <div class="pb-3 pt-1">
+        <div>
           <FormInput
             v-model="form.paypal_secret"
             type="text"
             class="w-6/12"
-            @change="setIsEdit"
+            @input="setIsEdit"
           />
         </div>
       </div>
