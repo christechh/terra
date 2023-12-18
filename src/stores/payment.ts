@@ -61,11 +61,35 @@ export type CreatePayPalDTO = {
   paypal_secret: string
 }
 
+export type UserPaymentSetting = {
+  line_pay_open: boolean
+  line_pay_channel_id: string | null
+  line_pay_channel_secret_key_id: string | null
+  stripe_open: boolean
+  stripe_api_secret: string | null
+  stripe_webhook_secret: string | null
+  paypal_open: boolean
+  paypal_sandbox_mode: boolean
+  paypal_client_id: string | null
+  paypal_secret: string | null
+} & Record<
+  string,
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  any
+>
+
 export const usePaymentStore = defineStore('payment', {
   state: () => ({
-    payments: [] as Payment[]
+    payments: [] as Payment[],
+    setting: {} as UserPaymentSetting
   }),
   actions: {
+    async fetchSelfSetting() {
+      const response = await axios.get('auth/setting')
+      if (response.data.data) {
+        this.setting = response.data.data.data
+      }
+    },
     async fetchAllPayments() {
       this.payments = await this.fetchPaymentsByPage([], 0, 100)
     },
@@ -87,7 +111,10 @@ export const usePaymentStore = defineStore('payment', {
         pageSize: number
       }
       if (typeof pagedData === 'object') {
-        const finalPage = Math.ceil(Number(pagedData.count) / pageSize)
+        const finalPage =
+          Math.ceil(Number(pagedData.count) / pageSize) - 1 >= 0
+            ? Math.ceil(Number(pagedData.count) / pageSize) - 1
+            : 0
         payments.push(...pagedData.data)
         if (page < finalPage) {
           return this.fetchPaymentsByPage(payments, page + 1, pageSize)

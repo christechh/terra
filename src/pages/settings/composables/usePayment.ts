@@ -8,16 +8,21 @@ import {
 export default function usePayment() {
   const paymentStore = usePaymentStore()
 
-  const { fetchAllPayments, setPaymentByMethod } = paymentStore
+  const { fetchAllPayments, setPaymentByMethod, fetchSelfSetting } =
+    paymentStore
 
   const payments = computed(() => paymentStore.payments)
+  const setting = computed(() => paymentStore.setting)
 
   fetchAllPayments()
+  fetchSelfSetting()
 
   return {
     payments,
+    setting,
     setPaymentByMethod,
     fetchAllPayments,
+    fetchSelfSetting,
     getPaymentStatus: (status: PaymentStatus) => {
       switch (status) {
         case PaymentStatus.pending:

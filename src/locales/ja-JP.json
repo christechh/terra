@@ -1893,6 +1893,7 @@
   "payment-flow-tooltip-stripe-locale": "Stripeの支払いリクエストの言語を設定する。",
   "payment-flow-tooltip-turn-on-paypal": "このスイッチをオンにすると、チャットルームにいる人にPayPalで支払いを依頼することができます。",
   "payment-flow-tooltip-paypal-email": "PayPalのEメールを入力してください。",
+  "payment-flow-paypal-live-mode": "Live Mode",
   "payment-flow-paypal-client-id": "PayPalクライアントID",
   "payment-flow-paypal-secret": "PayPalシークレット",
   "payment-flow-paypal-sandbox-mode": "PayPal Sandbox Mode",

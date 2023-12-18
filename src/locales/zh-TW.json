@@ -1858,6 +1858,7 @@
   "sort-order4": "未讀訊息數",
   "no-link": "沒有被指派的連結",
   "payment-flow": "聊天室金流設定",
+  "payment-flow-history-empty": "還沒有收款紀錄",
   "payment-flow-turn-on-line-pay": "啟用 LINE Pay",
   "payment-flow-line-pay-settings": "LINE Pay 設定",
   "payment-flow-for-the-line-pay-collection": "LINE Pay 收款，可參考此篇",
