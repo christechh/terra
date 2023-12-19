@@ -1,3 +1,10 @@
+## [1.23.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.23.2...v1.23.3) (2023-12-19)
+
+
+### Bug Fixes
+
+* [#7](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/7)#note_55575 ([4804fed](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/4804fedcaf3ee345b26b67151f3ca027bc3b32d2)), closes [#note_55575](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/note_55575)
+
 ## [1.23.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.23.1...v1.23.2) (2023-12-18)
 
 
