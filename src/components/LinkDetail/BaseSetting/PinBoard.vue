@@ -98,8 +98,8 @@ const onDrop = (idx: number) => {
         {{ $t('save-btn') }}
       </button>
     </header>
-    <div class="flex p-5">
-      <div class="flex-1 border-e pe-10">
+    <div class="p-5 lg:flex">
+      <div class="flex-1 pe-10 lg:border-e">
         <div class="mb-7 ml-6 flex w-full rounded-full bg-[#F6F6F6]">
           <div
             class="flex-1 cursor-pointer rounded-full py-2 text-center"
@@ -515,7 +515,7 @@ const onDrop = (idx: number) => {
           </VerticalSteps.Step>
         </VerticalSteps>
       </div>
-      <div class="flex-1 px-10 py-5">
+      <div class="mt-[60px] flex-1 px-10 py-5 lg:mt-0">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
         <div
           class="mx-auto mt-5 h-[700px] w-[325px] rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
