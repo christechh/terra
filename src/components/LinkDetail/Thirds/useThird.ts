@@ -22,7 +22,7 @@ export type ConnectType =
   | 'instagram'
   | 'slack'
 
-export const useThird = (type: ConnectType) => {
+export const useThird = (type?: ConnectType) => {
   const { t, locale } = useI18n()
   const { token } = useLinkPage()
   const notificationsStore = useNotificationsStore()
