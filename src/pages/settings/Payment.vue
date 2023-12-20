@@ -128,9 +128,14 @@ onMounted(() => {
           class="col-span-1 flex h-[60px] items-center border-b-2 border-solid border-[#e2e8f0]"
           >{{ $t('payment-flow-check-details') }}</b
         >
-        <template v-for="payment in payments" :key="payment.id">
+        <template v-for="(payment, index) in payments" :key="payment.id">
           <span
-            class="col-span-1 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+            class="col-span-1 flex h-[60px] items-center justify-center p-2"
+            :class="
+              index === payments.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
           >
             <img
               class="h-10 w-10 rounded-full"
@@ -141,27 +146,57 @@ onMounted(() => {
             />
           </span>
           <span
-            class="col-span-2 flex h-[60px] items-center justify-center overflow-hidden text-ellipsis border-b border-solid border-[#e2e8f0] p-2"
+            class="col-span-2 flex h-[60px] items-center justify-center overflow-hidden text-ellipsis p-2"
+            :class="
+              index === payments.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{ payment.enterpoint.name }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center justify-center overflow-hidden text-ellipsis border-b border-solid border-[#e2e8f0] p-2"
+            class="col-span-2 flex h-[60px] items-center justify-center overflow-hidden text-ellipsis p-2"
+            :class="
+              index === payments.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{ payment.payment_user.name }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+            class="col-span-2 flex h-[60px] items-center justify-center p-2"
+            :class="
+              index === payments.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{ convertYmdHis(payment.request_at) }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+            class="col-span-2 flex h-[60px] items-center justify-center p-2"
+            :class="
+              index === payments.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{ convertYmdHis(payment.payment_at) }}</span
           >
           <span
-            class="col-span-2 flex h-[60px] items-center justify-center border-b border-solid border-[#e2e8f0] p-2"
+            class="col-span-2 flex h-[60px] items-center justify-center p-2"
+            :class="
+              index === payments.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
             >{{ $t(`${getPaymentStatus(payment.status)}`) }}</span
           >
           <span
-            class="justify-content col-span-1 flex h-[60px] items-center border-b border-solid border-[#e2e8f0]"
+            class="justify-content col-span-1 flex h-[60px] items-center"
+            :class="
+              index === payments.length - 1
+                ? ''
+                : 'border-b border-solid border-[#e2e8f0]'
+            "
           >
             <Lucide
               :size="20"

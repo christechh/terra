@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue'
-import { Dialog } from '../../../base-components/Headless'
+import { onMounted, PropType, ref } from 'vue'
+import { Slideover } from '../../../base-components/Headless'
 import Button from '../../../base-components/Button'
-import CloseIcon from '../../Icons/CloseIcon.vue'
+import Lucide from '../../../base-components/Lucide'
 import { Colors } from '../../../utils/design-patterns'
 
 defineOptions({
@@ -41,10 +41,12 @@ const getSpanTitle = (key: string) => {
       return 'payment-flow-details-payment-method'
     case 'paymentNote':
       return 'payment-flow-details-memo'
-    default:
-      return
   }
 }
+
+onMounted(() => {
+  Object.keys(props.detail).filter((key) => getSpanTitle(key))
+})
 
 defineExpose({
   setOpen
@@ -54,7 +56,7 @@ defineExpose({
 <template>
   <div>
     <!-- BEGIN: Modal Content -->
-    <Dialog
+    <Slideover
       class="payment-dialog"
       :open="open"
       @close="
@@ -63,44 +65,48 @@ defineExpose({
         }
       "
     >
-      <Dialog.Panel
-        class="payment-dialog-panel"
-        style="position: fixed; height: 100vh; right: 0; margin-top: -4rem"
+      <Slideover.Panel
+        class="payment-dialog-panel rounded-none"
+        style="position: fixed; height: 100vh; right: 0"
       >
-        <Dialog.Title class="payment-dialog-title">
+        <Slideover.Title class="payment-dialog-title">
           <h2
             class="mr-auto text-base font-semibold"
             :style="[{ color: Colors.gray }]"
           >
             {{ $t('payment-flow-details') }}
           </h2>
-          <div
-            class="mt-2.5 flex h-4 w-4 -translate-y-1/2 translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-white"
+          <Lucide
+            icon="X"
+            class="absolute right-2.5 top-2.5 cursor-pointer text-[#939393]"
             @click="() => setOpen(false)"
-          >
-            <CloseIcon />
-          </div>
-        </Dialog.Title>
-        <Dialog.Description
+          />
+        </Slideover.Title>
+        <Slideover.Description
           class="payment-dialog-desc w-full grid-cols-12 gap-4 gap-y-3"
         >
           <ul
             class="w-full space-y-4 text-left text-gray-500 dark:text-gray-400"
           >
-            <template v-for="key in Object.keys(props.detail)" :key="key">
+            <template
+              v-for="key in Object.keys(props.detail).filter((key) =>
+                getSpanTitle(key)
+              )"
+              :key="key"
+            >
               <li class="flex items-center space-x-3 rtl:space-x-reverse">
-                <span class="font-semibold" v-if="key !== 'currency'">{{
+                <span v-if="key !== 'currency'">{{
                   $t(`${getSpanTitle(key)}`)
                 }}</span>
                 <span
                   v-if="key === 'paymentStatus'"
-                  class="font-bold font-semibold text-black"
+                  class="text-black"
                   style="margin-left: auto"
                   >{{ $t(`${props.detail[key]}`) }}</span
                 >
                 <span
                   v-else-if="key === 'paymentMethod'"
-                  class="font-bold font-semibold text-black"
+                  class="text-black"
                   style="margin-left: auto"
                   >{{
                     props.detail[key]
@@ -110,7 +116,7 @@ defineExpose({
                 >
                 <span
                   v-else-if="key === 'amount'"
-                  class="font-bold font-semibold text-black"
+                  class="text-black"
                   style="margin-left: auto"
                   >{{
                     `${props.detail['currency']} ${props.detail[key]}`
@@ -118,7 +124,7 @@ defineExpose({
                 >
                 <span
                   v-else-if="key !== 'currency'"
-                  class="font-bold font-semibold text-black"
+                  class="text-black"
                   style="margin-left: auto"
                   >{{ props.detail[key] }}</span
                 >
@@ -130,9 +136,9 @@ defineExpose({
               $t('payment-flow-details-go-to-chat-room')
             }}</Button>
           </div>
-        </Dialog.Description>
-      </Dialog.Panel>
-    </Dialog>
+        </Slideover.Description>
+      </Slideover.Panel>
+    </Slideover>
     <!-- END: Modal Content -->
   </div>
 </template>
