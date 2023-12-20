@@ -22,14 +22,13 @@ export type ConnectType =
   | 'instagram'
   | 'slack'
 
-export const useThird = (type?: ConnectType) => {
+export const useThird = (type: ConnectType) => {
   const { t, locale } = useI18n()
   const { token } = useLinkPage()
   const notificationsStore = useNotificationsStore()
   const enterpointsConfigStore = useEnterpointsConfigStore()
 
   const btnLoading = ref(false)
-  const btnSaveLoading = ref(false)
 
   const config = computed(() => {
     return enterpointsConfigStore.data
@@ -508,14 +507,9 @@ export const useThird = (type?: ConnectType) => {
       console.log('error', error)
     } finally {
       btnLoading.value = false
-      btnSaveLoading.value = false
     }
   }
-  const onSubmit = (type: string) => {
-    if (type) {
-      btnSaveLoading.value = true
-      enterpointsConfigStore.isDifferent = false
-    }
+  const onSubmit = () => {
     const form = getSubmitForm()
     saveConfig(form)
   }
@@ -592,6 +586,20 @@ export const useThird = (type?: ConnectType) => {
       }
     })
   }
+  const whetherLeave = ({ onSubmit }: { onSubmit?: () => void }) => {
+    useDeleteModalStore().showModal({
+      deleteType: 'callback',
+      title: t('enterpoint-modal-confirm-back-title'),
+      content: t('enterpoint-modal-confirm-back-desc'),
+      icon: 'MinusCircle',
+      iconColor: 'text-primary',
+      cancelButtonText: t('enterpoint-modal-confirm-back-cacel'),
+      confirmButtonText: t('enterpoint-modal-confirm-back-leave'),
+      onSubmit: () => {
+        onSubmit && onSubmit()
+      }
+    })
+  }
 
   return {
     title: computed(() => {
@@ -613,11 +621,11 @@ export const useThird = (type?: ConnectType) => {
     isDifferent: computed(() => enterpointsConfigStore.isDifferent),
     onSubmit,
     btnLoading,
-    btnSaveLoading,
     disconnectLineToken,
     disconnectWhatAppToken,
     disconnectMessageToken,
     disconnectIgToken,
-    disconnectSlackToken
+    disconnectSlackToken,
+    whetherLeave
   }
 }

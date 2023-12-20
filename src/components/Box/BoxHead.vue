@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <div
-    class="flex flex-col items-center border-b border-gray-200 p-5 sm:flex-row"
+    class="flex flex-col items-center gap-2 border-b border-gray-200 p-5 sm:flex-row"
   >
     <div>
       <h2 class="mr-auto text-base font-semibold">
