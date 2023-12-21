@@ -1,3 +1,10 @@
+# [1.25.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.24.0...v1.25.0) (2023-12-21)
+
+
+### Features
+
+* add pagination to links page ([832c076](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/832c07689eb1ba04dbd83f8b9f92570e83ae312b))
+
 # [1.24.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.23.4...v1.24.0) (2023-12-21)
 
 
