@@ -16,6 +16,15 @@ const title = computed(() => deleteModalStore.title)
 const content = computed(() => deleteModalStore.content)
 const cancelButtonText = computed(() => deleteModalStore.cancelButtonText)
 const confirmButtonText = computed(() => deleteModalStore.confirmButtonText)
+const icon = computed(() => deleteModalStore.icon)
+const iconColor = computed(() => deleteModalStore.iconColor)
+const submitVariant = computed(() => {
+  if (iconColor.value === 'text-primary') {
+    return 'primary'
+  }
+
+  return 'danger'
+})
 
 const setOpen = (value: boolean) => {
   deleteModalStore.setOpen({ status: value })
@@ -63,7 +72,11 @@ const deleteExec = async () => {
     >
       <Dialog.Panel>
         <div class="p-5 text-center">
-          <Lucide icon="XCircle" class="mx-auto mt-3 h-16 w-16 text-danger" />
+          <Lucide
+            :icon="icon || 'XCircle'"
+            class="mx-auto mt-3 h-16 w-16"
+            :class="iconColor || 'text-danger'"
+          />
           <div class="mt-5 text-3xl">{{ title }}</div>
           <div class="mt-2 text-slate-500">
             {{ content }}
@@ -84,7 +97,7 @@ const deleteExec = async () => {
           </Button>
           <Button
             type="button"
-            variant="danger"
+            :variant="submitVariant"
             class="ml-5 w-24"
             @click="deleteExec"
           >

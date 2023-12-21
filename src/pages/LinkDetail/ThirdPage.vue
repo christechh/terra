@@ -7,10 +7,13 @@ import Breadcrumb from '@/components/LinkDetail/Common/Breadcrumb.vue'
 import BaseConnect from '@/components/LinkDetail/Thirds/BaseConnect.vue'
 import WhatAppDisconnect from '@/components/LinkDetail/Thirds/WhatAppDisconnect.vue'
 import { useThird } from '../../components/LinkDetail/Thirds/useThird'
+import { useEnterpointsConfigStore } from '../../stores/enterpoint/config'
 
 const { t } = useI18n()
-const { fetchConfig } = useThird()
+const { isDifferent, fetchConfig, whetherLeave } = useThird()
+const enterpointsConfigStore = useEnterpointsConfigStore()
 
+const tabIndex = ref(0)
 const tabs = ref([
   {
     id: 'line',
@@ -28,24 +31,16 @@ const tabs = ref([
   {
     id: 'what-app',
     name: t('what-app-txt1'),
-    component: h('div', null, [
-      h(BaseConnect, {
-        type: 'what-app'
-      }),
-      h(WhatAppDisconnect, {
-        class: 'mt-2'
-      })
-    ])
-    // render: () => {
-    //   return h('div', null, [
-    //     h(BaseConnect, {
-    //       type: 'what-app'
-    //     }),
-    //     h(WhatAppDisconnect, {
-    //       class: 'mt-2'
-    //     })
-    //   ])
-    // }
+    render: () => {
+      return h('div', null, [
+        h(BaseConnect, {
+          type: 'what-app'
+        }),
+        h(WhatAppDisconnect, {
+          class: 'mt-2'
+        })
+      ])
+    }
   },
   {
     id: 'messenger',
@@ -88,6 +83,19 @@ const tabs = ref([
   }
 ])
 
+const handleClick = ({ index }: { index: number }) => {
+  if (isDifferent.value) {
+    return whetherLeave({
+      onSubmit: () => {
+        tabIndex.value = index
+        enterpointsConfigStore.cleanDifferent()
+      }
+    })
+  }
+
+  tabIndex.value = index
+}
+
 onMounted(() => {
   fetchConfig && fetchConfig()
 })
@@ -96,6 +104,11 @@ onMounted(() => {
 <template>
   <section>
     <Breadcrumb />
-    <Tabs :tabs="tabs" />
+    <Tabs
+      lose-self-control
+      :tabs="tabs"
+      :index="tabIndex"
+      @click="handleClick"
+    />
   </section>
 </template>

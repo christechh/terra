@@ -21,7 +21,7 @@ interface IState {
   isDifferent: boolean
 }
 export interface IUpdateEnterpointConfigInput {
-  key: keyof IState['data']
+  key: keyof IStateOriginData
   value: string
 }
 export interface ISubmitForm {
@@ -58,7 +58,6 @@ export const useEnterpointsConfigStore = defineStore('enterpointsConfig', {
       try {
         const response = await axios.get(`/chat/enterpoints/config/${token}`)
         const configData = response.data.data.data
-        console.log('configData.whatsapp_phone_number_id', configData)
         const transformData = {
           ...configData,
           line_messaging_channel_access_token:
@@ -74,6 +73,7 @@ export const useEnterpointsConfigStore = defineStore('enterpointsConfig', {
 
         this.data = { ...transformData }
         this.originData = { ...transformData }
+        this.isDifferent = false
       } catch (error) {
         console.log('error', error)
       }
@@ -83,6 +83,10 @@ export const useEnterpointsConfigStore = defineStore('enterpointsConfig', {
       const newData = { ...this.data }
       set(newData, input.key, input.value)
       this.isDifferent = !isEqual(newData, this.originData)
+    },
+    cleanDifferent() {
+      this.isDifferent = false
+      this.data = { ...this.originData }
     }
   }
 })
