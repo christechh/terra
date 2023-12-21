@@ -8,6 +8,8 @@ import { useI18n } from 'vue-i18n'
 import { Dialog } from '../base-components/Headless'
 import QrcodeVue from 'qrcode.vue'
 import CreateLinkModal from '../components/Modals/CreateLinkModal.vue'
+import Pagination from '../base-components/Pagination'
+import Lucide from '../base-components/Lucide'
 
 interface ILink {
   id: string
@@ -30,6 +32,17 @@ const links = computed((): ILink[] => {
   } else {
     return linkStore.links
   }
+})
+const currentPage = computed(() => linkStore.page)
+const totalPage = computed(() =>
+  Math.floor(linkStore.total / linkStore.pageSize)
+)
+const pages = computed(() => {
+  const pages = []
+  for (let i = 1; i <= totalPage.value; i++) {
+    pages.push(i)
+  }
+  return pages
 })
 const getSettingLink = (link: ILink): string => {
   return `/dashboard/enterpoint?token=${link.token}&type=direct`
@@ -87,7 +100,7 @@ const dialogOpen = ref(false)
 const createLinkDialogOpen = ref(false)
 onMounted(() => {
   userStore.fetchSetting()
-  linkStore.fetchLinks()
+  linkStore.fetchLinks(1)
 })
 </script>
 
@@ -188,6 +201,27 @@ onMounted(() => {
           </IconButton>
         </div>
       </div>
+      <Pagination class="w-full sm:mr-auto sm:w-auto">
+        <Pagination.Link
+          @click="linkStore.fetchLinks(Math.max(currentPage - 1, 1))"
+        >
+          <Lucide icon="ChevronsLeft" class="h-4 w-4" />
+        </Pagination.Link>
+        <Pagination.Link
+          v-for="(page, key) in pages"
+          :key="key"
+          @click="linkStore.fetchLinks(page)"
+          :class="{ 'bg-slate-100 font-bold': page === currentPage }"
+        >
+          {{ page }}
+        </Pagination.Link>
+
+        <Pagination.Link
+          @click="linkStore.fetchLinks(Math.min(currentPage + 1, totalPage))"
+        >
+          <Lucide icon="ChevronsRight" class="h-4 w-4" />
+        </Pagination.Link>
+      </Pagination>
     </div>
   </div>
   <Dialog :open="dialogOpen" @close="dialogOpen = false">
