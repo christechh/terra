@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, ref, computed } from 'vue'
+import { h, computed } from 'vue'
 
 import BoxHead from '@/components/Box/BoxHead.vue'
 import CButton from '@/base-components/Button/Button.vue'
@@ -14,11 +14,10 @@ defineOptions({
 })
 
 const { t } = useI18n()
-const { disconnectWhatAppToken } = useThird('what-app-2')
+const { btnLoading, disconnectWhatAppToken } = useThird('what-app-2')
 
 const enterpointsConfigStore = useEnterpointsConfigStore()
 const originalConfig = computed(() => enterpointsConfigStore.originData)
-const loadingTarget = ref<boolean>(false)
 const title = computed(() => t('what-app-txt12'))
 const subtitle = computed(() => {
   return h(
@@ -47,7 +46,6 @@ const showDisconnectBtn = computed(() => {
 })
 
 const handleLoadingSubmit = (callback?: () => void) => {
-  loadingTarget.value = true
   callback && callback()
 }
 </script>
@@ -65,7 +63,7 @@ const handleLoadingSubmit = (callback?: () => void) => {
         <CButton
           variant="danger"
           class="text-white disabled:opacity-80"
-          :loading="loadingTarget"
+          :loading="btnLoading"
           @click="handleLoadingSubmit(disconnectWhatAppToken)"
         >
           <Lucide icon="Trash2" class="mr-2 h-4" />
