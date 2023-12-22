@@ -497,10 +497,17 @@ getTypes()
                   <div class="rounded-[10px] bg-[#eeeff0] p-2 text-[#1a1a1a]">
                     {{ typeTitle }}
                     <div class="mt-1 flex items-center bg-white pr-2">
-                      <ContryCodePicker white model-value="+886" disabled />
+                      <ContryCodePicker
+                        white
+                        model-value="+886"
+                        disabled
+                        v-if="welcomeGetCustomerInfoType === 'phone'"
+                      />
                       <input
                         class="h-[26px] w-[130px] overflow-hidden overflow-ellipsis whitespace-nowrap border-0 bg-white text-xs"
-                        :placeholder="typeText"
+                        :placeholder="
+                          welcomeGetCustomerInfoType !== 'other' ? typeText : ''
+                        "
                         disabled
                       />
                       <Lucide
