@@ -2626,5 +2626,6 @@
   "welcome-message-setting": "Welcome message settings",
   "input-of-customer-info": "Customer information input box",
   "setting-to-online": "Set as online",
-  "message-notification-setting-pop": "Message notification setting prompt pop-up window"
+  "message-notification-setting-pop": "Message notification setting prompt pop-up window",
+  "uploading": "uploading"
 }

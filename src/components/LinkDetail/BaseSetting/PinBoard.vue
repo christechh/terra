@@ -257,7 +257,7 @@ const onDrop = (idx: number) => {
               </div>
             </div>
             <div
-              class="h-38 mt-2 flex flex h-[38px] w-[90px] items-center overflow-hidden rounded-xl border"
+              class="h-38 mt-2 flex flex h-[38px] w-[90px] items-center overflow-hidden rounded-lg border"
             >
               <input
                 v-model="chatLogoSize"
@@ -266,17 +266,23 @@ const onDrop = (idx: number) => {
               />
               <div>%</div>
               <div class="ml-2 flex flex-col border-l">
-                <button @click="() => (chatLogoSize = chatLogoSize + 1)">
-                  <Lucide icon="ChevronUp" width="20" height="20" />
+                <button
+                  @click="() => (chatLogoSize = chatLogoSize + 1)"
+                  class="flex w-5 justify-center"
+                >
+                  <Lucide icon="ChevronUp" width="16" height="16" />
                 </button>
-                <button @click="() => (chatLogoSize = chatLogoSize - 1)">
-                  <Lucide icon="ChevronDown" width="20" height="20" />
+                <button
+                  @click="() => (chatLogoSize = chatLogoSize - 1)"
+                  class="flex w-5 justify-center"
+                >
+                  <Lucide icon="ChevronDown" width="16" height="16" />
                 </button>
               </div>
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="6" class="pb-9">
-            <div class="font-bold">
+            <div class="flex items-center font-bold">
               {{ $t('choose-theme-color') }}
               <div
                 class="ml-1"
