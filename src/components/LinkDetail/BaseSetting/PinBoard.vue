@@ -57,6 +57,8 @@ const selectActionIdx = ref<any>()
 const dragIdx = ref<any>(null)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const dragItem = ref<any>(null)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dragType = ref<any>(null)
 
 const editActionBtn = (i: number) => {
   selectActionBtns.value = welcomeLinkSetting.value[i]
@@ -70,16 +72,21 @@ const createHandler = () => {
   showCreateActionBtn.value = true
 }
 
-const onDrop = (idx: number) => {
-  welcomeLinkSetting.value.splice(
-    dragIdx.value > idx ? idx : idx + 1,
-    0,
-    dragItem.value
-  )
-  welcomeLinkSetting.value.splice(
-    dragIdx.value > idx ? dragIdx.value + 1 : dragIdx.value,
-    1
-  )
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const onDrop = (idx: number, list: any[]) => {
+  if (list[dragIdx.value] !== dragItem.value) return
+  list.splice(dragIdx.value > idx ? idx : idx + 1, 0, dragItem.value)
+  list.splice(dragIdx.value > idx ? dragIdx.value + 1 : dragIdx.value, 1)
+}
+
+const beforeSetChatLogoSize = (event: Event) => {
+  const ipt = event.target as HTMLInputElement
+  const value = ipt?.value
+  if (Number(value) > 100) {
+    ipt.value = chatLogoSize.value.toString()
+    return
+  }
+  chatLogoSize.value = Number(value)
 }
 </script>
 
@@ -130,7 +137,7 @@ const onDrop = (idx: number) => {
             <div class="flex items-center">
               <span class="font-bold">{{ $t('show-pinboard-page') }}</span>
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-switch')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -144,7 +151,7 @@ const onDrop = (idx: number) => {
             <div class="flex items-center font-bold">
               {{ $t('pinboard-welecome-message') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-msg')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -158,7 +165,7 @@ const onDrop = (idx: number) => {
             <div class="flex items-center font-bold">
               {{ $t('edit-welcome_start_btn_text') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-button')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -176,7 +183,7 @@ const onDrop = (idx: number) => {
               <div class="mt-3 flex items-center">
                 {{ $t('set-required') }}
                 <div
-                  class="ml-1"
+                  class="ml-1 font-normal"
                   v-tooltip:top.tootip="$t('nickname-require-desc')"
                 >
                   <Lucide icon="HelpCircle" width="14" />
@@ -233,7 +240,7 @@ const onDrop = (idx: number) => {
             <div class="flex items-center font-bold">
               {{ $t('edit-welcome-logo') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-logo')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -260,7 +267,8 @@ const onDrop = (idx: number) => {
               class="h-38 mt-2 flex flex h-[38px] w-[90px] items-center overflow-hidden rounded-lg border"
             >
               <input
-                v-model="chatLogoSize"
+                :value="chatLogoSize"
+                @input="beforeSetChatLogoSize"
                 class="w-[40px] flex-1 border-0 bg-white px-0 py-0 text-center focus:ring-[transparent] dark:bg-darkmode-600"
                 max="100"
               />
@@ -285,7 +293,7 @@ const onDrop = (idx: number) => {
             <div class="flex items-center font-bold">
               {{ $t('choose-theme-color') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-theme')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -327,7 +335,7 @@ const onDrop = (idx: number) => {
             <div class="flex items-center font-bold">
               {{ $t('edit-welcome-bak-color') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-background')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -389,7 +397,7 @@ const onDrop = (idx: number) => {
               <div class="flex items-center">
                 {{ $t('should-include-in-seo') }}
                 <div
-                  class="ml-1"
+                  class="ml-1 font-normal"
                   v-tooltip:top.tootip="$t('should-include-in-seo-tip')"
                 >
                   <Lucide icon="HelpCircle" width="14" />
@@ -422,21 +430,21 @@ const onDrop = (idx: number) => {
             <div class="flex items-center font-bold">
               {{ $t('welcome-hr-text-input') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-hr')"
               >
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
             <div class="mt-3">
-              <FormInput type="text" v-model="hrText" />
+              <FormInput maxlength="35" type="text" v-model="hrText" />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2">
             <div class="flex items-center font-bold">
               {{ $t('choose-theme-color') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-theme')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -477,39 +485,70 @@ const onDrop = (idx: number) => {
             <div class="flex items-center font-bold">
               {{ $t('welcome-link-button-setting') }}
               <div
-                class="ml-1"
+                class="ml-1 font-normal"
                 v-tooltip:top.tootip="$t('tip-pinboard-welcome-links')"
               >
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
-            <div
-              class="mt-3 flex items-center rounded border px-2"
-              v-for="(link, i) in welcomeLinkSetting"
-              :data-idx="i"
-              :key="i"
-              draggable="true"
-              @dragstart="(dragIdx = i), (dragItem = link)"
-              @dragend="(dragIdx = null), (dragItem = null)"
-              @dragenter="(e) => e.preventDefault()"
-              @dragover="(e) => e.preventDefault()"
-              @drop="() => onDrop(i)"
-            >
-              <button class="cursor-move">
-                <Lucide icon="MoreVertical" width="16" />
-              </button>
-              <input
-                class="flex-1 border-0 bg-white focus:ring-[transparent]"
-                :value="link.title"
-                disabled
-              />
-              <button class="mr-2" @click="editActionBtn(i)">
-                <Lucide icon="Pen" width="20" />
-              </button>
-              <button @click="deleteActionBtn(i)">
-                <Lucide icon="Trash" width="25" />
-              </button>
-            </div>
+            <template v-for="(link, i) in welcomeLinkSetting" :key="i">
+              <div
+                class="mt-3 flex items-center rounded border px-2"
+                :data-idx="i"
+                draggable="true"
+                @dragstart="
+                  (dragIdx = i), (dragItem = link), (dragType = 'link')
+                "
+                @dragend="
+                  (dragIdx = null), (dragItem = null), (dragType = null)
+                "
+                @dragenter="(e) => e.preventDefault()"
+                @dragover="(e) => e.preventDefault()"
+                @drop="() => onDrop(i, welcomeLinkSetting)"
+              >
+                <button class="cursor-move">
+                  <Lucide icon="MoreVertical" width="16" />
+                </button>
+                <input
+                  class="flex-1 border-0 bg-white focus:ring-[transparent]"
+                  :value="link.title"
+                  disabled
+                />
+                <button class="mr-2" @click="editActionBtn(i)">
+                  <Lucide icon="Pen" width="20" />
+                </button>
+                <button @click="deleteActionBtn(i)">
+                  <Lucide icon="Trash" width="25" />
+                </button>
+              </div>
+              <template v-if="link.type === 'select'">
+                <div
+                  v-for="(option, j) in link.links"
+                  :key="j"
+                  class="ml-10 mt-3 flex items-center rounded border bg-input_bg px-2"
+                  :data-idx="i"
+                  draggable="true"
+                  @dragstart="
+                    (dragIdx = j), (dragItem = option), (dragType = 'select')
+                  "
+                  @dragend="
+                    (dragIdx = null), (dragItem = null), (dragType = null)
+                  "
+                  @dragenter="(e) => e.preventDefault()"
+                  @dragover="(e) => e.preventDefault()"
+                  @drop="() => onDrop(j, link.links)"
+                >
+                  <button class="cursor-move">
+                    <Lucide icon="MoreVertical" width="16" />
+                  </button>
+                  <input
+                    class="flex-1 border-0 bg-input_bg focus:ring-[transparent]"
+                    :value="option.title"
+                    disabled
+                  />
+                </div>
+              </template>
+            </template>
             <button
               class="mt-3 flex w-full items-center justify-center rounded border border-dashed bg-dashboard_bg p-4 text-primary"
               @click="createHandler"
@@ -524,7 +563,7 @@ const onDrop = (idx: number) => {
       <div class="mt-[60px] flex-1 px-10 py-5 lg:mt-0">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
         <div
-          class="mx-auto mt-5 h-[700px] w-[325px] rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
+          class="mx-auto mt-5 h-[700px] w-[325px] overflow-y-auto rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
           :style="`background: url(${welcomeBG}) center center / cover;`"
         >
           <img
@@ -550,16 +589,43 @@ const onDrop = (idx: number) => {
             class="mb-[10px] mt-[34px] flex items-center justify-center text-[#939393]"
           >
             <hr class="mr-2 flex-1 bg-[#939393]" />
-            {{ $t('welcome-hr-text') }}
+            {{ hrText || $t('welcome-hr-text') }}
             <hr class="ml-2 flex-1 bg-[#939393]" />
           </div>
-          <button
-            class="float-btn mb-[10px] h-[48px] w-full rounded-[15px]"
-            v-for="(link, i) in welcomeLinkSetting"
-            :key="i"
+          <div class="min-h-[200px]">
+            <template v-for="(link, i) in welcomeLinkSetting" :key="i">
+              <button
+                class="float-btn mb-[10px] h-[48px] w-full rounded-[15px]"
+                v-if="link.type === 'link'"
+              >
+                {{ link.title }}
+              </button>
+              <select
+                v-else
+                class="float-btn mb-[10px] h-[48px] w-full rounded-[15px] border-0"
+                :style="`background: ${floatButtonColor}
+                    url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 384 512&quot;><path fill=&quot;${floatBtnTextColor.replace(
+                      '#',
+                      '%23'
+                    )}&quot; d=&quot;M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z&quot;/></svg>')
+                    right 1rem center/8px 10px no-repeat;`"
+              >
+                <option
+                  v-for="(option, j) in link.links"
+                  :value="option.link"
+                  :key="j"
+                >
+                  {{ option.title }}
+                </option>
+              </select>
+            </template>
+          </div>
+          <div
+            class="mb-[50px] mt-5 text-center text-[#939393]"
+            v-if="!removePowerBy"
           >
-            {{ link.title }}
-          </button>
+            Powered By PinChat
+          </div>
         </div>
       </div>
     </div>
@@ -585,5 +651,7 @@ const onDrop = (idx: number) => {
 .float-btn {
   background-color: v-bind(floatButtonColor);
   color: v-bind(floatBtnTextColor);
+}
+select {
 }
 </style>

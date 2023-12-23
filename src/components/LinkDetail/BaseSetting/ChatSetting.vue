@@ -209,7 +209,10 @@ getTypes()
             <div class="font-bold">{{ $t('basic-info') }}</div>
             <div class="mt-5 flex items-center">
               {{ $t('edit-chatroom-name') }}
-              <div class="ml-2" v-tooltip:top.tooltip="$t('tip-chatroom-name')">
+              <div
+                class="ml-2 font-normal"
+                v-tooltip:top.tooltip="$t('tip-chatroom-name')"
+              >
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
@@ -236,7 +239,7 @@ getTypes()
             <div class="mt-5 flex items-center">
               {{ $t('edit-chat-room-default-message') }}
               <div
-                class="ml-2"
+                class="ml-2 font-normal"
                 v-tooltip:top.tooltip="$t('tip-chatroom-default-message')"
               >
                 <Lucide icon="HelpCircle" width="14" />
@@ -291,7 +294,7 @@ getTypes()
               <div class="flex items-center">
                 {{ $t('online-status-show') }}
                 <div
-                  class="ml-1"
+                  class="ml-1 font-normal"
                   v-tooltip:top.tooltip="$t('tip-chatroom-status')"
                 >
                   <Lucide icon="HelpCircle" width="14" />
@@ -333,7 +336,7 @@ getTypes()
               <div class="flex items-center">
                 {{ $t('message-notification-setting-pop') }}
                 <div
-                  class="ml-1"
+                  class="ml-1 font-normal"
                   v-tooltip:top.tooltip="$t('tip-open-notify-setting')"
                 >
                   <Lucide icon="HelpCircle" width="14" />

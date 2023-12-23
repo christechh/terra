@@ -1,6 +1,7 @@
 .tooltip-content {
   left: 10000px;
   position: fixed;
+  font-weight: normal;
 }
 .tippy-box {
   border-radius: theme('borderRadius.md');
