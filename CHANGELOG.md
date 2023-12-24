@@ -1,3 +1,10 @@
+## [1.25.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.25.0...v1.25.1) (2023-12-24)
+
+
+### Bug Fixes
+
+* **#12:** logo max width:160px ([1a53dd9](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/1a53dd9db789e51ba99b498dfa31c393aab58d73)), closes [#12](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/12)
+
 # [1.25.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.24.0...v1.25.0) (2023-12-21)
 
 

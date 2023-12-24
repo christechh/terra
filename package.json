@@ -1,7 +1,7 @@
 {
   "name": "pinchat-dashboard",
   "private": true,
-  "version": "1.25.0",
+  "version": "1.25.1",
   "scripts": {
     "dev": "vue-tsc && vite",
     "build": "vue-tsc && vite build",
