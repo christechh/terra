@@ -72,7 +72,12 @@ onMounted(() => {
           :to="{ name: 'landing-page' }"
           class="intro-x flex items-center pl-5 pt-4"
         >
-          <img alt="Pinchat" class="w-100" :src="logoUrl" />
+          <img
+            alt="Pinchat"
+            class="w-100"
+            style="max-width: 160px"
+            :src="logoUrl"
+          />
         </RouterLink>
         <Divider type="div" class="my-6"></Divider>
         <ul>
