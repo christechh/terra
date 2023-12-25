@@ -1,3 +1,15 @@
+# [1.26.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.25.1...v1.26.0) (2023-12-25)
+
+
+### Bug Fixes
+
+* ui ([0f3e0d7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0f3e0d767d22b85b9e7bfd608ddd6ea1e272feab))
+
+
+### Features
+
+* pinboard ui adjust ([7a74c93](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7a74c938af48f073989db585c27ff2dbc34a64d9))
+
 ## [1.25.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.25.0...v1.25.1) (2023-12-24)
 
 
