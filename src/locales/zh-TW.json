@@ -2630,5 +2630,7 @@
   "setting-to-online": "設為上線中",
   "message-notification-setting-pop": "訊息通知設定提示彈窗",
   "uploading": "上傳中",
-  "upload-success": "上傳成功"
+  "upload-success": "上傳成功",
+  "enter-phone-number": "輸入手機號碼",
+  "choose-date": "選擇日期時間"
 }

@@ -131,6 +131,16 @@ const submit = () => {
   submitTypes()
 }
 
+const displayCustInputPlaceholder = computed(() => {
+  const m = {
+    email: t('onboarding-step2-email-tip'),
+    phone: t('enter-phone-number'),
+    date: t('choose-date'),
+    other: ''
+  }
+  return m[welcomeGetCustomerInfoType.value as keyof typeof m]
+})
+
 getTypes()
 </script>
 <template>
@@ -498,7 +508,7 @@ getTypes()
                 <div class="text-[10px] text-[#8d8d8d]">{{ name }}</div>
                 <div class="flex items-end">
                   <div class="rounded-[10px] bg-[#eeeff0] p-2 text-[#1a1a1a]">
-                    {{ typeTitle }}
+                    {{ typeText }}
                     <div class="mt-1 flex items-center bg-white pr-2">
                       <ContryCodePicker
                         white
@@ -508,9 +518,7 @@ getTypes()
                       />
                       <input
                         class="h-[26px] w-[130px] overflow-hidden overflow-ellipsis whitespace-nowrap border-0 bg-white text-xs"
-                        :placeholder="
-                          welcomeGetCustomerInfoType !== 'other' ? typeText : ''
-                        "
+                        :placeholder="displayCustInputPlaceholder"
                         disabled
                       />
                       <Lucide
