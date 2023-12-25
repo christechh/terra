@@ -2626,5 +2626,6 @@
   "input-of-customer-info": "お客様情報入力欄",
   "setting-to-online": "オンラインとして設定",
   "message-notification-setting-pop": "メッセージ通知設定プロンプトポップアップウィンドウ",
-  "uploading": "アップロードする"
+  "uploading": "アップロードする",
+  "upload-success": "アップロード成功"
 }

@@ -563,7 +563,7 @@ const beforeSetChatLogoSize = (event: Event) => {
       <div class="mt-[60px] flex-1 px-10 py-5 lg:mt-0">
         <div class="font-bold">{{ $t('qrcode-setting-preview-title') }}</div>
         <div
-          class="mx-auto mt-5 h-[700px] w-[325px] overflow-y-auto rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
+          class="mx-auto mt-5 h-[700px] w-[350px] overflow-y-auto rounded-[55px] border-[16px] border-[#5b5b5b] px-6 py-[60px]"
           :style="`background: url(${welcomeBG}) center center / cover;`"
         >
           <img
@@ -600,24 +600,28 @@ const beforeSetChatLogoSize = (event: Event) => {
               >
                 {{ link.title }}
               </button>
-              <select
-                v-else
-                class="float-btn mb-[10px] h-[48px] w-full rounded-[15px] border-0"
-                :style="`background: ${floatButtonColor}
-                    url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 384 512&quot;><path fill=&quot;${floatBtnTextColor.replace(
-                      '#',
-                      '%23'
-                    )}&quot; d=&quot;M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z&quot;/></svg>')
-                    right 1rem center/8px 10px no-repeat;`"
-              >
-                <option
-                  v-for="(option, j) in link.links"
-                  :value="option.link"
-                  :key="j"
+              <template v-else>
+                <div
+                  class="float-btn relative mb-[10px] flex h-[48px] w-full items-center justify-center rounded-[15px] border-0"
+                  :style="`background: ${floatButtonColor}
+                      url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 384 512&quot;><path fill=&quot;${floatBtnTextColor.replace(
+                        '#',
+                        '%23'
+                      )}&quot; d=&quot;M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z&quot;/></svg>')
+                      right 1rem center/8px 10px no-repeat;`"
                 >
-                  {{ option.title }}
-                </option>
-              </select>
+                  {{ link.title }}
+                </div>
+                <ul class="cust-sel overflow-hidden rounded-[15px] border">
+                  <li
+                    v-for="(option, j) in link.links"
+                    :key="j"
+                    class="cust-opt flex h-[40px] w-full items-center border-b px-4 last:border-0"
+                  >
+                    {{ option.title }}
+                  </li>
+                </ul>
+              </template>
             </template>
           </div>
           <div
@@ -651,7 +655,14 @@ const beforeSetChatLogoSize = (event: Event) => {
 .float-btn {
   background-color: v-bind(floatButtonColor);
   color: v-bind(floatBtnTextColor);
+  border-color: v-bind(floatBtnTextColor);
 }
-select {
+.cust-opt {
+  background-color: v-bind(floatBtnTextColor);
+  color: v-bind(floatButtonColor);
+  border-color: v-bind(floatButtonColor);
+}
+.cust-sel {
+  border-color: v-bind(floatButtonColor);
 }
 </style>
