@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed, ComputedRef, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import axios from '../../axios'
 import ClipIcon from '../../components/Icons/ClipIcon.vue'
 import CloseIcon from '../../components/Icons/CloseIcon.vue'
@@ -27,6 +28,8 @@ const {
   showClose = true
 } = defineProps<Props>()
 const emit = defineEmits(['update:modelValue', 'clear'])
+
+const { t } = useI18n()
 
 const fileRef = ref(null)
 const isUploading = ref(false)
@@ -87,7 +90,10 @@ const fileChangeHandler = async (e: Event) => {
       })
       const url = res.data.data.data.url
       emit('update:modelValue', [{ name: '', data: url }])
-      useNotificationsStore().showSuccess({ title: '上傳成功', content: '' })
+      useNotificationsStore().showSuccess({
+        title: t('upload-success'),
+        content: ''
+      })
     }
   } catch (e) {
     console.log(e)
@@ -156,12 +162,12 @@ const resetFiles = (event: Event) => {
         <div class="text-center" style="color: #7b7b7b">
           <template v-if="isUploading">
             <LoadingIcon icon="tail-spin" class="mr-2" />
-            <span>{{ typeName }}上傳中</span>
+            <span>{{ $t('uploading') }}</span>
           </template>
           <template v-else>
             <Lucide icon="UploadCloud" width="48" class="mx-auto" />
             <span> {{ $t('edit-choose-file') }} </span>
-            <div class="ml-2">{{ typeName }}大小超過 {{ limit }}MB</div>
+            <div class="ml-2">{{ $t('edit-welcome-upload-limit-text') }}</div>
           </template>
         </div>
       </div>

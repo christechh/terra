@@ -2625,5 +2625,6 @@
   "welcome-message-setting": "ウェルカムメッセージの設定",
   "input-of-customer-info": "お客様情報入力欄",
   "setting-to-online": "オンラインとして設定",
-  "message-notification-setting-pop": "メッセージ通知設定プロンプトポップアップウィンドウ"
+  "message-notification-setting-pop": "メッセージ通知設定プロンプトポップアップウィンドウ",
+  "uploading": "アップロードする"
 }

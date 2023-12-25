@@ -70,7 +70,7 @@ onMounted(() => {
 <template>
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[400px]">
-      <header class="relative text-center">
+      <header class="relative my-5 text-center">
         {{ $t('welcome-link-add-link') }}
         <Lucide
           icon="X"
@@ -78,9 +78,9 @@ onMounted(() => {
           @click="() => emit('close')"
         />
       </header>
-      <main>
+      <main class="h-[530px] overflow-y-auto p-1">
         <div>
-          <span class="text-danger">*</span
+          <span class="mr-2 text-danger">*</span
           ><span>{{ $t('welcome-link-button-title') }}</span>
         </div>
         <FormInput
@@ -91,12 +91,12 @@ onMounted(() => {
         />
         <span>{{ $t('welcome-link-type') }}</span>
         <FormSelect class="mt-2" v-model="type">
-          <option value="link">連結</option>
-          <option value="select">選單</option>
+          <option value="link">{{ $t('welcome-link-link') }}</option>
+          <option value="select">{{ $t('welcome-link-menu') }}</option>
         </FormSelect>
         <template v-if="type === 'link'">
           <div class="mt-2">
-            <span class="text-danger">*</span
+            <span class="mr-2 text-danger">*</span
             ><span>{{ $t('welcome-link-link') }}</span>
           </div>
           <FormInput
@@ -119,7 +119,7 @@ onMounted(() => {
               @click="deleteOption(key)"
             />
             <div>
-              <span class="text-danger">*</span>
+              <span class="mr-2 text-danger">*</span>
               <span>{{ $t('edit-rich-menu-title') }}{{ key + 1 }}</span>
             </div>
             <FormInput
@@ -129,7 +129,7 @@ onMounted(() => {
               v-model="option.title"
             />
             <div class="mt-2">
-              <span class="text-danger">*</span>
+              <span class="mr-2 text-danger">*</span>
               <span>{{ $t('welcome-link-link') }}{{ key + 1 }}</span>
             </div>
             <FormInput
@@ -149,7 +149,7 @@ onMounted(() => {
           </button>
         </template>
       </main>
-      <footer class="mt-20 flex justify-between">
+      <footer class="mt-5 flex justify-between">
         <Button
           variant="outline-primary"
           class="flex-1 border border-primary"
