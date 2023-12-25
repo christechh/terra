@@ -1,3 +1,10 @@
+## [1.26.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.26.0...v1.26.1) (2023-12-25)
+
+
+### Bug Fixes
+
+* adjust placeholder ([e10fa58](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e10fa58ee372e5934a4157c857da0ac0dbb5cfe9))
+
 # [1.26.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.25.1...v1.26.0) (2023-12-25)
 
 
