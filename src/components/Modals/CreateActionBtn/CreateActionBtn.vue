@@ -70,7 +70,7 @@ onMounted(() => {
 <template>
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[400px]">
-      <header class="relative my-5 text-center">
+      <header class="relative mb-5 text-center text-xl">
         {{ $t('welcome-link-add-link') }}
         <Lucide
           icon="X"
@@ -154,11 +154,11 @@ onMounted(() => {
           variant="outline-primary"
           class="flex-1 border border-primary"
           @click="emit('close')"
-          >取消</Button
+          >{{ $t('cancel-btn') }}</Button
         >
-        <Button variant="primary" class="ml-2 flex-1" @click="onSave"
-          >儲存</Button
-        >
+        <Button variant="primary" class="ml-2 flex-1" @click="onSave">{{
+          $t('save-btn')
+        }}</Button>
       </footer>
     </Dialog.Panel>
   </Dialog>
