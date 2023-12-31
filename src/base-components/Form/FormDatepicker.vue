@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import VueDatePicker from '@vuepic/vue-datepicker'
-import { ref, watch, computed } from 'vue'
-import { defineProps, defineEmits } from 'vue'
 import { twMerge } from 'tailwind-merge'
+import { computed, ref, watch } from 'vue'
 
 interface FormDatepickerProps {
   modelValue?: string
