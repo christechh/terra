@@ -16,7 +16,7 @@ export default function useSurveySetting() {
   const mode = ref('list')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const surveys = ref<any[]>([])
-  const selectedSurvey = ref<number | null>(null)
+  const selectedSurvey = ref<number>(0)
   const sruveyTitle = ref('')
   const surveyTriggerWord = ref('')
   const surveyEnd = ref('')
@@ -56,6 +56,9 @@ export default function useSurveySetting() {
 
   const editSurveyContent = (idx: number) => {
     selectedContentIdx.value = idx
+    flowType.value = surveyContents.value[selectedContentIdx.value].type
+    contentOptions.value =
+      surveyContents.value[selectedContentIdx.value].options
     showEditContentSlidOver.value = true
   }
 
@@ -71,7 +74,14 @@ export default function useSurveySetting() {
     contentOptions.value.splice(idx, 1)
   }
 
-  const postSurvey = () => {
+  const postSurvey = (isEditFlow: boolean) => {
+    if (mode.value === 'edit' && isEditFlow) {
+      return {
+        data: {
+          data: { data: { id: surveys.value[selectedSurvey.value].survey.id } }
+        }
+      }
+    }
     return axios.post('survey', {
       end_message: surveyEnd.value,
       end_message_cn: surveyEnd.value,
@@ -89,7 +99,10 @@ export default function useSurveySetting() {
       is_open: false,
       keyword: surveyTriggerWord.value,
       name: sruveyTitle.value,
-      token: token
+      token: token,
+      ...(mode.value === 'edit' && {
+        id: surveys.value[selectedSurvey.value].survey.id
+      })
     })
   }
 
@@ -101,47 +114,70 @@ export default function useSurveySetting() {
   }
 
   const setFlow = (surveyId: number) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const content: any = {
+      text: surveyContents.value[selectedContentIdx.value].content
+    }
+    langs.forEach((l) => {
+      content[l as keyof typeof content] = {
+        text: surveyContents.value[selectedContentIdx.value].content
+      }
+    })
+    content.actions =
+      flowType.value === 'choice'
+        ? contentOptions.value.map((o) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const res: any = { text: o, label: o }
+            langs.forEach((l) => {
+              res[l as keyof typeof res] = { text: o, label: o }
+            })
+            return res
+          })
+        : []
     return axios.post('survey/flow', {
       idx: 0,
       lang: locale.value,
       list_text: '',
-      setting: surveyContents.value.map((surveyContent) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const content: any = {
-          text: surveyContent.content
-        }
-        langs.forEach((l) => {
-          content[l as keyof typeof content] = { text: surveyContent.content }
-        })
-        content.actions =
-          flowType.value === 'choice'
-            ? contentOptions.value.map((o) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const res: any = { text: o, label: o }
-                langs.forEach((l) => {
-                  res[l as keyof typeof res] = { text: o, label: o }
-                })
-                return res
-              })
-            : []
-        return content
-      }),
+      setting: [content],
       sort: 1,
       survey_id: surveyId,
       token,
-      type: flowType.value
+      type: flowType.value,
+      ...(mode.value === 'edit' && {
+        id: surveys.value[selectedSurvey.value].surveyFlow[
+          selectedContentIdx.value as keyof typeof surveys.value
+        ].id
+      })
     })
   }
 
   const saveContent = async (isEditFlow: boolean) => {
-    const { data } = await postSurvey()
+    const { data } = await postSurvey(isEditFlow)
     const surveyId = data.data.data.id
-    await releaseSurvey(surveyId)
     if (isEditFlow) {
       await setFlow(surveyId)
       return (showEditContentSlidOver.value = false)
     }
+    await releaseSurvey(surveyId)
     return getSurveys(), (mode.value = 'list')
+  }
+
+  const editSurvey = (idx: number) => {
+    selectedSurvey.value = idx
+    const survey = surveys.value[idx]
+    sruveyTitle.value = survey.survey.name
+    surveyTriggerWord.value = survey.survey.keyword
+    surveyEnd.value = survey.survey.end_message
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    surveyContents.value = survey.surveyFlow.map((s: any) => {
+      return {
+        content: s.setting[0].text,
+        type: s.type,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        options: s.setting[0].actions.map((o: any) => o.text)
+      }
+    })
+    mode.value = 'edit'
   }
 
   return {
@@ -163,6 +199,7 @@ export default function useSurveySetting() {
     addOption,
     delOption,
     editSurveyContent,
-    saveContent
+    saveContent,
+    editSurvey
   }
 }
