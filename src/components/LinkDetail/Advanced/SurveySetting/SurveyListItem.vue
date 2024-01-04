@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Lucide from '../../../../base-components/Lucide'
 
 type Props = {
@@ -13,6 +13,19 @@ const openMenu = ref(false)
 const survey = computed(() => props.survey)
 
 const emit = defineEmits(['edit', 'delete'])
+const hideMenu = () => {
+  openMenu.value = false
+}
+
+watch(openMenu, () => {
+  if (openMenu.value) {
+    setTimeout(() => {
+      window.addEventListener('click', hideMenu)
+    }, 0)
+  } else {
+    window.removeEventListener('click', hideMenu)
+  }
+})
 </script>
 
 <template>

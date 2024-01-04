@@ -2,14 +2,17 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import axios from '../../../../axios'
+import { useDeleteModalStore } from '../../../../stores/modals/deleteModal'
 
 type SurveyContent = {
   content: string
   type: string
   options: string[]
+  id?: number
 }
 
 export default function useSurveySetting() {
+  const { t } = useI18n()
   const showHowToModal = ref(false)
   const showEditContentSlidOver = ref(false)
   const route = useRoute()
@@ -62,7 +65,12 @@ export default function useSurveySetting() {
     showEditContentSlidOver.value = true
   }
 
-  const delSurveyContent = (idx: number) => {
+  const delSurveyContent = (item: SurveyContent, idx: number) => {
+    // eslint-disable-next-line no-debugger
+    debugger
+    if (item.id) {
+      deletContent(item.id)
+    }
     surveyContents.value.splice(idx, 1)
   }
 
@@ -100,7 +108,7 @@ export default function useSurveySetting() {
       keyword: surveyTriggerWord.value,
       name: sruveyTitle.value,
       token: token,
-      ...(mode.value === 'edit' && {
+      ...(surveys.value[selectedSurvey.value]?.survey.id && {
         id: surveys.value[selectedSurvey.value].survey.id
       })
     })
@@ -134,21 +142,30 @@ export default function useSurveySetting() {
             return res
           })
         : []
-    return axios.post('survey/flow', {
-      idx: 0,
-      lang: locale.value,
-      list_text: '',
-      setting: [content],
-      sort: 1,
-      survey_id: surveyId,
-      token,
-      type: flowType.value,
-      ...(mode.value === 'edit' && {
-        id: surveys.value[selectedSurvey.value].surveyFlow[
-          selectedContentIdx.value as keyof typeof surveys.value
-        ].id
+    return axios
+      .post('survey/flow', {
+        idx: 0,
+        lang: locale.value,
+        list_text: '',
+        setting: [content],
+        sort: 1,
+        survey_id: surveyId,
+        token,
+        type: flowType.value,
+        ...(mode.value === 'edit' &&
+          surveys.value[selectedSurvey.value].surveyFlow[
+            selectedContentIdx.value as keyof typeof surveys.value
+          ] && {
+            id: surveys.value[selectedSurvey.value].surveyFlow[
+              selectedContentIdx.value as keyof typeof surveys.value
+            ].id
+          })
       })
-    })
+      .then((res) => {
+        const { data } = res
+        const { id } = data.data.data
+        surveyContents.value[surveyContents.value.length - 1].id = id
+      })
   }
 
   const saveContent = async (isEditFlow: boolean) => {
@@ -156,10 +173,11 @@ export default function useSurveySetting() {
     const surveyId = data.data.data.id
     if (isEditFlow) {
       await setFlow(surveyId)
-      return (showEditContentSlidOver.value = false)
+      showEditContentSlidOver.value = false
     }
     await releaseSurvey(surveyId)
-    return getSurveys(), (mode.value = 'list')
+    getSurveys()
+    !isEditFlow && (mode.value = 'list')
   }
 
   const editSurvey = (idx: number) => {
@@ -174,10 +192,71 @@ export default function useSurveySetting() {
         content: s.setting[0].text,
         type: s.type,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        options: s.setting[0].actions.map((o: any) => o.text)
+        options: s.setting[0].actions.map((o: any) => o.text),
+        id: s.id
       }
     })
     mode.value = 'edit'
+  }
+
+  const deletContent = (id: number) => {
+    return axios
+      .delete('survey/flow', {
+        data: {
+          id,
+          token
+        }
+      })
+      .then(() => {
+        getSurveys()
+      })
+  }
+
+  const confirmDelete = (item: SurveyContent, idx: number) => {
+    useDeleteModalStore().showModal({
+      deleteType: 'callback',
+      title: t('qrcode-page-delete-check-title'),
+      content: t('survey-confirm-delete-question'),
+      cancelButtonText: t('disconnect-line-modal-cancel-btn'),
+      confirmButtonText: t('delete-btn'),
+      onSubmit: () => delSurveyContent(item, idx)
+    })
+  }
+
+  const confirmDeleteSurvey = (surveyId: number) => {
+    useDeleteModalStore().showModal({
+      deleteType: 'callback',
+      title: t('qrcode-page-delete-check-title'),
+      content: t('survey-confirm-delete-survey'),
+      cancelButtonText: t('disconnect-line-modal-cancel-btn'),
+      confirmButtonText: t('delete-btn'),
+      onSubmit: () => deleteSurvey(surveyId)
+    })
+  }
+
+  const deleteSurvey = (id: number) => {
+    return axios
+      .delete('survey', {
+        data: {
+          id,
+          token
+        }
+      })
+      .then(() => {
+        getSurveys()
+      })
+  }
+
+  const resetForm = () => {
+    sruveyTitle.value = ''
+    surveyTriggerWord.value = ''
+    surveyEnd.value = ''
+    surveyContents.value = []
+  }
+
+  const createSurvey = () => {
+    resetForm()
+    mode.value = 'create'
   }
 
   return {
@@ -200,6 +279,10 @@ export default function useSurveySetting() {
     delOption,
     editSurveyContent,
     saveContent,
-    editSurvey
+    editSurvey,
+    deletContent,
+    confirmDelete,
+    confirmDeleteSurvey,
+    createSurvey
   }
 }

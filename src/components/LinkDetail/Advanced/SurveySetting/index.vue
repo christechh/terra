@@ -27,12 +27,14 @@ const {
   selectedContentIdx,
   getSurveys,
   addSurveyContent,
-  delSurveyContent,
   addOption,
   delOption,
   editSurveyContent,
   saveContent,
-  editSurvey
+  editSurvey,
+  confirmDelete,
+  confirmDeleteSurvey,
+  createSurvey
 } = useSurveySetting()
 
 onMounted(() => {
@@ -52,7 +54,7 @@ onMounted(() => {
         alt=""
       />
       <div>{{ $t('survey-empty-desc') }}</div>
-      <Button variant="primary" class="mt-5" @click="mode = 'create'">
+      <Button variant="primary" class="mt-5" @click="createSurvey">
         {{ $t('survey-create-button') }}
       </Button>
       <div>
@@ -77,7 +79,7 @@ onMounted(() => {
             @click="mode = 'list'"
             >{{ $t('see_data') }}</Button
           >
-          <Button variant="primary" class="ml-2" @click="mode = 'create'">{{
+          <Button variant="primary" class="ml-2" @click="createSurvey">{{
             $t('survey-create-button')
           }}</Button>
         </div>
@@ -95,6 +97,7 @@ onMounted(() => {
           :key="survey.survey.id"
           :survey="survey"
           @edit="() => editSurvey(idx)"
+          @delete="() => confirmDeleteSurvey(survey.survey.id)"
         />
       </div>
     </div>
@@ -180,7 +183,7 @@ onMounted(() => {
               <Lucide
                 icon="Trash"
                 class="ml-2 cursor-pointer"
-                @click="delSurveyContent(idx)"
+                @click="confirmDelete(items, idx)"
               />
             </div>
           </div>
