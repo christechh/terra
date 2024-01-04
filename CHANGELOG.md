@@ -1,3 +1,12 @@
+# [1.27.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.26.2...v1.27.0) (2024-01-04)
+
+
+### Features
+
+* create survey ([a8c6126](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a8c612691e4af3db929cb45d866c78d13fc7a21e))
+* empty survey setting ([0e2ad35](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0e2ad35e904d13e896968defccf263e48b4f854c))
+* 新增survey ([e1bd330](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e1bd3306af723198590a1e32583877a6d3185084))
+
 ## [1.26.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.26.1...v1.26.2) (2023-12-26)
 
 
