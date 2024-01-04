@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import Breadcrumb from '@/components/LinkDetail/Common/Breadcrumb.vue'
 import ChatWidgetSetting from '@/components/LinkDetail/Advanced/ChatWidgetSetting/index.vue'
+import Breadcrumb from '@/components/LinkDetail/Common/Breadcrumb.vue'
+const SurveySetting = defineAsyncComponent(
+  () => import('@/components/LinkDetail/Advanced/SurveySetting/index.vue')
+)
 
 const { t } = useI18n()
 
@@ -15,7 +18,8 @@ const tabs = ref([
   },
   {
     id: 'survey-setting-tab',
-    name: t('survey-setting-tab')
+    name: t('survey-setting-tab'),
+    component: SurveySetting
   },
   {
     id: 'qrcode-setting-tab-sub-account',
