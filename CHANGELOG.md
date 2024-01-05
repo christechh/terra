@@ -1,3 +1,11 @@
+# [1.28.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.27.0...v1.28.0) (2024-01-05)
+
+
+### Features
+
+* update survey ([171d321](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/171d3213089ce9727060a7d2bcc376e1670b2302))
+* 刪除 ([9a7c1ae](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/9a7c1aea56b45f1adcd2e830d75956ee3401caa0))
+
 # [1.27.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.26.2...v1.27.0) (2024-01-04)
 
 
