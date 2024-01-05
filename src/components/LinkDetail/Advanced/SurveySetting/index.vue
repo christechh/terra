@@ -11,6 +11,8 @@ import Lucide from '../../../../base-components/Lucide'
 import useSurveySetting from '../../../../composables/LinkDetail/AdvancedSetting/SurveySetting/useSurveySetting'
 import HowToCreateSurveyModal from '../../../Modals/HowToCreateSurveyModal/Index.vue'
 import VerticalSteps from '../../../VerticalSteps'
+import SurveyListItem from './SurveyListItem.vue'
+
 const {
   showHowToModal,
   showEditContentSlidOver,
@@ -25,11 +27,14 @@ const {
   selectedContentIdx,
   getSurveys,
   addSurveyContent,
-  delSurveyContent,
   addOption,
   delOption,
   editSurveyContent,
-  saveContent
+  saveContent,
+  editSurvey,
+  confirmDelete,
+  confirmDeleteSurvey,
+  createSurvey
 } = useSurveySetting()
 
 onMounted(() => {
@@ -49,7 +54,7 @@ onMounted(() => {
         alt=""
       />
       <div>{{ $t('survey-empty-desc') }}</div>
-      <Button variant="primary" class="mt-5" @click="mode = 'create'">
+      <Button variant="primary" class="mt-5" @click="createSurvey">
         {{ $t('survey-create-button') }}
       </Button>
       <div>
@@ -74,7 +79,7 @@ onMounted(() => {
             @click="mode = 'list'"
             >{{ $t('see_data') }}</Button
           >
-          <Button variant="primary" class="ml-2" @click="mode = 'create'">{{
+          <Button variant="primary" class="ml-2" @click="createSurvey">{{
             $t('survey-create-button')
           }}</Button>
         </div>
@@ -87,37 +92,13 @@ onMounted(() => {
           <div class="w-[30%]">{{ $t('updated_at') }}</div>
           <div class="w-[5%]"></div>
         </div>
-        <div
-          v-for="survey in surveys"
+        <SurveyListItem
+          v-for="(survey, idx) in surveys"
           :key="survey.survey.id"
-          class="mb-2 flex items-center justify-between rounded-lg bg-input_bg px-5 py-2"
-        >
-          <div class="w-2/5">
-            <div>
-              {{ survey.survey.name }}
-              <span
-                v-if="survey.survey.is_open"
-                class="ml-2 bg-[#e3f2a5] px-2 py-1 text-xs text-primary"
-                ><span
-                  class="inline-block h-[6px] w-[6px] rounded-full bg-primary"
-                ></span>
-                {{ $t('in_use') }}</span
-              >
-            </div>
-            <div class="mt-2 text-xs text-[#939393]">
-              {{ $t('created_at') }}
-              {{ new Date(survey.survey.createdAt).toLocaleString() }}
-            </div>
-          </div>
-          <div class="w-[10%]">{{ survey.surveyFlow.length }}</div>
-          <div class="w-[10%]">{{ survey.survey.complete }}</div>
-          <div class="w-[30%]">
-            {{ new Date(survey.survey.updatedAt).toLocaleString() }}
-          </div>
-          <div class="more relative w-[5%]">
-            <Lucide icon="MoreHorizontal" />
-          </div>
-        </div>
+          :survey="survey"
+          @edit="() => editSurvey(idx)"
+          @delete="() => confirmDeleteSurvey(survey.survey.id)"
+        />
       </div>
     </div>
   </template>
@@ -125,7 +106,9 @@ onMounted(() => {
     <div
       class="flex items-center justify-between border-b px-5 py-3 text-base font-bold"
     >
-      {{ $t('survey-create-title') }}
+      {{
+        mode === 'create' ? $t('survey-create-title') : $t('survey-edit-survey')
+      }}
       <div>
         <Button
           variant="outline-primary"
@@ -186,9 +169,10 @@ onMounted(() => {
           >
             <div class="flex items-center">
               <Lucide icon="MoreVertical" class="cursor-move" />
-              <span class="text-base font-bold text-primary">{{
-                $t('survey-question')
-              }}</span>
+              <span class="text-base font-bold text-primary"
+                >{{ $t('survey-question') }}{{ idx + 1 }}</span
+              >
+              <div class="ml-2 font-medium">{{ items.content }}</div>
             </div>
             <div class="flex items-center">
               <Lucide
@@ -199,7 +183,7 @@ onMounted(() => {
               <Lucide
                 icon="Trash"
                 class="ml-2 cursor-pointer"
-                @click="delSurveyContent(idx)"
+                @click="confirmDelete(items, idx)"
               />
             </div>
           </div>

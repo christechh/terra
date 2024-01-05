@@ -2,21 +2,24 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import axios from '../../../../axios'
+import { useDeleteModalStore } from '../../../../stores/modals/deleteModal'
 
 type SurveyContent = {
   content: string
   type: string
   options: string[]
+  id?: number
 }
 
 export default function useSurveySetting() {
+  const { t } = useI18n()
   const showHowToModal = ref(false)
   const showEditContentSlidOver = ref(false)
   const route = useRoute()
   const mode = ref('list')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const surveys = ref<any[]>([])
-  const selectedSurvey = ref<number | null>(null)
+  const selectedSurvey = ref<number>(0)
   const sruveyTitle = ref('')
   const surveyTriggerWord = ref('')
   const surveyEnd = ref('')
@@ -56,10 +59,18 @@ export default function useSurveySetting() {
 
   const editSurveyContent = (idx: number) => {
     selectedContentIdx.value = idx
+    flowType.value = surveyContents.value[selectedContentIdx.value].type
+    contentOptions.value =
+      surveyContents.value[selectedContentIdx.value].options
     showEditContentSlidOver.value = true
   }
 
-  const delSurveyContent = (idx: number) => {
+  const delSurveyContent = (item: SurveyContent, idx: number) => {
+    // eslint-disable-next-line no-debugger
+    debugger
+    if (item.id) {
+      deletContent(item.id)
+    }
     surveyContents.value.splice(idx, 1)
   }
 
@@ -71,7 +82,14 @@ export default function useSurveySetting() {
     contentOptions.value.splice(idx, 1)
   }
 
-  const postSurvey = () => {
+  const postSurvey = (isEditFlow: boolean) => {
+    if (mode.value === 'edit' && isEditFlow) {
+      return {
+        data: {
+          data: { data: { id: surveys.value[selectedSurvey.value].survey.id } }
+        }
+      }
+    }
     return axios.post('survey', {
       end_message: surveyEnd.value,
       end_message_cn: surveyEnd.value,
@@ -89,7 +107,10 @@ export default function useSurveySetting() {
       is_open: false,
       keyword: surveyTriggerWord.value,
       name: sruveyTitle.value,
-      token: token
+      token: token,
+      ...(surveys.value[selectedSurvey.value]?.survey.id && {
+        id: surveys.value[selectedSurvey.value].survey.id
+      })
     })
   }
 
@@ -101,47 +122,141 @@ export default function useSurveySetting() {
   }
 
   const setFlow = (surveyId: number) => {
-    return axios.post('survey/flow', {
-      idx: 0,
-      lang: locale.value,
-      list_text: '',
-      setting: surveyContents.value.map((surveyContent) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const content: any = {
-          text: surveyContent.content
-        }
-        langs.forEach((l) => {
-          content[l as keyof typeof content] = { text: surveyContent.content }
-        })
-        content.actions =
-          flowType.value === 'choice'
-            ? contentOptions.value.map((o) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const res: any = { text: o, label: o }
-                langs.forEach((l) => {
-                  res[l as keyof typeof res] = { text: o, label: o }
-                })
-                return res
-              })
-            : []
-        return content
-      }),
-      sort: 1,
-      survey_id: surveyId,
-      token,
-      type: flowType.value
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const content: any = {
+      text: surveyContents.value[selectedContentIdx.value].content
+    }
+    langs.forEach((l) => {
+      content[l as keyof typeof content] = {
+        text: surveyContents.value[selectedContentIdx.value].content
+      }
     })
+    content.actions =
+      flowType.value === 'choice'
+        ? contentOptions.value.map((o) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const res: any = { text: o, label: o }
+            langs.forEach((l) => {
+              res[l as keyof typeof res] = { text: o, label: o }
+            })
+            return res
+          })
+        : []
+    return axios
+      .post('survey/flow', {
+        idx: 0,
+        lang: locale.value,
+        list_text: '',
+        setting: [content],
+        sort: 1,
+        survey_id: surveyId,
+        token,
+        type: flowType.value,
+        ...(mode.value === 'edit' &&
+          surveys.value[selectedSurvey.value].surveyFlow[
+            selectedContentIdx.value as keyof typeof surveys.value
+          ] && {
+            id: surveys.value[selectedSurvey.value].surveyFlow[
+              selectedContentIdx.value as keyof typeof surveys.value
+            ].id
+          })
+      })
+      .then((res) => {
+        const { data } = res
+        const { id } = data.data.data
+        surveyContents.value[surveyContents.value.length - 1].id = id
+      })
   }
 
   const saveContent = async (isEditFlow: boolean) => {
-    const { data } = await postSurvey()
+    const { data } = await postSurvey(isEditFlow)
     const surveyId = data.data.data.id
-    await releaseSurvey(surveyId)
     if (isEditFlow) {
       await setFlow(surveyId)
-      return (showEditContentSlidOver.value = false)
+      showEditContentSlidOver.value = false
     }
-    return getSurveys(), (mode.value = 'list')
+    await releaseSurvey(surveyId)
+    getSurveys()
+    !isEditFlow && (mode.value = 'list')
+  }
+
+  const editSurvey = (idx: number) => {
+    selectedSurvey.value = idx
+    const survey = surveys.value[idx]
+    sruveyTitle.value = survey.survey.name
+    surveyTriggerWord.value = survey.survey.keyword
+    surveyEnd.value = survey.survey.end_message
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    surveyContents.value = survey.surveyFlow.map((s: any) => {
+      return {
+        content: s.setting[0].text,
+        type: s.type,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        options: s.setting[0].actions.map((o: any) => o.text),
+        id: s.id
+      }
+    })
+    mode.value = 'edit'
+  }
+
+  const deletContent = (id: number) => {
+    return axios
+      .delete('survey/flow', {
+        data: {
+          id,
+          token
+        }
+      })
+      .then(() => {
+        getSurveys()
+      })
+  }
+
+  const confirmDelete = (item: SurveyContent, idx: number) => {
+    useDeleteModalStore().showModal({
+      deleteType: 'callback',
+      title: t('qrcode-page-delete-check-title'),
+      content: t('survey-confirm-delete-question'),
+      cancelButtonText: t('disconnect-line-modal-cancel-btn'),
+      confirmButtonText: t('delete-btn'),
+      onSubmit: () => delSurveyContent(item, idx)
+    })
+  }
+
+  const confirmDeleteSurvey = (surveyId: number) => {
+    useDeleteModalStore().showModal({
+      deleteType: 'callback',
+      title: t('qrcode-page-delete-check-title'),
+      content: t('survey-confirm-delete-survey'),
+      cancelButtonText: t('disconnect-line-modal-cancel-btn'),
+      confirmButtonText: t('delete-btn'),
+      onSubmit: () => deleteSurvey(surveyId)
+    })
+  }
+
+  const deleteSurvey = (id: number) => {
+    return axios
+      .delete('survey', {
+        data: {
+          id,
+          token
+        }
+      })
+      .then(() => {
+        getSurveys()
+      })
+  }
+
+  const resetForm = () => {
+    sruveyTitle.value = ''
+    surveyTriggerWord.value = ''
+    surveyEnd.value = ''
+    surveyContents.value = []
+  }
+
+  const createSurvey = () => {
+    resetForm()
+    mode.value = 'create'
   }
 
   return {
@@ -163,6 +278,11 @@ export default function useSurveySetting() {
     addOption,
     delOption,
     editSurveyContent,
-    saveContent
+    saveContent,
+    editSurvey,
+    deletContent,
+    confirmDelete,
+    confirmDeleteSurvey,
+    createSurvey
   }
 }
