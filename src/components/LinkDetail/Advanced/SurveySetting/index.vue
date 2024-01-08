@@ -97,7 +97,7 @@ onMounted(() => {
           v-for="(survey, idx) in surveys"
           :key="survey.survey.id"
           :survey="survey"
-          :showEnable="survey.length > 0"
+          :showEnable="surveys.length > 0 && !survey.survey.is_use"
           @edit="() => editSurvey(idx)"
           @delete="() => confirmDeleteSurvey(survey.survey.id)"
           @copy="() => copySurvey(survey.survey.id)"

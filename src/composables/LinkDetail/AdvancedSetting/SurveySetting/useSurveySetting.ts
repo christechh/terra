@@ -82,8 +82,8 @@ export default function useSurveySetting() {
     contentOptions.value.splice(idx, 1)
   }
 
-  const postSurvey = (isEditFlow: boolean) => {
-    if (mode.value === 'edit' && isEditFlow) {
+  const postSurvey = () => {
+    if (surveys.value[selectedSurvey.value]?.survey.id) {
       return {
         data: {
           data: { data: { id: surveys.value[selectedSurvey.value].survey.id } }
@@ -170,14 +170,17 @@ export default function useSurveySetting() {
   }
 
   const saveContent = async (isEditFlow: boolean) => {
-    const { data } = await postSurvey(isEditFlow)
+    const { data } = await postSurvey()
     const surveyId = data.data.data.id
     if (isEditFlow) {
       await setFlow(surveyId)
       showEditContentSlidOver.value = false
     }
     await releaseSurvey(surveyId)
-    getSurveys()
+    await getSurveys()
+    selectedSurvey.value = surveys.value.findIndex(
+      (s) => s.survey.id === surveyId
+    )
     !isEditFlow && (mode.value = 'list')
   }
 
@@ -257,6 +260,7 @@ export default function useSurveySetting() {
 
   const createSurvey = () => {
     resetForm()
+    selectedSurvey.value = -1
     mode.value = 'create'
   }
 
