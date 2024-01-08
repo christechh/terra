@@ -19,7 +19,7 @@ export default function useSurveySetting() {
   const mode = ref('list')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const surveys = ref<any[]>([])
-  const selectedSurvey = ref<number>(0)
+  const selectedSurvey = ref<number>(-1)
   const sruveyTitle = ref('')
   const surveyTriggerWord = ref('')
   const surveyEnd = ref('')
@@ -108,9 +108,10 @@ export default function useSurveySetting() {
       keyword: surveyTriggerWord.value,
       name: sruveyTitle.value,
       token: token,
-      ...(surveys.value[selectedSurvey.value]?.survey.id && {
-        id: surveys.value[selectedSurvey.value].survey.id
-      })
+      ...(mode.value === 'edit' &&
+        surveys.value[selectedSurvey.value]?.survey.id && {
+          id: surveys.value[selectedSurvey.value].survey.id
+        })
     })
   }
 
@@ -259,6 +260,17 @@ export default function useSurveySetting() {
     mode.value = 'create'
   }
 
+  const copySurvey = (id: number) => {
+    return axios
+      .post('survey/copy', {
+        id,
+        token
+      })
+      .then(() => {
+        getSurveys()
+      })
+  }
+
   return {
     showHowToModal,
     showEditContentSlidOver,
@@ -283,6 +295,7 @@ export default function useSurveySetting() {
     deletContent,
     confirmDelete,
     confirmDeleteSurvey,
-    createSurvey
+    createSurvey,
+    copySurvey
   }
 }
