@@ -5,6 +5,7 @@ import Lucide from '../../../../base-components/Lucide'
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   survey: any
+  showEnable: boolean
 }
 
 const props = defineProps<Props>()
@@ -12,7 +13,7 @@ const props = defineProps<Props>()
 const openMenu = ref(false)
 const survey = computed(() => props.survey)
 
-const emit = defineEmits(['edit', 'delete'])
+const emit = defineEmits(['edit', 'delete', 'copy'])
 const hideMenu = () => {
   openMenu.value = false
 }
@@ -36,7 +37,7 @@ watch(openMenu, () => {
       <div>
         {{ survey.survey.name }}
         <span
-          v-if="survey.survey.is_open"
+          v-if="survey.survey.is_use"
           class="ml-2 bg-[#e3f2a5] px-2 py-1 text-xs text-primary"
           ><span
             class="inline-block h-[6px] w-[6px] rounded-full bg-primary"
@@ -72,8 +73,15 @@ watch(openMenu, () => {
         </li>
         <li
           class="w-[90px] cursor-pointer px-4 py-2 hover:bg-[#eaeaea] dark:hover:bg-slate-700"
+          @click="emit('copy')"
         >
           {{ $t('duplicate') }}
+        </li>
+        <li
+          class="w-[90px] cursor-pointer px-4 py-2 hover:bg-[#eaeaea] dark:hover:bg-slate-700"
+          v-if="showEnable && !survey.survey.is_use"
+        >
+          {{ $t('survey-is-open-switch') }}
         </li>
         <li
           class="w-[90px] cursor-pointer px-4 py-2 text-danger hover:bg-[#eaeaea] dark:hover:bg-slate-700"

@@ -34,7 +34,8 @@ const {
   editSurvey,
   confirmDelete,
   confirmDeleteSurvey,
-  createSurvey
+  createSurvey,
+  copySurvey
 } = useSurveySetting()
 
 onMounted(() => {
@@ -96,8 +97,10 @@ onMounted(() => {
           v-for="(survey, idx) in surveys"
           :key="survey.survey.id"
           :survey="survey"
+          :showEnable="surveys.length > 0 && !survey.survey.is_use"
           @edit="() => editSurvey(idx)"
           @delete="() => confirmDeleteSurvey(survey.survey.id)"
+          @copy="() => copySurvey(survey.survey.id)"
         />
       </div>
     </div>

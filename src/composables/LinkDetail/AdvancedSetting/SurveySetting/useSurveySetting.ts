@@ -19,7 +19,7 @@ export default function useSurveySetting() {
   const mode = ref('list')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const surveys = ref<any[]>([])
-  const selectedSurvey = ref<number>(0)
+  const selectedSurvey = ref<number>(-1)
   const sruveyTitle = ref('')
   const surveyTriggerWord = ref('')
   const surveyEnd = ref('')
@@ -82,8 +82,8 @@ export default function useSurveySetting() {
     contentOptions.value.splice(idx, 1)
   }
 
-  const postSurvey = (isEditFlow: boolean) => {
-    if (mode.value === 'edit' && isEditFlow) {
+  const postSurvey = () => {
+    if (surveys.value[selectedSurvey.value]?.survey.id) {
       return {
         data: {
           data: { data: { id: surveys.value[selectedSurvey.value].survey.id } }
@@ -108,9 +108,10 @@ export default function useSurveySetting() {
       keyword: surveyTriggerWord.value,
       name: sruveyTitle.value,
       token: token,
-      ...(surveys.value[selectedSurvey.value]?.survey.id && {
-        id: surveys.value[selectedSurvey.value].survey.id
-      })
+      ...(mode.value === 'edit' &&
+        surveys.value[selectedSurvey.value]?.survey.id && {
+          id: surveys.value[selectedSurvey.value].survey.id
+        })
     })
   }
 
@@ -169,14 +170,17 @@ export default function useSurveySetting() {
   }
 
   const saveContent = async (isEditFlow: boolean) => {
-    const { data } = await postSurvey(isEditFlow)
+    const { data } = await postSurvey()
     const surveyId = data.data.data.id
     if (isEditFlow) {
       await setFlow(surveyId)
       showEditContentSlidOver.value = false
     }
     await releaseSurvey(surveyId)
-    getSurveys()
+    await getSurveys()
+    selectedSurvey.value = surveys.value.findIndex(
+      (s) => s.survey.id === surveyId
+    )
     !isEditFlow && (mode.value = 'list')
   }
 
@@ -256,7 +260,19 @@ export default function useSurveySetting() {
 
   const createSurvey = () => {
     resetForm()
+    selectedSurvey.value = -1
     mode.value = 'create'
+  }
+
+  const copySurvey = (id: number) => {
+    return axios
+      .post('survey/copy', {
+        id,
+        token
+      })
+      .then(() => {
+        getSurveys()
+      })
   }
 
   return {
@@ -283,6 +299,7 @@ export default function useSurveySetting() {
     deletContent,
     confirmDelete,
     confirmDeleteSurvey,
-    createSurvey
+    createSurvey,
+    copySurvey
   }
 }
