@@ -1,3 +1,11 @@
+# [1.29.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.28.0...v1.29.0) (2024-01-09)
+
+
+### Features
+
+* fixed crate ([2bb2f3d](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/2bb2f3d3253b80dd6ae822286b10a0f3925b25e0))
+* 複製以及啟用 ([334f6bd](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/334f6bd2ea4e2686f9ad3d24d7d7b1decac261c7))
+
 # [1.28.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.27.0...v1.28.0) (2024-01-05)
 
 
