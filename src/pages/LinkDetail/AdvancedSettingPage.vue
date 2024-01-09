@@ -59,7 +59,15 @@ const currentTabComponent = computed(() => currentTab.value.component)
         </button>
       </div>
     </div>
-    <div class="box">
+    <div
+      class="box"
+      :class="{
+        'bg-transparent': currentTabId === 'survey-setting-tab'
+      }"
+      :style="{
+        boxShadow: currentTabId === 'survey-setting-tab' ? 'none' : ''
+      }"
+    >
       <component :is="currentTabComponent" />
     </div>
   </section>

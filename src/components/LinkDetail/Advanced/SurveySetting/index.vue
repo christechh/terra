@@ -25,6 +25,7 @@ const {
   contentOptions,
   flowType,
   selectedContentIdx,
+  isInit,
   getSurveys,
   addSurveyContent,
   addOption,
@@ -35,20 +36,21 @@ const {
   confirmDelete,
   confirmDeleteSurvey,
   createSurvey,
-  copySurvey
+  copySurvey,
+  enableSurvey
 } = useSurveySetting()
 
 onMounted(() => {
-  getSurveys()
+  isInit.value = true
+  getSurveys().then(() => {
+    isInit.value = false
+  })
 })
 </script>
 
 <template>
-  <template v-if="mode === 'list'">
-    <div
-      v-if="surveys.length === 0"
-      class="mt-2 bg-transparent p-4 text-center"
-    >
+  <template v-if="mode === 'list' && !isInit">
+    <div v-if="surveys.length === 0" class="mt-2 p-4 text-center">
       <img
         src="@/assets/images/survey-empty.png"
         class="mx-auto mb-4 mt-10"
@@ -68,7 +70,7 @@ onMounted(() => {
         </button>
       </div>
     </div>
-    <div v-else>
+    <div v-else class="bg-white dark:bg-darkmode-600">
       <div
         class="flex items-center justify-between border-b px-5 py-3 text-base font-bold"
       >
@@ -76,16 +78,19 @@ onMounted(() => {
         <div>
           <Button
             variant="outline-primary"
-            class="border"
+            class="border text-sm"
             @click="mode = 'list'"
             >{{ $t('see_data') }}</Button
           >
-          <Button variant="primary" class="ml-2" @click="createSurvey">{{
-            $t('survey-create-button')
-          }}</Button>
+          <Button
+            variant="primary"
+            class="ml-2 text-sm"
+            @click="createSurvey"
+            >{{ $t('survey-create-button') }}</Button
+          >
         </div>
       </div>
-      <div class="px-[52px] py-4">
+      <div class="px-5 py-4">
         <div class="flex items-center justify-between p-3">
           <div class="w-2/5"></div>
           <div class="w-[10%]">{{ $t('survey-question') }}</div>
@@ -101,11 +106,15 @@ onMounted(() => {
           @edit="() => editSurvey(idx)"
           @delete="() => confirmDeleteSurvey(survey.survey.id)"
           @copy="() => copySurvey(survey.survey.id)"
+          @enable="() => enableSurvey(survey.survey.id)"
         />
       </div>
     </div>
   </template>
-  <div v-else-if="mode === 'create' || mode === 'edit'">
+  <div
+    v-else-if="mode === 'create' || mode === 'edit'"
+    class="rounded-lg bg-white dark:bg-darkmode-600"
+  >
     <div
       class="flex items-center justify-between border-b px-5 py-3 text-base font-bold"
     >
@@ -115,13 +124,13 @@ onMounted(() => {
       <div>
         <Button
           variant="outline-primary"
-          class="border"
+          class="border text-sm"
           @click="mode = 'list'"
           >{{ $t('back-button') }}</Button
         >
         <Button
           variant="primary"
-          class="ml-2"
+          class="ml-2 text-sm"
           @click="() => saveContent(false)"
           >{{ $t('survey-save-survey') }}</Button
         >
@@ -170,14 +179,14 @@ onMounted(() => {
             :key="idx"
             class="mt-3 flex items-center justify-between rounded-lg border px-5 py-3"
           >
-            <div class="flex items-center">
+            <div class="flex items-center gap-4">
               <Lucide icon="MoreVertical" class="cursor-move" />
               <span class="text-base font-bold text-primary"
                 >{{ $t('survey-question') }}{{ idx + 1 }}</span
               >
               <div class="ml-2 font-medium">{{ items.content }}</div>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center gap-4">
               <Lucide
                 icon="Pen"
                 class="cursor-pointer"
@@ -191,12 +200,25 @@ onMounted(() => {
             </div>
           </div>
           <div class="mt-2 text-sm">
-            <button class="flex items-center" @click="addSurveyContent">
-              <Lucide icon="PlusCircle" class="mr-2" color="#02B13F" /><span
-                class="text-primary"
-                >{{ $t('survey-question-add') }}</span
+            <button
+              class="flex items-center disabled:opacity-50"
+              @click="addSurveyContent"
+              :disabled="!sruveyTitle || !surveyEnd"
+            >
+              <Lucide
+                icon="PlusCircle"
+                :stroke-width="6"
+                :width="20"
+                :height="20"
+                class="mr-2"
+                color="#02B13F"
+              /><span class="font-bold text-primary">{{
+                $t('survey-question-add')
+              }}</span>
+              <div
+                class="ml-2 text-desc_font"
+                v-if="!sruveyTitle || !surveyEnd"
               >
-              <div class="ml-2 text-desc_font">
                 {{ $t('survey-question-add-notice') }}
               </div>
             </button>
@@ -207,72 +229,84 @@ onMounted(() => {
   </div>
   <HowToCreateSurveyModal v-model:open="showHowToModal" />
   <Slideover :open="showEditContentSlidOver">
-    <Slideover.Panel class="p-5">
-      <Lucide
-        icon="X"
-        class="absolute right-2 top-2 cursor-pointer"
-        @click="showEditContentSlidOver = false"
-      />
-      <div class="mb-2 p-1 text-base font-bold text-primary">
-        {{ $t('survey-question') }}
-      </div>
+    <Slideover.Panel class="overflow-y-auto p-5">
       <div>
-        <span class="text-red-500">*</span>
-        {{ $t('survey-question-select-type') }}
-      </div>
-      <div class="mt-2 text-xs text-disabled_font">
-        {{ $t('survey-question-choose-one') }}
-      </div>
-      <FormSelect class="mt-2" v-model="flowType">
-        <option value="choice">{{ $t('survey-question-type-choice') }}</option>
-        <option value="rating">{{ $t('survey-question-type-rating') }}</option>
-        <option value="command">
-          {{ $t('survey-question-type-command') }}
-        </option>
-      </FormSelect>
-      <div class="mt-3">
-        <span class="text-red-500">*</span>
-        {{ $t('survey-question-info') }}
-      </div>
-      <FormTextarea
-        class="mt-3 resize-none"
-        :placeholder="$t('edit-rich-menu-text-placeholder')"
-        v-model="surveyContents[selectedContentIdx].content"
-      />
-      <template v-if="flowType === 'choice'">
-        <div class="mt-5">{{ $t('survey-question-option') }}</div>
-        <div class="mt-3 text-xs text-disabled_font">
-          {{ $t('survey-question-required') }}
+        <Lucide
+          icon="X"
+          class="absolute right-2 top-2 cursor-pointer"
+          @click="showEditContentSlidOver = false"
+        />
+        <div class="mb-2 p-1 text-base font-bold text-primary">
+          {{ $t('survey-question') }}
         </div>
-        <div
-          v-for="(opt, idx) in contentOptions"
-          :key="idx"
-          class="mt-3 flex items-center bg-input_bg pr-2"
-        >
-          <FormInput
-            type="text"
-            :placeholder="$t('survey-question-option-placeholder')"
-            v-model="contentOptions[idx]"
-          />
-          <Lucide
-            v-if="contentOptions.length > 2"
-            icon="Trash"
-            class="ml-2 cursor-pointer"
-            @click="delOption(idx)"
-          />
+        <div>
+          <span class="text-red-500">*</span>
+          {{ $t('survey-question-select-type') }}
         </div>
-        <button @click="addOption" class="mt-3 flex items-center text-primary">
-          <Lucide icon="PlusCircle" class="mr-2" color="#02B13F" />
-          {{ $t('survey-question-add-option') }}
-        </button>
-      </template>
-      <div class="mt-5 flex justify-center gap-2">
-        <Button variant="outline-primary" class="border">{{
-          $t('cancel-btn')
-        }}</Button>
-        <Button variant="primary" @click="() => saveContent(true)">{{
-          $t('save-btn')
-        }}</Button>
+        <div class="mt-2 text-xs text-disabled_font">
+          {{ $t('survey-question-choose-one') }}
+        </div>
+        <FormSelect class="mt-2" v-model="flowType">
+          <option value="choice">
+            {{ $t('survey-question-type-choice') }}
+          </option>
+          <option value="rating">
+            {{ $t('survey-question-type-rating') }}
+          </option>
+          <option value="command">
+            {{ $t('survey-question-type-command') }}
+          </option>
+        </FormSelect>
+        <div class="mt-3">
+          <span class="text-red-500">*</span>
+          {{ $t('survey-question-info') }}
+        </div>
+        <FormTextarea
+          class="mt-3 resize-none"
+          :placeholder="$t('edit-rich-menu-text-placeholder')"
+          v-model="surveyContents[selectedContentIdx].content"
+        />
+        <template v-if="flowType === 'choice'">
+          <div class="mt-5">{{ $t('survey-question-option') }}</div>
+          <div class="mt-3 text-xs text-disabled_font">
+            {{ $t('survey-question-required') }}
+          </div>
+          <div
+            v-for="(opt, idx) in contentOptions"
+            :key="idx"
+            class="mt-3 flex items-center bg-input_bg pr-2"
+          >
+            <FormInput
+              type="text"
+              :placeholder="`${$t('survey-question-option-placeholder')}${
+                idx + 1
+              }`"
+              v-model="contentOptions[idx]"
+            />
+            <Lucide
+              v-if="contentOptions.length > 2"
+              icon="Trash"
+              class="ml-2 cursor-pointer"
+              @click="delOption(idx)"
+            />
+          </div>
+          <button
+            v-if="contentOptions.length < 10"
+            @click="addOption"
+            class="mt-3 flex items-center text-primary"
+          >
+            <Lucide icon="PlusCircle" class="mr-2" color="#02B13F" />
+            {{ $t('survey-question-add-option') }}
+          </button>
+        </template>
+        <div class="mt-5 flex justify-center gap-2">
+          <Button variant="outline-primary" class="border">{{
+            $t('cancel-btn')
+          }}</Button>
+          <Button variant="primary" @click="() => saveContent(true)">{{
+            $t('save-btn')
+          }}</Button>
+        </div>
       </div>
     </Slideover.Panel>
   </Slideover>

@@ -15,6 +15,7 @@ export default function useSurveySetting() {
   const { t } = useI18n()
   const showHowToModal = ref(false)
   const showEditContentSlidOver = ref(false)
+  const isInit = ref(true)
   const route = useRoute()
   const mode = ref('list')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,20 +47,21 @@ export default function useSurveySetting() {
 
   const getSurveys = async () => {
     const res = await axios.get(`survey?token=${token}`)
-    surveys.value = res.data.data.data
+    surveys.value = res.data.data.data.reverse()
   }
 
   const addSurveyContent = () => {
     surveyContents.value.push({
       content: '',
-      type: 'text',
+      type: 'choice',
       options: []
     })
   }
 
   const editSurveyContent = (idx: number) => {
     selectedContentIdx.value = idx
-    flowType.value = surveyContents.value[selectedContentIdx.value].type
+    flowType.value =
+      surveyContents.value[selectedContentIdx.value].type || 'choice'
     contentOptions.value =
       surveyContents.value[selectedContentIdx.value].options
     showEditContentSlidOver.value = true
@@ -174,13 +176,15 @@ export default function useSurveySetting() {
     const surveyId = data.data.data.id
     if (isEditFlow) {
       await setFlow(surveyId)
-      showEditContentSlidOver.value = false
     }
-    await releaseSurvey(surveyId)
+    if (!surveys.value.some((s) => s.survey.is_use)) {
+      await releaseSurvey(surveyId)
+    }
     await getSurveys()
     selectedSurvey.value = surveys.value.findIndex(
       (s) => s.survey.id === surveyId
     )
+    showEditContentSlidOver.value = false
     !isEditFlow && (mode.value = 'list')
   }
 
@@ -275,6 +279,11 @@ export default function useSurveySetting() {
       })
   }
 
+  const enableSurvey = async (id: number) => {
+    await releaseSurvey(id)
+    getSurveys()
+  }
+
   return {
     showHowToModal,
     showEditContentSlidOver,
@@ -288,6 +297,7 @@ export default function useSurveySetting() {
     contentOptions,
     flowType,
     selectedContentIdx,
+    isInit,
     getSurveys,
     addSurveyContent,
     delSurveyContent,
@@ -300,6 +310,7 @@ export default function useSurveySetting() {
     confirmDelete,
     confirmDeleteSurvey,
     createSurvey,
-    copySurvey
+    copySurvey,
+    enableSurvey
   }
 }

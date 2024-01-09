@@ -13,7 +13,7 @@ const props = defineProps<Props>()
 const openMenu = ref(false)
 const survey = computed(() => props.survey)
 
-const emit = defineEmits(['edit', 'delete', 'copy'])
+const emit = defineEmits(['edit', 'delete', 'copy', 'enable'])
 const hideMenu = () => {
   openMenu.value = false
 }
@@ -80,6 +80,7 @@ watch(openMenu, () => {
         <li
           class="w-[90px] cursor-pointer px-4 py-2 hover:bg-[#eaeaea] dark:hover:bg-slate-700"
           v-if="showEnable && !survey.survey.is_use"
+          @click="emit('enable')"
         >
           {{ $t('survey-is-open-switch') }}
         </li>
