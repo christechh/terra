@@ -13,6 +13,7 @@ type SurveyContent = {
 
 export default function useSurveySetting() {
   const { t } = useI18n()
+  const isChange = ref(false)
   const showHowToModal = ref(false)
   const showEditContentSlidOver = ref(false)
   const isInit = ref(true)
@@ -47,7 +48,7 @@ export default function useSurveySetting() {
 
   const getSurveys = async () => {
     const res = await axios.get(`survey?token=${token}`)
-    surveys.value = res.data.data.data.reverse()
+    surveys.value = res.data.data.data
   }
 
   const addSurveyContent = () => {
@@ -63,7 +64,9 @@ export default function useSurveySetting() {
     flowType.value =
       surveyContents.value[selectedContentIdx.value].type || 'choice'
     contentOptions.value =
-      surveyContents.value[selectedContentIdx.value].options
+      surveyContents.value[selectedContentIdx.value].options.length > 0
+        ? surveyContents.value[selectedContentIdx.value].options
+        : ['', '']
     showEditContentSlidOver.value = true
   }
 
@@ -85,6 +88,7 @@ export default function useSurveySetting() {
   }
 
   const postSurvey = () => {
+    isChange.value = false
     if (surveys.value[selectedSurvey.value]?.survey.id) {
       return {
         data: {
@@ -298,6 +302,7 @@ export default function useSurveySetting() {
     flowType,
     selectedContentIdx,
     isInit,
+    isChange,
     getSurveys,
     addSurveyContent,
     delSurveyContent,

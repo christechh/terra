@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Lucide from '../../../../base-components/Lucide'
 
 type Props = {
@@ -12,6 +13,7 @@ const props = defineProps<Props>()
 
 const openMenu = ref(false)
 const survey = computed(() => props.survey)
+const { locale } = useI18n()
 
 const emit = defineEmits(['edit', 'delete', 'copy', 'enable'])
 const hideMenu = () => {
@@ -47,13 +49,13 @@ watch(openMenu, () => {
       </div>
       <div class="mt-2 text-xs text-[#939393]">
         {{ $t('created_at') }}
-        {{ new Date(survey.survey.createdAt).toLocaleString() }}
+        {{ new Date(survey.survey.createdAt).toLocaleString(locale) }}
       </div>
     </div>
     <div class="w-[10%]">{{ survey.surveyFlow.length }}</div>
     <div class="w-[10%]">{{ survey.survey.complete }}</div>
     <div class="w-[30%]">
-      {{ new Date(survey.survey.updatedAt).toLocaleString() }}
+      {{ new Date(survey.survey.updatedAt).toLocaleString(locale) }}
     </div>
     <div class="more relative w-[5%]">
       <Lucide
