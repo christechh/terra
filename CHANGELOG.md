@@ -1,3 +1,10 @@
+## [1.29.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.29.1...v1.29.2) (2024-01-12)
+
+
+### Bug Fixes
+
+* adjust ([cff15ab](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/cff15abbc07485f94e8c8cc32e83b06d7959627a))
+
 ## [1.29.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.29.0...v1.29.1) (2024-01-10)
 
 
