@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Button from '../../../../base-components/Button'
 import {
   FormInput,
@@ -9,6 +10,7 @@ import {
 import { Slideover } from '../../../../base-components/Headless'
 import Lucide from '../../../../base-components/Lucide'
 import useSurveySetting from '../../../../composables/LinkDetail/AdvancedSetting/SurveySetting/useSurveySetting'
+import { useWaningModalStore } from '../../../../stores/modals/warrningModal'
 import HowToCreateSurveyModal from '../../../Modals/HowToCreateSurveyModal/Index.vue'
 import VerticalSteps from '../../../VerticalSteps'
 import SurveyListItem from './SurveyListItem.vue'
@@ -26,6 +28,7 @@ const {
   flowType,
   selectedContentIdx,
   isInit,
+  isChange,
   getSurveys,
   addSurveyContent,
   addOption,
@@ -39,6 +42,10 @@ const {
   copySurvey,
   enableSurvey
 } = useSurveySetting()
+const { t } = useI18n()
+const dragIdx = ref(-1)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dragItem = ref<any>(null)
 
 onMounted(() => {
   isInit.value = true
@@ -46,6 +53,29 @@ onMounted(() => {
     isInit.value = false
   })
 })
+
+const backHandler = () => {
+  if (isChange.value) {
+    return useWaningModalStore().showModal({
+      text: t('survey-modal-confirm-back-title'),
+      content: t('survey-modal-confirm-back-desc'),
+      type: 'warning',
+      showCancel: true,
+      callback: () => {
+        isChange.value = false
+        mode.value = 'list'
+      }
+    })
+  }
+  mode.value = 'list'
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const onDrop = (idx: number, list: any[]) => {
+  if (list[dragIdx.value] !== dragItem.value) return
+  list.splice(dragIdx.value > idx ? idx : idx + 1, 0, dragItem.value)
+  list.splice(dragIdx.value > idx ? dragIdx.value + 1 : dragIdx.value, 1)
+}
 </script>
 
 <template>
@@ -70,7 +100,7 @@ onMounted(() => {
         </button>
       </div>
     </div>
-    <div v-else class="bg-white dark:bg-darkmode-600">
+    <div v-else class="rounded-lg bg-white dark:bg-darkmode-600">
       <div
         class="flex items-center justify-between border-b px-5 py-3 text-base font-bold"
       >
@@ -90,7 +120,7 @@ onMounted(() => {
           >
         </div>
       </div>
-      <div class="px-5 py-4">
+      <div class="rounded-lg px-5 py-4">
         <div class="flex items-center justify-between p-3">
           <div class="w-2/5"></div>
           <div class="w-[10%]">{{ $t('survey-question') }}</div>
@@ -125,13 +155,14 @@ onMounted(() => {
         <Button
           variant="outline-primary"
           class="border text-sm"
-          @click="mode = 'list'"
+          @click="backHandler"
           >{{ $t('back-button') }}</Button
         >
         <Button
           variant="primary"
           class="ml-2 text-sm"
           @click="() => saveContent(false)"
+          :disabled="!isChange"
           >{{ $t('survey-save-survey') }}</Button
         >
       </div>
@@ -151,6 +182,7 @@ onMounted(() => {
             type="text"
             :placeholder="$t('survey-name-desc')"
             v-model="sruveyTitle"
+            @change="isChange = true"
           />
           <div class="mt-4">{{ $t('survey-keyword-input') }}</div>
           <FormInput
@@ -158,6 +190,7 @@ onMounted(() => {
             class="mt-2"
             :placeholder="$t('survey-keyword-input-placeholder')"
             v-model="surveyTriggerWord"
+            @change="isChange = true"
           />
           <div class="mt-4">
             <span class="text-red-500">*</span>
@@ -168,23 +201,35 @@ onMounted(() => {
             class="mt-2"
             :placeholder="$t('survey-end-message-input-placeholder')"
             v-model="surveyEnd"
+            @change="isChange = true"
           />
         </VerticalSteps.Step>
       </VerticalSteps>
       <VerticalSteps>
         <VerticalSteps.Step :step="2" class="pb-5 pr-5" is-final>
-          <div class="text-base font-bold">{{ $t('survey-info-setting') }}</div>
+          <div class="text-base font-bold">
+            {{ $t('survey-info-setting') }}
+          </div>
           <div
             v-for="(items, idx) in surveyContents"
             :key="idx"
             class="mt-3 flex items-center justify-between rounded-lg border px-5 py-3"
+            draggable="true"
+            @dragstart="(dragIdx = idx), (dragItem = items)"
+            @dragend="(dragIdx = -1), (dragItem = null)"
+            @dragenter="(e) => e.preventDefault()"
+            @dragover="(e) => e.preventDefault()"
+            @drop="() => onDrop(idx, surveyContents)"
           >
             <div class="flex items-center gap-4">
               <Lucide icon="MoreVertical" class="cursor-move" />
               <span class="text-base font-bold text-primary"
-                >{{ $t('survey-question') }}{{ idx + 1 }}</span
+                >{{ $t('survey-question') }} {{ idx + 1 }}</span
               >
-              <div class="ml-2 font-medium">{{ items.content }}</div>
+              <div v-if="!items.content" class="text-[#939393]">
+                {{ $t('survey-need-create') }}
+              </div>
+              <div v-else class="ml-2 font-medium">{{ items.content }}</div>
             </div>
             <div class="flex items-center gap-4">
               <Lucide
@@ -201,6 +246,7 @@ onMounted(() => {
           </div>
           <div class="mt-2 text-sm">
             <button
+              v-if="surveyContents.length < 10"
               class="flex items-center disabled:opacity-50"
               @click="addSurveyContent"
               :disabled="!sruveyTitle || !surveyEnd"
@@ -237,7 +283,7 @@ onMounted(() => {
           @click="showEditContentSlidOver = false"
         />
         <div class="mb-2 p-1 text-base font-bold text-primary">
-          {{ $t('survey-question') }}
+          {{ $t('survey-question') }} {{ selectedContentIdx + 1 }}
         </div>
         <div>
           <span class="text-red-500">*</span>
@@ -274,14 +320,15 @@ onMounted(() => {
           <div
             v-for="(opt, idx) in contentOptions"
             :key="idx"
-            class="mt-3 flex items-center bg-input_bg pr-2"
+            class="mt-3 flex items-center rounded bg-input_bg pr-2"
           >
             <FormInput
               type="text"
-              :placeholder="`${$t('survey-question-option-placeholder')}${
+              :placeholder="`${$t('survey-question-option-placeholder')} ${
                 idx + 1
               }`"
               v-model="contentOptions[idx]"
+              @change="isChange = true"
             />
             <Lucide
               v-if="contentOptions.length > 2"
@@ -293,16 +340,25 @@ onMounted(() => {
           <button
             v-if="contentOptions.length < 10"
             @click="addOption"
-            class="mt-3 flex items-center text-primary"
+            class="mt-3 flex items-center font-bold text-primary"
           >
-            <Lucide icon="PlusCircle" class="mr-2" color="#02B13F" />
+            <Lucide
+              icon="PlusCircle"
+              class="mr-2"
+              :stroke-width="6"
+              width="20"
+              color="#02B13F"
+            />
             {{ $t('survey-question-add-option') }}
           </button>
         </template>
         <div class="mt-5 flex justify-center gap-2">
-          <Button variant="outline-primary" class="border">{{
-            $t('cancel-btn')
-          }}</Button>
+          <Button
+            variant="outline-primary"
+            class="border"
+            @click="showEditContentSlidOver = false"
+            >{{ $t('cancel-btn') }}</Button
+          >
           <Button variant="primary" @click="() => saveContent(true)">{{
             $t('save-btn')
           }}</Button>

@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import Button from '../../../base-components/Button'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
-import Button from '../../../base-components/Button'
 import { useWaningModalStore } from '../../../stores/modals/warrningModal'
 
 const showModal = computed(() => useWaningModalStore().status)
 const modalText = computed(() => useWaningModalStore().text)
 const content = computed(() => useWaningModalStore().content)
 const type = computed(() => useWaningModalStore().type)
+const showCancel = computed(() => useWaningModalStore().showCancel)
 const icon = computed(() => {
   if (type.value === 'success') {
     return 'CheckCircle'
@@ -43,6 +44,14 @@ const iconColor = computed(() => {
 const setWarningModalPreview = (value: boolean) => {
   useWaningModalStore().displayModal({ status: value })
 }
+
+const clickHandler = () => {
+  setWarningModalPreview(false)
+  const callback = useWaningModalStore().callback
+  if (callback) {
+    callback()
+  }
+}
 </script>
 
 <template>
@@ -71,15 +80,20 @@ const setWarningModalPreview = (value: boolean) => {
             {{ content }}
           </div>
         </div>
-        <div class="px-5 pb-8 text-center">
+        <div
+          class="flex items-center justify-center gap-3 px-5 pb-8 text-center"
+        >
+          <Button
+            v-if="showCancel"
+            class="w-24 border"
+            variant="outline-secondary"
+            @click="() => setWarningModalPreview(false)"
+            >{{ $t('cancel-btn') }}</Button
+          >
           <Button
             type="button"
             variant="primary"
-            @click="
-              () => {
-                setWarningModalPreview(false)
-              }
-            "
+            @click="() => clickHandler()"
             class="w-24"
           >
             Ok
