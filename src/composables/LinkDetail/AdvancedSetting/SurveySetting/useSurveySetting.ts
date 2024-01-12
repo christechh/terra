@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import axios from '../../../../axios'
 import { useDeleteModalStore } from '../../../../stores/modals/deleteModal'
+import { useNotificationsStore } from '../../../../stores/notifications'
 
 type SurveyContent = {
   content: string
@@ -57,6 +58,7 @@ export default function useSurveySetting() {
       type: 'choice',
       options: []
     })
+    isChange.value = true
   }
 
   const editSurveyContent = (idx: number) => {
@@ -81,18 +83,23 @@ export default function useSurveySetting() {
 
   const addOption = () => {
     contentOptions.value.push('')
+    isChange.value = true
   }
 
   const delOption = (idx: number) => {
     contentOptions.value.splice(idx, 1)
   }
 
-  const postSurvey = () => {
+  const postSurvey = (saveSurvey: boolean = false) => {
     isChange.value = false
-    if (surveys.value[selectedSurvey.value]?.survey.id) {
-      return {
-        data: {
-          data: { data: { id: surveys.value[selectedSurvey.value].survey.id } }
+    if (!saveSurvey) {
+      if (surveys.value[selectedSurvey.value]?.survey.id) {
+        return {
+          data: {
+            data: {
+              data: { id: surveys.value[selectedSurvey.value].survey.id }
+            }
+          }
         }
       }
     }
@@ -168,10 +175,8 @@ export default function useSurveySetting() {
             ].id
           })
       })
-      .then((res) => {
-        const { data } = res
-        const { id } = data.data.data
-        surveyContents.value[surveyContents.value.length - 1].id = id
+      .then(() => {
+        isChange.value = true
       })
   }
 
@@ -188,8 +193,21 @@ export default function useSurveySetting() {
     selectedSurvey.value = surveys.value.findIndex(
       (s) => s.survey.id === surveyId
     )
+
+    const survey = surveys.value[selectedSurvey.value]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    surveyContents.value = survey.surveyFlow.map((s: any) => {
+      return {
+        content: s.setting[0].text,
+        type: s.type,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        options: s.setting[0].actions.map((o: any) => o.text),
+        id: s.id
+      }
+    })
+    useNotificationsStore().showSaveSuccess()
     showEditContentSlidOver.value = false
-    !isEditFlow && (mode.value = 'list')
+    mode.value = 'edit'
   }
 
   const editSurvey = (idx: number) => {
@@ -225,6 +243,9 @@ export default function useSurveySetting() {
   }
 
   const confirmDelete = (item: SurveyContent, idx: number) => {
+    if (!item.content) {
+      return delSurveyContent(item, idx)
+    }
     useDeleteModalStore().showModal({
       deleteType: 'callback',
       title: t('qrcode-page-delete-check-title'),
@@ -288,6 +309,16 @@ export default function useSurveySetting() {
     getSurveys()
   }
 
+  const saveSurvey = async () => {
+    await postSurvey(true)
+    const survey = surveys.value[selectedSurvey.value]
+    if (survey.survey.is_use) {
+      await releaseSurvey(survey.survey.id)
+    }
+    await getSurveys()
+    mode.value = 'list'
+  }
+
   return {
     showHowToModal,
     showEditContentSlidOver,
@@ -316,6 +347,7 @@ export default function useSurveySetting() {
     confirmDeleteSurvey,
     createSurvey,
     copySurvey,
-    enableSurvey
+    enableSurvey,
+    saveSurvey
   }
 }
