@@ -40,7 +40,8 @@ const {
   confirmDeleteSurvey,
   createSurvey,
   copySurvey,
-  enableSurvey
+  enableSurvey,
+  saveSurvey
 } = useSurveySetting()
 const { t } = useI18n()
 const dragIdx = ref(-1)
@@ -59,7 +60,7 @@ const backHandler = () => {
     return useWaningModalStore().showModal({
       text: t('survey-modal-confirm-back-title'),
       content: t('survey-modal-confirm-back-desc'),
-      type: 'warning',
+      type: 'info',
       showCancel: true,
       callback: () => {
         isChange.value = false
@@ -161,7 +162,7 @@ const onDrop = (idx: number, list: any[]) => {
         <Button
           variant="primary"
           class="ml-2 text-sm"
-          @click="() => saveContent(false)"
+          @click="() => saveSurvey()"
           :disabled="!isChange"
           >{{ $t('survey-save-survey') }}</Button
         >
