@@ -1,3 +1,10 @@
+# [1.30.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.29.3...v1.30.0) (2024-01-16)
+
+
+### Features
+
+* porting sub account setting ([30647d1](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/30647d1b46ac7508b4f6f771e045c0ffdb9173b7))
+
 ## [1.29.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.29.2...v1.29.3) (2024-01-15)
 
 
