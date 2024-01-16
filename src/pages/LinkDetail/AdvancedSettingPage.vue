@@ -8,6 +8,10 @@ const SurveySetting = defineAsyncComponent(
   () => import('@/components/LinkDetail/Advanced/SurveySetting/index.vue')
 )
 
+const SubAccountSetting = defineAsyncComponent(
+  () => import('@/components/LinkDetail/Advanced/SubAccountSetting/index.vue')
+)
+
 const { t } = useI18n()
 
 const tabs = ref([
@@ -23,7 +27,8 @@ const tabs = ref([
   },
   {
     id: 'qrcode-setting-tab-sub-account',
-    name: t('qrcode-setting-tab-sub-account')
+    name: t('qrcode-setting-tab-sub-account'),
+    component: SubAccountSetting
   },
   {
     id: 'qrcode-setting-tab-chatbot',
