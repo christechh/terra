@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { twMerge } from 'tailwind-merge'
-import { computed, ButtonHTMLAttributes, useAttrs } from 'vue'
+import { ButtonHTMLAttributes, computed, useAttrs } from 'vue'
 import LoadingIcon from '../LoadingIcon'
 export type Variant =
   | 'primary'
@@ -63,7 +63,7 @@ const generalStyles = [
   'dark:focus:ring-slate-700 dark:focus:ring-opacity-50', // Dark mode
   '[&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90', // On hover and not disabled
   '[&:not(button)]:text-center', // Not a button element
-  'disabled:opacity-70 disabled:cursor-not-allowed' // Disabled
+  'disabled:opacity-50 disabled:cursor-not-allowed' // Disabled
 ]
 
 // Sizes

@@ -29,6 +29,7 @@ const {
   selectedContentIdx,
   isInit,
   isChange,
+  saving,
   getSurveys,
   addSurveyContent,
   addOption,
@@ -163,7 +164,8 @@ const onDrop = (idx: number, list: any[]) => {
           variant="primary"
           class="ml-2 text-sm"
           @click="() => saveSurvey()"
-          :disabled="!isChange"
+          :disabled="!isChange || saving"
+          :loading="saving"
           >{{ $t('survey-save-survey') }}</Button
         >
       </div>
@@ -183,7 +185,7 @@ const onDrop = (idx: number, list: any[]) => {
             type="text"
             :placeholder="$t('survey-name-desc')"
             v-model="sruveyTitle"
-            @change="isChange = true"
+            @input="isChange = true"
           />
           <div class="mt-4">{{ $t('survey-keyword-input') }}</div>
           <FormInput
@@ -191,7 +193,7 @@ const onDrop = (idx: number, list: any[]) => {
             class="mt-2"
             :placeholder="$t('survey-keyword-input-placeholder')"
             v-model="surveyTriggerWord"
-            @change="isChange = true"
+            @input="isChange = true"
           />
           <div class="mt-4">
             <span class="text-red-500">*</span>
@@ -202,7 +204,7 @@ const onDrop = (idx: number, list: any[]) => {
             class="mt-2"
             :placeholder="$t('survey-end-message-input-placeholder')"
             v-model="surveyEnd"
-            @change="isChange = true"
+            @input="isChange = true"
           />
         </VerticalSteps.Step>
       </VerticalSteps>
@@ -329,7 +331,7 @@ const onDrop = (idx: number, list: any[]) => {
                 idx + 1
               }`"
               v-model="contentOptions[idx]"
-              @change="isChange = true"
+              @input="isChange = true"
             />
             <Lucide
               v-if="contentOptions.length > 2"
