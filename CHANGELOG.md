@@ -1,3 +1,15 @@
+# [1.31.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.30.0...v1.31.0) (2024-01-17)
+
+
+### Bug Fixes
+
+* adjsut ui ([bb2008c](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/bb2008c00cb0db45ea7874b0c5e7a23a4d37fd2e))
+
+
+### Features
+
+* adjsut uI ([aba8ce5](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/aba8ce5dc9015aace0d0798c3176dab68216144f))
+
 # [1.30.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.29.3...v1.30.0) (2024-01-16)
 
 
