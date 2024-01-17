@@ -3,7 +3,12 @@ import {
   Button as AButton,
   ConfigProvider as AConfigProvider,
   Empty as AEmpty,
+  Radio as ARadio,
+  RadioGroup as ARadioGroup,
+  Select as ASelect,
+  SelectOption as ASelectOption,
   Table as ATable,
+  Tooltip as ATooltip,
   Transfer as ATransfer
 } from 'ant-design-vue'
 import ACol from 'ant-design-vue/es/grid/Col'
@@ -409,6 +414,10 @@ onMounted(() => {
   height: 100%;
   float: right;
 }
+.bg-theme-1 {
+  background-color: #02b13f !important;
+  border-color: #02b13f !important;
+}
 .primary-button:disabled {
   opacity: 0.5;
 }
@@ -433,5 +442,22 @@ onMounted(() => {
   .radio-2 {
     margin-top: 20px;
   }
+}
+</style>
+<style>
+.ant-pagination-item-active {
+  font-weight: 500 !important;
+  border-color: #02b13f !important;
+}
+.ant-pagination-item-active a {
+  color: #02b13f !important;
+}
+.ant-radio-checked .ant-radio-inner,
+.ant-radio-checked:after {
+  border-color: #02b13f;
+}
+.ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+  border-color: #02b13f;
+  background-color: #02b13f;
 }
 </style>
