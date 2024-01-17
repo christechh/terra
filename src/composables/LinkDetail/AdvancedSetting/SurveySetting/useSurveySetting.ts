@@ -30,6 +30,7 @@ export default function useSurveySetting() {
   const selectedContentIdx = ref<number>(0)
   const contentOptions = ref<string[]>(['', ''])
   const flowType = ref('choice')
+  const saving = ref(false)
   const { locale } = useI18n()
   const token = route.query.token
   const langs = [
@@ -310,12 +311,15 @@ export default function useSurveySetting() {
   }
 
   const saveSurvey = async () => {
+    saving.value = true
     await postSurvey(true)
     const survey = surveys.value[selectedSurvey.value]
     if (survey.survey.is_use) {
       await releaseSurvey(survey.survey.id)
     }
+    useNotificationsStore().showSaveSuccess()
     await getSurveys()
+    saving.value = false
     mode.value = 'list'
   }
 
@@ -334,6 +338,7 @@ export default function useSurveySetting() {
     selectedContentIdx,
     isInit,
     isChange,
+    saving,
     getSurveys,
     addSurveyContent,
     delSurveyContent,
