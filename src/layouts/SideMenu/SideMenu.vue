@@ -1,26 +1,26 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import logoUrl from '../../assets/images/logo_dark_v6.png'
+import TopBar from '../../components/TopBar'
 import Divider from './Divider.vue'
 import Menu from './Menu.vue'
-import TopBar from '../../components/TopBar'
 // import DarkModeSwitcher from "../../components/DarkModeSwitcher";
 // import MainColorSwitcher from "../../components/MainColorSwitcher";
 // import MobileMenu from "../../components/MobileMenu";
+import { computed, onMounted, provide, ref, watch } from 'vue'
+import CommonModal from '../../components/Modals/CommonModal'
+import CommonNotifications from '../../components/Notifications/CommonNotifications'
+import RedirectTo from '../../components/RedirectTo'
 import { useSideMenuStore } from '../../stores/side-menu'
 import {
-  ProvideForceActiveMenu,
-  forceActiveMenu,
-  Route,
   FormattedMenu,
-  nestedMenu,
+  ProvideForceActiveMenu,
+  Route,
   enter,
-  leave
+  forceActiveMenu,
+  leave,
+  nestedMenu
 } from './side-menu'
-import { watch, ref, computed, onMounted, provide } from 'vue'
-import CommonModal from '../../components/Modals/CommonModal'
-import RedirectTo from '../../components/RedirectTo'
-import CommonNotifications from '../../components/Notifications/CommonNotifications'
 
 const route: Route = useRoute()
 let formattedMenu = ref<Array<FormattedMenu | 'divider'>>([])
@@ -112,7 +112,7 @@ onMounted(() => {
               <Transition @enter="() => enter" @leave="() => leave">
                 <ul
                   v-if="menu.subMenu && menu.activeDropdown"
-                  class="mt-2 rounded-lg bg-slate-100 dark:bg-darkmode-900/30"
+                  class="mt-2 rounded-lg bg-dashboard_bg dark:bg-darkmode-900/30"
                 >
                   <li
                     v-for="(subMenu, subMenuKey) in menu.subMenu"
@@ -175,7 +175,7 @@ onMounted(() => {
       <!-- END: Side Menu -->
       <!-- BEGIN: Content -->
       <div
-        class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]"
+        class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-dashboard_bg px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]"
       >
         <TopBar />
         <RouterView />
