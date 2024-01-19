@@ -1,26 +1,26 @@
 <script setup lang="ts">
+import { TransitionRoot } from '@headlessui/vue'
+import _ from 'lodash'
+import { computed, onMounted, provide, reactive, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import logoUrl from '../../assets/images/logo.svg'
-import MenuLink from './MenuLink.vue'
-import DarkModeSwitcher from '../../components/DarkModeSwitcher'
-import MainColorSwitcher from '../../components/MainColorSwitcher'
-import MobileMenu from '../../components/MobileMenu'
-import fakerData from '../../utils/faker'
-import _ from 'lodash'
-import { useTopMenuStore } from '../../stores/top-menu'
-import {
-  ProvideForceActiveMenu,
-  forceActiveMenu,
-  Route,
-  FormattedMenu,
-  nestedMenu
-} from './top-menu'
-import Lucide from '../../base-components/Lucide'
 import Breadcrumb from '../../base-components/Breadcrumb'
 import { FormInput } from '../../base-components/Form'
 import { Menu, Popover } from '../../base-components/Headless'
-import { TransitionRoot } from '@headlessui/vue'
-import { watch, reactive, computed, onMounted, ref, provide } from 'vue'
+import Lucide from '../../base-components/Lucide'
+import DarkModeSwitcher from '../../components/DarkModeSwitcher'
+import MainColorSwitcher from '../../components/MainColorSwitcher'
+import MobileMenu from '../../components/MobileMenu'
+import { useTopMenuStore } from '../../stores/top-menu'
+import fakerData from '../../utils/faker'
+import MenuLink from './MenuLink.vue'
+import {
+  FormattedMenu,
+  ProvideForceActiveMenu,
+  Route,
+  forceActiveMenu,
+  nestedMenu
+} from './top-menu'
 
 const searchDropdown = ref(false)
 const showSearchDropdown = () => {

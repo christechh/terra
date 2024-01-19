@@ -1,23 +1,23 @@
 <script setup lang="ts">
+import { computed, onMounted, provide, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import logoUrl from '../../assets/images/logo.svg'
-import Divider from './Divider.vue'
-import Menu from './Menu.vue'
-import TopBar from '../../components/TopBar'
 import DarkModeSwitcher from '../../components/DarkModeSwitcher'
 import MainColorSwitcher from '../../components/MainColorSwitcher'
 import MobileMenu from '../../components/MobileMenu'
+import TopBar from '../../components/TopBar'
 import { useSimpleMenuStore } from '../../stores/simple-menu'
+import Divider from './Divider.vue'
+import Menu from './Menu.vue'
 import {
-  ProvideForceActiveMenu,
-  forceActiveMenu,
-  Route,
   FormattedMenu,
-  nestedMenu,
+  ProvideForceActiveMenu,
+  Route,
   enter,
-  leave
+  forceActiveMenu,
+  leave,
+  nestedMenu
 } from './simple-menu'
-import { watch, reactive, computed, onMounted, provide } from 'vue'
 
 const route: Route = useRoute()
 let formattedMenu = reactive<Array<FormattedMenu | 'divider'>>([])
