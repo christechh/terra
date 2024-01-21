@@ -1,3 +1,10 @@
+# [1.32.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.31.1...v1.32.0) (2024-01-21)
+
+
+### Features
+
+* temp-add pinbot ([af10e10](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/af10e105f0419b9d4052c0fcae4e7c6bb994db55))
+
 ## [1.31.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.31.0...v1.31.1) (2024-01-20)
 
 
