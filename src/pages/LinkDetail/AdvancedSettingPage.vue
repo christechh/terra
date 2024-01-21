@@ -12,6 +12,10 @@ const SubAccountSetting = defineAsyncComponent(
   () => import('@/components/LinkDetail/Advanced/SubAccountSetting/index.vue')
 )
 
+const PinBot = defineAsyncComponent(
+  () => import('@/components/LinkDetail/Advanced/PinBot/index.vue')
+)
+
 const { t } = useI18n()
 
 const tabs = ref([
@@ -32,7 +36,8 @@ const tabs = ref([
   },
   {
     id: 'qrcode-setting-tab-chatbot',
-    name: t('qrcode-setting-tab-chatbot')
+    name: t('qrcode-setting-tab-chatbot'),
+    component: PinBot
   },
   {
     id: 'custom-domain-title',
