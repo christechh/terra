@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from '../axios'
 import { SubAccountRole } from '../utils/common'
-import { useCommonStore } from './common'
-const { successfullySaved } = useCommonStore()
+import { useNotificationsStore } from './notifications'
 
 export interface IQuery {
   lang: string
@@ -211,7 +210,7 @@ export const useSubAccountStore = defineStore('subAccounts', {
         // 2. if ok, dispatch get subaccount list
         // if (res.statusCode == 200)
         console.log('update res :\n', JSON.stringify(res))
-        successfullySaved()
+        useNotificationsStore().showSaveSuccess()
         await this.getSubAccountList(form.query)
 
         // 3. not ok, throw error
