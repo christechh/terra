@@ -1,3 +1,10 @@
+## [1.32.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.32.0...v1.32.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* fix sub account setting issue ([b3deee4](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/b3deee455a04f096a7b254d70980e15964da86d3))
+
 # [1.32.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.31.1...v1.32.0) (2024-01-21)
 
 
