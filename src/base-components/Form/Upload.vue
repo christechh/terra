@@ -16,7 +16,7 @@ interface uploadFile {
 
 interface Props {
   type: string
-  modelValue: Array<uploadFile | { data: string }> | null
+  modelValue?: Array<uploadFile | { data: string }> | null
   limit: number
   showClose?: boolean
 }
