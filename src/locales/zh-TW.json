@@ -612,7 +612,7 @@
   "edit-welcome-choose-image": "選擇背景圖片",
   "edit-welcome-upload-image": "上傳背景圖片",
   "edit-welcome-text-color": "歡迎訊息文字顏色",
-  "edit-welcome-upload-limit-text": "大小限制於 2 MB 以下",
+  "edit-welcome-upload-limit-text": "大小限制於 {size} MB 以下",
   "edit-welcome-pinboard-setting": "PinBoard 設定",
   "edit-welcome-display-pinboard": "顯示 Pinboard畫面",
   "edit-welcome-refer-other-design": "看別人怎麼設計",

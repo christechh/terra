@@ -9,7 +9,19 @@ import {
 import useCustomizeDomain from '../../../../composables/LinkDetail/AdvancedSetting/CustomizeDomain/useCustomizeDomain'
 import VerticalSteps from '../../../VerticalSteps'
 const { t } = useI18n()
-const { custom_domain, hostName, isValid, validDomain } = useCustomizeDomain()
+const {
+  custom_domain,
+  hostName,
+  wrongInput,
+  isValid,
+  doValid,
+  page_title,
+  page_desc,
+  page_keywords,
+  preview,
+  validDomain,
+  saveCustomDomain
+} = useCustomizeDomain()
 </script>
 
 <template>
@@ -30,7 +42,15 @@ const { custom_domain, hostName, isValid, validDomain } = useCustomizeDomain()
           <div class="mt-5">
             <span class="text-red-500">*</span>{{ t('custom-domain-name') }}
           </div>
-          <FormInput v-model="custom_domain" type="text" class="mt-2" />
+          <FormInput
+            v-model="custom_domain"
+            type="text"
+            class="mt-2"
+            :class="{ 'rounded border border-red-500': wrongInput }"
+          />
+          <span v-if="wrongInput" class="text-xs text-red-500">{{
+            t('widget-domain-format-error')
+          }}</span>
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="2" class="pb-9">
           <b class="text-base">{{ t('custom-domain-step-2-title') }}</b>
@@ -67,16 +87,23 @@ const { custom_domain, hostName, isValid, validDomain } = useCustomizeDomain()
             @click="validDomain"
             >{{ t('custom-domain-check-domain') }}</Button
           >
-          <span class="ml-2" v-if="isValid">{{
-            t('custom-domain-check-success')
-          }}</span>
+          <span
+            class="ml-2"
+            :class="{ 'text-red-500': !isValid }"
+            v-if="doValid"
+            >{{
+              isValid
+                ? t('custom-domain-check-success')
+                : t('custom-domain-submit-message-dns-error')
+            }}</span
+          >
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="3" class="pb-9" is-final>
           <b class="text-base">{{ t('custom-domain-step-3-title') }}</b>
           <div class="mt-2 text-desc_font">
             {{ t('custom-domain-step-3-desc') }}
           </div>
-          <Button variant="primary" class="mt-5">{{
+          <Button variant="primary" class="mt-5" :disabled="!isValid">{{
             t('custom-domain-submit')
           }}</Button>
         </VerticalSteps.Step>
@@ -88,6 +115,9 @@ const { custom_domain, hostName, isValid, validDomain } = useCustomizeDomain()
       class="flex items-center justify-between border-b p-5 text-base font-bold"
     >
       {{ t('custom-domain-meta-title') }}
+      <Button variant="primary" @click="saveCustomDomain">{{
+        t('save-btn')
+      }}</Button>
     </div>
     <div class="gap-3 pl-12 pr-5 pt-5 lg:flex">
       <div class="flex-1">
@@ -102,6 +132,7 @@ const { custom_domain, hostName, isValid, validDomain } = useCustomizeDomain()
               type="text"
               class="mt-2"
               :placeholder="t('custom-domain-meta-og-title-placeholder')"
+              v-model="page_title"
             />
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2" class="pb-9">
@@ -113,6 +144,7 @@ const { custom_domain, hostName, isValid, validDomain } = useCustomizeDomain()
             <FormTextarea
               class="mt-2"
               :placeholder="t('custom-domain-meta-og-description-placeholder')"
+              v-model="page_desc"
             />
             <div class="mt-5">
               {{ t('custom-domain-meta-og-keys-title') }}
@@ -120,23 +152,37 @@ const { custom_domain, hostName, isValid, validDomain } = useCustomizeDomain()
                 type="text"
                 class="mt-2"
                 :placeholder="t('custom-domain-meta-og-keys-placeholder')"
+                v-model="page_keywords"
               />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="3" is-final>
             <b class="text-base">{{ t('custom-domain-meta-step3-title') }}</b>
             <div class="mt-5 flex items-center gap-2">
-              <div class="h-[110px] flex-1 rounded-lg bg-[#ececec]"></div>
-              <Upload class="flex-1" type="img" :limit="2" />
+              <Upload
+                :limit="5"
+                v-model="preview"
+                class="flex-1"
+                type="img"
+                show-close
+              />
             </div>
           </VerticalSteps.Step>
         </VerticalSteps>
       </div>
-      <div class="flex-1 lg:border-l">
+      <div class="flex-1 lg:border-l lg:pl-8">
         <b class="text-base">{{ t('chatbot-preview-btn') }}</b>
         <div class="mt-5 rounded-xl border p-5">
-          <div class="flex h-[235px] items-center justify-center border">
-            {{ t('custom-domain-meta-step3-title') }}
+          <div
+            class="flex min-h-[235px] items-center justify-center border p-5"
+          >
+            <img
+              class="w-100"
+              v-if="preview[0]?.data"
+              :src="preview[0]?.data"
+              alt=""
+            />
+            <span v-else>{{ t('custom-domain-meta-step3-title') }}</span>
           </div>
           <div class="mt-5 text-base font-bold">
             {{ t('custom-domain-meta-preview-og-title-text') }}
