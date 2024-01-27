@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Button from '../../../../base-components/Button'
 import {
@@ -7,6 +8,7 @@ import {
   Upload
 } from '../../../../base-components/Form'
 import useCustomizeDomain from '../../../../composables/LinkDetail/AdvancedSetting/CustomizeDomain/useCustomizeDomain'
+import MailSample from '../../../Modals/CustomizeDomain/MailSample.vue'
 import VerticalSteps from '../../../VerticalSteps'
 const { t } = useI18n()
 const {
@@ -19,9 +21,13 @@ const {
   page_desc,
   page_keywords,
   preview,
+  networkError,
+  isCustomDomainEnable,
   validDomain,
-  saveCustomDomain
+  saveCustomDomain,
+  enableCustomDomain
 } = useCustomizeDomain()
+const showMailSample = ref(false)
 </script>
 
 <template>
@@ -33,7 +39,12 @@ const {
     </div>
     <div class="pl-8 pt-5 text-desc_font">
       {{ t('custom-domain-desc') }}
-      <a class="text-primary" href="#">{{ t('custom-domain-go-tutorial') }}</a>
+      <a
+        class="text-primary"
+        href="https://funtek.notion.site/Custom-Domain-and-Meta-Tags-1867f4b9bbe041978f1e4e06e22ac868"
+        target="_blank"
+        >{{ t('custom-domain-go-tutorial') }}</a
+      >
     </div>
     <div class="pl-12 pr-5 pt-5">
       <VerticalSteps>
@@ -78,7 +89,7 @@ const {
           <div class="my-2">{{ t('custom-domain-help-title') }}</div>
           <div class="text-sm text-desc_font">
             {{ t('custom-domain-help-desc') }}
-            <button class="text-primary">
+            <button class="text-primary" @click="showMailSample = true">
               {{ t('custom-domain-help-see-desc-button') }}
             </button>
           </div>
@@ -103,14 +114,24 @@ const {
           <div class="mt-2 text-desc_font">
             {{ t('custom-domain-step-3-desc') }}
           </div>
-          <Button variant="primary" class="mt-5" :disabled="!isValid">{{
-            t('custom-domain-submit')
-          }}</Button>
+          <Button
+            variant="primary"
+            class="mt-5"
+            :disabled="!isValid"
+            @click="enableCustomDomain"
+            >{{ t('custom-domain-submit') }}</Button
+          >
+          <span class="ml-2 text-red-500" v-if="networkError">{{
+            networkError
+          }}</span>
         </VerticalSteps.Step>
       </VerticalSteps>
     </div>
   </div>
-  <div class="mt-2 rounded-lg bg-white dark:bg-darkmode-600">
+  <div
+    class="mt-2 rounded-lg bg-white dark:bg-darkmode-600"
+    v-if="isCustomDomainEnable"
+  >
     <div
       class="flex items-center justify-between border-b p-5 text-base font-bold"
     >
@@ -195,4 +216,5 @@ const {
       </div>
     </div>
   </div>
+  <MailSample v-if="showMailSample" @close="showMailSample = false" />
 </template>

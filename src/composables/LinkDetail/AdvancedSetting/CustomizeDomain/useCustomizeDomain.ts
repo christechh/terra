@@ -1,16 +1,20 @@
 import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import axios from '../../../../axios'
 import { useEnterpointsConfigStore } from '../../../../stores/enterpoint/config'
 
 export default function useCustomizeDomain() {
+  const { t } = useI18n()
   const store = useEnterpointsConfigStore()
   const isValid = ref(false)
   const wrongInput = ref(false)
   const doValid = ref(false)
   const preview = ref<{ name: string; data: string }[]>([])
+  const isCustomDomainEnable = ref(false)
   const route = useRoute()
   const token = route.query.token as string
+  const networkError = ref(null)
   onMounted(async () => {
     await store.fetchConfig(token)
     preview.value.push({
@@ -75,6 +79,7 @@ export default function useCustomizeDomain() {
   })
 
   const validDomain = async () => {
+    networkError.value = null
     wrongInput.value = false
     doValid.value = false
     const rex =
@@ -107,6 +112,23 @@ export default function useCustomizeDomain() {
     store.data.custom_domain = res.data.data.domain
   }
 
+  const enableCustomDomain = async () => {
+    try {
+      await saveCustomDomain()
+      isCustomDomainEnable.value = true
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      doValid.value = false
+      isValid.value = false
+      const errorMap = {
+        40006: t('custom-domain-submit-message-token-exists')
+      }
+      custom_domain.value = ''
+      return (networkError.value =
+        errorMap[e.response?.data.errorCode as keyof typeof errorMap] || e)
+    }
+  }
+
   return {
     custom_domain,
     page_title,
@@ -117,7 +139,10 @@ export default function useCustomizeDomain() {
     isValid,
     wrongInput,
     doValid,
+    networkError,
+    isCustomDomainEnable,
     validDomain,
-    saveCustomDomain
+    saveCustomDomain,
+    enableCustomDomain
   }
 }
