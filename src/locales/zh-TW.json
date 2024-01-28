@@ -2056,6 +2056,8 @@
   "plan-detail-notification": "簡訊/Email 通知",
   "plan-detail-chatbot-editor": "聊天機器人編輯器",
   "plan-detail-chat-widget": "網站聊天外掛程式",
+  "plan-tier-active-users": "每月活躍用戶",
+  "plan-tier-subaccounts": "個子帳號",
   "plan-tier-1-features": "License Tier 1 功能",
   "plan-tier-1-active-users": "2,500 每月活躍用戶",
   "plan-tier-1-subaccounts": "2 個子帳號",

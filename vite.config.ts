@@ -19,5 +19,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       'tailwind-config': path.resolve(__dirname, './tailwind.config.js')
     }
-  }
+  },
 })

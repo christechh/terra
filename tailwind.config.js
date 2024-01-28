@@ -155,6 +155,9 @@ module.exports = {
             transform: 'translateY(0px)'
           }
         }
+      },
+      screens: {
+        'web': '992px',
       }
     }
   },

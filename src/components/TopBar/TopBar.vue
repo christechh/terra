@@ -19,7 +19,10 @@ const doLogout = () => {
 
 <template>
   <!-- BEGIN: Top Bar -->
-  <div class="relative z-[51] flex h-[67px] items-center">
+  <div
+    class="relative z-[51] flex h-[67px] items-center"
+    v-if="!route.meta.noLayout"
+  >
     <div class="text-lg font-bold text-black dark:text-white">
       {{ route.meta.title }}
     </div>

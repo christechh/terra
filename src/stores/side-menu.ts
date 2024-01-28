@@ -63,6 +63,11 @@ export const useSideMenuStore = defineStore('sideMenu', {
             title: i18n.global.t('subaccount-section1-title')
           },
           {
+            icon: 'ScrollText',
+            pageName: 'settings-princing_plan',
+            title: i18n.global.t('princing-plan')
+          },
+          {
             icon: 'BadgeDollarSign',
             pageName: 'settings-payment',
             title: i18n.global.t('payment-flow')

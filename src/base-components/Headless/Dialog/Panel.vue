@@ -47,12 +47,12 @@ const computedClass = computed(() =>
 const panelOptions = computed<IOptions>(() => {
   return {
     enter: options?.enter || 'ease-in-out duration-500',
-    enterFrom: options?.enterFrom || 'opacity-0 -mt-16',
-    enterTo: options?.enterTo || 'opacity-100 mt-16',
-    entered: options?.entered || 'opacity-100 mt-16',
+    enterFrom: options?.enterFrom || 'opacity-0 -pt-16',
+    enterTo: options?.enterTo || 'opacity-100 pt-16',
+    entered: options?.entered || 'opacity-100 pt-16',
     leave: options?.leave || 'ease-in-out duration-[400ms]',
-    leaveFrom: options?.leaveFrom || 'opacity-100 mt-16',
-    leaveTo: options?.leaveTo || 'opacity-0 -mt-16'
+    leaveFrom: options?.leaveFrom || 'opacity-100 pt-16',
+    leaveTo: options?.leaveTo || 'opacity-0 -pt-16'
   }
 })
 </script>
@@ -78,7 +78,7 @@ const panelOptions = computed<IOptions>(() => {
     :leave="panelOptions.leave"
     :leaveFrom="panelOptions.leaveFrom"
     :leaveTo="panelOptions.leaveTo"
-    class="fixed inset-0"
+    class="fixed inset-0 overflow-y-auto py-[50px]"
   >
     <HeadlessDialogPanel as="template">
       <component

@@ -2055,6 +2055,8 @@
   "plan-detail-notification": "SMS / Eメール通知",
   "plan-detail-chatbot-editor": "チャットボットエディター",
   "plan-detail-chat-widget": "ウェブサイトチャットウィジェット",
+  "plan-tier-active-users": "人月間アクティブユーザー数",
+  "plan-tier-subaccounts": " サブアカウント",
   "plan-tier-1-features": "ライセンス Tier 1 機能",
   "plan-tier-1-active-users": "月間アクティブユーザー数 2,500 人",
   "plan-tier-1-subaccounts": "2つのサブアカウント",

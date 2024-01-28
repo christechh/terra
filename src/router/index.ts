@@ -69,6 +69,16 @@ const routes = [
             component: () => import('@/pages/settings/SubAccount.vue')
           },
           {
+            path: 'princing_plan',
+            name: 'settings-princing_plan',
+            component: () => import('@/pages/settings/PrincingPlan.vue')
+          },
+          {
+            path: 'payment_upgrade',
+            name: 'settings-payment-upgrade',
+            component: () => import('@/pages/settings/PaymentUpgrade.vue')
+          },
+          {
             path: 'settings_payment_flow',
             name: 'settings-payment',
             component: () => import('@/pages/settings/Payment.vue')
@@ -110,6 +120,9 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   if (to.name === 'landing-page') return
   if (to.name === 'login') return
+  if (to.name === 'settings-payment-upgrade') {
+    to.meta.noLayout = true
+  }
   if (!localStorage.getItem('token')) {
     return { name: 'login' }
   }

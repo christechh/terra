@@ -22,6 +22,8 @@ interface FormInputProps {
   name?: string
   onInput?: (data: FormInputOnInputParams) => void
   type?: InputHTMLAttributes['type']
+  id?: InputHTMLAttributes['id']
+  maxlength?: number
 }
 
 interface FormInputEmit {
@@ -84,7 +86,9 @@ const handleInput = (e: Event) => {
     </div>
     <input
       :class="computedClass"
+      :id="$props.id"
       :type="props.type"
+      :maxlength="props.maxlength"
       v-bind="_.omit(attrs, 'class')"
       v-model="localValue"
       @change="emit('change')"
