@@ -2056,6 +2056,8 @@
   "plan-detail-notification": "SMS/ email notification",
   "plan-detail-chatbot-editor": "Chatbot editor",
   "plan-detail-chat-widget": "Website chat widget",
+  "plan-tier-active-users": "monthly active users",
+  "plan-tier-subaccounts": " subaccounts",
   "plan-tier-1-features": "License Tier 1 Features",
   "plan-tier-1-active-users": "2,500 monthly active users",
   "plan-tier-1-subaccounts": "2 subaccounts",

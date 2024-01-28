@@ -438,7 +438,7 @@ const beforeSetChatLogoSize = (event: Event) => {
               </div>
             </div>
             <div class="mt-3">
-              <FormInput maxlength="35" type="text" v-model="hrText" />
+              <FormInput :maxlength="35" type="text" v-model="hrText" />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2">

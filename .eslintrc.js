@@ -1,4 +1,7 @@
 module.exports = {
+  globals: {
+    TPDirect: 'readonly',
+  },
   env: {
     browser: true,
     es2021: true

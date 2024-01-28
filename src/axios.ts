@@ -28,6 +28,9 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (error.config.skipInterceptor) {
+      return Promise.reject(error)
+    }
     if (error?.response?.status === 403) {
       useRedirectToStore().redirect({ path: '/login' })
     } else {

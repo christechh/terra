@@ -31,7 +31,7 @@ export type Variant =
   | 'linkedin'
 
 type Elevated = boolean
-type Size = 'sm' | 'lg'
+type Size = 'sm' | 'lg' | 'lg2'
 type Rounded = boolean
 
 defineOptions({
@@ -69,6 +69,7 @@ const generalStyles = [
 // Sizes
 const small = ['text-xs py-1.5 px-2']
 const large = ['text-lg py-1.5 px-4']
+const large2 = ['text-base py-3 px-14']
 
 // Main Colors
 const primary = [
@@ -200,6 +201,7 @@ const computedClass = computed(() =>
     generalStyles,
     props.size == 'sm' && small,
     props.size == 'lg' && large,
+    props.size == 'lg2' && large2,
     props.variant == 'primary' && primary,
     props.variant == 'secondary' && secondary,
     props.variant == 'success' && success,

@@ -24,7 +24,6 @@ import CommonNotifications from '../../components/Notifications/CommonNotificati
 
 const route: Route = useRoute()
 let formattedMenu = ref<Array<FormattedMenu | 'divider'>>([])
-
 // TODO: Check if this is needed
 const setFormattedMenu = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -67,6 +66,7 @@ onMounted(() => {
       <!-- BEGIN: Side Menu -->
       <nav
         class="hidden w-[85px] overflow-x-hidden pb-16 pr-2 md:block xl:w-[230px]"
+        v-if="!$route.meta.noLayout"
       >
         <RouterLink
           :to="{ name: 'landing-page' }"
@@ -175,7 +175,12 @@ onMounted(() => {
       <!-- END: Side Menu -->
       <!-- BEGIN: Content -->
       <div
-        class="md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px] bg-slate-100 px-4 pb-10 before:block before:h-px before:w-full before:content-[''] dark:bg-darkmode-700 md:px-[22px]"
+        :class="[
+          'md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px]  before:block before:h-px before:w-full dark:bg-darkmode-700 ',
+          route.meta.noLayout
+            ? 'bg-transparent p-0'
+            : 'bg-slate-100 px-4 pb-10 md:px-[22px]'
+        ]"
       >
         <TopBar />
         <RouterView />

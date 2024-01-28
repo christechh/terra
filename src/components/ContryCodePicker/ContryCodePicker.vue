@@ -73,13 +73,13 @@ const toggleMenu = () => {
 
     <ul
       v-if="isOpen"
-      class="absolute top-9 z-10 h-52 w-[520px] overflow-y-auto bg-white shadow-xl"
+      class="absolute top-9 z-10 h-52 w-[520px] overflow-y-auto bg-white shadow-xl dark:bg-darkmode-700"
     >
       <li
         v-for="country in countriesCodeList"
         :id="country.country"
         :key="country.country"
-        class="flex cursor-pointer items-center p-2 hover:bg-slate-100"
+        class="flex cursor-pointer items-center p-2 hover:bg-slate-100 dark:hover:bg-darkmode-600"
         @click="selectHandler(country)"
       >
         <div class="mr-2 w-5" v-html="country.flag"></div>
