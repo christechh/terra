@@ -21,7 +21,8 @@ const DesignTemplate = {
     font: '#2D3748',
     desc_font: '#939393',
     text_dark: '#3c3c3c',
-    placeholder_font: '#000000' // opactiy 25%
+    placeholder_font: '#000000', // opactiy 25%
+    black: '#2D3748'
   },
   dark: {
     theme1: '#02B13F',
@@ -85,6 +86,7 @@ module.exports = {
         desc_font: 'rgb(var(--color-desc_font) / <alpha-value>)',
         placeholder_font:
           'rgb(var(--color-placeholder_font) / var(--opacity-placeholder_font))',
+        black: 'rgb(var(--color-black) / <alpha-value>)',
         darkmode: {
           50: 'rgb(var(--color-darkmode-50) / <alpha-value>)',
           100: 'rgb(var(--color-darkmode-100) / <alpha-value>)',

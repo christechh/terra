@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  Button as AButton,
   ConfigProvider as AConfigProvider,
   Empty as AEmpty,
   Radio as ARadio,
@@ -18,6 +17,7 @@ import { storeToRefs } from 'pinia'
 import { onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
+import Button from '../../../../base-components/Button'
 import {
   IBatchUpdateForm,
   IQuery,
@@ -210,31 +210,31 @@ onMounted(() => {
           <h2>{{ $t('sub-account-title') }}</h2>
         </a-col>
         <a-col :offset="14" :span="2">
-          <a-button
-            class="bg-theme-1 primary-button"
+          <Button
+            variant="primary"
             :style="`width: ${i18nWidth()};`"
             @click="handleFormSubmit"
             :disabled="submitDisabled"
           >
             {{ $t('save-btn') }}
-          </a-button>
+          </Button>
         </a-col>
       </a-row>
 
       <a-row class="w-100 divider transfer-section p-5">
         <a-col :span="24">
-          <a-col :span="24" class="sub-account-text">
+          <a-col :span="24" class="sub-account-text mb-2">
             {{ $t('sub-account-1') }}
           </a-col>
           <a-col :span="24">
             <span class="primary-text-color">
               {{ $t('sub-account-2') }}
             </span>
-            <a target="blank" href="settings_subaccount">
+            <router-link target="_blank" to="/dashboard/settings/sub_account">
               <span class="primary-font-color">
                 {{ $t('sub-account-3') }}
               </span>
-            </a>
+            </router-link>
           </a-col>
         </a-col>
         <a-col :span="24">
@@ -459,5 +459,30 @@ onMounted(() => {
 .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
   border-color: #02b13f;
   background-color: #02b13f;
+}
+.ant-checkbox-inner::after {
+  background: #02b13f !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #02b13f !important;
+  border-color: #02b13f !important;
+}
+
+.ant-btn-primary {
+  background-color: #02b13f !important;
+  color: white;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.ant-btn-primary[disabled] {
+  background: #f5f5f5 !important;
+}
+.primary-font-color,
+.primary-font-color:hover {
+  color: #02b13f;
+}
+.primary-text-color {
+  color: #939393;
 }
 </style>

@@ -58,7 +58,7 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState
           props.menu.active && props.level == 'first' && !props.menu.subMenu,
         'text-black dark:text-slate-400':
           !props.menu.active && props.level == 'first',
-        'before:absolute before:right-0 before:top-0 before:z-[-1] before:-mr-5 before:h-full before:w-12 before:bg-slate-100 before:content-[\'\'] before:dark:bg-darkmode-700':
+        'before:absolute before:right-0 before:top-0 before:z-[-1] before:-mr-5 before:h-full before:w-12 before:bg-dashboard_bg before:content-[\'\'] before:dark:bg-darkmode-700':
           props.menu.active && props.level == 'first',
         'before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-[230px] before:rounded-l-full before:transition before:duration-100 before:ease-in before:content-[\'\']':
           !props.menu.activeDropdown &&

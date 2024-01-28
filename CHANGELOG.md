@@ -1,3 +1,24 @@
+## [1.32.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.32.0...v1.32.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* fix sub account setting issue ([b3deee4](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/b3deee455a04f096a7b254d70980e15964da86d3))
+
+# [1.32.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.31.1...v1.32.0) (2024-01-21)
+
+
+### Features
+
+* temp-add pinbot ([af10e10](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/af10e105f0419b9d4052c0fcae4e7c6bb994db55))
+
+## [1.31.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.31.0...v1.31.1) (2024-01-20)
+
+
+### Bug Fixes
+
+* adjust[#18](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/18) ([d72f3f0](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/d72f3f0d7a998a5f3c861e76b69505563d411c66))
+
 # [1.31.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.30.0...v1.31.0) (2024-01-17)
 
 
