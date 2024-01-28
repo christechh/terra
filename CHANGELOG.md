@@ -1,3 +1,11 @@
+# [1.33.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.32.1...v1.33.0) (2024-01-28)
+
+
+### Features
+
+* conflict ([af2ac5a](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/af2ac5a53f247743ff8d89a7edca5c4521188e05))
+* princing_plan page ([7dfe9e9](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7dfe9e97f76e7f86ae2688860b10aa360b839f19))
+
 ## [1.32.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.32.0...v1.32.1) (2024-01-22)
 
 
