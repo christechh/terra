@@ -179,7 +179,7 @@ onMounted(() => {
           'md:max-w-auto min-h-screen min-w-0 max-w-full flex-1 rounded-[30px]  before:block before:h-px before:w-full dark:bg-darkmode-700 ',
           route.meta.noLayout
             ? 'bg-transparent p-0'
-            : 'bg-slate-100 px-4 pb-10 md:px-[22px]'
+            : 'bg-dashboard_bg px-4 pb-10 md:px-[22px]'
         ]"
       >
         <TopBar />
