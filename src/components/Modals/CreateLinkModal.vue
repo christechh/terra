@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, watch } from 'vue'
-import { Dialog } from '../../base-components/Headless'
-import Lucide from '../../base-components/Lucide'
-import { FormCheck } from '../../base-components/Form'
 import FormInput from '@/base-components/Form/FormInput.vue'
 import HeadShots from '@/components/HeadShots/HeadShots.vue'
-import axios from '../../axios'
+import { defineEmits, defineProps, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useNotificationsStore } from '../../stores/notifications'
 import { useRouter } from 'vue-router'
+import axios from '../../axios'
+import { FormCheck } from '../../base-components/Form'
+import { Dialog } from '../../base-components/Headless'
+import Lucide from '../../base-components/Lucide'
+import { useNotificationsStore } from '../../stores/notifications'
 interface Props {
   modelValue: boolean
 }
@@ -201,8 +201,7 @@ const create = async () => {
 }
 const randomToken = () => {
   let result = ''
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
   const charactersLength = characters.length
   for (let i = 0; i < 5; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
@@ -239,7 +238,7 @@ watch(
 
 <template>
   <Dialog :open="modelValue" size="md" @close="close">
-    <Dialog.Panel class="p-6">
+    <Dialog.Panel class="p-7">
       <div class="relative flex items-center justify-between pb-5">
         <div class="mx-auto text-lg font-bold">
           {{
@@ -336,7 +335,7 @@ watch(
             <div
               class="mt-2 flex items-center rounded-md bg-[#f6f6f6] px-3 py-2 text-[#7b7b7b]"
             >
-              {{ domain }}
+              {{ domain }}/
               <input
                 type="text"
                 class="border-transparent p-0 text-[14px] text-black focus:border-transparent focus:ring-0"

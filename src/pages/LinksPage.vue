@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
-import { useLinkStore } from '../stores/link'
-import { useUserStore } from '../stores/user'
-import { useNotificationsStore } from '../stores/notifications'
-import IconButton from '../components/IconButton/index.vue'
+import QrcodeVue from 'qrcode.vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Dialog } from '../base-components/Headless'
-import QrcodeVue from 'qrcode.vue'
-import CreateLinkModal from '../components/Modals/CreateLinkModal.vue'
-import Pagination from '../base-components/Pagination'
 import Lucide from '../base-components/Lucide'
+import Pagination from '../base-components/Pagination'
+import IconButton from '../components/IconButton/index.vue'
+import CreateLinkModal from '../components/Modals/CreateLinkModal.vue'
+import { useLinkStore } from '../stores/link'
+import { useNotificationsStore } from '../stores/notifications'
+import { useUserStore } from '../stores/user'
 
 interface ILink {
   id: string
@@ -139,7 +139,7 @@ onMounted(() => {
         >
           <input
             ref="searchInput"
-            class="rounded-lg border-none bg-gray-100 outline-none focus:border-none focus:ring-0"
+            class="rounded-lg border-none bg-gray-100 text-sm placeholder-[#00000025] outline-none focus:border-none focus:ring-0"
             v-model="searchKeyword"
             :placeholder="$t('search')"
           />
