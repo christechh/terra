@@ -155,7 +155,7 @@ module.exports = {
         }
       },
       screens: {
-        'web': '992px'
+        web: '992px'
       }
     }
   },
