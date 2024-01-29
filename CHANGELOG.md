@@ -1,3 +1,10 @@
+## [1.34.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.34.0...v1.34.1) (2024-01-29)
+
+
+### Bug Fixes
+
+* prettier/prettier ([93faf6e](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/93faf6ef24309b5046705ea9cb64ab9b653d0050))
+
 # [1.34.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.33.0...v1.34.0) (2024-01-29)
 
 
