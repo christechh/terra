@@ -1,3 +1,12 @@
+# [1.34.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.33.0...v1.34.0) (2024-01-29)
+
+
+### Features
+
+* custom domain ([b560ba0](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/b560ba039c349053ae49bf8bd42bce5bf3611d37))
+* custom domain done ([51346f7](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/51346f740e58c1920307c79e574429228b505c0d))
+* init ([c1de8bf](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/c1de8bf5f438b97a15182177a0c414a8b4e7c203))
+
 # [1.33.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.32.1...v1.33.0) (2024-01-28)
 
 
