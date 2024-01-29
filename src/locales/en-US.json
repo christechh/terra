@@ -612,7 +612,7 @@
   "edit-welcome-choose-image": "Choose image",
   "edit-welcome-upload-image": "Upload image",
   "edit-welcome-text-color": "Welcome Message Color",
-  "edit-welcome-upload-limit-text": "Maximum file size is 2 MB",
+  "edit-welcome-upload-limit-text": "Maximum file size is {size} MB",
   "edit-welcome-pinboard-setting": "PinBoard Setting",
   "edit-welcome-display-pinboard": "Show PinBoard page",
   "edit-welcome-refer-other-design": "See how others design their PinBoard",

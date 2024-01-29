@@ -15,6 +15,9 @@ const SubAccountSetting = defineAsyncComponent(
 const PinBot = defineAsyncComponent(
   () => import('@/components/LinkDetail/Advanced/PinBot/index.vue')
 )
+const CustomizeDomain = defineAsyncComponent(
+  () => import('@/components/LinkDetail/Advanced/CustomizeDomain/index.vue')
+)
 
 const { t } = useI18n()
 
@@ -41,12 +44,18 @@ const tabs = ref([
   },
   {
     id: 'custom-domain-title',
-    name: t('custom-domain-title')
+    name: t('custom-domain-title'),
+    component: CustomizeDomain
   }
 ])
 const currentTab = ref(tabs.value[0])
 const currentTabId = computed(() => currentTab.value.id)
 const currentTabComponent = computed(() => currentTab.value.component)
+const tranparentBG = computed(() => {
+  return ['survey-setting-tab', 'custom-domain-title'].includes(
+    currentTabId.value
+  )
+})
 </script>
 
 <template>
@@ -72,10 +81,10 @@ const currentTabComponent = computed(() => currentTab.value.component)
     <div
       class="box"
       :class="{
-        'bg-transparent': currentTabId === 'survey-setting-tab'
+        'bg-transparent': tranparentBG
       }"
       :style="{
-        boxShadow: currentTabId === 'survey-setting-tab' ? 'none' : ''
+        boxShadow: tranparentBG ? 'none' : ''
       }"
     >
       <component :is="currentTabComponent" />

@@ -193,7 +193,8 @@ module.exports = {
           '--color-placeholder_font': toRGB(
             DesignTemplate.main.placeholder_font
           ),
-          '--opacity-placeholder_font': '0.25'
+          '--opacity-placeholder_font': '0.25',
+          '--color-black': toRGB(DesignTemplate.main.black)
         },
         '.dark': {
           '--color-primary': toRGB(DesignTemplate.dark.theme1),

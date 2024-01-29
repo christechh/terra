@@ -16,7 +16,7 @@ interface uploadFile {
 
 interface Props {
   type: string
-  modelValue: Array<uploadFile | { data: string }> | null
+  modelValue?: Array<uploadFile | { data: string }> | null
   limit: number
   showClose?: boolean
 }
@@ -146,7 +146,7 @@ const resetFiles = (event: Event) => {
             >
           </div>
           <div
-            v-if="showClose"
+            v-if="showClose && modelValue && modelValue[0]?.data"
             class="absolute right-0 top-0 flex h-4 w-4 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#e2e8f0]"
             @click="removeImgHandler(k)"
           >
@@ -167,7 +167,9 @@ const resetFiles = (event: Event) => {
           <template v-else>
             <Lucide icon="UploadCloud" width="48" class="mx-auto" />
             <span> {{ $t('edit-choose-file') }} </span>
-            <div class="ml-2">{{ $t('edit-welcome-upload-limit-text') }}</div>
+            <div class="ml-2">
+              {{ $t('edit-welcome-upload-limit-text', { size: limit }) }}
+            </div>
           </template>
         </div>
       </div>

@@ -1,6 +1,5 @@
+import { isEqual, set } from 'lodash'
 import { defineStore } from 'pinia'
-import { set } from 'lodash'
-import { isEqual } from 'lodash'
 import axios from '../../axios'
 
 interface IStateOriginData {
@@ -14,6 +13,11 @@ interface IStateOriginData {
   ig_page_access_token: string
   ig_page_id: string
   slack_webhook_url: string
+  custom_domain?: string | null
+  page_title?: string | null
+  page_desc?: string | null
+  page_keywords?: string | null
+  page_og_image?: string | null
 }
 interface IState {
   originData: IStateOriginData
