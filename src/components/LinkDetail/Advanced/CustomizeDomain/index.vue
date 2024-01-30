@@ -7,6 +7,7 @@ import {
   FormTextarea,
   Upload
 } from '../../../../base-components/Form'
+import LoadingIcon from '../../../../base-components/LoadingIcon'
 import useCustomizeDomain from '../../../../composables/LinkDetail/AdvancedSetting/CustomizeDomain/useCustomizeDomain'
 import MailSample from '../../../Modals/CustomizeDomain/MailSample.vue'
 import VerticalSteps from '../../../VerticalSteps'
@@ -23,6 +24,8 @@ const {
   preview,
   networkError,
   isCustomDomainEnable,
+  validing,
+  activating,
   validDomain,
   saveCustomDomain,
   enableCustomDomain
@@ -52,9 +55,9 @@ const descDoc = computed(() => {
     <div class="pl-12 pr-5 pt-5">
       <VerticalSteps>
         <VerticalSteps.Step :step="1" class="pb-9">
-          <b class="text-base">{{ t('custom-domain-step-1-title') }}</b>
+          <b class="text-sm">{{ t('custom-domain-step-1-title') }}</b>
           <div class="mt-5">
-            <span class="text-red-500">*</span>{{ t('custom-domain-name') }}
+            <span class="text-red-500">* </span>{{ t('custom-domain-name') }}
           </div>
           <FormInput
             v-model="custom_domain"
@@ -68,8 +71,10 @@ const descDoc = computed(() => {
           }}</span>
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="2" class="pb-9">
-          <b class="text-base">{{ t('custom-domain-step-2-title') }}</b>
-          <div class="mt-5">{{ t('custom-domain-step-2-dns-record') }}</div>
+          <b class="text-sm">{{ t('custom-domain-step-2-title') }}</b>
+          <div class="mb-2 mt-5">
+            {{ t('custom-domain-step-2-dns-record') }}
+          </div>
           <div class="rounded-lg border border-[#e2e8f0] p-3">
             <div>
               <span class="text-[#7b7b7b]">{{
@@ -87,7 +92,7 @@ const descDoc = computed(() => {
               <span class="text-[#7b7b7b]">{{
                 t('custom-domain-record-value')
               }}</span>
-              <span class="font-bold text-black">land.pageing.me</span>
+              <span class="font-bold text-black">landing.pinchat.me</span>
             </div>
           </div>
           <div class="my-2">{{ t('custom-domain-help-title') }}</div>
@@ -97,13 +102,16 @@ const descDoc = computed(() => {
               {{ t('custom-domain-help-see-desc-button') }}
             </button>
           </div>
-          <Button
-            class="py4 mt-5 border border-black px-5"
-            @click="validDomain"
-            >{{ t('custom-domain-check-domain') }}</Button
-          >
+          <Button class="py4 mt-5 border border-black px-5" @click="validDomain"
+            >{{ t('custom-domain-check-domain') }}
+            <LoadingIcon
+              v-if="validing"
+              icon="oval"
+              color="#00000050"
+              class="ml-2 h-4"
+          /></Button>
           <span
-            class="ml-2"
+            class="ml-3"
             :class="{ 'text-red-500': !isValid }"
             v-if="doValid"
             >{{
@@ -114,7 +122,7 @@ const descDoc = computed(() => {
           >
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="3" class="pb-9" is-final>
-          <b class="text-base">{{ t('custom-domain-step-3-title') }}</b>
+          <b class="text-sm">{{ t('custom-domain-step-3-title') }}</b>
           <div class="mt-2 text-desc_font">
             {{ t('custom-domain-step-3-desc') }}
           </div>
@@ -125,12 +133,22 @@ const descDoc = computed(() => {
             @click="enableCustomDomain"
             >{{ t('custom-domain-submit') }}</Button
           >
-          <span class="ml-2 text-red-500" v-if="networkError">{{
+          <span class="ml-3 text-red-500" v-if="networkError">{{
             networkError
           }}</span>
         </VerticalSteps.Step>
       </VerticalSteps>
     </div>
+    <Teleport to="body" v-if="activating">
+      <div
+        telport
+        class="fixed inset-0 z-50 flex items-center justify-center bg-[#00000040]"
+      >
+        <div class="w-8">
+          <LoadingIcon icon="oval" color="#00000050" />
+        </div>
+      </div>
+    </Teleport>
   </div>
   <div
     class="mt-2 rounded-lg bg-white dark:bg-darkmode-600"
