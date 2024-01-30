@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Button from '../../../../base-components/Button'
 import {
@@ -10,7 +10,7 @@ import {
 import useCustomizeDomain from '../../../../composables/LinkDetail/AdvancedSetting/CustomizeDomain/useCustomizeDomain'
 import MailSample from '../../../Modals/CustomizeDomain/MailSample.vue'
 import VerticalSteps from '../../../VerticalSteps'
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const {
   custom_domain,
   hostName,
@@ -28,6 +28,12 @@ const {
   enableCustomDomain
 } = useCustomizeDomain()
 const showMailSample = ref(false)
+const descDoc = computed(() => {
+  if (locale.value === 'zh-TW') {
+    return 'https://funtek.notion.site/Meta-Tags-fbd40e13c8aa403b82aba0dca7b274d6?pvs=4'
+  }
+  return 'https://funtek.notion.site/Custom-Domain-and-Meta-Tags-1867f4b9bbe041978f1e4e06e22ac868'
+})
 </script>
 
 <template>
@@ -39,12 +45,9 @@ const showMailSample = ref(false)
     </div>
     <div class="pl-8 pt-5 text-desc_font">
       {{ t('custom-domain-desc') }}
-      <a
-        class="text-primary"
-        href="https://funtek.notion.site/Custom-Domain-and-Meta-Tags-1867f4b9bbe041978f1e4e06e22ac868"
-        target="_blank"
-        >{{ t('custom-domain-go-tutorial') }}</a
-      >
+      <a class="text-primary" :href="descDoc" target="_blank">{{
+        t('custom-domain-go-tutorial')
+      }}</a>
     </div>
     <div class="pl-12 pr-5 pt-5">
       <VerticalSteps>
