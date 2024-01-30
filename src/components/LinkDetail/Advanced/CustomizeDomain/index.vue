@@ -60,6 +60,7 @@ const descDoc = computed(() => {
             v-model="custom_domain"
             type="text"
             class="mt-2"
+            placeholder="www.example.com"
             :class="{ 'rounded border border-red-500': wrongInput }"
           />
           <span v-if="wrongInput" class="text-xs text-red-500">{{
