@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import logoUrl from '../../assets/images/logo_dark_v6.png'
+import logoUrlM from '../../assets/images/logo_dark_v6_m.png'
 import TopBar from '../../components/TopBar'
 import Divider from './Divider.vue'
 import Menu from './Menu.vue'
@@ -74,10 +75,11 @@ onMounted(() => {
         >
           <img
             alt="Pinchat"
-            class="w-100"
+            class="w-100 hidden lg:block"
             style="max-width: 160px"
             :src="logoUrl"
           />
+          <img alt="Pinchat" class="lg:hidden" width="32" :src="logoUrlM" />
         </RouterLink>
         <Divider type="div" class="my-6"></Divider>
         <ul>
