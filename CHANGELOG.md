@@ -1,3 +1,11 @@
+## [1.34.4](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.34.3...v1.34.4) (2024-01-31)
+
+
+### Bug Fixes
+
+* [#16](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/16) ([3579e18](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/3579e18ab0ba60ffa02eaa139b5d5d14b577df9f))
+* title ([0cea211](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0cea211a9d7c27648f97db94ee45697f091e74c7))
+
 ## [1.34.3](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.34.2...v1.34.3) (2024-01-31)
 
 
