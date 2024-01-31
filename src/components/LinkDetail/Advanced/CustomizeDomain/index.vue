@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Button from '../../../../base-components/Button'
 import {
@@ -7,10 +7,11 @@ import {
   FormTextarea,
   Upload
 } from '../../../../base-components/Form'
+import LoadingIcon from '../../../../base-components/LoadingIcon'
 import useCustomizeDomain from '../../../../composables/LinkDetail/AdvancedSetting/CustomizeDomain/useCustomizeDomain'
 import MailSample from '../../../Modals/CustomizeDomain/MailSample.vue'
 import VerticalSteps from '../../../VerticalSteps'
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const {
   custom_domain,
   hostName,
@@ -23,11 +24,19 @@ const {
   preview,
   networkError,
   isCustomDomainEnable,
+  validing,
+  activating,
   validDomain,
   saveCustomDomain,
   enableCustomDomain
 } = useCustomizeDomain()
 const showMailSample = ref(false)
+const descDoc = computed(() => {
+  if (locale.value === 'zh-TW') {
+    return 'https://funtek.notion.site/Meta-Tags-fbd40e13c8aa403b82aba0dca7b274d6?pvs=4'
+  }
+  return 'https://funtek.notion.site/Custom-Domain-and-Meta-Tags-1867f4b9bbe041978f1e4e06e22ac868'
+})
 </script>
 
 <template>
@@ -39,24 +48,22 @@ const showMailSample = ref(false)
     </div>
     <div class="pl-8 pt-5 text-desc_font">
       {{ t('custom-domain-desc') }}
-      <a
-        class="text-primary"
-        href="https://funtek.notion.site/Custom-Domain-and-Meta-Tags-1867f4b9bbe041978f1e4e06e22ac868"
-        target="_blank"
-        >{{ t('custom-domain-go-tutorial') }}</a
-      >
+      <a class="text-primary" :href="descDoc" target="_blank">{{
+        t('custom-domain-go-tutorial')
+      }}</a>
     </div>
     <div class="pl-12 pr-5 pt-5">
       <VerticalSteps>
         <VerticalSteps.Step :step="1" class="pb-9">
-          <b class="text-base">{{ t('custom-domain-step-1-title') }}</b>
+          <b class="text-sm">{{ t('custom-domain-step-1-title') }}</b>
           <div class="mt-5">
-            <span class="text-red-500">*</span>{{ t('custom-domain-name') }}
+            <span class="text-red-500">* </span>{{ t('custom-domain-name') }}
           </div>
           <FormInput
             v-model="custom_domain"
             type="text"
             class="mt-2"
+            placeholder="www.example.com"
             :class="{ 'rounded border border-red-500': wrongInput }"
           />
           <span v-if="wrongInput" class="text-xs text-red-500">{{
@@ -64,8 +71,10 @@ const showMailSample = ref(false)
           }}</span>
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="2" class="pb-9">
-          <b class="text-base">{{ t('custom-domain-step-2-title') }}</b>
-          <div class="mt-5">{{ t('custom-domain-step-2-dns-record') }}</div>
+          <b class="text-sm">{{ t('custom-domain-step-2-title') }}</b>
+          <div class="mb-2 mt-5">
+            {{ t('custom-domain-step-2-dns-record') }}
+          </div>
           <div class="rounded-lg border border-[#e2e8f0] p-3">
             <div>
               <span class="text-[#7b7b7b]">{{
@@ -83,7 +92,7 @@ const showMailSample = ref(false)
               <span class="text-[#7b7b7b]">{{
                 t('custom-domain-record-value')
               }}</span>
-              <span class="font-bold text-black">land.pageing.me</span>
+              <span class="font-bold text-black">landing.pinchat.me</span>
             </div>
           </div>
           <div class="my-2">{{ t('custom-domain-help-title') }}</div>
@@ -93,13 +102,16 @@ const showMailSample = ref(false)
               {{ t('custom-domain-help-see-desc-button') }}
             </button>
           </div>
-          <Button
-            class="py4 mt-5 border border-black px-5"
-            @click="validDomain"
-            >{{ t('custom-domain-check-domain') }}</Button
-          >
+          <Button class="py4 mt-5 border border-black px-5" @click="validDomain"
+            >{{ t('custom-domain-check-domain') }}
+            <LoadingIcon
+              v-if="validing"
+              icon="oval"
+              color="#00000050"
+              class="ml-2 h-4"
+          /></Button>
           <span
-            class="ml-2"
+            class="ml-3"
             :class="{ 'text-red-500': !isValid }"
             v-if="doValid"
             >{{
@@ -110,7 +122,7 @@ const showMailSample = ref(false)
           >
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="3" class="pb-9" is-final>
-          <b class="text-base">{{ t('custom-domain-step-3-title') }}</b>
+          <b class="text-sm">{{ t('custom-domain-step-3-title') }}</b>
           <div class="mt-2 text-desc_font">
             {{ t('custom-domain-step-3-desc') }}
           </div>
@@ -121,12 +133,22 @@ const showMailSample = ref(false)
             @click="enableCustomDomain"
             >{{ t('custom-domain-submit') }}</Button
           >
-          <span class="ml-2 text-red-500" v-if="networkError">{{
+          <span class="ml-3 text-red-500" v-if="networkError">{{
             networkError
           }}</span>
         </VerticalSteps.Step>
       </VerticalSteps>
     </div>
+    <Teleport to="body" v-if="activating">
+      <div
+        telport
+        class="fixed inset-0 z-50 flex items-center justify-center bg-[#00000040]"
+      >
+        <div class="w-8">
+          <LoadingIcon icon="oval" color="#00000050" />
+        </div>
+      </div>
+    </Teleport>
   </div>
   <div
     class="mt-2 rounded-lg bg-white dark:bg-darkmode-600"

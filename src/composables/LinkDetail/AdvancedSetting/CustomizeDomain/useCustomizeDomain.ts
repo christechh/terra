@@ -15,6 +15,8 @@ export default function useCustomizeDomain() {
   const route = useRoute()
   const token = route.query.token as string
   const networkError = ref(null)
+  const validing = ref(false)
+  const activating = ref(false)
   onMounted(async () => {
     await store.fetchConfig(token)
     preview.value.push({
@@ -71,14 +73,19 @@ export default function useCustomizeDomain() {
 
   const hostName = computed(() => {
     if (!custom_domain.value) return ''
-    const domain = custom_domain.value
-    const url = new URL(
-      domain.startsWith('http') ? domain : `https://${domain}`
-    )
-    return url.hostname.split('.')[0]
+    try {
+      const domain = custom_domain.value
+      const url = new URL(
+        domain.startsWith('http') ? domain : `https://${domain}`
+      )
+      return url.hostname.split('.')[0]
+    } catch (e) {
+      return ''
+    }
   })
 
   const validDomain = async () => {
+    validing.value = true
     networkError.value = null
     wrongInput.value = false
     doValid.value = false
@@ -88,6 +95,7 @@ export default function useCustomizeDomain() {
       custom_domain.value.split('.').length < 3 ||
       !rex.test(custom_domain.value)
     ) {
+      validing.value = false
       return (wrongInput.value = true)
     }
     const res = await axios.post('/dashboard/enterpoint/check-domain-cname', {
@@ -95,6 +103,7 @@ export default function useCustomizeDomain() {
     })
     isValid.value = res.data.data.valid
     doValid.value = true
+    validing.value = false
   }
 
   const saveCustomDomain = async () => {
@@ -114,6 +123,7 @@ export default function useCustomizeDomain() {
 
   const enableCustomDomain = async () => {
     try {
+      activating.value = true
       await saveCustomDomain()
       isCustomDomainEnable.value = true
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -126,6 +136,8 @@ export default function useCustomizeDomain() {
       custom_domain.value = ''
       return (networkError.value =
         errorMap[e.response?.data.errorCode as keyof typeof errorMap] || e)
+    } finally {
+      activating.value = false
     }
   }
 
@@ -141,6 +153,8 @@ export default function useCustomizeDomain() {
     doValid,
     networkError,
     isCustomDomainEnable,
+    validing,
+    activating,
     validDomain,
     saveCustomDomain,
     enableCustomDomain
