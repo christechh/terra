@@ -72,19 +72,6 @@ const defaultQuery: IQuery = {
   lang: curLang,
   token: curLinkToken
 }
-const i18nWidth = (): string => {
-  switch (curLang) {
-    case 'zh-tw':
-    case 'zh-cn':
-    case 'kr':
-    case 'pt-br':
-    case 'ro':
-    case 'th':
-      return '6.3em'
-    default:
-      return 'auto'
-  }
-}
 
 getSubAccountList(defaultQuery)
 const targetKeys = ref<string[]>()
@@ -206,19 +193,15 @@ onMounted(() => {
         justify="space-between"
         align="middle"
       >
-        <a-col :span="8">
-          <h2>{{ $t('sub-account-title') }}</h2>
-        </a-col>
-        <a-col :offset="14" :span="2">
-          <Button
-            variant="primary"
-            :style="`width: ${i18nWidth()};`"
-            @click="handleFormSubmit"
-            :disabled="submitDisabled"
-          >
-            {{ $t('save-btn') }}
-          </Button>
-        </a-col>
+        <h2>{{ $t('sub-account-title') }}</h2>
+        <Button
+          variant="primary"
+          class="px-5 py-2"
+          @click="handleFormSubmit"
+          :disabled="submitDisabled"
+        >
+          {{ $t('save-btn') }}
+        </Button>
       </a-row>
 
       <a-row class="w-100 divider transfer-section p-5">
@@ -484,5 +467,23 @@ onMounted(() => {
 }
 .primary-text-color {
   color: #939393;
+}
+.ant-table-row-hover > td {
+  background: #d1edd5 !important;
+}
+.ant-table-row-selected > td {
+  background: #d8f0dc !important;
+}
+.ant-select-focused:where(.css-dev-only-do-not-override-u4kgz5).ant-select:not(
+    .ant-select-disabled
+  ):not(.ant-select-customize-input):not(.ant-pagination-size-changer)
+  .ant-select-selector {
+  border-color: #02b13f !important;
+}
+.ant-select:hover .ant-select-selector {
+  border-color: #02b13f !important;
+}
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: #d8f0dc !important;
 }
 </style>
