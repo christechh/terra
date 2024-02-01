@@ -1,3 +1,10 @@
+## [1.35.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.35.0...v1.35.1) (2024-02-01)
+
+
+### Bug Fixes
+
+* format ([b60707e](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/b60707ec77656943b6307260e5d7892a58ffd60e))
+
 # [1.35.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.34.5...v1.35.0) (2024-02-01)
 
 
