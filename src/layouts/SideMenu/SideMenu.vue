@@ -75,11 +75,11 @@ onMounted(() => {
         >
           <img
             alt="Pinchat"
-            class="w-100 hidden lg:block"
+            class="w-100 hidden xl:block"
             style="max-width: 160px"
             :src="logoUrl"
           />
-          <img alt="Pinchat" class="lg:hidden" width="32" :src="logoUrlM" />
+          <img alt="Pinchat" class="xl:hidden" width="32" :src="logoUrlM" />
         </RouterLink>
         <Divider type="div" class="my-6"></Divider>
         <ul>
