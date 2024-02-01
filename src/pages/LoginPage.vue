@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import illustrationUrl from '../assets/images/illustration.svg'
 import logoUrl from '../assets/images/logo.svg'
 import Button from '../base-components/Button'
@@ -19,12 +19,22 @@ const passwordType = ref('password')
 const isEyeOffVisible = ref(false)
 const isEyeVisible = ref(true)
 const { t } = useI18n()
+const isInputError = ref(false)
+const isLoging = ref(false)
 
 const doLogin = () => {
-  useUserStore().login({
-    account: account.value,
-    password: password.value
-  })
+  if (!account.value || !password.value) {
+    return (isInputError.value = true)
+  }
+  isLoging.value = true
+  useUserStore()
+    .login({
+      account: account.value,
+      password: password.value
+    })
+    .finally(() => {
+      isLoging.value = false
+    })
 }
 
 const eyeOpen = (status: boolean) => {
@@ -38,13 +48,16 @@ const eyeOpen = (status: boolean) => {
     passwordType.value = 'text'
   }
 }
+watch([account, password], () => {
+  isInputError.value = false
+})
 </script>
 
 <template>
   <div>
     <img :src="logoImg" alt="" class="mx-auto mb-[50px] mt-16 w-40" />
     <div
-      class="mx-auto w-full rounded-lg border p-5 text-xl sm:w-[66%] md:w-1/2 lg:w-[41%]"
+      class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
     >
       <div class="mb-7 text-center font-extrabold">
         {{ t('login-title') }}
@@ -56,6 +69,9 @@ const eyeOpen = (status: boolean) => {
           v-model="account"
           :placeholder="t('signup-login-placeholder-email')"
         />
+        <div v-if="isInputError && !account" class="mt-1 text-xs text-red-500">
+          {{ t('error-message7') }}
+        </div>
       </div>
       <div class="mb-5">
         <span class="mb-1 text-xs">{{ t('login-password-label') }}</span>
@@ -64,15 +80,25 @@ const eyeOpen = (status: boolean) => {
           v-model="password"
           :placeholder="t('signup-password-place-holder')"
         />
+        <div
+          v-if="isInputError && !password && account"
+          class="mt-1 text-xs text-red-500"
+        >
+          {{ t('error-message8') }}
+        </div>
       </div>
       <div class="mb-5 text-center">
         <button class="text-xs text-[#808080] underline">
           {{ t('login-forget-btn') }}
         </button>
       </div>
-      <Button variant="primary" class="mb-3 w-full text-sm" @click="doLogin">{{
-        t('login-btn')
-      }}</Button>
+      <Button
+        variant="primary"
+        class="mb-3 w-full text-sm"
+        @click="doLogin"
+        :loading="isLoging"
+        >{{ t('login-btn') }}</Button
+      >
       <div class="mb-5 text-center text-xs">
         <span>{{ t('login-no-sign-up-login-text') }}</span
         ><button class="text-[#808080] underline">
