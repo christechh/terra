@@ -1,3 +1,13 @@
+## [1.35.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.35.1...v1.35.2) (2024-02-01)
+
+
+### Bug Fixes
+
+* [#16](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/16)[#56771](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/56771) ([0b12c84](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0b12c844505658787c26431c72f8abdf6d793e5d))
+* [#17](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/17)[#56767](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/56767) ([cb273e2](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/cb273e28690e1a16df5b91727a2681988849db3f))
+* [#19](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/19)[#56773](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/56773) ([dd79d36](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/dd79d36756fae9f68198aa67aedaee89d59937de))
+* [#21](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/21)[#56783](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/56783) ([e1cfb75](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e1cfb756d60d5274d5304ae8f523239ef58d1a71))
+
 ## [1.35.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.35.0...v1.35.1) (2024-02-01)
 
 
