@@ -486,4 +486,22 @@ onMounted(() => {
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
   background: #d8f0dc !important;
 }
+:where(.css-dev-only-do-not-override-u4kgz5).ant-checkbox-wrapper:not(
+    .ant-checkbox-wrapper-disabled
+  ):hover
+  .ant-checkbox-inner,
+:where(.css-dev-only-do-not-override-u4kgz5).ant-checkbox:not(
+    .ant-checkbox-disabled
+  ):hover
+  .ant-checkbox-inner,
+:where(.css-dev-only-do-not-override-u4kgz5).ant-checkbox-wrapper:not(
+    .ant-checkbox-wrapper-disabled
+  ):hover
+  .ant-checkbox-checked:not(.ant-checkbox-disabled):after,
+.ant-radio-wrapper:hover
+  :where(.css-dev-only-do-not-override-u4kgz5).ant-radio-wrapper,
+:where(.css-dev-only-do-not-override-u4kgz5).ant-radio-wrapper:hover
+  .ant-radio-inner {
+  border-color: #02b13f;
+}
 </style>
