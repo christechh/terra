@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FormInput from '@/base-components/Form/FormInput.vue'
 import HeadShots from '@/components/HeadShots/HeadShots.vue'
-import { defineEmits, defineProps, ref, watch } from 'vue'
+import { computed, defineEmits, defineProps, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import axios from '../../axios'
@@ -27,6 +27,9 @@ const name = ref('')
 const token = ref<string>('')
 const avatarImageId = ref(5141)
 const domain = import.meta.env.VITE_DOMAIN
+const isTokenValid = computed(() => {
+  return !/\W/.test(token.value)
+})
 const imgObj: { [key: number]: string } = {
   5141: 'https://pinchatbeta.s3.ap-northeast-1.amazonaws.com/user/d1664a78247f2c0c3dc1ccd7af89b6ee.png',
   5142: 'https://pinchatbeta.s3.ap-northeast-1.amazonaws.com/user/11cb5d623d8021fb0ba389f3ff9b0318.png',
@@ -257,7 +260,7 @@ watch(
           "
         />
       </div>
-      <div class="flex flex-col gap-6 px-5 text-[14px]">
+      <div class="flex flex-col gap-6 text-[14px]">
         <template v-if="completed">
           <div class="desc">{{ $t('dashboard-create-room-success-desc') }}</div>
           <div
@@ -335,15 +338,16 @@ watch(
             <div
               class="mt-2 flex items-center rounded-md bg-[#f6f6f6] px-3 py-2 text-[#7b7b7b]"
             >
-              {{ domain }}/
+              <div>{{ domain }}/</div>
               <input
                 type="text"
-                class="border-transparent p-0 text-[14px] text-black focus:border-transparent focus:ring-0"
+                class="w-full flex-1 border-transparent p-0 text-[14px] text-black focus:border-transparent focus:ring-0"
+                maxlength="30"
                 v-model="token"
               />
             </div>
             <div
-              v-if="token.length < 5 || token.length > 30"
+              v-if="token.length < 5 || token.length > 30 || !isTokenValid"
               class="mt-1 text-xs text-[#ff4d4f]"
             >
               {{ $t('error-characters5to15') }}
