@@ -111,10 +111,12 @@ export default function useCustomizeDomain() {
       id: store.data.id,
       is_valid: true,
       custom_domain: custom_domain.value,
-      page_title: page_title.value,
-      page_desc: page_desc.value,
-      page_keywords: page_keywords.value,
-      page_og_image: preview.value[0]?.data
+      ...(isCustomDomainEnable.value && {
+        page_title: page_title.value,
+        page_desc: page_desc.value,
+        page_keywords: page_keywords.value,
+        page_og_image: preview.value[0]?.data
+      })
     }
     console.log(payload)
     const res = await axios.post('/dashboard/enterpoint', payload)
