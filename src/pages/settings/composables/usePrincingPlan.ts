@@ -21,10 +21,19 @@ export default function usePrincingPlan() {
     pinchat_tier3: 'plan-appsumo-tier-3',
     pinchat_tier4: 'plan-appsumo-tier-4',
     pinchat_tier5: 'plan-appsumo-tier-5',
+    pinchat_tier6: 'plan-appsumo-tier-6',
     starter_month: 'billing-starter',
     light_month: 'billing-light',
     standard2_month: 'billing-standard'
   }
+  const appSumoPlanUid: string[] = [
+    'pinchat_tier1',
+    'pinchat_tier2',
+    'pinchat_tier3',
+    'pinchat_tier4',
+    'pinchat_tier5',
+    'pinchat_tier6'
+  ]
   const isShowPlanContent = ref(true)
   const planContent = ref({
     common: [
@@ -76,6 +85,7 @@ export default function usePrincingPlan() {
     isShowUseCouponModal,
     planContent,
     planUidName,
+    appSumoPlanUid,
     princingPlan,
     mauPrecent,
     showMauOverAlert,

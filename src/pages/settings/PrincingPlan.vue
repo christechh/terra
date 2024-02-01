@@ -9,6 +9,7 @@ const {
   isShowPlanContent,
   planContent,
   planUidName,
+  appSumoPlanUid,
   princingPlan,
   mauPrecent,
   showMauOverAlert,
@@ -16,14 +17,6 @@ const {
   isShowPlanModal,
   getPrincingPlan
 } = usePrincingPlan()
-
-const hiddenCouponPlanUid = [
-  'pinchat_tier1',
-  'pinchat_tier2',
-  'pinchat_tier3',
-  'pinchat_tier4',
-  'pinchat_tier5'
-]
 
 onMounted(() => {
   getPrincingPlan()
@@ -69,7 +62,7 @@ onMounted(() => {
           </p>
         </div>
       </div>
-      <div class="mt-3">
+      <div v-if="appSumoPlanUid.includes(princingPlan.plan_uid)" class="mt-3">
         <div
           class="my-2 flex cursor-pointer items-center"
           @click="isShowPlanContent = !isShowPlanContent"
@@ -149,8 +142,8 @@ onMounted(() => {
       </div>
     </div>
     <div class="mt-1 rounded-b-xl bg-white p-5 dark:bg-darkmode-600">
-      <div class="flex flex-col items-center justify-center md:flex-row">
-        <div class="w-16 pt-5 text-center">{{ $t('mau-text') }}</div>
+      <div class="flex flex-col items-center md:flex-row">
+        <div class="w-16 pt-5">{{ $t('mau-text') }}</div>
         <div class="w-full pt-1 md:w-7/12">
           <div class="flex">
             <div id="mau-min" class="flex-1 text-left">0</div>
@@ -168,7 +161,7 @@ onMounted(() => {
             ></div>
           </div>
         </div>
-        <div class="py-5 text-xs md:ml-8" style="display: block">
+        <div class="pt-5 text-xs md:ml-8" style="display: block">
           {{ $t('mau-used') }}
           <span id="mau-used">{{ princingPlan.used_MAU }}</span>
           {{ $t('mau-text') }}
@@ -176,7 +169,7 @@ onMounted(() => {
       </div>
       <div
         v-if="showMauOverAlert"
-        class="mx-auto mt-5 flex w-fit items-center rounded-md bg-[#e3f2a4] p-2"
+        class="mt-5 flex w-fit items-center rounded-md bg-[#e3f2a4] p-2 md:ml-16"
       >
         <Lucide icon="Info" :size="20" class="mr-2 stroke-2" />
         <p>
@@ -192,7 +185,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <div v-if="hiddenCouponPlanUid.includes(princingPlan.plan_uid)" class="mt-6">
+  <div v-if="!appSumoPlanUid.includes(princingPlan.plan_uid)" class="mt-6">
     <div
       class="flex items-center justify-between rounded-t-xl bg-white p-4 dark:bg-darkmode-600"
     >

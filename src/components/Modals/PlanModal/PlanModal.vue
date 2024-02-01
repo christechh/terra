@@ -1,109 +1,18 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useI18n } from 'vue-i18n'
 import Button from '../../../base-components/Button'
 import Lucide from '../../../base-components/Lucide'
 import { Dialog } from '../../../base-components/Headless'
-import { usePrincingPlanStore } from '../../../stores/princingPlan'
-const princingPlanStore = usePrincingPlanStore()
-const { princingPlan } = storeToRefs(princingPlanStore)
+import usePlanModal from './composables/usePlanModal'
 
 const emit = defineEmits(['close'])
-
-const plans = [
-  {
-    price: 0,
-    plan_uid: 'free',
-    href: 'https://pinchat.me/contact',
-    version: 'pricing-addnew1',
-    description: 'pricing-plan12',
-    content: [
-      'pricing-plan14',
-      'pricing-plan15',
-      'pricing-plan16',
-      'pricing-plan17',
-      'pricing-plan18',
-      'pricing-plan1'
-    ]
-  },
-  {
-    price: 'pricing-addnew5',
-    plan_uid: 'starter_month',
-    version: 'pricing-plan10',
-    href: 'payment_upgrade?type=package750',
-    description: 'pricing-addnew6',
-    content: [
-      'pricing-plan14',
-      'paymnet_upgrade4',
-      'paymnet_upgrade5',
-      'paymnet_upgrade6',
-      'paymnet_upgrade7'
-    ]
-  },
-  {
-    price: 'pricing-addnew13',
-    plan_uid: 'light_month',
-    href: 'payment_upgrade?type=package1200',
-    version: 'pricing-addnew12',
-    description: 'pricing-addnew14',
-    content: ['pricing-plan14', 'pricing-addnew15', 'pricing-addnew16']
-  },
-  {
-    price: 'pricing-addnew18',
-    plan_uid: 'standard2_month',
-    href: 'payment_upgrade?type=package1800',
-    version: 'pricing-addnew17',
-    description: 'pricing-addnew19',
-    content: [
-      'pricing-plan14',
-      'pricing-addnew20',
-      'pricing-addnew21',
-      'custom-domain-title',
-      'pricing-addnew11'
-    ]
-  }
-]
-const customContent = [
-  'plan-list-rule-qrcode-desc2',
-  'plan-desc-5-1',
-  'pricing-plan39',
-  'pricing-plan40',
-  'pricing-plan41'
-]
-
-const planUid: string = princingPlan.value.plan_uid
-function planChoice(currentPlan: string) {
-  const { t } = useI18n()
-  if (currentPlan === planUid) return t('pricing-CTA98')
-  if (planUid === 'free') return t('pricing-addnew25')
-  return t('menu-label-1')
-}
-function getPlanUrl(currentPlan: string, url: string) {
-  if (currentPlan === planUid) return 'https://pinchat.me/contact'
-  if (planUid === 'free') return url
-  return 'https://pinchat.me/contact'
-}
-function showGreenBg(currentPlan: string) {
-  const planUids: string[] = [
-    'free',
-    'starter_month',
-    'light_month',
-    'standard2_month'
-  ]
-  if (
-    currentPlan === planUid ||
-    (!planUids.includes(planUid) && currentPlan === 'light_month')
-  )
-    return true
-  return false
-}
+const { plans, customContent, planUid, planChoice, getPlanUrl } = usePlanModal()
 </script>
 
 <template>
   <component :is="Dialog" :open="true" size="md">
     <component
       :is="Dialog.Panel"
-      class="!w-[calc(100vw_-_40px)] bg-[#f8f8f8] p-4 web:!w-[1440px]"
+      class="!w-[calc(100%_-_40px)] bg-[#f8f8f8] p-4 xl:!w-[1200px]"
     >
       <div class="m-3 flex justify-end">
         <Lucide
@@ -116,10 +25,10 @@ function showGreenBg(currentPlan: string) {
       <div
         class="mx-6 mt-10 flex flex-col items-center gap-8 pb-6 web:grid web:grid-cols-4"
       >
-        <div v-for="item in plans" :key="item.price">
+        <div v-for="(item, index) in plans" :key="item.price">
           <div
             :class="[
-              showGreenBg(item.plan_uid)
+              index === 2
                 ? 'origin-bottom bg-[#02b13f] shadow-2xl md:scale-y-105'
                 : 'bg-white',
               'my-6 h-[550px] w-full max-w-[330px] rounded-[30px] p-[30px]'
@@ -135,14 +44,11 @@ function showGreenBg(currentPlan: string) {
             </div>
 
             <div
-              :class="[
-                showGreenBg(item.plan_uid) ? 'text-white' : 'text-black',
-                'mb-[25px] '
-              ]"
+              :class="[index === 2 ? 'text-white' : 'text-black', 'mb-[25px] ']"
             >
               <span
                 :class="[
-                  showGreenBg(item.plan_uid) ? 'text-white' : 'text-[#2d3748]',
+                  index === 2 ? 'text-white' : 'text-[#2d3748]',
                   'text-[20px] font-black'
                 ]"
               >
@@ -150,7 +56,7 @@ function showGreenBg(currentPlan: string) {
               </span>
               <span
                 :class="[
-                  showGreenBg(item.plan_uid) ? 'text-white' : 'text-[#2d3748]',
+                  index === 2 ? 'text-white' : 'text-[#2d3748]',
                   'mx-1 text-[36px] font-black '
                 ]"
               >
@@ -158,7 +64,7 @@ function showGreenBg(currentPlan: string) {
               </span>
               <span
                 :class="[
-                  showGreenBg(item.plan_uid) ? 'text-white' : 'text-[#939393]',
+                  index === 2 ? 'text-white' : 'text-[#939393]',
                   'text-base font-black'
                 ]"
               >
@@ -167,7 +73,7 @@ function showGreenBg(currentPlan: string) {
             </div>
             <div
               :class="[
-                showGreenBg(item.plan_uid) ? 'text-white' : 'text-black',
+                index === 2 ? 'text-white' : 'text-black',
                 'mb-10 text-[28px] font-black'
               ]"
             >
@@ -175,7 +81,7 @@ function showGreenBg(currentPlan: string) {
             </div>
             <div
               :class="[
-                showGreenBg(item.plan_uid) ? 'text-white' : 'text-[#757575]',
+                index === 2 ? 'text-white' : 'text-[#757575]',
                 'mb-6 min-h-[83px] text-base font-semibold'
               ]"
             >
@@ -183,13 +89,13 @@ function showGreenBg(currentPlan: string) {
             </div>
             <a :href="getPlanUrl(item.plan_uid, item.href)" target="_blank">
               <Button
-                :variant="
-                  showGreenBg(item.plan_uid)
-                    ? 'outline-primary'
-                    : 'soft-primary'
-                "
+                :variant="index === 2 ? 'outline-primary' : 'soft-primary'"
                 :class="[
-                  showGreenBg(item.plan_uid) && 'bg-white hover:!bg-white',
+                  index === 2 && 'bg-white hover:!bg-white',
+                  item.plan_uid === planUid && 'bg-gray-500 text-gray-700',
+                  index === 2 &&
+                    item.plan_uid === planUid &&
+                    'bg-gray-300 text-gray-600 hover:!bg-gray-300',
                   'mb-5 w-full whitespace-nowrap px-5'
                 ]"
                 size="lg2"
@@ -200,9 +106,7 @@ function showGreenBg(currentPlan: string) {
             </a>
             <div>
               <div
-                :class="[
-                  showGreenBg(item.plan_uid) ? 'text-white' : 'text-[#959796]'
-                ]"
+                :class="[index === 2 ? 'text-white' : 'text-[#959796]']"
                 v-for="(data, idx) in item.content"
                 :key="`planContent${idx}`"
               >

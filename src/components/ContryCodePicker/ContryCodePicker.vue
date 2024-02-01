@@ -3,11 +3,13 @@ import countryCodes, { CountryProperty } from 'country-codes-list'
 import * as FlagIcon from 'country-flag-icons/string/3x2'
 import { computed, onBeforeUnmount, ref } from 'vue'
 import Lucide from '../../base-components/Lucide'
+import { twMerge } from 'tailwind-merge'
 
 interface Props {
   modelValue: string
   white?: boolean
   disabled?: boolean
+  class?: string
 }
 
 const props = defineProps<Props>()
@@ -59,13 +61,14 @@ const toggleMenu = () => {
   if (props.disabled) return
   isOpen.value = !isOpen.value
 }
+
+const computedClass = computed(() =>
+  twMerge([!props.white && 'dashboard-bg', props.class])
+)
 </script>
 
 <template>
-  <div
-    class="relative flex items-center"
-    :class="{ 'dashboard-bg': !props.white }"
-  >
+  <div class="relative flex items-center" :class="computedClass">
     <div class="flex cursor-pointer items-center" @click.stop="toggleMenu">
       <div v-html="selectedFlag" class="w-7 pl-2" />
       <Lucide icon="ChevronDown" width="12" class="ml-2" />
