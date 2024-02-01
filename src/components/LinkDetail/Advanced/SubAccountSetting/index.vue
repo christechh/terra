@@ -504,4 +504,7 @@ onMounted(() => {
   .ant-radio-inner {
   border-color: #02b13f;
 }
+:where(.css-dev-only-do-not-override-u4kgz5).ant-checkbox-checked:after {
+  border-color: #02b13f;
+}
 </style>
