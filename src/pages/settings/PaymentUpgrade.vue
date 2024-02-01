@@ -1,373 +1,37 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useDarkModeStore } from '../../stores/dark-mode'
-import { ref, onMounted, watch, computed, nextTick } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
+import { onMounted } from 'vue'
 import Lucide from '../../base-components/Lucide/Lucide.vue'
 import { FormCheck, InputGroup } from '../../base-components/Form'
-import usePaymentUpgrade from './composables/usePaymentUpgrade'
 import FormInput from '../../base-components/Form/FormInput.vue'
 import FormLabel from '../../base-components/Form/FormLabel.vue'
 import ContryCodePicker from '../../components/ContryCodePicker'
-import axios from '../../axios'
-import countryCodes, { CountryProperty } from 'country-codes-list'
-import { AxiosRequestConfig, AxiosResponse } from 'axios'
-
+import usePaymentUpgrade from './composables/usePaymentUpgrade'
+import { useI18n } from 'vue-i18n'
 const { locale } = useI18n()
-const { phoneCode, paymentInfo, cardInfo } = usePaymentUpgrade()
-const route = useRoute()
-const query = route.query
 
-// phone code
-const myCountryCodesObject = countryCodes.customList(
-  'countryCode' as CountryProperty,
-  '{countryNameEn}({countryNameLocal}) +{countryCallingCode}'
-)
-const countriesCodeList = Object.entries(myCountryCodesObject)
-  .map(([key, value]) => {
-    return {
-      country: key,
-      name: value,
-      phoneCode: `+${value.split('+')[1]}`
-    }
-  })
-  .sort((a, b) => a.name.localeCompare(b.name))
-const _initCountryCode = () => {
-  let activeLang = ''
-  switch (locale.value) {
-    case 'en-US':
-      activeLang = 'US'
-      break
+const {
+  phoneCode,
+  paymentInfo,
+  activePlan,
+  showDiscount,
+  discountPrice,
+  totalPrice,
+  isShowLinePayRadio,
+  tapPayKey,
+  errorMessage,
+  successDiscount,
+  disabledUseCouponBtn,
+  disabledSubmitBtn,
+  _initCountryCode,
+  _initShowLinePayRadio,
+  _initTapPaySDK,
+  _initActivePlan,
+  _verEmail,
+  resetCoupon,
+  _handleUseCoupon,
+  _handleSubmitToPay
+} = usePaymentUpgrade()
 
-    case 'ja-JP':
-      activeLang = 'JP'
-      break
-
-    case 'zh-TW':
-      activeLang = 'TW'
-      break
-  }
-
-  const findCountry = countriesCodeList.find(
-    (item) => item.country === activeLang
-  )
-  phoneCode.value = findCountry ? findCountry.phoneCode : ''
-}
-
-const darkModeStore = useDarkModeStore()
-const { darkModeValue } = storeToRefs(darkModeStore)
-const tapPayKey = ref(0)
-const resetTapPay = () => {
-  tapPayKey.value++
-  nextTick(() => {
-    _initTapPaySDK()
-  })
-}
-watch(darkModeValue, () => {
-  resetTapPay()
-})
-
-// pay sdk
-const _initTapPaySDK = () => {
-  const TAPPAY_APP_ID = Number(import.meta.env.VITE_TAPPAY_APP_ID)
-  const TAPPAY_APP_KEY = import.meta.env.VITE_TAPPAY_APP_KEY
-  TPDirect.setupSDK(TAPPAY_APP_ID, TAPPAY_APP_KEY, 'production')
-
-  const fields = {
-    number: {
-      element: '#card-number',
-      placeholder: '**** **** **** ****'
-    },
-    expirationDate: {
-      element: '#card-expiration-date',
-      placeholder: 'MM / YY'
-    },
-    ccv: {
-      element: '#card-ccv',
-      placeholder: '***'
-    }
-  }
-
-  TPDirect.card.setup({
-    fields,
-    styles: {
-      input: {
-        color: darkModeValue.value ? 'white' : '#2d3748',
-        'font-size': '14px',
-        'font-family': 'System UI'
-      },
-      '::placeholder': {
-        color: darkModeValue.value ? '#55637b' : 'rgba(0, 0, 0, 0.25)'
-      },
-      '.valid': {
-        color: darkModeValue.value ? 'white' : '#2d3748'
-      },
-      '.invalid': {
-        color: 'red',
-        border: '5px solid gray',
-        'border-color': 'red'
-      }
-    }
-  })
-
-  TPDirect.card.onUpdate(function (update) {
-    cardInfo.number = update.status.number || ''
-    cardInfo.expiry = update.status.expiry || ''
-    cardInfo.ccv = update.status.ccv || ''
-  })
-}
-
-// active plan
-type PlanType = {
-  type: string
-  plan_uid: string
-  price: string
-  version: string
-  description: string
-  content: string[]
-}
-const plans: PlanType[] = [
-  {
-    type: 'package750',
-    plan_uid: 'starter_month',
-    price: 'pricing-addnew5',
-    version: 'pricing-plan10',
-    description: 'pricing-addnew6',
-    content: [
-      'pricing-plan14',
-      'paymnet_upgrade4',
-      'paymnet_upgrade5',
-      'paymnet_upgrade6',
-      'paymnet_upgrade7'
-    ]
-  },
-  {
-    type: 'package1200',
-    plan_uid: 'light_month',
-    price: 'pricing-addnew13',
-    version: 'pricing-addnew12',
-    description: 'pricing-addnew14',
-    content: ['pricing-plan14', 'pricing-addnew15', 'pricing-addnew16']
-  },
-  {
-    type: 'package1800',
-    plan_uid: 'standard2_month',
-    price: 'pricing-addnew18',
-    version: 'pricing-addnew17',
-    description: 'pricing-addnew19',
-    content: [
-      'pricing-plan14',
-      'pricing-addnew20',
-      'pricing-addnew21',
-      'custom-domain-title',
-      'pricing-addnew11'
-    ]
-  }
-]
-const activePlan = ref<PlanType>({
-  type: '',
-  plan_uid: '',
-  price: '',
-  version: '',
-  description: '',
-  content: []
-})
-const _initActivePlan = () => {
-  const findPlan = plans.find((item) => item.type === query.type)
-  if (findPlan) activePlan.value = { ...findPlan }
-  paymentInfo.uid = activePlan.value.plan_uid ?? ''
-}
-
-// line pay radio
-const isShowLinePayRadio = ref(false)
-const _initShowLinePayRadio = () => {
-  const showLangList: string[] = ['zh-TW', 'ja', 'th']
-  if (showLangList.includes(locale.value)) {
-    isShowLinePayRadio.value = true
-  } else {
-    isShowLinePayRadio.value = false
-  }
-}
-
-// coupon
-const disabledUseCouponBtn = computed(() =>
-  paymentInfo.coupon_code ? false : true
-)
-
-const errorMessage = ref('')
-const successDiscount = ref({
-  discount_value: 0,
-  discount_type: ''
-})
-interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-  skipInterceptor?: boolean
-}
-
-type Error = {
-  response?: {
-    data?: {
-      message?: string
-    }
-  }
-}
-
-async function _handleUseCoupon(code: string) {
-  try {
-    errorMessage.value = ''
-    const { data } = await axios.get(`/coupon/checkAvailable/${code}`, {
-      skipInterceptor: true
-    } as CustomAxiosRequestConfig)
-    const { discount_value, discount_type } = data.data
-    successDiscount.value = { discount_value, discount_type }
-  } catch (error: unknown) {
-    // console.log(error)
-    errorMessage.value = (error as Error)!.response?.data?.message as string
-  }
-}
-
-const { t } = useI18n()
-
-const discountPrice = computed(() => {
-  const { discount_type, discount_value } = successDiscount.value
-  if (discount_type === 'percent')
-    return Number(t(activePlan.value.price ?? '')) * (discount_value / 100)
-  return discount_value || 0
-})
-
-const totalPrice = computed(() => {
-  const { discount_type, discount_value } = successDiscount.value
-  if (!discount_value) return t(activePlan.value.price ?? '')
-  if (discount_type === 'percent')
-    return Number(t(activePlan.value.price ?? '')) * (1 - discount_value / 100)
-  return Number(t(activePlan.value.price ?? '')) - discount_value
-})
-
-async function resetCoupon() {
-  paymentInfo.coupon_code = ''
-  errorMessage.value = ''
-  successDiscount.value = {
-    discount_value: 0,
-    discount_type: ''
-  }
-}
-
-watch(
-  () => paymentInfo.coupon_code,
-  () => {
-    successDiscount.value = {
-      discount_value: 0,
-      discount_type: ''
-    }
-  }
-)
-
-// verify email
-const _verEmail = (email: string) => {
-  const reg =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return reg.test(email)
-}
-
-// set disable submit button
-const disabledSubmitBtn = ref(true)
-const _handleDisabledSubmitBtn = () => {
-  const { payment_type } = paymentInfo
-  if (payment_type === 1) return _checkCardInfo()
-  _checkLinePayInfo()
-}
-const _checkCardInfo = () => {
-  const { name, phone, email } = paymentInfo
-  const { number, expiry, ccv } = cardInfo
-  if (
-    name &&
-    phone &&
-    _verEmail(email) &&
-    number === '' &&
-    expiry === '' &&
-    ccv === ''
-  ) {
-    _checkInvoiceInfo()
-  } else {
-    disabledSubmitBtn.value = true
-  }
-}
-const _checkLinePayInfo = () => {
-  const { name, phone, email } = paymentInfo
-  if (name && phone && _verEmail(email)) {
-    _checkInvoiceInfo()
-  } else {
-    disabledSubmitBtn.value = true
-  }
-}
-const _checkInvoiceInfo = () => {
-  const { invoice_type, invoice_title, uniform_invoice_numbers } = paymentInfo
-  // 二聯發票
-  if (invoice_type !== 1) return (disabledSubmitBtn.value = false)
-
-  // 三聯發票
-  if (invoice_title && uniform_invoice_numbers) {
-    disabledSubmitBtn.value = false
-  } else {
-    disabledSubmitBtn.value = true
-  }
-}
-watch(
-  [paymentInfo, cardInfo],
-  () => {
-    _handleDisabledSubmitBtn()
-  },
-  { deep: true }
-)
-
-interface payResponse extends AxiosResponse {
-  payment_url: string
-}
-
-// go to pay
-async function callAPI(prime: string) {
-  try {
-    paymentInfo.prime = prime
-    const response = await axios.post('/payment', paymentInfo)
-    TPDirect.redirect((response as payResponse)?.payment_url)
-    disabledSubmitBtn.value = false
-  } catch (err) {
-    // console.log(err)
-    disabledSubmitBtn.value = false
-  }
-}
-
-async function _handleSubmitToPay() {
-  const { payment_type } = paymentInfo
-  disabledSubmitBtn.value = true
-  try {
-    if (payment_type === 0) {
-      TPDirect.linePay.getPrime(function (result) {
-        callAPI(result.prime)
-      })
-    } else {
-      TPDirect.card.getPrime((result) => {
-        const tappayStatus = TPDirect.card.getTappayFieldsStatus()
-
-        // 確認是否可以 getPrime
-        if (tappayStatus.canGetPrime === false) {
-          // alert('can not get prime')
-          return
-        }
-        if (result.status !== 0) {
-          // alert('get prime error ' + result.msg)
-          return
-        }
-        // alert('get prime 成功，prime: ' + result.card.prime)
-        callAPI(result?.card?.prime)
-      })
-    }
-  } catch (error) {
-    // console.log('error', error)
-  }
-}
-
-// init
 onMounted(() => {
   _initCountryCode()
   _initShowLinePayRadio()
@@ -415,8 +79,8 @@ onMounted(() => {
           class="border-[rgba(0, 0, 0, 0.25)] my-8 w-full border-[0.5px] border-solid"
         ></div>
         <div
-          v-if="successDiscount.discount_value"
-          class="flex items-center justify-between text-base text-[#939393]"
+          v-if="showDiscount"
+          class="mt-2.5 flex items-center justify-between text-base text-[#939393]"
         >
           <p>{{ $t('paymnet_upgrade19-1') }}</p>
           <p>
@@ -426,8 +90,8 @@ onMounted(() => {
           </p>
         </div>
         <div
-          v-if="successDiscount.discount_value"
-          class="flex items-center justify-between text-base text-[#939393]"
+          v-if="showDiscount"
+          class="mt-2.5 flex items-center justify-between text-base text-[#939393]"
         >
           <p>{{ $t('paymnet_upgrade19-2') }}</p>
           <p>
@@ -436,7 +100,9 @@ onMounted(() => {
             <span>{{ discountPrice }}</span>
           </p>
         </div>
-        <div class="flex items-center justify-between text-xl text-[#02b13f]">
+        <div
+          class="mt-2.5 flex items-center justify-between text-xl text-[#02b13f]"
+        >
           <b>{{ $t('paymnet_upgrade19-3') }}</b>
           <b class="font-black">
             <span>{{ $t('pricing-plan251') }}</span>
@@ -479,12 +145,12 @@ onMounted(() => {
             </FormCheck.Label>
           </FormCheck>
         </div>
-        <div
-          class="rounded-[20px] bg-white p-4 shadow-xl dark:bg-darkmode-600 md:p-6 md:pl-10"
-        >
+        <div class="rounded-[20px] bg-white p-4 shadow-xl dark:bg-darkmode-600">
           <div class="md:flex">
             <div class="flex flex-1 p-4">
-              <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+              <FormLabel
+                class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+              >
                 {{ $t('payment-name') }}
               </FormLabel>
               <FormInput
@@ -494,24 +160,30 @@ onMounted(() => {
               />
             </div>
             <div class="flex flex-1 p-4">
-              <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+              <FormLabel
+                class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+              >
                 {{ $t('client-list-phone-number') }}
               </FormLabel>
               <InputGroup class="col-span-3">
-                <ContryCodePicker v-model="phoneCode" />
+                <ContryCodePicker
+                  v-model="phoneCode"
+                  :white="true"
+                  class="shadow-sm dark:bg-darkmode-800"
+                />
                 <FormInput
                   v-model="paymentInfo.phone"
                   :placeholder="$t('912 345 678')"
                   class="col-span-3"
-                  type="text"
                 />
               </InputGroup>
             </div>
           </div>
           <div class="flex p-4">
-            <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">{{
-              $t('payment-email')
-            }}</FormLabel>
+            <FormLabel
+              class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+              >{{ $t('payment-email') }}</FormLabel
+            >
             <FormInput
               v-model="paymentInfo.email"
               :placeholder="$t('paymnet_upgrade28')"
@@ -522,8 +194,13 @@ onMounted(() => {
             />
           </div>
 
-          <div v-show="paymentInfo.payment_type === 1" class="flex w-full p-4">
-            <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+          <div
+            v-show="paymentInfo.payment_type === 1"
+            class="flex w-full justify-center p-4"
+          >
+            <FormLabel
+              class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+            >
               {{ $t('paymnet_upgrade29') }}
             </FormLabel>
             <div
@@ -534,7 +211,9 @@ onMounted(() => {
           </div>
           <div class="md:flex" v-show="paymentInfo.payment_type === 1">
             <div class="flex flex-1 p-4">
-              <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+              <FormLabel
+                class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+              >
                 {{ $t('paymnet_upgrade30') }}
               </FormLabel>
               <div
@@ -544,7 +223,9 @@ onMounted(() => {
               ></div>
             </div>
             <div class="flex flex-1 p-4">
-              <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+              <FormLabel
+                class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+              >
                 {{ $t('paymnet_upgrade31') }}
               </FormLabel>
               <div
@@ -559,12 +240,12 @@ onMounted(() => {
       <!-- 使用折扣碼 -->
       <div class="mb-10">
         <div class="mb-2.5 text-xl">{{ $t('paymnet_upgrade46') }}</div>
-        <div
-          class="rounded-[20px] bg-white p-3 shadow-xl dark:bg-darkmode-600 md:pl-10"
-        >
-          <div class="flex w-full p-4 text-center">
-            <div class="relative m-2 flex w-full md:mr-8 md:w-[70%]">
-              <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+        <div class="rounded-[20px] bg-white p-4 shadow-xl dark:bg-darkmode-600">
+          <div class="flex w-full flex-wrap items-center p-4 md:flex-nowrap">
+            <div class="relative flex w-full md:mr-8 md:w-[50%]">
+              <FormLabel
+                class="mb-0 mt-2 flex-shrink-0 whitespace-nowrap pr-[15px] text-end md:w-[100px]"
+              >
                 {{ $t('paymnet_upgrade47') }}
               </FormLabel>
               <div class="relative h-fit w-full">
@@ -580,44 +261,63 @@ onMounted(() => {
                 />
                 <p
                   v-if="errorMessage"
-                  class="absolute ml-1 mt-1 text-[12px] text-red-500"
+                  class="absolute mt-1 text-[12px] text-red-500"
                 >
                   {{ errorMessage }}
                 </p>
-                <p
-                  v-if="successDiscount.discount_value"
-                  class="absolute ml-1 mt-1 text-[12px] text-primary"
-                >
-                  {{
-                    $t('paymnet_upgrade50', {
-                      x: successDiscount.discount_value
-                    })
-                  }}
-                  <span v-if="successDiscount.discount_type === 'percent'"
-                    >{{ $t('paymnet_upgrade51') + ')' }}
-                  </span>
-                  <span v-else>{{ $t('paymnet_upgrade52') + ')' }}</span>
-                </p>
                 <div
-                  v-show="!disabledUseCouponBtn"
+                  v-if="successDiscount.discount_value"
+                  class="absolute mt-1 text-[12px] text-primary"
+                >
+                  <p v-if="successDiscount.type === 'all_rules'">
+                    {{
+                      $t('paymnet_upgrade53', {
+                        x: successDiscount.discount_value
+                      })
+                    }}
+                  </p>
+                  <p v-else>
+                    <span v-if="showDiscount">
+                      {{
+                        $t('paymnet_upgrade50', {
+                          x: successDiscount.discount_value
+                        })
+                      }}
+                    </span>
+                    <span v-if="!showDiscount">
+                      {{
+                        $t('payment-free-trial', {
+                          x: successDiscount.discount_value
+                        }) + ')'
+                      }}
+                    </span>
+                    <span v-if="successDiscount.discount_type === 'percentage'"
+                      >{{ $t('paymnet_upgrade51') + ')' }}
+                    </span>
+                    <span v-if="successDiscount.discount_type === 'cash'"
+                      >{{ $t('paymnet_upgrade52') + ')' }}
+                    </span>
+                  </p>
+                </div>
+                <div
+                  v-show="paymentInfo.coupon_code"
                   class="absolute right-3 top-1/2 flex -translate-y-1/2"
                 >
                   <div
-                    class="flex h-4 w-4 cursor-pointer items-center justify-center rounded-full bg-[#bfbfbf] p-1 text-white"
+                    class="cursor-pointer rounded-full bg-[#bfbfbf] p-1 text-white"
                     @click="resetCoupon"
                   >
-                    x
+                    <Lucide icon="X" :size="9" class="stroke-[3]"></Lucide>
                   </div>
                   <Lucide
-                    v-if="successDiscount.discount_value"
+                    v-if="successDiscount.discount_type"
                     icon="Check"
                     :size="18"
-                    class="ml-2 text-primary"
+                    class="ml-2 stroke-[4] text-primary"
                   ></Lucide>
                 </div>
               </div>
             </div>
-
             <button
               @click="
                 () =>
@@ -626,10 +326,11 @@ onMounted(() => {
                     : _handleUseCoupon(paymentInfo.coupon_code)
               "
               :class="[
-                'm-2 mx-auto w-[100px] rounded-lg p-[12px_18px] font-semibold transition-all duration-300',
+                'mx-auto my-0 w-[100px] rounded-lg p-[10px_18px] font-semibold transition-all duration-300 md:m-0',
                 disabledUseCouponBtn
                   ? 'bg-[#eeeeee] text-[#898e99]'
-                  : 'bg-[#02813f] text-white'
+                  : 'bg-[#02b13f] text-white',
+                errorMessage || successDiscount.discount_type ? 'mt-8' : 'mt-4'
               ]"
             >
               {{ $t('paymnet_upgrade49') }}
@@ -682,8 +383,10 @@ onMounted(() => {
           v-if="paymentInfo.invoice_type === 1"
           class="bg rounded-[20px] bg-white p-3 shadow-xl dark:bg-darkmode-600 md:pl-10"
         >
-          <div class="flex w-full p-4">
-            <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+          <div class="flex w-full justify-center p-4">
+            <FormLabel
+              class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+            >
               {{ $t('paymnet_upgrade35') }}
             </FormLabel>
             <FormInput
@@ -692,8 +395,10 @@ onMounted(() => {
               class="col-span-3"
             />
           </div>
-          <div class="flex w-full p-4">
-            <FormLabel class="mb-0 mr-2 mt-2 flex-shrink-0 text-end">
+          <div class="flex w-full justify-center p-4">
+            <FormLabel
+              class="mb-0 mt-2 w-[100px] flex-shrink-0 pr-[15px] text-end"
+            >
               {{ $t('paymnet_upgrade37') }}
             </FormLabel>
             <FormInput
@@ -712,7 +417,7 @@ onMounted(() => {
             'w-full rounded-lg p-[12px_18px] font-semibold transition-all duration-300',
             disabledSubmitBtn
               ? 'bg-[#eeeeee] text-[#898e99]'
-              : 'bg-[#02813f] text-white hover:bg-[#028e81]'
+              : 'bg-[#02b13f] text-white hover:bg-[#028e81]'
           ]"
         >
           {{ $t('payment-check-out') }}
@@ -725,6 +430,7 @@ onMounted(() => {
           <span class="mr-1">{{ $t('paymnet_upgrade42') }}</span>
           <a
             href="https://pinchat.me/zh-tw/terms"
+            target="_blank"
             class="cursor-pointer underline hover:text-[#02b13f]"
           >
             {{ $t('paymnet_upgrade421') }}

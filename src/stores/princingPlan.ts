@@ -29,8 +29,6 @@ export const usePrincingPlanStore = defineStore('princingPlan', {
     async getPrincingPlan() {
       try {
         const response = await axios.get('auth/setting')
-        // console.log(response)
-
         const {
           plan_uid,
           plan_payment_at,
