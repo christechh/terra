@@ -1,3 +1,10 @@
+# [1.35.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.34.5...v1.35.0) (2024-02-01)
+
+
+### Features
+
+* account page update ([7af76a4](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7af76a4c57e488a451d575ca9c7df9938c267372))
+
 ## [1.34.5](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.34.4...v1.34.5) (2024-01-31)
 
 
