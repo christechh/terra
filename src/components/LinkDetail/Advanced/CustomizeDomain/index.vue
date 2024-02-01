@@ -55,7 +55,9 @@ const descDoc = computed(() => {
     <div class="pl-12 pr-5 pt-5">
       <VerticalSteps>
         <VerticalSteps.Step :step="1" class="pb-9">
-          <b class="text-sm">{{ t('custom-domain-step-1-title') }}</b>
+          <b class="block pt-[2px] text-sm">{{
+            t('custom-domain-step-1-title')
+          }}</b>
           <div class="mt-5">
             <span class="text-red-500">* </span>{{ t('custom-domain-name') }}
           </div>
@@ -71,7 +73,9 @@ const descDoc = computed(() => {
           }}</span>
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="2" class="pb-9">
-          <b class="text-sm">{{ t('custom-domain-step-2-title') }}</b>
+          <b class="block pt-[2px] text-sm">{{
+            t('custom-domain-step-2-title')
+          }}</b>
           <div class="mb-2 mt-5">
             {{ t('custom-domain-step-2-dns-record') }}
           </div>
@@ -122,7 +126,9 @@ const descDoc = computed(() => {
           >
         </VerticalSteps.Step>
         <VerticalSteps.Step :step="3" class="pb-9" is-final>
-          <b class="text-sm">{{ t('custom-domain-step-3-title') }}</b>
+          <b class="block pt-[2px] text-sm">{{
+            t('custom-domain-step-3-title')
+          }}</b>
           <div class="mt-2 text-desc_font">
             {{ t('custom-domain-step-3-desc') }}
           </div>
