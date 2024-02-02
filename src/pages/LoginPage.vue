@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import logoUrl from '../assets/images/logo.svg'
+import { ref, watch } from 'vue'
 import illustrationUrl from '../assets/images/illustration.svg'
-import { FormInput } from '../base-components/Form'
+import logoUrl from '../assets/images/logo.svg'
 import Button from '../base-components/Button'
+import { FormInput } from '../base-components/Form'
 
 import CommonModal from '../components/Modals/CommonModal'
 import RedirectTo from '../components/RedirectTo'
 
+import { useI18n } from 'vue-i18n'
+import logoImg from '../assets/images/logo_dark_v6.png'
 import Lucide from '../base-components/Lucide'
 import { useUserStore } from '../stores/user'
 
@@ -16,12 +18,23 @@ const password = ref('')
 const passwordType = ref('password')
 const isEyeOffVisible = ref(false)
 const isEyeVisible = ref(true)
+const { t } = useI18n()
+const isInputError = ref(false)
+const isLoging = ref(false)
 
 const doLogin = () => {
-  useUserStore().login({
-    account: account.value,
-    password: password.value
-  })
+  if (!account.value || !password.value) {
+    return (isInputError.value = true)
+  }
+  isLoging.value = true
+  useUserStore()
+    .login({
+      account: account.value,
+      password: password.value
+    })
+    .finally(() => {
+      isLoging.value = false
+    })
 }
 
 const eyeOpen = (status: boolean) => {
@@ -35,11 +48,86 @@ const eyeOpen = (status: boolean) => {
     passwordType.value = 'text'
   }
 }
+watch([account, password], () => {
+  isInputError.value = false
+})
 </script>
 
 <template>
+  <div>
+    <img :src="logoImg" alt="" class="mx-auto mb-[50px] mt-16 w-40" />
+    <div
+      class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
+    >
+      <div class="mb-7 text-center font-extrabold">
+        {{ t('login-title') }}
+      </div>
+      <div class="mb-3">
+        <span class="mb-1 text-xs">{{ t('login-email-label') }}</span>
+        <FormInput
+          class="rounded-lg border"
+          v-model="account"
+          type="text"
+          :placeholder="t('signup-login-placeholder-email')"
+        />
+        <div v-if="isInputError && !account" class="mt-1 text-xs text-red-500">
+          {{ t('error-message7') }}
+        </div>
+      </div>
+      <div class="mb-5">
+        <span class="mb-1 text-xs">{{ t('login-password-label') }}</span>
+        <FormInput
+          class="rounded-lg border"
+          v-model="password"
+          type="password"
+          :placeholder="t('signup-password-place-holder')"
+        />
+        <div
+          v-if="isInputError && !password && account"
+          class="mt-1 text-xs text-red-500"
+        >
+          {{ t('error-message8') }}
+        </div>
+      </div>
+      <div class="mb-5 text-center">
+        <button class="text-xs text-[#808080] underline">
+          {{ t('login-forget-btn') }}
+        </button>
+      </div>
+      <Button
+        variant="primary"
+        class="mb-3 w-full text-sm"
+        @click="doLogin"
+        :loading="isLoging"
+        >{{ t('login-btn') }}</Button
+      >
+      <div class="mb-5 text-center text-xs">
+        <span>{{ t('login-no-sign-up-login-text') }}</span
+        ><button class="text-[#808080] underline">
+          {{ t('login-sign-up-btn') }}
+        </button>
+      </div>
+      <div class="my-5 flex items-center justify-center">
+        <hr class="flex-1" />
+        <span class="px-1 text-sm">{{ t('or') }}</span>
+        <hr class="flex-1" />
+      </div>
+      <div class="flex flex-col gap-3">
+        <Button class="w-full border border-black text-sm font-semibold">{{
+          t('signup-apple-btn-title')
+        }}</Button>
+        <Button class="w-full border border-black text-sm font-semibold">{{
+          t('signup-google-btn-title')
+        }}</Button>
+        <Button class="w-full border border-black text-sm font-semibold">{{
+          t('signup-facebook-btn-title')
+        }}</Button>
+      </div>
+    </div>
+  </div>
   <div
     :class="[
+      'hidden',
       'relative -m-3 h-screen bg-primary p-3 dark:bg-darkmode-800 sm:-mx-8 sm:px-8 lg:overflow-hidden xl:bg-white xl:dark:bg-darkmode-600',
       'before:absolute before:inset-y-0 before:left-0 before:-mb-[16%] before:-ml-[13%] before:-mt-[28%] before:hidden before:w-[57%] before:rotate-[-4.5deg] before:transform before:rounded-[100%] before:bg-primary/20 before:content-[\'\'] before:dark:bg-darkmode-400 before:xl:block',
       'after:absolute after:inset-y-0 after:left-0 after:-mb-[13%] after:-ml-[13%] after:-mt-[20%] after:hidden after:w-[57%] after:rotate-[-4.5deg] after:transform after:rounded-[100%] after:bg-primary after:content-[\'\'] after:dark:bg-darkmode-700 after:xl:block'
