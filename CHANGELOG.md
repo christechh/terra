@@ -1,3 +1,18 @@
+# [1.36.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.35.2...v1.36.0) (2024-02-02)
+
+
+### Bug Fixes
+
+* [#19](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/19) border color ([e9966db](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e9966db5442b364ff5e04c48aede36a852ab4322))
+* [#21](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/21)[#56811](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/56811) ([a52f2e0](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a52f2e01da0320bcb4d19dc34ad2065961aa44c7))
+* add input type ([38926fc](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/38926fc9e539bf2d680a655f853445e324dafd21))
+
+
+### Features
+
+* add error handler ([e7f60ea](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/e7f60ea68ef6b0a4bd2522e8f713cb6c0d388365))
+* init ([ceedf3b](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/ceedf3b247f0149a57775e1cb0a4d8bb41ce2b33))
+
 ## [1.35.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.35.1...v1.35.2) (2024-02-01)
 
 
