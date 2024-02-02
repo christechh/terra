@@ -67,6 +67,7 @@ watch([account, password], () => {
         <FormInput
           class="rounded-lg border"
           v-model="account"
+          type="text"
           :placeholder="t('signup-login-placeholder-email')"
         />
         <div v-if="isInputError && !account" class="mt-1 text-xs text-red-500">
@@ -78,6 +79,7 @@ watch([account, password], () => {
         <FormInput
           class="rounded-lg border"
           v-model="password"
+          type="password"
           :placeholder="t('signup-password-place-holder')"
         />
         <div
