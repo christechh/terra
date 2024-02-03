@@ -26,9 +26,11 @@ const {
   isCustomDomainEnable,
   validing,
   activating,
+  metaSaving,
+  eableTime,
   validDomain,
-  saveCustomDomain,
-  enableCustomDomain
+  enableCustomDomain,
+  saveMetadata
 } = useCustomizeDomain()
 const showMailSample = ref(false)
 const descDoc = computed(() => {
@@ -37,6 +39,7 @@ const descDoc = computed(() => {
   }
   return 'https://funtek.notion.site/Custom-Domain-and-Meta-Tags-1867f4b9bbe041978f1e4e06e22ac868'
 })
+const isChange = ref(false)
 </script>
 
 <template>
@@ -139,6 +142,10 @@ const descDoc = computed(() => {
             @click="enableCustomDomain"
             >{{ t('custom-domain-submit') }}</Button
           >
+          <span class="ml-2" v-if="isCustomDomainEnable"
+            >{{ isCustomDomainEnable && eableTime }}
+            {{ t('custom-domain-submit-message-enable') }}</span
+          >
           <span class="ml-3 text-red-500" v-if="networkError">{{
             networkError
           }}</span>
@@ -164,17 +171,21 @@ const descDoc = computed(() => {
       class="flex items-center justify-between border-b p-5 text-base font-bold"
     >
       {{ t('custom-domain-meta-title') }}
-      <Button variant="primary" @click="saveCustomDomain">{{
-        t('save-btn')
-      }}</Button>
+      <Button
+        variant="primary"
+        @click="saveMetadata"
+        :loading="metaSaving"
+        :disabled="!isChange"
+        >{{ t('save-btn') }}</Button
+      >
     </div>
     <div class="gap-3 pl-12 pr-5 pt-5 lg:flex">
       <div class="flex-1">
         <VerticalSteps>
           <VerticalSteps.Step :step="1" class="pb-9">
-            <b class="text-base">{{ t('custom-domain-meta-step1-title') }}</b>
+            <b class="text-sm">{{ t('custom-domain-meta-step1-title') }}</b>
             <div class="mt-5">
-              <span class="text-red-500">*</span
+              <span class="text-red-500">* </span
               >{{ t('custom-domain-meta-og-title-title') }}
             </div>
             <FormInput
@@ -182,10 +193,11 @@ const descDoc = computed(() => {
               class="mt-2"
               :placeholder="t('custom-domain-meta-og-title-placeholder')"
               v-model="page_title"
+              @input="isChange = true"
             />
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2" class="pb-9">
-            <b class="text-base">{{ t('custom-domain-meta-step2-title') }}</b>
+            <b class="text-sm">{{ t('custom-domain-meta-step2-title') }}</b>
             <div class="mt-5">
               <span class="text-red-500">*</span>
               {{ t('custom-domain-meta-og-description-title') }}
@@ -194,6 +206,7 @@ const descDoc = computed(() => {
               class="mt-2"
               :placeholder="t('custom-domain-meta-og-description-placeholder')"
               v-model="page_desc"
+              @input="isChange = true"
             />
             <div class="mt-5">
               {{ t('custom-domain-meta-og-keys-title') }}
@@ -202,11 +215,12 @@ const descDoc = computed(() => {
                 class="mt-2"
                 :placeholder="t('custom-domain-meta-og-keys-placeholder')"
                 v-model="page_keywords"
+                @input="isChange = true"
               />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="3" is-final>
-            <b class="text-base">{{ t('custom-domain-meta-step3-title') }}</b>
+            <b class="text-sm">{{ t('custom-domain-meta-step3-title') }}</b>
             <div class="mt-5 flex items-center gap-2">
               <Upload
                 :limit="5"
@@ -220,7 +234,7 @@ const descDoc = computed(() => {
         </VerticalSteps>
       </div>
       <div class="flex-1 lg:border-l lg:pl-8">
-        <b class="text-base">{{ t('chatbot-preview-btn') }}</b>
+        <b class="text-sm">{{ t('chatbot-preview-btn') }}</b>
         <div class="mt-5 rounded-xl border p-5">
           <div
             class="flex min-h-[235px] items-center justify-center border p-5"
@@ -234,10 +248,12 @@ const descDoc = computed(() => {
             <span v-else>{{ t('custom-domain-meta-step3-title') }}</span>
           </div>
           <div class="mt-5 text-base font-bold">
-            {{ t('custom-domain-meta-preview-og-title-text') }}
+            {{ page_title || t('custom-domain-meta-preview-og-title-text') }}
           </div>
           <div class="my-2 text-sm">
-            {{ t('custom-domain-meta-preview-og-description-text') }}
+            {{
+              page_desc || t('custom-domain-meta-preview-og-description-text')
+            }}
           </div>
           <div class="text-desc_font">test0118.four.tw</div>
         </div>
