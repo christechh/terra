@@ -92,15 +92,15 @@ const beforeSetChatLogoSize = (event: Event) => {
 </script>
 
 <template>
-  <main class="mt-2 rounded rounded-lg bg-white dark:bg-darkmode-600">
+  <main class="mt-2 rounded rounded-xl bg-white dark:bg-darkmode-600">
     <header
       class="flex items-center justify-between border-b border-[#EDF2F7] p-5 text-base"
     >
-      <span>
+      <span class="font-bold">
         {{ $t('edit-welcome-pinboard-setting') }}
       </span>
       <button
-        class="rounded-lg bg-primary px-5 py-2 text-sm text-white"
+        class="h-[40px] min-w-[75px] rounded-lg bg-primary px-5 py-2 text-sm text-white"
         @click="save"
       >
         {{ $t('save-btn') }}
