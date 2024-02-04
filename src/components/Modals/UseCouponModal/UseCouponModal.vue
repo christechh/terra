@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import Button from '../../../base-components/Button'
 import { FormInput } from '../../../base-components/Form'
 import { Dialog } from '../../../base-components/Headless'
@@ -30,14 +30,20 @@ async function checkCouponCode() {
     await axios.get(`/coupon/checkAvailable/${couponCode.value}`, {
       skipInterceptor: true
     } as CustomAxiosRequestConfig)
-    await axios.get(`/coupon/directlyRedeem/${couponCode.value}`, {
+    await axios.post(`/coupon/directlyRedeem/${couponCode.value}`, {}, {
       skipInterceptor: true
     } as CustomAxiosRequestConfig)
+    window.alert('Success')
+    emit('close')
     await getPrincingPlan()
   } catch (error: unknown) {
     errorMessage.value = (error as Error)!.response?.data?.message as string
   }
 }
+
+watch(couponCode, () => {
+  errorMessage.value = ''
+})
 </script>
 
 <template>
@@ -67,7 +73,7 @@ async function checkCouponCode() {
             class="absolute right-3 top-1/2 flex h-4 w-4 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#bfbfbf] p-1 text-white"
             @click="(couponCode = ''), (errorMessage = '')"
           >
-            x
+            <Lucide icon="X" :size="9" class="stroke-[3]"></Lucide>
           </div>
         </div>
         <p v-if="errorMessage" class="ml-1 mt-1 text-[12px] text-red-500">
@@ -92,4 +98,3 @@ async function checkCouponCode() {
     </component>
   </component>
 </template>
-./useUseCoupon

@@ -19,6 +19,7 @@ const {
   isShowLinePayRadio,
   tapPayKey,
   errorMessage,
+  paymentErrorMsg,
   successDiscount,
   disabledUseCouponBtn,
   disabledSubmitBtn,
@@ -78,6 +79,7 @@ onMounted(() => {
         <div
           class="border-[rgba(0, 0, 0, 0.25)] my-8 w-full border-[0.5px] border-solid"
         ></div>
+        <!-- 小計 -->
         <div
           v-if="showDiscount"
           class="mt-2.5 flex items-center justify-between text-base text-[#939393]"
@@ -89,6 +91,7 @@ onMounted(() => {
             <span>{{ $t('pricing-plan253') }}</span>
           </p>
         </div>
+        <!-- 折扣 -->
         <div
           v-if="showDiscount"
           class="mt-2.5 flex items-center justify-between text-base text-[#939393]"
@@ -100,6 +103,7 @@ onMounted(() => {
             <span>{{ discountPrice }}</span>
           </p>
         </div>
+        <!-- 總計 -->
         <div
           class="mt-2.5 flex items-center justify-between text-xl text-[#02b13f]"
         >
@@ -273,7 +277,7 @@ onMounted(() => {
                     {{
                       $t('paymnet_upgrade53', {
                         x: successDiscount.discount_value
-                      })
+                      }) + ')'
                     }}
                   </p>
                   <p v-else>
@@ -285,10 +289,13 @@ onMounted(() => {
                       }}
                     </span>
                     <span v-if="!showDiscount">
+                      {{ $t('paymnet_upgrade57') }}
                       {{
+                        '(' +
                         $t('payment-free-trial', {
                           x: successDiscount.discount_value
-                        }) + ')'
+                        }) +
+                        ')'
                       }}
                     </span>
                     <span v-if="successDiscount.discount_type === 'percentage'"
@@ -372,7 +379,7 @@ onMounted(() => {
         <!-- 二聯式 -->
         <p v-if="paymentInfo.invoice_type === 0">
           <span class="mr-2 text-[#939393]">{{ $t('paymnet_upgrade39') }}</span>
-          <a href="https://pinchat.me/contact">
+          <a href="https://pinchat.me/contact" target="_blank">
             <span class="text-[#02b13f]">
               {{ $t('paymnet_upgrade391') }}
             </span>
@@ -381,7 +388,7 @@ onMounted(() => {
         <!-- 三聯式 -->
         <div
           v-if="paymentInfo.invoice_type === 1"
-          class="bg rounded-[20px] bg-white p-3 shadow-xl dark:bg-darkmode-600 md:pl-10"
+          class="rounded-[20px] bg-white p-4 shadow-xl dark:bg-darkmode-600"
         >
           <div class="flex w-full justify-center p-4">
             <FormLabel
@@ -410,7 +417,7 @@ onMounted(() => {
         </div>
       </div>
       <!-- 確認付款 -->
-      <div class="mb-5">
+      <div :class="['relative', paymentErrorMsg ? 'mb-10' : 'mb-5']">
         <button
           @click="() => (disabledSubmitBtn ? {} : _handleSubmitToPay())"
           :class="[
@@ -422,6 +429,12 @@ onMounted(() => {
         >
           {{ $t('payment-check-out') }}
         </button>
+        <p
+          v-if="paymentErrorMsg"
+          class="absolute mt-1 text-[12px] text-red-500"
+        >
+          {{ paymentErrorMsg }}
+        </p>
       </div>
       <!-- 注意事項 -->
       <ul class="list-inside list-disc text-xs leading-5 text-[#939393]">

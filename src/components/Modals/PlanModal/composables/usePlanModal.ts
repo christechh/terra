@@ -1,10 +1,10 @@
 import { useI18n } from 'vue-i18n'
-import { storeToRefs } from 'pinia'
-import { usePrincingPlanStore } from '../../../../stores/princingPlan'
+// import { storeToRefs } from 'pinia'
+// import { usePrincingPlanStore } from '../../../../stores/princingPlan'
 
 export default function usePlanModal() {
-  const princingPlanStore = usePrincingPlanStore()
-  const { princingPlan } = storeToRefs(princingPlanStore)
+  // const princingPlanStore = usePrincingPlanStore()
+  // const { princingPlan } = storeToRefs(princingPlanStore)
 
   const plans = [
     {
@@ -67,7 +67,8 @@ export default function usePlanModal() {
     'pricing-plan41'
   ]
 
-  const planUid: string = princingPlan.value.plan_uid
+  // const planUid: string = princingPlan.value.plan_uid
+  const planUid: string = 'light_month'
 
   function planChoice(currentPlan: string) {
     const { t } = useI18n()
