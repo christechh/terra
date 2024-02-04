@@ -952,6 +952,7 @@
   "paymnet_upgrade51": "%",
   "paymnet_upgrade52": "",
   "paymnet_upgrade53": "割引コードが適用されました（フル機能を体験 {x} 日",
+  "paymnet_upgrade57": "割引コードが適用されました ",
   "Invalid redeem code": "割引コードが見つかりません",
   "The discount code has reached its maximum usage limit": "割引コードは使用限度額に達しています",
   "The redeem code has exceeded the user's available usage limit": "割引コードの使用回数が、1ユーザーあたりの上限回数を超えた場合",

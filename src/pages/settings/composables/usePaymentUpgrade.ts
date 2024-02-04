@@ -376,17 +376,24 @@ export default function usePaymentUpgrade() {
   )
 
   // go to pay
+  const paymentErrorMsg = ref('')
   async function callAPI(prime: string) {
     try {
       paymentInfo.prime = prime
       const phone = `${phoneCode.value}${paymentInfo.phone}`
       const reqData = { ...paymentInfo, phone }
       const response = await axios.post('/payment', reqData)
+      if (response.data.status == 10008) {
+        paymentErrorMsg.value = response.data.bank_result_msg
+        return
+      }
       TPDirect.redirect(response?.data.payment_url)
       disabledSubmitBtn.value = false
+      paymentErrorMsg.value = ''
     } catch (err) {
       // console.log(err)
       disabledSubmitBtn.value = false
+      paymentErrorMsg.value = 'payment error'
     }
   }
 
@@ -430,6 +437,7 @@ export default function usePaymentUpgrade() {
     isShowLinePayRadio,
     tapPayKey,
     errorMessage,
+    paymentErrorMsg,
     successDiscount,
     disabledUseCouponBtn,
     disabledSubmitBtn,

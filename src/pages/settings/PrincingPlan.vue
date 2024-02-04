@@ -10,6 +10,7 @@ const {
   planContent,
   planUidName,
   appSumoPlanUid,
+  planTierFeaturesTitle,
   princingPlan,
   mauPrecent,
   showMauOverAlert,
@@ -32,7 +33,7 @@ onMounted(() => {
         <b class="text-base">{{ $t('pricing-plan') }}</b>
       </div>
       <button
-        class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary px-5 text-base font-bold text-primary"
+        class="flex h-[40px] items-center justify-center gap-2 rounded-lg border border-primary px-5 font-bold text-primary"
         @click="isShowPlanModal = true"
       >
         {{ $t('setting-change-plan') }}
@@ -55,9 +56,9 @@ onMounted(() => {
         <div class="mt-2 flex-1">
           <b>{{ $t('setting-plan-end-date') }}</b>
           <p class="pt-2 text-sm text-[#718096]">
-            <span v-if="princingPlan.plan_end_at === 'Invalid date'">{{
-              $t('plan-list-free-unlimited')
-            }}</span>
+            <span v-if="princingPlan.plan_end_at === 'Invalid date'">
+              {{ $t('plan-list-free-unlimited') }}
+            </span>
             <span v-else>{{ princingPlan.plan_end_at }}</span>
           </p>
         </div>
@@ -85,7 +86,7 @@ onMounted(() => {
           <div
             class="auto-rows-[minmax(min-content, max-content)] grid grid-cols-[1fr] gap-1.5 md:grid-cols-[1/3]"
           >
-            <b class="w-full md:col-span-3">{{
+            <b class="w-full md:col-span-2">{{
               $t('plan-detail-features-included-all-plans')
             }}</b>
             <div v-for="item in planContent.common" :key="item">
@@ -98,7 +99,15 @@ onMounted(() => {
           <div
             class="auto-rows-[minmax(min-content, max-content)] mt-5 grid grid-cols-[1fr] gap-1.5 md:ml-10 md:mt-0"
           >
-            <b class="w-full">{{ $t('plan-tier-5-features') }}</b>
+            <b
+              v-if="
+                princingPlan.plan_uid &&
+                princingPlan.plan_uid.includes('pinchat_tier')
+              "
+              class="w-full"
+            >
+              {{ $t(planTierFeaturesTitle[princingPlan.plan_uid]) }}
+            </b>
             <div
               v-for="(item, index) in planContent.appSumo"
               :key="`feat${index}`"
@@ -211,7 +220,9 @@ onMounted(() => {
         <div>
           <p class="mb-2 font-bold">{{ $t('payment-discount-item') }}</p>
           <p>
-            {{ $t('paymnet_upgrade53', { x: princingPlan.discount_value }) }}
+            {{
+              $t('paymnet_upgrade53', { x: princingPlan.discount_value }) + ')'
+            }}
           </p>
         </div>
       </div>

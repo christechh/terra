@@ -952,6 +952,7 @@
   "paymnet_upgrade51": "% off",
   "paymnet_upgrade52": "discount",
   "paymnet_upgrade53": "Redeem code has been applied（Explore all features for {x} days",
+  "paymnet_upgrade57": "Redeem code has been applied ",
   "Invalid redeem code": "Invalid redeem code",
   "The discount code has reached its maximum usage limit": "The redeem code has reached the limit of use",
   "The redeem code has exceeded the user's available usage limit": "You have reached the limit of using this redeem code",

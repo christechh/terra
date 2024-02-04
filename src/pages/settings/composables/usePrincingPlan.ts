@@ -35,6 +35,14 @@ export default function usePrincingPlan() {
     'pinchat_tier6'
   ]
   const isShowPlanContent = ref(true)
+  const planTierFeaturesTitle: { [key: string]: string } = {
+    pinchat_tier1: 'plan-tier-1-features',
+    pinchat_tier2: 'plan-tier-2-features',
+    pinchat_tier3: 'plan-tier-3-features',
+    pinchat_tier4: 'plan-tier-4-features',
+    pinchat_tier5: 'plan-tier-5-features',
+    pinchat_tier6: 'plan-tier-6-features'
+  }
   const planContent = ref({
     common: [
       'plan-detail-set-chat-type',
@@ -86,6 +94,7 @@ export default function usePrincingPlan() {
     planContent,
     planUidName,
     appSumoPlanUid,
+    planTierFeaturesTitle,
     princingPlan,
     mauPrecent,
     showMauOverAlert,

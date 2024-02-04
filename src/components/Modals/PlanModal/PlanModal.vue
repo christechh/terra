@@ -91,11 +91,13 @@ const { plans, customContent, planUid, planChoice, getPlanUrl } = usePlanModal()
               <Button
                 :variant="index === 2 ? 'outline-primary' : 'soft-primary'"
                 :class="[
-                  index === 2 && 'bg-white hover:!bg-white',
-                  item.plan_uid === planUid && 'bg-gray-500 text-gray-700',
+                  index === 2 &&
+                    '!bg-white text-primary hover:!bg-white disabled:!opacity-100',
+                  item.plan_uid === planUid &&
+                    'bg-gray-500 disabled:text-[#2D374B]',
                   index === 2 &&
                     item.plan_uid === planUid &&
-                    'bg-gray-300 text-gray-600 hover:!bg-gray-300',
+                    'disabled:text-opacity-50',
                   'mb-5 w-full whitespace-nowrap px-5'
                 ]"
                 size="lg2"
