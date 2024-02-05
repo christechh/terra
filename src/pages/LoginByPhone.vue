@@ -29,7 +29,7 @@ const {
         {{ t('login-phone-title') }}
       </div>
       <div class="mb-3">
-        <span class="mb-1 text-xs">{{ t('sub-account-table-phone') }}</span>
+        <span class="mb-1 text-sm">{{ t('sub-account-table-phone') }}</span>
         <div class="flex items-center rounded-lg border bg-dashboard_bg">
           <ContryCodePicker v-model="phoneCode" show-code />
           <FormInput
@@ -39,12 +39,12 @@ const {
             placeholder="912345678"
           />
         </div>
-        <div v-if="isInputError && !phone" class="mt-1 text-xs text-red-500">
+        <div v-if="isInputError && !phone" class="mt-1 text-sm text-red-500">
           {{ t('error-message9') }}
         </div>
       </div>
-      <div class="mb-5">
-        <span class="mb-1 text-xs">{{ t('login-password-label') }}</span>
+      <div>
+        <span class="mb-1 text-sm">{{ t('login-password-label') }}</span>
         <FormInput
           class="rounded-lg border"
           v-model="password"
@@ -59,11 +59,11 @@ const {
       >
         {{ t('error-message8') }}
       </div>
-      <div v-if="apiError" class="mt-1 text-xs text-red-500">
+      <div v-if="apiError && !isInputError" class="mt-1 text-xs text-red-500">
         {{ apiError }}
       </div>
       <div class="mb-5 text-center">
-        <button class="text-xs text-[#808080] underline">
+        <button class="text-sm text-[#808080] underline">
           {{ t('login-forget-btn') }}
         </button>
       </div>
@@ -74,7 +74,7 @@ const {
         :loading="isLoging"
         >{{ t('login-btn') }}</Button
       >
-      <div class="mb-5 text-center text-xs">
+      <div class="mb-5 text-center text-sm">
         <span>{{ t('login-no-sign-up-login-text') }}</span
         ><button class="text-[#808080] underline">
           {{ t('login-sign-up-btn') }}
