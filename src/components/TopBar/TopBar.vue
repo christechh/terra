@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import Lucide from '../../base-components/Lucide'
+import { TransitionRoot } from '@headlessui/vue'
+import _ from 'lodash'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import headPickUrl from '../../assets/images/logo.png'
 import Breadcrumb from '../../base-components/Breadcrumb'
 import { Menu } from '../../base-components/Headless'
-import fakerData from '../../utils/faker'
-import _ from 'lodash'
-import { TransitionRoot } from '@headlessui/vue'
-import headPickUrl from '../../assets/images/logo.png'
+import Lucide from '../../base-components/Lucide'
 import { useUserStore } from '../../stores/user'
-import { useRoute } from 'vue-router'
-const account = computed(() => useUserStore().email)
+import fakerData from '../../utils/faker'
+const account = computed(() => useUserStore().account)
 const route = useRoute()
 const searchDropdown = ref(false)
 const doLogout = () => {

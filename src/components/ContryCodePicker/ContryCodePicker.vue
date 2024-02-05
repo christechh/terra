@@ -72,7 +72,7 @@ const computedClass = computed(() =>
   <div class="relative flex items-center" :class="computedClass">
     <div class="flex cursor-pointer items-center" @click.stop="toggleMenu">
       <div v-html="selectedFlag" class="w-7 pl-2" />
-      <span class="ml-2 text-xs" v-if="props.showCode">{{ modelValue }}</span>
+      <span class="ml-2 text-sm" v-if="props.showCode">{{ modelValue }}</span>
       <Lucide icon="ChevronDown" width="12" class="ml-2" />
     </div>
 
@@ -84,7 +84,7 @@ const computedClass = computed(() =>
         v-for="country in countriesCodeList"
         :id="country.country"
         :key="country.country"
-        class="flex cursor-pointer items-center p-2 hover:bg-slate-100 dark:hover:bg-darkmode-600"
+        class="flex cursor-pointer items-center p-2 text-sm hover:bg-slate-100 dark:hover:bg-darkmode-600"
         @click="selectHandler(country)"
       >
         <div class="mr-2 w-5" v-html="country.flag"></div>
