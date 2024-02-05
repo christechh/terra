@@ -3,20 +3,24 @@ import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import axios from '../../../../axios'
 import { useEnterpointsConfigStore } from '../../../../stores/enterpoint/config'
+import { useNotificationsStore } from '../../../../stores/notifications'
 
 export default function useCustomizeDomain() {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
   const store = useEnterpointsConfigStore()
   const isValid = ref(false)
   const wrongInput = ref(false)
   const doValid = ref(false)
   const preview = ref<{ name: string; data: string }[]>([])
-  const isCustomDomainEnable = ref(false)
   const route = useRoute()
   const token = route.query.token as string
+  const isCustomDomainEnable = ref(
+    !!localStorage.getItem('custom-domain-valid-ts' + token)
+  )
   const networkError = ref(null)
   const validing = ref(false)
   const activating = ref(false)
+  const metaSaving = ref(false)
   onMounted(async () => {
     await store.fetchConfig(token)
     preview.value.push({
@@ -84,6 +88,17 @@ export default function useCustomizeDomain() {
     }
   })
 
+  const eableTime = computed(() => {
+    const d = localStorage.getItem('custom-domain-valid-ts' + token)
+    const ts = new Date(parseInt(d as string))
+    const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const str = ts.toLocaleString(locale.value, {
+      hour12: false,
+      timeZone: browserTimeZone
+    })
+    return str
+  })
+
   const validDomain = async () => {
     validing.value = true
     networkError.value = null
@@ -120,7 +135,7 @@ export default function useCustomizeDomain() {
     }
     console.log(payload)
     const res = await axios.post('/dashboard/enterpoint', payload)
-    store.data.custom_domain = res.data.data.domain
+    store.data.custom_domain = res.data.data.data.custom_domain
   }
 
   const enableCustomDomain = async () => {
@@ -128,6 +143,10 @@ export default function useCustomizeDomain() {
       activating.value = true
       await saveCustomDomain()
       isCustomDomainEnable.value = true
+      localStorage.setItem(
+        'custom-domain-valid-ts' + token,
+        new Date().getTime().toString()
+      )
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       doValid.value = false
@@ -140,6 +159,19 @@ export default function useCustomizeDomain() {
         errorMap[e.response?.data.errorCode as keyof typeof errorMap] || e)
     } finally {
       activating.value = false
+    }
+  }
+
+  const saveMetadata = async () => {
+    try {
+      metaSaving.value = true
+      await saveCustomDomain()
+      metaSaving.value = false
+      useNotificationsStore().showSaveSuccess()
+    } catch (e) {
+      console.log(e)
+    } finally {
+      metaSaving.value = false
     }
   }
 
@@ -157,8 +189,11 @@ export default function useCustomizeDomain() {
     isCustomDomainEnable,
     validing,
     activating,
+    metaSaving,
+    eableTime,
     validDomain,
     saveCustomDomain,
+    saveMetadata,
     enableCustomDomain
   }
 }

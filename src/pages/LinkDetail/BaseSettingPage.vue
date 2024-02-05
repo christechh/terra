@@ -26,25 +26,31 @@ const tabContent = computed(() => {
     <Breadcrumb.Link>{{ routeTitle }}</Breadcrumb.Link>
   </Breadcrumb>
   <header
-    class="mt-6 flex items-center rounded-lg bg-white px-4 py-2 dark:bg-darkmode-600"
+    class="mt-6 flex items-center rounded-xl bg-white px-4 py-2 dark:bg-darkmode-600"
   >
     <nav
       class="mx-2 mt-2 cursor-pointer pb-2"
-      :class="{ 'border-b-2 border-primary font-bold': currentTab === 0 }"
+      :class="{
+        'border-b-[3px] border-primary text-primary': currentTab === 0
+      }"
       @click="currentTab = 0"
     >
       {{ $t('connent-info') }}
     </nav>
     <nav
       class="ml-12 mr-2 mt-2 cursor-pointer pb-2"
-      :class="{ 'border-b-2 border-primary font-bold': currentTab === 1 }"
+      :class="{
+        'border-b-[3px] border-primary text-primary': currentTab === 1
+      }"
       @click="currentTab = 1"
     >
       {{ $t('menu-features-pinpage') }}
     </nav>
     <nav
       class="ml-12 mr-2 mt-2 cursor-pointer pb-2"
-      :class="{ 'border-b-2 border-primary font-bold': currentTab === 2 }"
+      :class="{
+        'border-b-[3px] border-primary text-primary': currentTab === 2
+      }"
       @click="currentTab = 2"
     >
       {{ $t('edit-chat-room-title') }}

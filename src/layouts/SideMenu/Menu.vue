@@ -31,7 +31,7 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState
           props.menu.active && props.level != 'first',
         'text-black dark:text-slate-400':
           !props.menu.active && props.level != 'first',
-        'z-10 bg-slate-100 dark:bg-darkmode-700':
+        'z-10 bg-dashboard_bg dark:bg-darkmode-700':
           props.menu.active && props.level == 'first',
         'before:absolute before:right-0 before:top-0 before:-mr-5 before:-mt-[30px] before:h-[30px] before:w-[30px] before:rotate-90 before:scale-[1.04] before:bg-menu-corner before:bg-[length:100%] before:content-[\'\'] dark:before:bg-menu-corner-dark':
           props.menu.active && props.level == 'first',

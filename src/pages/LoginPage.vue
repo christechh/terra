@@ -21,16 +21,22 @@ const isEyeVisible = ref(true)
 const { t } = useI18n()
 const isInputError = ref(false)
 const isLoging = ref(false)
+const apiError = ref('')
+const isAndroid = ref(navigator.userAgent.toLowerCase().indexOf('android') > -1)
 
 const doLogin = () => {
   if (!account.value || !password.value) {
     return (isInputError.value = true)
   }
+  apiError.value = ''
   isLoging.value = true
   useUserStore()
     .login({
       account: account.value,
       password: password.value
+    })
+    .catch((e) => {
+      apiError.value = e.response.data.message
     })
     .finally(() => {
       isLoging.value = false
@@ -81,12 +87,16 @@ watch([account, password], () => {
           v-model="password"
           type="password"
           :placeholder="t('signup-password-place-holder')"
+          @keyup.enter="doLogin"
         />
         <div
           v-if="isInputError && !password && account"
           class="mt-1 text-xs text-red-500"
         >
           {{ t('error-message8') }}
+        </div>
+        <div v-if="apiError" class="mt-1 text-xs text-red-500">
+          {{ apiError }}
         </div>
       </div>
       <div class="mb-5 text-center">
@@ -113,14 +123,22 @@ watch([account, password], () => {
         <hr class="flex-1" />
       </div>
       <div class="flex flex-col gap-3">
-        <Button class="w-full border border-black text-sm font-semibold">{{
-          t('signup-apple-btn-title')
-        }}</Button>
+        <Button
+          v-if="!isAndroid"
+          class="w-full border border-black text-sm font-semibold"
+          >{{ t('signup-apple-btn-title') }}</Button
+        >
         <Button class="w-full border border-black text-sm font-semibold">{{
           t('signup-google-btn-title')
         }}</Button>
         <Button class="w-full border border-black text-sm font-semibold">{{
           t('signup-facebook-btn-title')
+        }}</Button>
+        <Button class="w-full border border-black text-sm font-semibold">{{
+          t('login-phone-btn-title')
+        }}</Button>
+        <Button class="w-full border border-black text-sm font-semibold">{{
+          t('sub-account-login-title')
         }}</Button>
       </div>
     </div>
