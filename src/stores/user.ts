@@ -19,10 +19,10 @@ export const useUserStore = defineStore('user', {
     },
     async loginByPhone(credentials: { phone: string; password: string }) {
       const resp = await axios.post('/auth/phone/login', credentials)
-      this.email = resp.data.data.data.account
+      this.email = ''
       this.token = resp.data.data.data.access_token
       localStorage.setItem('token', this.token)
-      localStorage.setItem('email', resp.data.data.data.account)
+      localStorage.setItem('email', '')
       useRedirectToStore().redirect({ path: '/dashboard' })
     },
     async fetchSetting() {
