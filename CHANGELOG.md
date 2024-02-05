@@ -1,3 +1,10 @@
+# [1.37.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.36.2...v1.37.0) (2024-02-05)
+
+
+### Features
+
+* login by phone ([062a89e](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/062a89e5f35e3372e5cab990152dd626ccc2c395))
+
 ## [1.36.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.36.1...v1.36.2) (2024-02-05)
 
 
