@@ -1,3 +1,14 @@
+## [1.36.2](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.36.1...v1.36.2) (2024-02-05)
+
+
+### Bug Fixes
+
+* [#19](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/19)#note_56862 ([177c812](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/177c8127277296c954d4569a155697b29b689d28)), closes [#note_56862](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/note_56862)
+* [#21](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/21)#note_56861 ([893f4e0](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/893f4e023bd164ce685dac7c26ac9bd0dcfd3dfd)), closes [#note_56861](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/note_56861)
+* [#24](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/24) ([69b91e4](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/69b91e4a55f5906d77b4087354ec781a61e175dd))
+* [#25](https://codebase.funtek.io/pinchat/pinchat_dashboard/issues/25) ([72b3a96](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/72b3a96a5211237f97817d0f8197a6e5d47a7321))
+* loginPage ([5b925cf](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/5b925cff0784f109b986d5aa9d361586e4550fa7))
+
 ## [1.36.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.36.0...v1.36.1) (2024-02-04)
 
 
