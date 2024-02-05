@@ -56,24 +56,13 @@ const { subAccount, password, isLoging, isInputError, apiError, doLogin } =
       <div v-if="apiError" class="mt-1 text-xs text-red-500">
         {{ apiError }}
       </div>
-      <div class="mb-5 text-center">
-        <button class="text-sm text-[#808080] underline">
-          {{ t('login-forget-btn') }}
-        </button>
-      </div>
       <Button
         variant="primary"
-        class="mb-3 w-full text-sm"
+        class="mb-3 mt-10 w-full text-sm"
         @click="doLogin"
         :loading="isLoging"
         >{{ t('login-btn') }}</Button
       >
-      <div class="mb-5 text-center text-sm">
-        <span>{{ t('login-no-sign-up-login-text') }}</span
-        ><button class="text-[#808080] underline">
-          {{ t('login-sign-up-btn') }}
-        </button>
-      </div>
     </div>
   </div>
 </template>
