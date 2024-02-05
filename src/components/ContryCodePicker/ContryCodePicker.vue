@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import countryCodes, { CountryProperty } from 'country-codes-list'
 import * as FlagIcon from 'country-flag-icons/string/3x2'
+import { twMerge } from 'tailwind-merge'
 import { computed, onBeforeUnmount, ref } from 'vue'
 import Lucide from '../../base-components/Lucide'
-import { twMerge } from 'tailwind-merge'
 
 interface Props {
   modelValue: string
   white?: boolean
   disabled?: boolean
   class?: string
+  showCode?: boolean
 }
 
 const props = defineProps<Props>()
@@ -71,6 +72,7 @@ const computedClass = computed(() =>
   <div class="relative flex items-center" :class="computedClass">
     <div class="flex cursor-pointer items-center" @click.stop="toggleMenu">
       <div v-html="selectedFlag" class="w-7 pl-2" />
+      <span class="ml-2 text-xs" v-if="props.showCode">{{ modelValue }}</span>
       <Lucide icon="ChevronDown" width="12" class="ml-2" />
     </div>
 
