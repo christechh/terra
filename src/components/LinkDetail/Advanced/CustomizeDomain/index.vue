@@ -28,6 +28,7 @@ const {
   activating,
   metaSaving,
   eableTime,
+  isChange,
   validDomain,
   enableCustomDomain,
   saveMetadata
@@ -39,7 +40,6 @@ const descDoc = computed(() => {
   }
   return 'https://funtek.notion.site/Custom-Domain-and-Meta-Tags-1867f4b9bbe041978f1e4e06e22ac868'
 })
-const isChange = ref(false)
 </script>
 
 <template>
@@ -138,11 +138,11 @@ const isChange = ref(false)
           <Button
             variant="primary"
             class="mt-5"
-            :disabled="!isValid"
+            :disabled="!isValid || isCustomDomainEnable"
             @click="enableCustomDomain"
             >{{ t('custom-domain-submit') }}</Button
           >
-          <span class="ml-2" v-if="isCustomDomainEnable"
+          <span class="ml-3" v-if="isCustomDomainEnable"
             >{{ isCustomDomainEnable && eableTime }}
             {{ t('custom-domain-submit-message-enable') }}</span
           >
@@ -176,6 +176,7 @@ const isChange = ref(false)
         @click="saveMetadata"
         :loading="metaSaving"
         :disabled="!isChange"
+        class="text-sm"
         >{{ t('save-btn') }}</Button
       >
     </div>

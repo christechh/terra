@@ -26,7 +26,7 @@ const tabContent = computed(() => {
     <Breadcrumb.Link>{{ routeTitle }}</Breadcrumb.Link>
   </Breadcrumb>
   <header
-    class="mt-6 flex items-center rounded-xl bg-white px-4 py-2 dark:bg-darkmode-600"
+    class="mt-6 flex items-center rounded-xl bg-white px-4 pb-3 pt-2 dark:bg-darkmode-600"
   >
     <nav
       class="mx-2 mt-2 cursor-pointer pb-2"
