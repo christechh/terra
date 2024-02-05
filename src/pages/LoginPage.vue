@@ -125,21 +125,52 @@ watch([account, password], () => {
       <div class="flex flex-col gap-3">
         <Button
           v-if="!isAndroid"
-          class="w-full border border-black text-sm font-semibold"
-          >{{ t('signup-apple-btn-title') }}</Button
+          class="relative w-full border border-black text-sm font-semibold"
         >
-        <Button class="w-full border border-black text-sm font-semibold">{{
-          t('signup-google-btn-title')
-        }}</Button>
-        <Button class="w-full border border-black text-sm font-semibold">{{
-          t('signup-facebook-btn-title')
-        }}</Button>
-        <Button class="w-full border border-black text-sm font-semibold">{{
-          t('login-phone-btn-title')
-        }}</Button>
-        <Button class="w-full border border-black text-sm font-semibold">{{
-          t('sub-account-login-title')
-        }}</Button>
+          <img
+            class="absolute left-3"
+            src="../assets/images/apple_logo.svg"
+            alt=""
+          />
+          {{ t('signup-apple-btn-title') }}</Button
+        >
+        <Button
+          class="relative w-full border border-black text-sm font-semibold"
+        >
+          <img
+            class="absolute left-3"
+            src="../assets/images/google_logo.svg"
+            alt=""
+          />{{ t('signup-google-btn-title') }}</Button
+        >
+        <Button
+          class="relative w-full border border-black text-sm font-semibold"
+        >
+          <img
+            class="absolute left-3"
+            src="../assets/images/facebook_logo.svg"
+            alt=""
+          />{{ t('signup-facebook-btn-title') }}</Button
+        >
+        <Button
+          class="relative w-full border border-black text-sm font-semibold"
+          @click="$router.push({ name: 'loginByPhone' })"
+        >
+          <img
+            class="absolute left-3"
+            src="../assets/images/phone.svg"
+            alt=""
+          />{{ t('login-phone-btn-title') }}</Button
+        >
+        <Button
+          class="relative w-full border border-black text-sm font-semibold"
+        >
+          <img
+            class="absolute left-3"
+            src="../assets/images/sub-account-login.svg"
+            alt=""
+          />{{ t('sub-account-login-title') }}</Button
+        >
       </div>
     </div>
   </div>

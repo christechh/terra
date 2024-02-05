@@ -3,6 +3,7 @@ import i18n from '../i18n'
 import SideMenu from '../layouts/SideMenu/SideMenu.vue'
 import LandingPage from '../pages/LandingPage.vue'
 import LinksPage from '../pages/LinksPage.vue'
+import LoginByPhonePage from '../pages/LoginByPhone.vue'
 import LoginPage from '../pages/LoginPage.vue'
 const routes = [
   {
@@ -106,6 +107,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginPage
+  },
+  {
+    path: '/login_by_phone',
+    name: 'loginByPhone',
+    component: LoginByPhonePage
   }
 ]
 
@@ -119,7 +125,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   if (to.name === 'landing-page') return
-  if (to.name === 'login') return
+  if (to.name === 'login' || to.name === 'loginByPhone') return
   if (to.name === 'settings-payment-upgrade') {
     to.meta.noLayout = true
   }
