@@ -38,7 +38,8 @@ instance.interceptors.response.use(
     }
     if (
       error?.response?.status === 403 &&
-      error.config.url !== '/chat/sub/login'
+      error.config.url !== '/chat/sub/login' &&
+      error.config.url !== '/auth/phone/login'
     ) {
       useRedirectToStore().redirect({ path: '/login' })
     } else if (error.config.url === '/dashboard/enterpoint') {
