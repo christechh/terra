@@ -48,6 +48,7 @@ export default function usePinBoard() {
   const withoutSeoNoIndex = ref(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const welcomeLinkSetting = ref<any[]>([])
+  const isChange = ref(false)
   const chatroomActionSetting = reactive({
     file: false,
     location: false,
@@ -89,7 +90,7 @@ export default function usePinBoard() {
       id = data.id
       name.value = data.name
       chatHeaderColor.value = data.chat_header_color
-      chatHeaderColorChangeHandler(data.chat_header_color)
+      chatHeaderColorChangeHandler(data.chat_header_color, true)
       title.value = data.title
       avatar.value = data.avatar
       image_id.value = data.image_id
@@ -141,6 +142,7 @@ export default function usePinBoard() {
       })
       .then(() => {
         useNotificationsStore().showSaveSuccess()
+        isChange.value = false
       })
   }
 
@@ -180,9 +182,10 @@ export default function usePinBoard() {
     if (!(event.target as HTMLInputElement).checked) {
       showExportLog.value = false
     }
+    // isChange.value = true
   }
 
-  const chatHeaderColorChangeHandler = (color: string) => {
+  const chatHeaderColorChangeHandler = (color: string, notChange?: boolean) => {
     const m = {
       '#02b13f': {
         headerText: '#ffffff',
@@ -229,6 +232,8 @@ export default function usePinBoard() {
       chatBubbleBorderColor.value = theme.bubbleBorder
       chatBubbleTextColor.value = theme.bubbleText
     }
+    if (notChange) return
+    isChange.value = true
   }
 
   const nickNameFormatTypeChange = (event: Event) => {
@@ -241,6 +246,7 @@ export default function usePinBoard() {
       number: t('nickname-type-number-placeholder')
     }
     nicknamePlaceholder.value = m[value as keyof typeof m]
+    isChange.value = true
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -298,6 +304,7 @@ export default function usePinBoard() {
     chatLogoSize,
     withoutSeoNoIndex,
     welcomeLinkSetting,
+    isChange,
     handleCreateActionBtn,
     deleteActionBtn,
     changeShowGuestSetting,

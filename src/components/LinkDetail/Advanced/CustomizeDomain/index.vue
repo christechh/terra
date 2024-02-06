@@ -45,7 +45,7 @@ const descDoc = computed(() => {
 <template>
   <div class="rounded-lg bg-white dark:bg-darkmode-600">
     <div
-      class="flex items-center justify-between border-b p-5 text-base font-bold"
+      class="flex items-center justify-between border-b p-5 text-base font-bold leading-10"
     >
       {{ t('custom-domain-title') }}
     </div>

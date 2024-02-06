@@ -502,10 +502,10 @@ onMounted(() => {
 [class*=' ant-col'],
 .ant-table,
 .ant-radio-wrapper {
-  font-family: Robot !important;
+  font-family: Roboto !important;
 }
 [class^='ant-row'],
 [class*=' ant-row'] {
-  font-family: Robot !important;
+  font-family: Roboto !important;
 }
 </style>

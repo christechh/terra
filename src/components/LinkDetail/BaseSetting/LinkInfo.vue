@@ -6,7 +6,9 @@ const { type, chatUrl, deleteHandler } = useLinkInfo()
 </script>
 <template>
   <main class="mt-2 rounded rounded-lg bg-white dark:bg-darkmode-600">
-    <header class="border-b border-[#EDF2F7] p-5 text-base">
+    <header
+      class="flex items-center justify-between border-b border-[#EDF2F7] p-5 text-base font-bold leading-10"
+    >
       {{ $t('connent-info') }}
     </header>
     <div class="p-5 ps-11">
