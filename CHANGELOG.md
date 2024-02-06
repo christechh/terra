@@ -1,3 +1,19 @@
+# [1.38.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.37.0...v1.38.0) (2024-02-06)
+
+
+### Bug Fixes
+
+* font size ([289b291](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/289b29137d731fd4564704b068ffc12e1d2af641))
+* phone login ([1c078e0](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/1c078e088ef87d97f3fa9466cd39566bab129172))
+* phone login menu display ([457eedd](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/457eedd132d31128c89e34de6d0400ed53eaa3e3))
+* style adjust 0205 ([6fa90b8](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/6fa90b8d9af9684b4dd3b291d57e072bc3542251))
+
+
+### Features
+
+* clean code ([a8074d5](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a8074d545e3bc085e9b75687444d130b93c37747))
+* sub account login done ([898367d](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/898367de889095fd49294462e340d0b659c36861))
+
 # [1.37.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.36.2...v1.37.0) (2024-02-05)
 
 
