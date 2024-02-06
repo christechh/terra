@@ -25,6 +25,14 @@ export const useUserStore = defineStore('user', {
       localStorage.setItem('account', '')
       useRedirectToStore().redirect({ path: '/dashboard' })
     },
+    async subLogin(credentials: { account: string; password: string }) {
+      const resp = await axios.post('/chat/sub/login', credentials)
+      this.account = credentials.account
+      this.token = resp.data.data.data.access_token
+      localStorage.setItem('token', this.token)
+      localStorage.setItem('account', '')
+      useRedirectToStore().redirect({ path: '/dashboard' })
+    },
     async fetchSetting() {
       try {
         const {

@@ -10,7 +10,11 @@ const instance = axios.create({
 })
 instance.interceptors.request.use(
   (config) => {
-    if (['/auth/login', '/auth/phone/login'].includes(config.url as string)) {
+    if (
+      ['/auth/login', '/auth/phone/login', '/chat/sub/login'].includes(
+        config.url as string
+      )
+    ) {
       config.headers.Authorization = import.meta.env.VITE_BASIC_TOKEN_CMS
     } else {
       const token = localStorage.getItem('token')
@@ -32,7 +36,10 @@ instance.interceptors.response.use(
     if (error.config.skipInterceptor) {
       return Promise.reject(error)
     }
-    if (error?.response?.status === 403) {
+    if (
+      error?.response?.status === 403 &&
+      error.config.url !== '/chat/sub/login'
+    ) {
       useRedirectToStore().redirect({ path: '/login' })
     } else if (error.config.url === '/dashboard/enterpoint') {
       return Promise.reject(error)
