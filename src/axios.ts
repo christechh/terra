@@ -2,6 +2,7 @@ import axios from 'axios'
 import i18n from './i18n'
 import { useWaningModalStore } from './stores/modals/warrningModal'
 import { useRedirectToStore } from './stores/redirect-to'
+
 const instance = axios.create({
   headers: {
     'Content-Type': 'application/json'
@@ -9,7 +10,7 @@ const instance = axios.create({
 })
 instance.interceptors.request.use(
   (config) => {
-    if (config.url === '/auth/login') {
+    if (['/auth/login', '/auth/phone/login'].includes(config.url as string)) {
       config.headers.Authorization = import.meta.env.VITE_BASIC_TOKEN_CMS
     } else {
       const token = localStorage.getItem('token')

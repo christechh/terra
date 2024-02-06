@@ -6,7 +6,6 @@ import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 
 import CommonModal from '../components/Modals/CommonModal'
-import RedirectTo from '../components/RedirectTo'
 
 import { useI18n } from 'vue-i18n'
 import logoImg from '../assets/images/logo_dark_v6.png'
@@ -307,7 +306,6 @@ watch([account, password], () => {
         </div>
         <!-- END: Login Form -->
         <CommonModal />
-        <RedirectTo />
       </div>
     </div>
   </div>

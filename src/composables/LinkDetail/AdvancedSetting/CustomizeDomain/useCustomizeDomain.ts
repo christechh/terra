@@ -21,6 +21,7 @@ export default function useCustomizeDomain() {
   const validing = ref(false)
   const activating = ref(false)
   const metaSaving = ref(false)
+  const isChange = ref(false)
   onMounted(async () => {
     await store.fetchConfig(token)
     preview.value.push({
@@ -168,6 +169,7 @@ export default function useCustomizeDomain() {
       await saveCustomDomain()
       metaSaving.value = false
       useNotificationsStore().showSaveSuccess()
+      isChange.value = false
     } catch (e) {
       console.log(e)
     } finally {
@@ -191,6 +193,7 @@ export default function useCustomizeDomain() {
     activating,
     metaSaving,
     eableTime,
+    isChange,
     validDomain,
     saveCustomDomain,
     saveMetadata,

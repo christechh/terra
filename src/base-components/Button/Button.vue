@@ -57,7 +57,7 @@ const attrs = useAttrs()
 
 // General Styles
 const generalStyles = [
-  'transition duration-200 shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-lg font-medium cursor-pointer', // Default
+  'transition duration-200 shadow-sm inline-flex items-center justify-center py-2 px-4 rounded-lg font-medium cursor-pointer h-10 min-w-[75px]', // Default
   'focus:ring-4 focus:ring-primary focus:ring-opacity-20', // On focus
   'focus-visible:outline-none', // On focus visible
   'dark:focus:ring-slate-700 dark:focus:ring-opacity-50', // Dark mode

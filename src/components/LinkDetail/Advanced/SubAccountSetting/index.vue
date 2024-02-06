@@ -499,7 +499,13 @@ onMounted(() => {
   border-color: #02b13f;
 }
 [class^='ant-col'],
-[class*=' ant-col'] {
+[class*=' ant-col'],
+.ant-table,
+.ant-radio-wrapper {
+  font-family: Robot !important;
+}
+[class^='ant-row'],
+[class*=' ant-row'] {
   font-family: Robot !important;
 }
 </style>
