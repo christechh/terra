@@ -163,6 +163,7 @@ watch([account, password], () => {
         >
         <Button
           class="relative w-full border border-black text-sm font-semibold"
+          @click="$router.push({ name: 'sublogin' })"
         >
           <img
             class="absolute left-3"
