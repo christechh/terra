@@ -1,6 +1,10 @@
 import { computed, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import axios from '../axios'
 
 export default function useEmailReset() {
+  const route = useRoute()
+  const router = useRouter()
   const newPassword = ref('')
   const newPasswordAgain = ref('')
   const isReseting = ref(false)
@@ -10,7 +14,7 @@ export default function useEmailReset() {
   watch([newPassword, newPasswordAgain], () => {
     isInputError.value = false
   })
-  const submit = () => {
+  const submit = async () => {
     if (!newPassword.value || !newPasswordAgain.value) {
       isInputError.value = true
       return
@@ -23,9 +27,21 @@ export default function useEmailReset() {
       isInputError.value = true
       return
     }
-    isInputError.value = false
-    apiError.value = ''
-    isReseting.value = true
+    try {
+      await axios.put('/auth/resetPassword', {
+        new_password: newPassword.value,
+        new_password_confirmation: newPasswordAgain.value,
+        token: route.query.token
+      })
+      isInputError.value = false
+      apiError.value = ''
+      router.push({ name: 'login' })
+    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      apiError.value = (e as any).response.data.message
+    } finally {
+      isReseting.value = true
+    }
   }
 
   const isPassRule1 = computed(() => {
