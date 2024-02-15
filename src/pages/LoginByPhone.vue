@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 import ContryCodePicker from '../components/ContryCodePicker'
 import useLoginByPohne from '../composables/useLoginByPohne'
 const { t } = useI18n()
+const router = useRouter()
 const {
   phone,
   password,
@@ -23,7 +25,7 @@ const {
       alt=""
     />
     <div
-      class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
+      class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[567px]"
     >
       <div class="mb-7 text-center text-xl font-extrabold text-[#777777]">
         {{ t('login-phone-title') }}
@@ -62,8 +64,11 @@ const {
       <div v-if="apiError && !isInputError" class="mt-1 text-xs text-red-500">
         {{ apiError }}
       </div>
-      <div class="mb-5 text-center">
-        <button class="text-sm text-[#808080] underline">
+      <div class="my-5 text-center">
+        <button
+          class="text-sm text-[#808080] underline"
+          @click="router.push({ name: 'reset_by_phone' })"
+        >
           {{ t('login-forget-btn') }}
         </button>
       </div>

@@ -6,6 +6,7 @@ import LandingPage from '../pages/LandingPage.vue'
 import LinksPage from '../pages/LinksPage.vue'
 import LoginByPhonePage from '../pages/LoginByPhone.vue'
 import LoginPage from '../pages/LoginPage.vue'
+import PhoneReset from '../pages/PhoneReset.vue'
 import ResetPassword from '../pages/ResetPassword.vue'
 import SubLogin from '../pages/SubLogin.vue'
 const routes = [
@@ -174,6 +175,14 @@ const routes = [
     path: '/resetpassword',
     name: 'resetpassword',
     component: ResetPassword,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/reset_by_phone',
+    name: 'reset_by_phone',
+    component: PhoneReset,
     meta: {
       requiresAuth: false
     }
