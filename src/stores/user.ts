@@ -43,6 +43,28 @@ export const useUserStore = defineStore('user', {
         console.log(error)
       }
     },
+    async registerByEmail(credentials: {
+      email: string
+      password: string
+      confirmPassword: string
+    }) {
+      const res = await axios.post('/auth/register', {
+        account: credentials.email,
+        guestToken: null,
+        name: credentials.email.split('@')[0],
+        password: credentials.password,
+        password_confirmation: credentials.confirmPassword,
+        sendMail: true
+      })
+      const { access_token } = res.data.data.data
+      localStorage.setItem('token', access_token)
+      // localStorage.setItem('refresh_token', refresh_token)
+      // localStorage.setItem('token_end_at', token_end_at)
+      localStorage.setItem('account', credentials.email)
+      this.token = access_token
+      this.account = credentials.email
+      useRedirectToStore().redirect({ path: '/dashboard' })
+    },
     async logout() {
       localStorage.removeItem('token')
       localStorage.removeItem('email')

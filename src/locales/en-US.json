@@ -2633,5 +2633,6 @@
   "uploading": "uploading",
   "upload-success": "Upload successful",
   "enter-phone-number": "Enter mobile number",
-  "choose-date": "Select date time"
+  "choose-date": "Select date time",
+  "two-psd-not-same": "The password entered twice is different"
 }
