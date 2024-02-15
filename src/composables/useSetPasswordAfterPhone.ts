@@ -1,4 +1,4 @@
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from '../axios'
 
@@ -14,12 +14,16 @@ export default function useEmailReset() {
   watch([newPassword, newPasswordAgain, name], () => {
     isInputError.value = false
   })
-  const submit = async () => {
+  const submit = async (
+    isPassRule1: boolean,
+    isPassRule2: boolean,
+    isPassRule3: boolean
+  ) => {
     if (!newPassword.value || !newPasswordAgain.value) {
       isInputError.value = true
       return
     }
-    if (!isPassRule1.value || !isPassRule2.value || !isPassRule3.value) {
+    if (!isPassRule1 || !isPassRule2 || !isPassRule3) {
       isInputError.value = true
       return
     }
@@ -45,21 +49,6 @@ export default function useEmailReset() {
     }
   }
 
-  const isPassRule1 = computed(() => {
-    const regex = /.{8,}/
-    return regex.test(newPassword.value)
-  })
-
-  const isPassRule2 = computed(() => {
-    const regex = /[A-Z]/
-    return regex.test(newPassword.value)
-  })
-
-  const isPassRule3 = computed(() => {
-    const regex = /\d/
-    return regex.test(newPassword.value)
-  })
-
   return {
     name,
     newPassword,
@@ -67,9 +56,6 @@ export default function useEmailReset() {
     isReseting,
     isInputError,
     apiError,
-    isPassRule1,
-    isPassRule2,
-    isPassRule3,
     submit
   }
 }

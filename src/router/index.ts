@@ -7,6 +7,7 @@ import LinksPage from '../pages/LinksPage.vue'
 import LoginByPhonePage from '../pages/LoginByPhone.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import PhoneReset from '../pages/PhoneReset.vue'
+import RegisterByEmail from '../pages/RegisterByEmail.vue'
 import ResetPassword from '../pages/ResetPassword.vue'
 import SetPasswordAfterPhone from '../pages/SetPasswordAfterPhone.vue'
 import SubLogin from '../pages/SubLogin.vue'
@@ -192,6 +193,14 @@ const routes = [
     path: '/setpassword_after_phone',
     name: 'setpassword_after_phone',
     component: SetPasswordAfterPhone,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/register_by_email',
+    name: 'registerByEmail',
+    component: RegisterByEmail,
     meta: {
       requiresAuth: false
     }
