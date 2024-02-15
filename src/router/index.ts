@@ -8,6 +8,7 @@ import LoginByPhonePage from '../pages/LoginByPhone.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import PhoneReset from '../pages/PhoneReset.vue'
 import RegisterByEmail from '../pages/RegisterByEmail.vue'
+import RegisterPage from '../pages/RegisterPage.vue'
 import ResetPassword from '../pages/ResetPassword.vue'
 import SetPasswordAfterPhone from '../pages/SetPasswordAfterPhone.vue'
 import SubLogin from '../pages/SubLogin.vue'
@@ -203,6 +204,14 @@ const routes = [
     component: RegisterByEmail,
     meta: {
       requiresAuth: false
+    }
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterPage,
+    meta: {
+      requireAuth: false
     }
   }
 ]
