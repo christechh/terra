@@ -1,8 +1,17 @@
-import { ConfirmationResult, RecaptchaVerifier } from 'firebase/auth'
+import {
+  ConfirmationResult,
+  RecaptchaVerifier,
+  getAuth,
+  onAuthStateChanged,
+  signOut
+} from 'firebase/auth'
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from '../axios'
 import { addRecaptcha, sendSMS } from '../lib/firebase'
 
 export default function usePhoneReset() {
+  const router = useRouter()
   const phone = ref('')
   const phoneCode = ref('+886')
   const validCode = ref('')
@@ -14,7 +23,19 @@ export default function usePhoneReset() {
   const confirnatiomationResult = ref<ConfirmationResult>()
 
   onMounted(() => {
-    recaptcha.value = addRecaptcha('recaptcha')
+    recaptcha.value = addRecaptcha('send-sms-btn')
+    const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
+      if (user && getAuth()) {
+        signOut(getAuth())
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        verifyPhone((user as any).xa)
+      } else {
+        // No user is signed in.
+      }
+    })
+    return () => {
+      unsubscribe()
+    }
   })
   const sendPhoeCode = async () => {
     if (!phone.value) {
@@ -29,6 +50,7 @@ export default function usePhoneReset() {
         `${phoneCode.value}${phone.value}`,
         recaptcha.value as RecaptchaVerifier
       )
+      return true
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       apiError.value = (e as any).message
@@ -36,6 +58,16 @@ export default function usePhoneReset() {
       isReseting.value = false
       isInputError.value = false
     }
+  }
+
+  const verifyPhone = (token: string) => {
+    axios.post('/auth/verify_phone', { token }).then(() => {
+      router.push('')
+    })
+  }
+
+  const checkCode = () => {
+    confirnatiomationResult.value?.confirm(validCode.value).then(() => {})
   }
 
   return {
@@ -46,6 +78,8 @@ export default function usePhoneReset() {
     showModal,
     phoneCode,
     validCode,
-    sendPhoeCode
+    recaptcha,
+    sendPhoeCode,
+    checkCode
   }
 }

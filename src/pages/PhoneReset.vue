@@ -15,12 +15,17 @@ const {
   apiError,
   showModal,
   validCode,
-  sendPhoeCode
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  recaptcha,
+  sendPhoeCode,
+  checkCode
 } = usePhoneReset()
 const { count, countDown } = useCountDown()
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const sendClick = () => {
-  sendPhoeCode()?.then(() => {
+  sendPhoeCode()?.then((res) => {
+    if (!res) return
     countDown(60)
   })
 }
@@ -58,18 +63,22 @@ const sendClick = () => {
       <div v-if="apiError && !isInputError" class="mt-1 text-xs text-red-500">
         {{ apiError }}
       </div>
-      <Button
-        variant="primary"
-        class="mb-3 mt-4 w-full text-sm"
-        @click="sendClick"
-        :loading="isReseting"
-        :disabled="count > 0"
-        >{{
-          count <= 0
-            ? t('signup-phone-get-sms-text')
-            : `${count}${t('error-message31')}`
-        }}</Button
-      >
+      <form @submit.prevent>
+        <Button
+          type="submit"
+          id="send-sms-btn"
+          variant="primary"
+          class="mb-3 mt-4 w-full text-sm"
+          :loading="isReseting"
+          :disabled="count > 0"
+          @click="sendClick"
+          >{{
+            count <= 0
+              ? t('signup-phone-get-sms-text')
+              : `${count}${t('error-message31')}`
+          }}</Button
+        >
+      </form>
       <div class="flex items-center rounded-lg border bg-dashboard_bg">
         <FormInput
           class="rounded-lg"
@@ -84,9 +93,12 @@ const sendClick = () => {
       >
         {{ t('error-message19') }}
       </div>
-      <Button variant="primary" class="mt-5 w-full text-sm">{{
-        t('reset-set-btn')
-      }}</Button>
+      <Button
+        variant="primary"
+        class="mt-5 w-full text-sm"
+        @click="checkCode"
+        >{{ t('reset-set-btn') }}</Button
+      >
       <div class="mt-[14px] text-center text-sm">
         <span>{{ t('signup-login-text') }}</span
         ><button class="text-[#808080] underline">
