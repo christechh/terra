@@ -1,3 +1,21 @@
+# [1.39.0](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.38.1...v1.39.0) (2024-02-15)
+
+
+### Features
+
+* init firebase ([11dc9ac](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/11dc9acc74adb1cde065f85fd17d50cb2cb6f2b0))
+* phone reset init ([462faf1](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/462faf1a8af6b4e61da63bb7c4c5945556be93e3))
+* register by eamil init ([5215972](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/5215972f4ff5e57f288a3e8453960974e75ed949))
+* register by email ([a8f686e](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/a8f686ebb5d76623a471837557a2dd3d7f613613))
+* register page ([7c34e6a](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/7c34e6a4af250b57caaa26d94a8fe8cc4a57bde3))
+* reset by phone done ([b607d36](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/b607d36b5b3fd0f8ca3bfcd9d07415d2363aac49))
+* reset email ([567f43c](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/567f43ce77696ef61d31364a8248b9bb3ead4016))
+* reset init ([53f09d4](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/53f09d4598558b463c5410caccd563f6b4ceb789))
+* reset password done ([1b3b48c](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/1b3b48cad41f1602d6a3c7dd4098d1216e1e3def))
+* reset password finish ([67c3db1](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/67c3db1be3a988f94caa611fc4b5d6eaf3e34ad5))
+* resetpassword ([13dc520](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/13dc52074c5c437f85ef436297b4555dc504c405))
+* rest phone with firebase init ([0436c0c](https://codebase.funtek.io/pinchat/pinchat_dashboard/commit/0436c0cb0983e5943cdbeddd5a2c84480bfa121f))
+
 ## [1.38.1](https://codebase.funtek.io/pinchat/pinchat_dashboard/compare/v1.38.0...v1.38.1) (2024-02-15)
 
 
