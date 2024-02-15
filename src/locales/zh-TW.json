@@ -2635,5 +2635,6 @@
   "uploading": "上傳中",
   "upload-success": "上傳成功",
   "enter-phone-number": "輸入手機號碼",
-  "choose-date": "選擇日期時間"
+  "choose-date": "選擇日期時間",
+  "two-psd-not-same": "兩次密碼輸入不同"
 }

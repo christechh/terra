@@ -2632,5 +2632,6 @@
   "uploading": "アップロードする",
   "upload-success": "アップロード成功",
   "enter-phone-number": "携帯電話番号を入力してください",
-  "choose-date": "日付時刻を選択してください"
+  "choose-date": "日付時刻を選択してください",
+  "two-psd-not-same": "2回入力したパスワードが異なります"
 }

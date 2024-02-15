@@ -6,6 +6,7 @@ import LandingPage from '../pages/LandingPage.vue'
 import LinksPage from '../pages/LinksPage.vue'
 import LoginByPhonePage from '../pages/LoginByPhone.vue'
 import LoginPage from '../pages/LoginPage.vue'
+import ResetPassword from '../pages/ResetPassword.vue'
 import SubLogin from '../pages/SubLogin.vue'
 const routes = [
   {
@@ -124,6 +125,11 @@ const routes = [
     path: '/reset',
     name: 'reset',
     component: EmailRest
+  },
+  {
+    path: '/resetpassword',
+    name: 'resetpassword',
+    component: ResetPassword
   }
 ]
 
