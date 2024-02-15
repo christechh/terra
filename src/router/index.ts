@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '../i18n'
 import SideMenu from '../layouts/SideMenu/SideMenu.vue'
+import EmailRest from '../pages/EmailRest.vue'
 import LandingPage from '../pages/LandingPage.vue'
 import LinksPage from '../pages/LinksPage.vue'
 import LoginByPhonePage from '../pages/LoginByPhone.vue'
@@ -118,6 +119,11 @@ const routes = [
     path: '/sublogin',
     name: 'sublogin',
     component: SubLogin
+  },
+  {
+    path: '/reset',
+    name: 'reset',
+    component: EmailRest
   }
 ]
 
