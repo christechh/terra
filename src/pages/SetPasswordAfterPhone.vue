@@ -36,7 +36,7 @@ const {
           t('signup-display-name-label')
         }}</span>
         <div class="flex items-center rounded-lg border bg-dashboard_bg">
-          <FormInput class="rounded-lg" v-model="name" type="password" />
+          <FormInput class="rounded-lg" v-model="name" type="text" />
         </div>
         <div v-if="isInputError && !name" class="mt-1 text-xs text-red-500">
           {{ t('error-message2') }}

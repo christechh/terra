@@ -7,13 +7,15 @@ const instance = axios.create({
     'Content-Type': 'application/json'
   }
 })
+const useBasicTokenRouters = [
+  '/auth/login',
+  '/auth/phone/login',
+  '/auth/verify_phone',
+  '/chat/sub/login'
+]
 instance.interceptors.request.use(
   (config) => {
-    if (
-      ['/auth/login', '/auth/phone/login', '/chat/sub/login'].includes(
-        config.url as string
-      )
-    ) {
+    if (useBasicTokenRouters.includes(config.url as string)) {
       config.headers.Authorization = import.meta.env.VITE_BASIC_TOKEN_CMS
     } else {
       const token = localStorage.getItem('token')

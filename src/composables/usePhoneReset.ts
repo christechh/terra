@@ -28,7 +28,7 @@ export default function usePhoneReset() {
       if (user && getAuth()) {
         signOut(getAuth())
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        verifyPhone((user as any).xa)
+        verifyPhone((user as any).accessToken)
       } else {
         // No user is signed in.
       }
@@ -61,8 +61,9 @@ export default function usePhoneReset() {
   }
 
   const verifyPhone = (token: string) => {
-    axios.post('/auth/verify_phone', { token }).then(() => {
-      router.push('')
+    axios.post('/auth/verify_phone', { token }).then((res) => {
+      localStorage.setItem('token', res.data.data.data.access_token)
+      router.push({ name: 'setpassword_after_phone' })
     })
   }
 

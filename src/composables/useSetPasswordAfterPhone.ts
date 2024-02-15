@@ -35,6 +35,7 @@ export default function useEmailReset() {
       })
       isInputError.value = false
       apiError.value = ''
+      localStorage.removeItem('token')
       router.push({ name: 'login' })
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
