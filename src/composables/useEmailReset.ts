@@ -4,35 +4,39 @@ import axios from '../axios'
 
 export default function useEmailReset() {
   const email = ref('')
-  const password = ref('')
   const isReseting = ref(false)
   const isInputError = ref(false)
   const apiError = ref('')
-  const doReset = () => {
-    if (!email.value || !password.value) {
-      return (isInputError.value = true)
+  const sendRestEmail = () => {
+    if (!email.value) {
+      isInputError.value = true
+      return
     }
+    isInputError.value = false
     apiError.value = ''
     isReseting.value = true
-    axios
-      .post('', {
-        email: email.value,
-        password: password.value
+    return axios
+      .put('/auth/forgetPassword', {
+        email: email.value
       })
-      .catch((e: AxiosError) => {
+      .then(() => {
+        isReseting.value = false
+        isInputError.value = false
+      })
+      .catch((error: AxiosError) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        apiError.value = (e.response?.data as any).message
+        apiError.value = (error.response?.data as any).message
       })
       .finally(() => {
         isReseting.value = false
       })
   }
+
   return {
     email,
-    password,
     isReseting,
     isInputError,
     apiError,
-    doReset
+    sendRestEmail
   }
 }

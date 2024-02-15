@@ -1,7 +1,6 @@
 import axios from 'axios'
 import i18n from './i18n'
 import { useWaningModalStore } from './stores/modals/warrningModal'
-import { useRedirectToStore } from './stores/redirect-to'
 
 const instance = axios.create({
   headers: {
@@ -36,13 +35,7 @@ instance.interceptors.response.use(
     if (error.config.skipInterceptor) {
       return Promise.reject(error)
     }
-    if (
-      error?.response?.status === 403 &&
-      error.config.url !== '/chat/sub/login' &&
-      error.config.url !== '/auth/phone/login'
-    ) {
-      useRedirectToStore().redirect({ path: '/login' })
-    } else if (error.config.url === '/dashboard/enterpoint') {
+    if (error.config.url === '/dashboard/enterpoint') {
       return Promise.reject(error)
     } else {
       useWaningModalStore().showModal({ text: error.message })
