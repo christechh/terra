@@ -11,7 +11,8 @@ const useBasicTokenRouters = [
   '/auth/login',
   '/auth/phone/login',
   '/auth/verify_phone',
-  '/chat/sub/login'
+  '/chat/sub/login',
+  '/auth/register'
 ]
 instance.interceptors.request.use(
   (config) => {

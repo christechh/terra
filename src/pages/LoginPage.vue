@@ -117,7 +117,10 @@ watch([account, password], () => {
       >
       <div class="mb-5 text-center text-sm">
         <span>{{ t('login-no-sign-up-login-text') }}</span
-        ><button class="text-[#808080] underline">
+        ><button
+          class="text-[#808080] underline"
+          @click="router.push({ name: 'registerByEmail' })"
+        >
           {{ t('login-sign-up-btn') }}
         </button>
       </div>

@@ -25,10 +25,10 @@ export const sendSMS = (
   return signInWithPhoneNumber(getAuth(), phone, recaptchaVerifier)
 }
 
-export const addRecaptcha = (elementId: string) => {
+export const addRecaptcha = (elementId: string, size = 'invisible') => {
   const auth = getAuth()
   return new RecaptchaVerifier(auth, elementId, {
-    size: 'invisible',
+    size,
     callback: () => {}
   })
 }
