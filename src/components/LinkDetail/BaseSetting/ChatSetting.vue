@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import axios from '../../../axios'
+import Button from '../../../base-components/Button'
 import {
   FormInput,
   FormSelect,
@@ -39,6 +40,7 @@ const {
   showIsRead,
   chatroomActionSetting,
   name,
+  isChange,
   saveChatSetting,
   changeShowGuestSetting,
   chatHeaderColorChangeHandler
@@ -54,6 +56,7 @@ const {
   otherTitle,
   phoneText,
   phoneTitle,
+  chatSettingChange,
   getTypes
 } = useChatSetting(token)
 
@@ -124,6 +127,7 @@ const submitTypes = () => {
     text: typeText.value,
     type: welcomeGetCustomerInfoType.value
   })
+  chatSettingChange.value = false
 }
 
 const submit = () => {
@@ -146,15 +150,16 @@ getTypes()
 <template>
   <div class="mt-2 rounded-lg bg-white dark:bg-darkmode-600">
     <div
-      class="flex items-center justify-between border-b border-[#EDF2F7] p-5 text-base"
+      class="flex items-center justify-between border-b border-[#EDF2F7] p-5 text-base font-bold"
     >
       {{ $t('qrcode-setting-tab-chat-setting') }}
-      <button
-        class="rounded-lg bg-primary px-5 py-2 text-base text-sm text-white"
+      <Button
+        variant="primary"
         @click="submit"
+        :disabled="!isChange && !chatSettingChange"
       >
         {{ $t('save-btn') }}
-      </button>
+      </Button>
     </div>
     <div class="p-5 lg:flex">
       <div class="flex-1 pe-10 lg:border-e">
@@ -174,6 +179,7 @@ getTypes()
                     type="color"
                     class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
                     v-model="chatHeaderColor"
+                    @change="isChange = true"
                     disabled
                   />
                 </div>
@@ -183,6 +189,7 @@ getTypes()
                     type="color"
                     class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
                     v-model="chatHeaderTextColor"
+                    @change="isChange = true"
                   />
                 </div>
                 <div class="mt-3 flex items-center justify-between">
@@ -226,7 +233,12 @@ getTypes()
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
-            <FormInput class="mt-2" v-model="title" type="text" />
+            <FormInput
+              class="mt-2"
+              v-model="title"
+              @change="isChange = true"
+              type="text"
+            />
             <div class="mt-5 flex items-center">
               {{ $t('chat-room-nickname') }}
               <div
@@ -236,7 +248,12 @@ getTypes()
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
-            <FormInput class="mt-2" v-model="name" type="text" />
+            <FormInput
+              class="mt-2"
+              v-model="name"
+              @change="isChange = true"
+              type="text"
+            />
             <div class="mt-5">{{ $t('chat-room-avatar') }}</div>
             <HeadShots
               class="mt-2"
@@ -255,7 +272,11 @@ getTypes()
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
-            <FormTextarea class="mt-2" v-model="welcome_message" />
+            <FormTextarea
+              class="mt-2"
+              v-model="welcome_message"
+              @change="isChange = true"
+            />
             <div class="mt-5 flex items-center">
               {{ $t('input-of-customer-info') }}
               <div
@@ -265,7 +286,11 @@ getTypes()
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
-            <FormSelect v-model="welcomeGetCustomerInfoType" class="mt-2">
+            <FormSelect
+              v-model="welcomeGetCustomerInfoType"
+              class="mt-2"
+              @change="isChange = true"
+            >
               <option v-for="t in types" :key="t.value" :value="t.value">
                 {{ t.text }}
               </option>
@@ -283,7 +308,12 @@ getTypes()
                   <Lucide icon="HelpCircle" width="14" />
                 </div>
               </div>
-              <FormInput type="text" v-model="typeTitle" class="mt-2" />
+              <FormInput
+                type="text"
+                v-model="typeTitle"
+                class="mt-2"
+                @change="isChange = true"
+              />
               <div class="mt-3 flex items-center">
                 {{ $t('reply-message-desc') }}
                 <div
@@ -293,7 +323,12 @@ getTypes()
                   <Lucide icon="HelpCircle" width="14" />
                 </div>
               </div>
-              <FormInput type="text" v-model="typeText" class="mt-2" />
+              <FormInput
+                type="text"
+                v-model="typeText"
+                class="mt-2"
+                @change="chatSettingChange = true"
+              />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="4" class="pb-9">
@@ -311,7 +346,11 @@ getTypes()
                 </div>
               </div>
               <FormSwitch>
-                <FormSwitch.Input type="checkbox" v-model="showOnlineStatus" />
+                <FormSwitch.Input
+                  type="checkbox"
+                  v-model="showOnlineStatus"
+                  @change="isChange = true"
+                />
               </FormSwitch>
             </div>
             <div class="mt-5 flex items-center justify-between">
@@ -325,7 +364,11 @@ getTypes()
                 </div>
               </div>
               <FormSwitch>
-                <FormSwitch.Input type="checkbox" v-model="isOnline" />
+                <FormSwitch.Input
+                  type="checkbox"
+                  v-model="isOnline"
+                  @change="isChange = true"
+                />
               </FormSwitch>
             </div>
 
@@ -338,7 +381,11 @@ getTypes()
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
-            <FormTextarea class="mt-2" v-model="offlineSendMsg" />
+            <FormTextarea
+              class="mt-2"
+              v-model="offlineSendMsg"
+              @change="isChange = true"
+            />
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="5" class="pb-9">
             <div class="font-bold">{{ $t('advanced-setting') }}</div>
@@ -353,7 +400,11 @@ getTypes()
                 </div>
               </div>
               <FormSwitch>
-                <FormSwitch.Input type="checkbox" v-model="openNotifySetting" />
+                <FormSwitch.Input
+                  type="checkbox"
+                  v-model="openNotifySetting"
+                  @change="isChange = true"
+                />
               </FormSwitch>
             </div>
             <div class="mt-5 flex items-center justify-between">
@@ -367,7 +418,11 @@ getTypes()
                 </div>
               </div>
               <FormSwitch>
-                <FormSwitch.Input type="checkbox" v-model="showSavePopup" />
+                <FormSwitch.Input
+                  type="checkbox"
+                  v-model="showSavePopup"
+                  @change="isChange = true"
+                />
               </FormSwitch>
             </div>
             <div class="mt-5 flex items-center justify-between">
@@ -400,6 +455,7 @@ getTypes()
                   type="checkbox"
                   v-model="showExportLog"
                   :disabled="!showGuestSetting"
+                  @change="isChange = true"
                 />
               </FormSwitch>
             </div>
@@ -414,7 +470,11 @@ getTypes()
                 </div>
               </div>
               <FormSwitch>
-                <FormSwitch.Input type="checkbox" v-model="showIsRead" />
+                <FormSwitch.Input
+                  type="checkbox"
+                  v-model="showIsRead"
+                  @change="isChange = true"
+                />
               </FormSwitch>
             </div>
           </VerticalSteps.Step>
@@ -429,6 +489,7 @@ getTypes()
                 <FormSwitch.Input
                   type="checkbox"
                   v-model="chatroomActionSetting.file"
+                  @change="isChange = true"
                 />
               </FormSwitch>
             </div>
@@ -441,6 +502,7 @@ getTypes()
                 <FormSwitch.Input
                   type="checkbox"
                   v-model="chatroomActionSetting.location"
+                  @change="isChange = true"
                 />
               </FormSwitch>
             </div>
@@ -453,6 +515,7 @@ getTypes()
                 <FormSwitch.Input
                   type="checkbox"
                   v-model="chatroomActionSetting.voice"
+                  @change="isChange = true"
                 />
               </FormSwitch>
             </div>
@@ -465,6 +528,7 @@ getTypes()
                 <FormSwitch.Input
                   type="checkbox"
                   v-model="chatroomActionSetting.vote"
+                  @change="isChange = true"
                 />
               </FormSwitch>
             </div>

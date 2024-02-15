@@ -12,6 +12,7 @@ export default function useChatSetting(token: Ref<string>) {
   const otherTitle = ref<string | null>(null)
   const phoneText = ref<string | null>(null)
   const phoneTitle = ref<string | null>(null)
+  const chatSettingChange = ref(false)
 
   const getTypes = () => {
     axios
@@ -51,6 +52,7 @@ export default function useChatSetting(token: Ref<string>) {
     otherTitle,
     phoneText,
     phoneTitle,
+    chatSettingChange,
     getTypes
   }
 }

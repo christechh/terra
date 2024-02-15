@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { isEqual } from 'lodash'
-import { computed, ref, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import BoxHead from '@/components/Box/BoxHead.vue'
 import axios from '../../../../axios'
 import CButton from '../../../../base-components/Button'
 import Steps from '../../../../components/Steps/index.vue'
-import WidgetSelectType from './WidgetSelectType.vue'
-import WidgetCustomTheme from './WidgetCustomTheme/index.vue'
-import WidgetCopyScript from './WidgetCopyScript.vue'
 import { useLinkPage } from '../../../../composables/useLinkPage'
 import { useNotificationsStore } from '../../../../stores/notifications'
-import BoxHead from '@/components/Box/BoxHead.vue'
+import WidgetCopyScript from './WidgetCopyScript.vue'
+import WidgetCustomTheme from './WidgetCustomTheme/index.vue'
+import WidgetSelectType from './WidgetSelectType.vue'
 
 export type WidgetType = 'circle' | 'rectangle' | 'rectangle_left' | 'full'
 export interface IForm {
@@ -135,7 +135,7 @@ onMounted(() => {
       <template #right>
         <CButton
           variant="primary"
-          class="w-24 text-white disabled:opacity-50"
+          class="text-white disabled:opacity-50"
           :disabled="!isDiffWithOrigin"
           @click="submitConfig"
           >{{ $t('save-btn') }}</CButton

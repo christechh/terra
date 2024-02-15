@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
+import Button from '../../../base-components/Button'
 import {
   FormInput,
   FormSelect,
@@ -33,6 +34,7 @@ const {
   chatLogoSize,
   withoutSeoNoIndex,
   welcomeLinkSetting,
+  isChange,
   handleCreateActionBtn,
   deleteActionBtn,
   save,
@@ -99,12 +101,9 @@ const beforeSetChatLogoSize = (event: Event) => {
       <span class="font-bold">
         {{ $t('edit-welcome-pinboard-setting') }}
       </span>
-      <button
-        class="h-[40px] min-w-[75px] rounded-lg bg-primary px-5 py-2 text-sm text-white"
-        @click="save"
-      >
+      <Button variant="primary" @click="save" :disabled="!isChange">
         {{ $t('save-btn') }}
-      </button>
+      </Button>
     </header>
     <div class="p-5 lg:flex">
       <div class="flex-1 pe-10 lg:border-e">
@@ -145,7 +144,11 @@ const beforeSetChatLogoSize = (event: Event) => {
               </div>
             </div>
             <FormSwitch>
-              <FormSwitch.Input v-model="showPinBoard" type="checkbox" />
+              <FormSwitch.Input
+                v-model="showPinBoard"
+                @change="isChange = true"
+                type="checkbox"
+              />
             </FormSwitch>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2" class="pb-9">
@@ -159,7 +162,11 @@ const beforeSetChatLogoSize = (event: Event) => {
               </div>
             </div>
             <div class="mt-2">
-              <FormTextarea v-model="welecomeMessage" class="resize-none" />
+              <FormTextarea
+                v-model="welecomeMessage"
+                @change="isChange = true"
+                class="resize-none"
+              />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="3" class="pb-9">
@@ -173,7 +180,11 @@ const beforeSetChatLogoSize = (event: Event) => {
               </div>
             </div>
             <div class="mt-2">
-              <FormTextarea v-model="btnText" class="resize-none" />
+              <FormTextarea
+                v-model="btnText"
+                @change="isChange = true"
+                class="resize-none"
+              />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="4" class="pb-9">
@@ -193,6 +204,7 @@ const beforeSetChatLogoSize = (event: Event) => {
               <FormSwitch>
                 <FormSwitch.Input
                   v-model="isNicknameRequired"
+                  @change="isChange = true"
                   type="checkbox"
                 />
               </FormSwitch>
@@ -234,7 +246,11 @@ const beforeSetChatLogoSize = (event: Event) => {
               </div>
             </div>
             <div class="mt-2">
-              <FormInput v-model="nicknamePlaceholder" type="text" />
+              <FormInput
+                v-model="nicknamePlaceholder"
+                @change="isChange = true"
+                type="text"
+              />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="5" class="pb-9">
@@ -253,6 +269,7 @@ const beforeSetChatLogoSize = (event: Event) => {
                 type="img"
                 :limit="2"
                 :show-close="false"
+                @change="isChange = true"
               />
             </div>
             <div class="mt-5 flex items-center">
@@ -300,7 +317,7 @@ const beforeSetChatLogoSize = (event: Event) => {
                 <Lucide icon="HelpCircle" width="14" />
               </div>
             </div>
-            <ThemePicker v-model="theme">
+            <ThemePicker v-model="theme" @change="isChange = true">
               <div>
                 <div class="flex items-center justify-between">
                   {{ $t('edit-welcome-text-color') }}
@@ -316,6 +333,7 @@ const beforeSetChatLogoSize = (event: Event) => {
                   <input
                     type="color"
                     class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
+                    @change="isChange = true"
                     v-model="theme"
                     disabled
                   />
@@ -344,7 +362,7 @@ const beforeSetChatLogoSize = (event: Event) => {
             </div>
             <div class="mt-3">
               <div>
-                <FormSelect v-model="welcomeBGType">
+                <FormSelect v-model="welcomeBGType" @change="isChange = true">
                   <option value="color">
                     {{ $t('edit-welcome-choose-color') }}
                   </option>
@@ -372,6 +390,7 @@ const beforeSetChatLogoSize = (event: Event) => {
                 <div class="mt-3">
                   <Upload
                     v-model="localBGImgs"
+                    @change="isChange = true"
                     type="img"
                     :limit="2"
                     show-close
@@ -405,7 +424,11 @@ const beforeSetChatLogoSize = (event: Event) => {
                 </div>
               </div>
               <FormSwitch>
-                <FormSwitch.Input v-model="withoutSeoNoIndex" type="checkbox" />
+                <FormSwitch.Input
+                  v-model="withoutSeoNoIndex"
+                  @change="isChange = true"
+                  type="checkbox"
+                />
               </FormSwitch>
             </div>
             <div class="mt-5 flex items-center justify-between">
@@ -421,7 +444,11 @@ const beforeSetChatLogoSize = (event: Event) => {
                 </div>
               </div>
               <FormSwitch>
-                <FormSwitch.Input v-model="removePowerBy" type="checkbox" />
+                <FormSwitch.Input
+                  v-model="removePowerBy"
+                  @change="isChange = true"
+                  type="checkbox"
+                />
               </FormSwitch>
             </div>
           </VerticalSteps.Step>
@@ -438,7 +465,12 @@ const beforeSetChatLogoSize = (event: Event) => {
               </div>
             </div>
             <div class="mt-3">
-              <FormInput :maxlength="35" type="text" v-model="hrText" />
+              <FormInput
+                :maxlength="35"
+                type="text"
+                v-model="hrText"
+                @change="isChange = true"
+              />
             </div>
           </VerticalSteps.Step>
           <VerticalSteps.Step :step="2">
@@ -452,7 +484,7 @@ const beforeSetChatLogoSize = (event: Event) => {
               </div>
             </div>
             <div class="mt-2 bg-[#F6F6F6] dark:bg-darkmode-700">
-              <ThemePicker v-model="floatButtonColor">
+              <ThemePicker v-model="floatButtonColor" @change="isChange = true">
                 <div class="">
                   <div class="flex items-center justify-between">
                     {{ $t('welcome-hr-color-input') }}
@@ -468,6 +500,7 @@ const beforeSetChatLogoSize = (event: Event) => {
                       type="color"
                       class="h-8 w-16 rounded-md bg-[#e4e4e4] px-2 py-1"
                       v-model="floatButtonColor"
+                      @change="isChange = true"
                     />
                   </div>
                   <div class="mt-3 flex items-center justify-between">

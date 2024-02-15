@@ -68,7 +68,7 @@ watch([account, password], () => {
         {{ t('login-title') }}
       </div>
       <div class="mb-3">
-        <span class="mb-1 text-xs">{{ t('login-email-label') }}</span>
+        <span class="mb-1 text-sm">{{ t('login-email-label') }}</span>
         <FormInput
           class="rounded-lg border"
           v-model="account"
@@ -80,7 +80,7 @@ watch([account, password], () => {
         </div>
       </div>
       <div class="mb-5">
-        <span class="mb-1 text-xs">{{ t('login-password-label') }}</span>
+        <span class="mb-1 text-sm">{{ t('login-password-label') }}</span>
         <FormInput
           class="rounded-lg border"
           v-model="password"
@@ -99,7 +99,7 @@ watch([account, password], () => {
         </div>
       </div>
       <div class="mb-5 text-center">
-        <button class="text-xs text-[#808080] underline">
+        <button class="text-sm text-[#808080] underline">
           {{ t('login-forget-btn') }}
         </button>
       </div>
@@ -110,7 +110,7 @@ watch([account, password], () => {
         :loading="isLoging"
         >{{ t('login-btn') }}</Button
       >
-      <div class="mb-5 text-center text-xs">
+      <div class="mb-5 text-center text-sm">
         <span>{{ t('login-no-sign-up-login-text') }}</span
         ><button class="text-[#808080] underline">
           {{ t('login-sign-up-btn') }}
@@ -163,6 +163,7 @@ watch([account, password], () => {
         >
         <Button
           class="relative w-full border border-black text-sm font-semibold"
+          @click="$router.push({ name: 'sublogin' })"
         >
           <img
             class="absolute left-3"

@@ -104,7 +104,7 @@ const onDrop = (idx: number, list: any[]) => {
     </div>
     <div v-else class="rounded-lg bg-white dark:bg-darkmode-600">
       <div
-        class="flex items-center justify-between border-b px-5 py-3 text-base font-bold"
+        class="flex items-center justify-between border-b p-5 text-base font-bold"
       >
         {{ $t('survey-my-survey') }}
         <div>
