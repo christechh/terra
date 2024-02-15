@@ -12,7 +12,10 @@ const routes = [
   {
     path: '/',
     name: 'landing-page',
-    component: LandingPage
+    component: LandingPage,
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/dashboard',
@@ -23,7 +26,8 @@ const routes = [
         name: 'links',
         component: LinksPage,
         meta: {
-          title: i18n.global.t('my-links')
+          title: i18n.global.t('my-links'),
+          requiresAuth: true
         }
       },
       {
@@ -31,7 +35,8 @@ const routes = [
         name: 'enterpoint-setting',
         component: () => import('@/pages/LinkDetail/BaseSettingPage.vue'),
         meta: {
-          title: i18n.global.t('menu-enterpoint2')
+          title: i18n.global.t('menu-enterpoint2'),
+          requiresAuth: true
         }
       },
       {
@@ -39,6 +44,7 @@ const routes = [
         name: 'enterpoint-advanced',
         component: () => import('@/pages/LinkDetail/AdvancedSettingPage.vue'),
         meta: {
+          requiresAuth: true,
           title: i18n.global.t('menu-enterpoint3')
         }
       },
@@ -47,6 +53,7 @@ const routes = [
         name: 'enterpoint-thirds',
         component: () => import('@/pages/LinkDetail/ThirdPage.vue'),
         meta: {
+          requiresAuth: true,
           title: i18n.global.t('menu-enterpoint5')
         }
       },
@@ -55,6 +62,7 @@ const routes = [
         name: 'enterpoint-customer',
         component: () => import('@/pages/LinkDetail/CustomerPage.vue'),
         meta: {
+          requiresAuth: true,
           title: i18n.global.t('menu-enterpoint4')
         }
       },
@@ -65,42 +73,66 @@ const routes = [
           {
             path: '',
             name: 'settings-account',
-            component: () => import('@/pages/settings/Account.vue')
+            component: () => import('@/pages/settings/Account.vue'),
+            meta: {
+              requiresAuth: true
+            }
           },
           {
             path: 'sub_account',
             name: 'settings-sub_account',
-            component: () => import('@/pages/settings/SubAccount.vue')
+            component: () => import('@/pages/settings/SubAccount.vue'),
+            meta: {
+              requiresAuth: true
+            }
           },
           {
             path: 'princing_plan',
             name: 'settings-princing_plan',
-            component: () => import('@/pages/settings/PrincingPlan.vue')
+            component: () => import('@/pages/settings/PrincingPlan.vue'),
+            meta: {
+              requiresAuth: true
+            }
           },
           {
             path: 'payment_upgrade',
             name: 'settings-payment-upgrade',
-            component: () => import('@/pages/settings/PaymentUpgrade.vue')
+            component: () => import('@/pages/settings/PaymentUpgrade.vue'),
+            meta: {
+              requiresAuth: true
+            }
           },
           {
             path: 'settings_payment_flow',
             name: 'settings-payment',
-            component: () => import('@/pages/settings/Payment.vue')
+            component: () => import('@/pages/settings/Payment.vue'),
+            meta: {
+              requiresAuth: true
+            }
           },
           {
             path: 'settings_payment_flow_paypal',
             name: 'settings-payment-paypal',
-            component: () => import('@/pages/settings/SettingPayPal.vue')
+            component: () => import('@/pages/settings/SettingPayPal.vue'),
+            meta: {
+              requiresAuth: true
+            }
           },
           {
             path: 'settings_payment_flow_stripe',
             name: 'settings-payment-stripe',
-            component: () => import('@/pages/settings/SettingStripe.vue')
+            component: () => import('@/pages/settings/SettingStripe.vue'),
+            meta: {
+              requiresAuth: true
+            }
           },
           {
             path: 'settings_payment_flow_line_pay',
             name: 'settings-payment-line-pay',
-            component: () => import('@/pages/settings/SettingLinePay.vue')
+            component: () => import('@/pages/settings/SettingLinePay.vue'),
+            meta: {
+              requiresAuth: true
+            }
           }
         ]
       }
@@ -109,27 +141,42 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: LoginPage
+    component: LoginPage,
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/login_by_phone',
     name: 'loginByPhone',
-    component: LoginByPhonePage
+    component: LoginByPhonePage,
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/sublogin',
     name: 'sublogin',
-    component: SubLogin
+    component: SubLogin,
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/reset',
     name: 'reset',
-    component: EmailRest
+    component: EmailRest,
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/resetpassword',
     name: 'resetpassword',
-    component: ResetPassword
+    component: ResetPassword,
+    meta: {
+      requiresAuth: false
+    }
   }
 ]
 
@@ -142,17 +189,10 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
-  if (to.name === 'landing-page') return
-  if (
-    to.name === 'login' ||
-    to.name === 'loginByPhone' ||
-    to.name === 'sublogin'
-  )
-    return
   if (to.name === 'settings-payment-upgrade') {
     to.meta.noLayout = true
   }
-  if (!localStorage.getItem('token')) {
+  if (to.meta.requiresAuth && !localStorage.getItem('token')) {
     return { name: 'login' }
   }
 })

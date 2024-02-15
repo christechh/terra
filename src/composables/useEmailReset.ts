@@ -7,6 +7,7 @@ export default function useEmailReset() {
   const isReseting = ref(false)
   const isInputError = ref(false)
   const apiError = ref('')
+  const showModal = ref(false)
   const sendRestEmail = () => {
     if (!email.value) {
       isInputError.value = true
@@ -22,6 +23,7 @@ export default function useEmailReset() {
       .then(() => {
         isReseting.value = false
         isInputError.value = false
+        showModal.value = true
       })
       .catch((error: AxiosError) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,6 +39,7 @@ export default function useEmailReset() {
     isReseting,
     isInputError,
     apiError,
+    showModal,
     sendRestEmail
   }
 }

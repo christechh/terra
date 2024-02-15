@@ -2,10 +2,11 @@
 import { useI18n } from 'vue-i18n'
 import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
+import SendResetPasswordEmailConfirnModal from '../components/Modals/SendResetPasswordEmailConfirnModal/SendResetPasswordEmailConfirnModal.vue'
 import useCountDown from '../composables/useCountDown'
 import useEmailReset from '../composables/useEmailReset'
 const { t } = useI18n()
-const { email, isReseting, isInputError, apiError, sendRestEmail } =
+const { email, isReseting, isInputError, apiError, showModal, sendRestEmail } =
   useEmailReset()
 const { count, countDown } = useCountDown()
 const sendClick = () => {
@@ -53,4 +54,5 @@ const sendClick = () => {
       >
     </div>
   </div>
+  <SendResetPasswordEmailConfirnModal v-if="showModal" />
 </template>

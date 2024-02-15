@@ -8,10 +8,12 @@ import { FormInput } from '../base-components/Form'
 import CommonModal from '../components/Modals/CommonModal'
 
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import logoImg from '../assets/images/logo_dark_v6.png'
 import Lucide from '../base-components/Lucide'
 import { useUserStore } from '../stores/user'
 
+const router = useRouter()
 const account = ref('')
 const password = ref('')
 const passwordType = ref('password')
@@ -99,7 +101,10 @@ watch([account, password], () => {
         </div>
       </div>
       <div class="mb-5 text-center">
-        <button class="text-sm text-[#808080] underline">
+        <button
+          class="text-xs text-[#808080] underline"
+          @click="router.push({ name: 'reset' })"
+        >
           {{ t('login-forget-btn') }}
         </button>
       </div>

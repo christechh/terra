@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 import useResetPassword from '../composables/useResetPassword'
+
 const { t } = useI18n()
 const {
   newPassword,
@@ -46,20 +47,20 @@ const {
       <ul class="mb-3 mt-2 text-xs">
         <p class="mb-1">{{ t('signup-confirm-password-validation-text') }}：</p>
         <li
-          class="translate-x-3 list-disc text-primary"
-          :class="{ 'text-[#d0d0d0]': isPassRule1 }"
+          class="translate-x-3 list-disc"
+          :class="isPassRule1 ? 'text-[#d0d0d0]' : 'text-primary'"
         >
           {{ t('signup-confirm-password-validation-eight-characters') }}
         </li>
         <li
-          class="translate-x-3 list-disc text-primary"
-          :class="{ 'text-[#d0d0d0]': isPassRule2 }"
+          class="translate-x-3 list-disc"
+          :class="isPassRule2 ? 'text-[#d0d0d0]' : 'text-primary'"
         >
           {{ t('signup-confirm-password-validation-capital-letters') }}
         </li>
         <li
-          class="translate-x-3 list-disc text-primary"
-          :class="{ 'text-[#d0d0d0]': isPassRule3 }"
+          class="translate-x-3 list-disc"
+          :class="isPassRule3 ? 'text-[#d0d0d0]' : 'text-primary'"
         >
           {{ t('signup-confirm-password-validation-numbers') }}
         </li>
