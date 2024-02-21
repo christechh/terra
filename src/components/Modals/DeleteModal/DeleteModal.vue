@@ -7,7 +7,7 @@ import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useNotificationsStore } from '../../../stores/notifications'
-import { useSubAccountStore } from '../../../stores/sub-account'
+import { useCompanyStore } from '../../../stores/company'
 const deleteModalStore = useDeleteModalStore()
 const router = useRouter()
 
@@ -36,9 +36,9 @@ const deleteExec = async () => {
     case 'account':
       await axios.delete('/user')
       break
-    case 'subAccount':
+    case 'company':
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      useSubAccountStore().deleteSubAccount((deleteData as any).id)
+      useCompanyStore().deleteCompany((deleteData as any).id)
       break
     case 'chatLink': {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

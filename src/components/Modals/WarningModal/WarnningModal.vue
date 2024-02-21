@@ -39,7 +39,7 @@ const iconColor = computed(() => {
   }
 
   if (type.value === 'info') {
-    return 'text-[#02b13f]'
+    return 'text-[#C2512B]'
   }
 
   return 'text-warning'

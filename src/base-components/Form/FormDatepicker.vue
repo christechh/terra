@@ -63,8 +63,9 @@ watch(localValue, (newValue) => {
     v-model="localValue"
     class="c-date-picker p-0"
     :input-class-name="computedClass"
-    format="yyyy.MM.dd HH:mm"
+    format="yyyy.MM.dd"
     model-type="timestamp"
+    :enable-time-picker="false"
     @blur="handleBlur"
   />
 </template>
@@ -77,5 +78,9 @@ watch(localValue, (newValue) => {
 .c-date-picker input {
   border: 0;
   border-radius: 0.375rem; /* Rounded-md */
+}
+.dp__action_select {
+  background: var(--dp-primary-color) !important;
+  color: var(--dp-primary-text-color) !important;
 }
 </style>

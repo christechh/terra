@@ -22,7 +22,7 @@ import {
   IBatchUpdateForm,
   IQuery,
   ITransferItem,
-  useSubAccountStore
+  useCompanyStore
 } from '../../../../stores/sub-account-setting'
 import { SubAccountRole } from '../../../../utils/common'
 const route = useRoute()
@@ -31,14 +31,14 @@ if (route.params.curLocale) {
   locale.value = route.params.curLocale as string
 }
 const { allTransferList, shareAvatars, submitDisabled } =
-  storeToRefs(useSubAccountStore())
+  storeToRefs(useCompanyStore())
 const {
   getSubAccountList,
   updateSubAccountData,
   updateToAdmin,
   removeRole,
   toggleSubmitDisabled
-} = useSubAccountStore()
+} = useCompanyStore()
 
 const defaultEmptyImage = AEmpty.PRESENTED_IMAGE_SIMPLE
 
@@ -398,8 +398,8 @@ onMounted(() => {
   float: right;
 }
 .bg-theme-1 {
-  background-color: #02b13f !important;
-  border-color: #02b13f !important;
+  background-color: #c2512b !important;
+  border-color: #c2512b !important;
 }
 .primary-button:disabled {
   opacity: 0.5;
@@ -430,29 +430,29 @@ onMounted(() => {
 <style>
 .ant-pagination-item-active {
   font-weight: 500 !important;
-  border-color: #02b13f !important;
+  border-color: #c2512b !important;
 }
 .ant-pagination-item-active a {
-  color: #02b13f !important;
+  color: #c2512b !important;
 }
 .ant-radio-checked .ant-radio-inner,
 .ant-radio-checked:after {
-  border-color: #02b13f;
+  border-color: #c2512b;
 }
 .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
-  border-color: #02b13f;
-  background-color: #02b13f;
+  border-color: #c2512b;
+  background-color: #c2512b;
 }
 .ant-checkbox-inner::after {
-  background: #02b13f !important;
+  background: #c2512b !important;
 }
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #02b13f !important;
-  border-color: #02b13f !important;
+  background-color: #c2512b !important;
+  border-color: #c2512b !important;
 }
 
 .ant-btn-primary {
-  background-color: #02b13f !important;
+  background-color: #c2512b !important;
   color: white;
   display: flex !important;
   align-items: center;
@@ -463,7 +463,7 @@ onMounted(() => {
 }
 .primary-font-color,
 .primary-font-color:hover {
-  color: #02b13f;
+  color: #c2512b;
 }
 .primary-text-color {
   color: #939393;
@@ -478,10 +478,10 @@ onMounted(() => {
     .ant-select-customize-input
   ):not(.ant-pagination-size-changer)
   .ant-select-selector {
-  border-color: #02b13f !important;
+  border-color: #c2512b !important;
 }
 .ant-select:hover .ant-select-selector {
-  border-color: #02b13f !important;
+  border-color: #c2512b !important;
 }
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
   background: #d8f0dc !important;
@@ -493,10 +493,10 @@ onMounted(() => {
   .ant-checkbox-checked:not(.ant-checkbox-disabled):after,
 .ant-radio-wrapper:hover .ant-radio-wrapper,
 .ant-radio-wrapper:hover .ant-radio-inner {
-  border-color: #02b13f;
+  border-color: #c2512b;
 }
 .ant-checkbox-checked:after {
-  border-color: #02b13f;
+  border-color: #c2512b;
 }
 [class^='ant-col'],
 [class*=' ant-col'],

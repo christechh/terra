@@ -43,7 +43,7 @@ onMounted(() => {
       <div class="items-center md:flex">
         <div class="mr-2 mt-2 flex-1">
           <b>{{ $t('pricing-CTA98') }}</b>
-          <p class="pt-2 text-lg font-medium text-[#02B13F]">
+          <p class="pt-2 text-lg font-medium text-[#C2512B]">
             {{ $t(planUidName[princingPlan.plan_uid]) }}
           </p>
         </div>
@@ -165,7 +165,7 @@ onMounted(() => {
           >
             <div
               id="mau-value"
-              class="h-full w-3/4 rounded bg-[#02B13F]"
+              class="h-full w-3/4 rounded bg-[#C2512B]"
               :style="`width: ${mauPrecent}%`"
             ></div>
           </div>
@@ -184,7 +184,7 @@ onMounted(() => {
         <p>
           {{ $t('mau-limit-asap-start') }}
           <span
-            class="cursor-pointer text-[#02B13F]"
+            class="cursor-pointer text-[#C2512B]"
             @click="isShowPlanModal = true"
           >
             {{ $t('mau-limit-change-plan') }}
@@ -205,7 +205,7 @@ onMounted(() => {
     <div class="mt-1 rounded-b-xl bg-white p-5 dark:bg-darkmode-600">
       <div v-if="!princingPlan.coupon_code">
         <div
-          class="flex cursor-pointer items-center text-[#02B13F]"
+          class="flex cursor-pointer items-center text-[#C2512B]"
           @click="isShowUseCouponModal = true"
         >
           <Lucide icon="Ticket" :size="20" class="mr-2" />

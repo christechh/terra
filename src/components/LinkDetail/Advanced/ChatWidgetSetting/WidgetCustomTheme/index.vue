@@ -38,7 +38,7 @@ const showText = computed(() => props.form.widgetType !== 'circle')
 const colors = computed(() => {
   return [
     {
-      color: '#02b13f'
+      color: '#C2512B'
     },
     {
       color: '#007abf'

@@ -99,7 +99,7 @@ const removeCurrentRole = (account: ITransferItem): void => {
   account.rules = replaced
 }
 
-export const useSubAccountStore = defineStore('subAccounts', {
+export const useCompanyStore = defineStore('subAccounts', {
   state: () => {
     return {
       subAccountRawData: null,

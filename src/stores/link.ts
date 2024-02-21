@@ -14,7 +14,7 @@ export const useLinkStore = defineStore('link', {
       try {
         const {
           data: { data }
-        } = await axios.get('/chat/enterpoints/list', {
+        } = await axios.get('/company', {
           params: {
             sort: 'createdAt',
             order: 'desc',
@@ -22,8 +22,8 @@ export const useLinkStore = defineStore('link', {
             pageSize: this.pageSize
           }
         })
-        this.links = data.data
-        this.total = data.counts
+        this.links = data
+        // this.total = data.counts
       } catch (error) {
         console.log(error)
       }

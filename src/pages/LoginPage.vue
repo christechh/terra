@@ -8,13 +8,13 @@ import { FormInput } from '../base-components/Form'
 import CommonModal from '../components/Modals/CommonModal'
 
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import logoImg from '../assets/images/logo_dark_v6.png'
 import Lucide from '../base-components/Lucide'
 import { useUserStore } from '../stores/user'
 
-const router = useRouter()
-const account = ref('')
+// const router = useRouter()
+const email = ref('')
 const password = ref('')
 const passwordType = ref('password')
 const isEyeOffVisible = ref(false)
@@ -23,21 +23,21 @@ const { t } = useI18n()
 const isInputError = ref(false)
 const isLoging = ref(false)
 const apiError = ref('')
-const isAndroid = ref(navigator.userAgent.toLowerCase().indexOf('android') > -1)
+// const isAndroid = ref(navigator.userAgent.toLowerCase().indexOf('android') > -1)
 
 const doLogin = () => {
-  if (!account.value || !password.value) {
+  if (!email.value || !password.value) {
     return (isInputError.value = true)
   }
   apiError.value = ''
   isLoging.value = true
   useUserStore()
     .login({
-      account: account.value,
+      email: email.value,
       password: password.value
     })
     .catch((e) => {
-      apiError.value = e.response.data.message
+      apiError.value = e.response.data.errors[0].message
     })
     .finally(() => {
       isLoging.value = false
@@ -55,7 +55,7 @@ const eyeOpen = (status: boolean) => {
     passwordType.value = 'text'
   }
 }
-watch([account, password], () => {
+watch([email, password], () => {
   isInputError.value = false
 })
 </script>
@@ -73,11 +73,11 @@ watch([account, password], () => {
         <span class="mb-1 text-sm">{{ t('login-email-label') }}</span>
         <FormInput
           class="rounded-lg border"
-          v-model="account"
+          v-model="email"
           type="text"
           :placeholder="t('signup-login-placeholder-email')"
         />
-        <div v-if="isInputError && !account" class="mt-1 text-xs text-red-500">
+        <div v-if="isInputError && !email" class="mt-1 text-xs text-red-500">
           {{ t('error-message7') }}
         </div>
       </div>
@@ -91,7 +91,7 @@ watch([account, password], () => {
           @keyup.enter="doLogin"
         />
         <div
-          v-if="isInputError && !password && account"
+          v-if="isInputError && !password && email"
           class="mt-1 text-xs text-red-500"
         >
           {{ t('error-message8') }}
@@ -100,14 +100,14 @@ watch([account, password], () => {
           {{ apiError }}
         </div>
       </div>
-      <div class="mb-5 text-center">
+      <!-- <div class="mb-5 text-center">
         <button
           class="text-xs text-[#808080] underline"
           @click="router.push({ name: 'reset' })"
         >
           {{ t('login-forget-btn') }}
         </button>
-      </div>
+      </div> -->
       <Button
         variant="primary"
         class="mb-3 w-full text-sm"
@@ -115,7 +115,7 @@ watch([account, password], () => {
         :loading="isLoging"
         >{{ t('login-btn') }}</Button
       >
-      <div class="mb-5 text-center text-sm">
+      <!-- <div class="mb-5 text-center text-sm">
         <span>{{ t('login-no-sign-up-login-text') }}</span
         ><button
           class="text-[#808080] underline"
@@ -123,14 +123,14 @@ watch([account, password], () => {
         >
           {{ t('login-sign-up-btn') }}
         </button>
-      </div>
+      </div> -->
       <div class="my-5 flex items-center justify-center">
         <hr class="flex-1" />
         <span class="px-1 text-sm">{{ t('or') }}</span>
         <hr class="flex-1" />
       </div>
       <div class="flex flex-col gap-3">
-        <Button
+        <!-- <Button
           v-if="!isAndroid"
           class="relative w-full border border-black text-sm font-semibold"
         >
@@ -140,7 +140,7 @@ watch([account, password], () => {
             alt=""
           />
           {{ t('signup-apple-btn-title') }}</Button
-        >
+        > -->
         <Button
           class="relative w-full border border-black text-sm font-semibold"
         >
@@ -150,7 +150,7 @@ watch([account, password], () => {
             alt=""
           />{{ t('signup-google-btn-title') }}</Button
         >
-        <Button
+        <!-- <Button
           class="relative w-full border border-black text-sm font-semibold"
         >
           <img
@@ -158,8 +158,8 @@ watch([account, password], () => {
             src="../assets/images/facebook_logo.svg"
             alt=""
           />{{ t('signup-facebook-btn-title') }}</Button
-        >
-        <Button
+        > -->
+        <!-- <Button
           class="relative w-full border border-black text-sm font-semibold"
           @click="$router.push({ name: 'loginByPhone' })"
         >
@@ -168,8 +168,8 @@ watch([account, password], () => {
             src="../assets/images/phone.svg"
             alt=""
           />{{ t('login-phone-btn-title') }}</Button
-        >
-        <Button
+        > -->
+        <!-- <Button
           class="relative w-full border border-black text-sm font-semibold"
           @click="$router.push({ name: 'sublogin' })"
         >
@@ -178,7 +178,7 @@ watch([account, password], () => {
             src="../assets/images/sub-account-login.svg"
             alt=""
           />{{ t('sub-account-login-title') }}</Button
-        >
+        > -->
       </div>
     </div>
   </div>
@@ -239,7 +239,7 @@ watch([account, password], () => {
             <div class="intro-x mt-8">
               <FormInput
                 type="text"
-                v-model="account"
+                v-model="email"
                 class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]"
                 placeholder="帳號"
               />

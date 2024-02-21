@@ -19,9 +19,7 @@ interface Response<T> {
     // per_page?: number
     // current_page?: number
     // last_page?: number
-    data?: {
-      data?: T[]
-    }
+    data?: T[]
   }
 }
 
@@ -62,7 +60,7 @@ export const useTable = <T = any, R extends Response<T> = Response<T>>({
       })
 
       responseData.value = response as Response<T>
-      const responseList = getList(responseData.value?.data?.data?.data || [])
+      const responseList = getList(responseData.value?.data?.data || [])
       if (isStack) {
         const ids = list.value.map((item) => (item as any).value)
         const newList = [

@@ -10,7 +10,7 @@ import {
 import { Dialog, Slideover } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import ContryCodePicker from '../../ContryCodePicker'
-import useCreateSubAccount from './useCreateSubAccount'
+import useCreateUser from './useCreateUser'
 
 interface Props {
   subAccount?: {
@@ -40,7 +40,7 @@ const {
   canSubmit,
   isEdit,
   submit
-} = useCreateSubAccount(subAccount)
+} = useCreateUser(subAccount)
 
 const component = computed(() => {
   return isEdit.value ? Slideover : Dialog

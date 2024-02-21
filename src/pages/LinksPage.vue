@@ -99,7 +99,7 @@ const downloadQrCode = () => {
 const dialogOpen = ref(false)
 const createLinkDialogOpen = ref(false)
 onMounted(() => {
-  userStore.fetchSetting()
+  // userStore.fetchSetting()
   linkStore.fetchLinks(1)
 })
 </script>
@@ -146,11 +146,13 @@ onMounted(() => {
           <img width="20" height="20" src="@/assets/images/search.png" alt="" />
         </div>
       </div>
+
       <div
         v-for="link in links"
         :key="link.id"
         class="flex flex-col flex-wrap items-start justify-center gap-6 rounded-xl border border-gray-200 p-5 dark:border-darkmode-700 sm:flex-row sm:items-center sm:justify-between"
       >
+        <!-- {{ link }} -->
         <div class="flex items-center space-x-3">
           <img
             :src="
@@ -285,7 +287,7 @@ onMounted(() => {
 .tab {
   @apply flex-grow cursor-pointer border-b-[2px] p-4 text-center text-[18px] font-medium;
   &.active {
-    @apply border-[#d9e756] text-[#02b13f];
+    @apply border-[#d9e756] text-[#C2512B];
   }
   /* f0f0f0 */
 }

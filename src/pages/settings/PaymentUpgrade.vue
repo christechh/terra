@@ -56,7 +56,7 @@ onMounted(() => {
         </div>
       </RouterLink>
       <div class="mb-4 flex justify-center">
-        <b class="text-2xl font-black text-[#02b13f]">
+        <b class="text-2xl font-black text-[#C2512B]">
           {{ $t(activePlan?.version ?? '') }}
         </b>
       </div>
@@ -105,7 +105,7 @@ onMounted(() => {
         </div>
         <!-- 總計 -->
         <div
-          class="mt-2.5 flex items-center justify-between text-xl text-[#02b13f]"
+          class="mt-2.5 flex items-center justify-between text-xl text-[#C2512B]"
         >
           <b>{{ $t('paymnet_upgrade19-3') }}</b>
           <b class="font-black">
@@ -336,7 +336,7 @@ onMounted(() => {
                 'mx-auto my-0 w-[100px] rounded-lg p-[10px_18px] font-semibold transition-all duration-300 md:m-0',
                 disabledUseCouponBtn
                   ? 'bg-[#eeeeee] text-[#898e99]'
-                  : 'bg-[#02b13f] text-white',
+                  : 'bg-[#C2512B] text-white',
                 errorMessage || successDiscount.discount_type ? 'mt-8' : 'mt-4'
               ]"
             >
@@ -380,7 +380,7 @@ onMounted(() => {
         <p v-if="paymentInfo.invoice_type === 0">
           <span class="mr-2 text-[#939393]">{{ $t('paymnet_upgrade39') }}</span>
           <a href="https://pinchat.me/contact" target="_blank">
-            <span class="text-[#02b13f]">
+            <span class="text-[#C2512B]">
               {{ $t('paymnet_upgrade391') }}
             </span>
           </a>
@@ -424,7 +424,7 @@ onMounted(() => {
             'w-full rounded-lg p-[12px_18px] font-semibold transition-all duration-300',
             disabledSubmitBtn
               ? 'bg-[#eeeeee] text-[#898e99]'
-              : 'bg-[#02b13f] text-white hover:bg-[#028e81]'
+              : 'bg-[#C2512B] text-white hover:bg-[#028e81]'
           ]"
         >
           {{ $t('payment-check-out') }}
@@ -444,7 +444,7 @@ onMounted(() => {
           <a
             href="https://pinchat.me/zh-tw/terms"
             target="_blank"
-            class="cursor-pointer underline hover:text-[#02b13f]"
+            class="cursor-pointer underline hover:text-[#C2512B]"
           >
             {{ $t('paymnet_upgrade421') }}
           </a>

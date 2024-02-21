@@ -3,7 +3,8 @@ import i18n from '../i18n'
 import SideMenu from '../layouts/SideMenu/SideMenu.vue'
 import EmailRest from '../pages/EmailRest.vue'
 import LandingPage from '../pages/LandingPage.vue'
-import LinksPage from '../pages/LinksPage.vue'
+// import LinksPage from '../pages/LinksPage.vue'
+import CompanyPage from '../pages/CompanyPage.vue'
 import LoginByPhonePage from '../pages/LoginByPhone.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import PhoneReset from '../pages/PhoneReset.vue'
@@ -28,9 +29,9 @@ const routes = [
       {
         path: '/dashboard',
         name: 'links',
-        component: LinksPage,
+        component: CompanyPage,
         meta: {
-          title: i18n.global.t('my-links'),
+          title: i18n.global.t('company-title'),
           requiresAuth: true
         }
       },
@@ -78,14 +79,6 @@ const routes = [
             path: '',
             name: 'settings-account',
             component: () => import('@/pages/settings/Account.vue'),
-            meta: {
-              requiresAuth: true
-            }
-          },
-          {
-            path: 'sub_account',
-            name: 'settings-sub_account',
-            component: () => import('@/pages/settings/SubAccount.vue'),
             meta: {
               requiresAuth: true
             }

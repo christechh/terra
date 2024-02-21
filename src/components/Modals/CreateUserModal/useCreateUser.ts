@@ -1,7 +1,7 @@
 import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
-import { useSubAccountStore } from '../../../stores/sub-account'
+import { useCompanyStore } from '../../../stores/company'
 import { parsePhone } from '../../../utils/helper'
 
 interface CreateSubAccountPayload {
@@ -105,7 +105,7 @@ export default function useCreateSubAccount(
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useSubAccountStore().fetchSubAccounts()
+    useCompanyStore().fetchCompanies()
   }
 
   return {

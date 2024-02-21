@@ -496,7 +496,7 @@ watch(
 <style scoped lang="css">
 .label-coming {
   background: #f4fabd;
-  color: #02b13f;
+  color: #c2512b;
   padding: 4px 8px;
   display: inline-block;
   border-radius: 16px;

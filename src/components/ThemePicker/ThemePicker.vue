@@ -9,7 +9,7 @@ interface Props {
 const { modelValue } = defineProps<Props>()
 const emit = defineEmits(['update:modelValue'])
 const colors = [
-  '#02b13f',
+  '#C2512B',
   '#007abf',
   '#ffa01a',
   '#ff85b0',

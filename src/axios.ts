@@ -1,6 +1,6 @@
 import axios from 'axios'
-import i18n from './i18n'
 import { useWaningModalStore } from './stores/modals/warrningModal'
+import { useRedirectToStore } from './stores/redirect-to'
 
 const instance = axios.create({
   headers: {
@@ -24,8 +24,7 @@ instance.interceptors.request.use(
         config.headers.Authorization = 'Bearer ' + token
       }
     }
-    config.baseURL =
-      import.meta.env.VITE_API_URL + i18n.global.locale.value.toLowerCase()
+    config.baseURL = import.meta.env.VITE_API_URL
     return config
   },
   (error) => {
@@ -38,10 +37,13 @@ instance.interceptors.response.use(
     if (error.config.skipInterceptor) {
       return Promise.reject(error)
     }
-    if (error.config.url === '/dashboard/enterpoint') {
-      return Promise.reject(error)
-    } else {
-      useWaningModalStore().showModal({ text: error.message })
+
+    useWaningModalStore().showModal({
+      text: error.response.data.errors[0].message
+    })
+
+    if (error.response.status === 401) {
+      useRedirectToStore().redirect({ path: '/login' })
     }
     return Promise.reject(error)
   }

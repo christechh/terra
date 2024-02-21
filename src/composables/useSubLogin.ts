@@ -16,7 +16,7 @@ export default function useSubLogin() {
     isLoging.value = true
     useUserStore()
       .subLogin({
-        account: subAccount.value,
+        email: subAccount.value,
         password: password.value
       })
       .catch((e: AxiosError) => {

@@ -38,7 +38,7 @@ export default function useUserInfo() {
   const nofityChange = ref(false)
 
   const getUserInfo = async () => {
-    await axios.get('/auth/setting').then((res) => {
+    await axios.get('/meta').then((res) => {
       const { data } = res.data.data
       Object.assign(userInfo, data)
       const ast = new AsYouType()

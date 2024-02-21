@@ -9,7 +9,7 @@ import { Menu } from '../../base-components/Headless'
 import Lucide from '../../base-components/Lucide'
 import { useUserStore } from '../../stores/user'
 import fakerData from '../../utils/faker'
-const account = computed(() => useUserStore().account)
+const email = computed(() => useUserStore().email)
 const route = useRoute()
 const searchDropdown = ref(false)
 const doLogout = () => {
@@ -192,7 +192,7 @@ const doLogout = () => {
       </Menu.Button>
       <Menu.Items class="mt-px w-56 bg-primary text-white">
         <Menu.Header class="font-normal">
-          <div class="font-medium">{{ account }}</div>
+          <div class="font-medium">{{ email }}</div>
         </Menu.Header>
         <Menu.Divider class="bg-white/[0.08]" />
         <Menu.Item class="hover:bg-white/5" @click="doLogout">
