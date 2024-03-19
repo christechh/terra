@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Button from '../../../base-components/Button'
 import { FormInput, FormLabel } from '../../../base-components/Form'
-import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
+// import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateCompany from './useCreateCompany'
@@ -56,7 +56,7 @@ const { name, taxId, canSubmit, isEdit, submit } = useCreateCompany(company)
           v-model="taxId"
         />
       </div>
-      <div class="mb-4 flex items-center">
+      <!-- <div class="mb-4 flex items-center">
         <FormLabel class="w-[120px]">勞報單模組</FormLabel>
         <FormDatepicker
           class="flex-1"
@@ -64,7 +64,7 @@ const { name, taxId, canSubmit, isEdit, submit } = useCreateCompany(company)
           :placeholder="$t('error-message35')"
           v-model="labor"
         />
-      </div>
+      </div> -->
 
       <div class="flex justify-center">
         <Button

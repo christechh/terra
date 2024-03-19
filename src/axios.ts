@@ -4,7 +4,8 @@ import { useRedirectToStore } from './stores/redirect-to'
 
 const instance = axios.create({
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'X-User-Type': 'admin'
   }
 })
 const useBasicTokenRouters = [
