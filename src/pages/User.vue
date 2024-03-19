@@ -6,24 +6,24 @@ import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
-import CreateCompanyModal from '../components/Modals/CreateCompanyModal'
+import CreateUserModal from '../components/Modals/CreateUserModal'
 import useCompany from './settings/composables/useCompany'
 
 const { companies, confirmDeleteCompany } = useCompany()
 
-const showCreateCompanyModal = ref(false)
-const selectedCompanyIndex = ref(-1)
+const showCreateUserModal = ref(false)
+const selectedUserIndex = ref(-1)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedCompany: any = computed(
-  () => companies.value[selectedCompanyIndex.value] || null
+const selectedUser: any = computed(
+  () => companies.value[selectedUserIndex.value] || null
 )
 
 const creatOredit = (idx?: number) => {
-  selectedCompanyIndex.value = -1
+  selectedUserIndex.value = -1
   if (idx !== undefined) {
-    selectedCompanyIndex.value = idx
+    selectedUserIndex.value = idx
   }
-  showCreateCompanyModal.value = true
+  showCreateUserModal.value = true
 }
 </script>
 
@@ -33,7 +33,7 @@ const creatOredit = (idx?: number) => {
       class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap"
     >
       <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-        <div class="relative w-56 text-slate-500">
+        <div class="relative text-slate-500">
           <FormInput
             type="text"
             class="!box w-56 pr-10"
@@ -51,7 +51,7 @@ const creatOredit = (idx?: number) => {
       class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap"
     >
       <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-        <div class="relative w-56 text-slate-500">
+        <div class="relative text-slate-500">
           <Button
             variant="primary"
             type="button"
@@ -207,10 +207,10 @@ const creatOredit = (idx?: number) => {
     <!-- END: Pagination -->
   </div>
 
-  <CreateCompanyModal
-    v-if="showCreateCompanyModal"
-    @close="showCreateCompanyModal = false"
-    :company="selectedCompany"
-    :idx="selectedCompanyIndex"
+  <CreateUserModal
+    v-if="showCreateUserModal"
+    @close="showCreateUserModal = false"
+    :company="selectedUser"
+    :idx="selectedUserIndex"
   />
 </template>

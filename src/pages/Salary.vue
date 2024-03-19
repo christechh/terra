@@ -59,7 +59,33 @@ const creatOredit = (idx?: number) => {
             @click="() => creatOredit()"
           >
             <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-            新增公司
+            薪資計算
+          </Button>
+        </div>
+      </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button
+            variant="primary"
+            type="button"
+            class="m-3"
+            @click="() => creatOredit()"
+          >
+            <Lucide icon="Download" class="mr-1 h-4 w-4" />
+            匯出薪資明細
+          </Button>
+        </div>
+      </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button
+            variant="primary"
+            type="button"
+            class="m-3"
+            @click="() => creatOredit()"
+          >
+            <Lucide icon="Send" class="mr-1 h-4 w-4" />
+            薪資單寄送
           </Button>
         </div>
       </div>
@@ -69,14 +95,13 @@ const creatOredit = (idx?: number) => {
       <Table class="-mt-2 border-separate border-spacing-y-[10px]">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th class="whitespace-nowrap border-b-0">ID</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">公司名稱</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">統一編號</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">勞報單</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">財務報表</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">人事管理</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">電子發票</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">財務分析</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">薪資年月</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">發放名稱</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">起始日</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">結束日</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">發放人數</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">發放日期</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">狀態</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
           </Table.Tr>
         </Table.Thead>
@@ -112,35 +137,28 @@ const creatOredit = (idx?: number) => {
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                <!-- {{ item.taxId }} -->
+                {{ item.taxId }}
               </div>
             </Table.Td>
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                <!-- {{ item.taxId }} -->
+                {{ item.taxId }}
               </div>
             </Table.Td>
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                <!-- {{ item.taxId }} -->
+                {{ item.taxId }}
               </div>
             </Table.Td>
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                <!-- {{ item.taxId }} -->
-              </div>
-            </Table.Td>
-            <Table.Td
-              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-            >
-              <div class="font-medium">
-                <!-- {{ item.taxId }} -->
+                {{ item.taxId }}
               </div>
             </Table.Td>
 

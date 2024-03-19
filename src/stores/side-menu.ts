@@ -17,6 +17,11 @@ export const useSideMenuStore = defineStore('sideMenu', {
   state: (): SideMenuState => ({
     menu: [
       {
+        icon: 'Home',
+        pageName: 'Dashboard',
+        title: i18n.global.t('首頁')
+      },
+      {
         icon: 'Building2',
         pageName: 'Company',
         title: i18n.global.t('公司管理')

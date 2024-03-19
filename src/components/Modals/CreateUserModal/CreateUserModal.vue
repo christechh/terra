@@ -1,15 +1,10 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import Button from '../../../base-components/Button'
-import {
-  FormCheck,
-  FormInput,
-  FormLabel,
-  InputGroup
-} from '../../../base-components/Form'
+import { FormInput, FormLabel } from '../../../base-components/Form'
 import { Dialog, Slideover } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
-import ContryCodePicker from '../../ContryCodePicker'
+// import ContryCodePicker from '../../ContryCodePicker'
 import useCreateUser from './useCreateUser'
 
 interface Props {
@@ -29,18 +24,8 @@ interface Props {
 const emit = defineEmits(['close'])
 const { subAccount } = defineProps<Props>()
 
-const {
-  account,
-  name,
-  password,
-  notifyType,
-  notifyEmail,
-  phoneCode,
-  notifyPhone,
-  canSubmit,
-  isEdit,
-  submit
-} = useCreateUser(subAccount)
+const { account, name, password, canSubmit, isEdit, submit } =
+  useCreateUser(subAccount)
 
 const component = computed(() => {
   return isEdit.value ? Slideover : Dialog
@@ -49,12 +34,6 @@ const component = computed(() => {
 const childComponet = computed(() => {
   return isEdit.value ? Slideover.Panel : Dialog.Panel
 })
-
-const reset = () => {
-  notifyEmail.value = ''
-  notifyPhone.value = ''
-  phoneCode.value = '+886'
-}
 </script>
 
 <template>
@@ -66,8 +45,8 @@ const reset = () => {
       >
         {{
           isEdit
-            ? $t('feature-section8-title') + (idx + 1)
-            : $t('sub-account-add-btn-text')
+            ? $t('user-edit-model-title') + (idx + 1)
+            : $t('user-create-model-title')
         }}
         <Lucide
           icon="X"
@@ -108,70 +87,7 @@ const reset = () => {
           v-model="password"
         />
       </div>
-      <div class="mb-4 flex items-center">
-        <FormLabel class="w-[120px]">{{
-          $t('sub-account-notify-setting')
-        }}</FormLabel>
-        <div>
-          <FormCheck>
-            <FormCheck.Input
-              id="notify-switch-email"
-              type="radio"
-              v-model="notifyType"
-              :value="20"
-              @click="reset"
-            />
-            <FormCheck.Label htmlFor="notify-switch-email">
-              {{ $t('sub-account-table-email') }}
-            </FormCheck.Label>
-          </FormCheck>
-          <FormCheck class="mt-3">
-            <FormCheck.Input
-              id="notify-switch-phone"
-              type="radio"
-              v-model="notifyType"
-              :value="10"
-              @click="reset"
-            />
-            <FormCheck.Label htmlFor="notify-switch-phone">
-              {{ $t('sub-account-table-phone') }}
-            </FormCheck.Label>
-          </FormCheck>
-          <FormCheck class="mt-3">
-            <FormCheck.Input
-              id="notify-switch-none"
-              type="radio"
-              v-model="notifyType"
-              value="none"
-              @click="reset"
-            />
-            <FormCheck.Label htmlFor="notify-switch-none">
-              {{ $t('sub-account-no-notify') }}
-            </FormCheck.Label>
-          </FormCheck>
-        </div>
-      </div>
-      <div class="mb-5 flex items-center">
-        <FormLabel class="w-[120px]" v-if="notifyType !== 'none'">{{
-          notifyType === 20
-            ? $t('sub-account-table-email')
-            : $t('sub-account-table-phone')
-        }}</FormLabel>
-        <FormInput
-          v-if="notifyType === 20"
-          class="flex-1"
-          type="text"
-          :placeholder="$t('error-message36')"
-          v-model="notifyEmail"
-        />
-        <InputGroup
-          v-if="notifyType === 10"
-          class="dashboard-bg flex-1 rounded pl-1 shadow-sm"
-        >
-          <ContryCodePicker v-model="phoneCode" />
-          <FormInput v-model="notifyPhone" type="text" class="shadow-none" />
-        </InputGroup>
-      </div>
+
       <div class="flex justify-center">
         <Button
           v-if="isEdit"
@@ -180,8 +96,15 @@ const reset = () => {
           >{{ $t('cancel-btn') }}</Button
         >
         <Button
+          style="display: none"
           :class="{ 'flex-1': !isEdit, 'ml-3': isEdit }"
           :disabled="!canSubmit"
+          variant="primary"
+          @click="() => submit(isEdit, () => emit('close'))"
+          >{{ $t('save-btn') }}</Button
+        >
+        <Button
+          :class="{ 'flex-1': !isEdit, 'ml-3': isEdit }"
           variant="primary"
           @click="() => submit(isEdit, () => emit('close'))"
           >{{ $t('save-btn') }}</Button

@@ -511,6 +511,10 @@
   "feature-section7-sub-title1": "在聊天室中透過單一按鈕完成真人客服以及聊天機器人的切換。",
   "feature-section7-title2": "選擇訊息類型搭配",
   "feature-section7-sub-title2": "我們提供圖文、按鈕牌卡以及輪播牌卡等三種不同的訊息類型。",
+
+  "user-create-model-title": "新增員工",
+  "user-edit-model-title": "編輯員工",
+
   "feature-section8-title": "編輯公司",
   "feature-section8-title1": "指定權限",
   "feature-section8-sub-title1": "決定您要開放什麼權限給下面的員工或客服人員，相關權限包括：聊天、編輯連結、查看數據分析。",
@@ -961,7 +965,10 @@
   "chat-signup-btn": "用 App 回覆",
   "chatroom": "聊天室",
   "my-links": "公司管理",
-  "company-title": "公司列表",
+  "dashboard-title": "首頁",
+  "company-title": "公司管理",
+  "user-title": "人事管理",
+  "salary-title": "薪資管理",
   "dashboard-page-title": "已加入的聊天室",
   "logout": "登出",
   "breadcrumbs-label1": "管理首頁",

@@ -15,6 +15,7 @@ const routes = [
   {
     path: '/',
     name: 'landing-page',
+    redirect: '/dashboard',
     component: LandingPage,
     meta: {
       requiresAuth: false
@@ -26,6 +27,15 @@ const routes = [
     children: [
       {
         path: '/dashboard',
+        name: 'Dashboard',
+        component: () => import('@/pages/Dashboard.vue'),
+        meta: {
+          title: i18n.global.t('dashboard-title'),
+          requiresAuth: true
+        }
+      },
+      {
+        path: '/company',
         name: 'Company',
         component: () => import('@/pages/CompanyPage.vue'),
         meta: {
@@ -34,21 +44,21 @@ const routes = [
         }
       },
       {
-        path: 'enterpoint',
+        path: 'user',
         name: 'User',
         component: () => import('@/pages/User.vue'),
         meta: {
-          title: i18n.global.t('menu-enterpoint2'),
+          title: i18n.global.t('user-title'),
           requiresAuth: true
         }
       },
       {
-        path: 'enterpoint_advanced',
+        path: 'salary',
         name: 'Salary',
-        component: () => import('@/pages/CompanyPage.vue'),
+        component: () => import('@/pages/Salary.vue'),
         meta: {
-          requiresAuth: true,
-          title: i18n.global.t('menu-enterpoint3')
+          title: i18n.global.t('salary-title'),
+          requiresAuth: true
         }
       }
     ]
