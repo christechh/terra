@@ -1,0 +1,1 @@
+import{s as c,c as l,B as p,C as o}from"./index-UyvVqaOg.js";function r(){const e=c(),{fetchCompanies:t}=e,a=l(()=>e.companies),n=s=>{p().showModal({deleteType:"company",title:o.global.t("delete-alert-title"),content:o.global.t("page-delete-check-desc"),deleteData:{id:s}})};return t(),{companies:a,fetchCompanies:t,confirmDeleteCompany:n}}export{r as u};
