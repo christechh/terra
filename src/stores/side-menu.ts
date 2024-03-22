@@ -59,7 +59,17 @@ export const useSideMenuStore = defineStore('sideMenu', {
           {
             icon: 'Tent',
             pageName: 'holiday',
-            title: i18n.global.t('假勤管理')
+            title: i18n.global.t('加班/兼職出勤')
+          },
+          {
+            icon: 'Banknote',
+            pageName: 'holiday',
+            title: i18n.global.t('薪資科別加減項')
+          },
+          {
+            icon: 'Tent',
+            pageName: 'holiday',
+            title: i18n.global.t('假勤設定')
           }
         ]
       },

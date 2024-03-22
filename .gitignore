@@ -25,5 +25,5 @@ launch.json
 docker-compose.yaml
 Makefile
 
-dist/
+# dist/
 .firebase

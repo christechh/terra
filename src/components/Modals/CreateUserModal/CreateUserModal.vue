@@ -6,6 +6,7 @@ import { Dialog, Slideover } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 // import ContryCodePicker from '../../ContryCodePicker'
 import useCreateUser from './useCreateUser'
+import useUser from '../../../pages/settings/composables/useUser'
 
 interface Props {
   subAccount?: {
@@ -21,6 +22,7 @@ interface Props {
   idx: number
 }
 
+const { confirmLinkSalary } = useUser()
 const emit = defineEmits(['close'])
 const { subAccount } = defineProps<Props>()
 
@@ -106,7 +108,7 @@ const childComponet = computed(() => {
         <Button
           :class="{ 'flex-1': !isEdit, 'ml-3': isEdit }"
           variant="primary"
-          @click="() => submit(isEdit, () => emit('close'))"
+          @click="confirmLinkSalary()"
           >{{ $t('save-btn') }}</Button
         >
       </div>

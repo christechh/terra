@@ -7,15 +7,15 @@ import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
 import CreateUserModal from '../components/Modals/CreateUserModal'
-import useCompany from './settings/composables/useCompany'
+import useUser from './settings/composables/useUser'
 
-const { companies, confirmDeleteCompany } = useCompany()
+const { users, confirmDeleteCompany } = useUser()
 
 const showCreateUserModal = ref(false)
 const selectedUserIndex = ref(-1)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedUser: any = computed(
-  () => companies.value[selectedUserIndex.value] || null
+  () => users.value[selectedUserIndex.value] || null
 )
 
 const creatOredit = (idx?: number) => {
@@ -63,6 +63,32 @@ const creatOredit = (idx?: number) => {
           </Button>
         </div>
       </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button
+            variant="primary"
+            type="button"
+            class="m-3"
+            @click="() => creatOredit()"
+          >
+            <Lucide icon="Upload" class="mr-1 h-4 w-4" />
+            匯入員工資料
+          </Button>
+        </div>
+      </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button
+            variant="primary"
+            type="button"
+            class="m-3"
+            @click="() => creatOredit()"
+          >
+            <Lucide icon="Download" class="mr-1 h-4 w-4" />
+            匯出員工資料
+          </Button>
+        </div>
+      </div>
     </div>
     <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
@@ -83,16 +109,19 @@ const creatOredit = (idx?: number) => {
         </Table.Thead>
 
         <Table.Tbody>
-          <Table.Tr
-            v-for="(item, index) in companies"
-            :key="index"
-            class="intro-x"
-          >
+          <Table.Tr v-for="(item, index) in users" :key="index" class="intro-x">
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
                 {{ item.id }}
+              </div>
+            </Table.Td>
+            <Table.Td
+              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+            >
+              <div class="font-medium">
+                {{ item.name }}
               </div>
             </Table.Td>
             <Table.Td
