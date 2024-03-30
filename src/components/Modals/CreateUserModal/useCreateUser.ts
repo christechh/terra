@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
@@ -16,6 +17,7 @@ interface CreateUsersPayload {
   isEmployeeRetirementPercentage: boolean
   companyIds?: string[]
   enabledModules: string[]
+  [key: string]: any
 }
 
 export default function useCreateUser(
@@ -59,13 +61,13 @@ export default function useCreateUser(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const extend: any = {}
     if (user) {
-      const newValue = {
+      const newValue: CreateUsersPayload = {
         ...user,
         ...extend
       }
       Object.keys(payload).forEach((key) => {
         if (newValue[key] !== undefined) {
-          payload[key as keyof CreateUsersPayload] = newValue[key]
+          payload[key] = newValue[key]
         }
       })
       // Object.assign(payload, { ...user, ...extend })
@@ -74,7 +76,7 @@ export default function useCreateUser(
 
   const canSubmit = computed(() => {
     return name.value !== '' &&
-      email.value !== '' &&
+      email?.value !== '' &&
       employeeId.value !== '' &&
       workStatus.value !== '' &&
       onboardDate.value !== '' &&

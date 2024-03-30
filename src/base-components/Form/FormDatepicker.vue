@@ -7,6 +7,7 @@ interface FormDatepickerProps {
   modelValue?: string
   formInputSize?: 'sm' | 'lg'
   rounded?: boolean
+  monthPicker?: boolean
 }
 
 const props = defineProps<FormDatepickerProps>()
@@ -20,7 +21,7 @@ const transTimestampToString = (timestampString: string) => {
   const day = date.getDate().toString().padStart(2, '0')
   // const hour = date.getHours().toString().padStart(2, '0')
   // const minute = date.getMinutes().toString().padStart(2, '0')
-  return `${year}-${month}-${day}`
+  return props.monthPicker ? `${year}-${month}` : `${year}-${month}-${day}`
 }
 const isTimestampNotString = (value: string) => {
   return Number(value) > 0
@@ -67,6 +68,7 @@ watch(localValue, (newValue) => {
     model-type="timestamp"
     :enable-time-picker="false"
     @blur="handleBlur"
+    :month-picker="props.monthPicker"
   />
 </template>
 

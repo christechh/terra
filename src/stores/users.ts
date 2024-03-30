@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
 import axios from '../axios'
 
@@ -6,6 +7,12 @@ export interface Users {
   name: string
   taxId: string
   enabledModules: string[]
+  email: string
+  onboardDate: string
+  resignationDate: string
+  workStatus: number
+  salaryType: number
+  updatedAt: string
 }
 
 export const useUsersStore = defineStore('users', {

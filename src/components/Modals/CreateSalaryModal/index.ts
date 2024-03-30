@@ -1,3 +1,3 @@
-import CreateCompanyModal from './CreateCompanyModal.vue'
+import CreateSalaryModal from './CreateSalaryModal.vue'
 
-export default CreateCompanyModal
+export default CreateSalaryModal

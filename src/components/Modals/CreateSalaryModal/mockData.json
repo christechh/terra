@@ -1,0 +1,6239 @@
+[
+  {
+    "employee": {
+      "id": 244,
+      "name": "張堪序",
+      "code": "W0020",
+      "arrivalDate": "2010-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 41600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1100,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3848,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 710,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2231,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 2748,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2748,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 245,
+      "name": "鐘玉麟",
+      "code": "W0162",
+      "arrivalDate": "2018-04-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3233,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1683,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1063,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 487,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 246,
+      "name": "魏均恬",
+      "code": "W0205",
+      "arrivalDate": "2019-04-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 47600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 10000,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1100,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3848,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 943,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2961,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 3648,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 248,
+      "name": "白美華",
+      "code": "W0043",
+      "arrivalDate": "2012-12-10T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25500,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1555,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 983,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 562,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 728,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2545,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 470,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1476,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1818,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 249,
+      "name": "傅淑琴",
+      "code": "W0182",
+      "arrivalDate": "2018-10-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28500,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 8100,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 4114,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1372,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 361,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1008,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3528,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 651,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2045,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2520,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 250,
+      "name": "溫仕瑄",
+      "code": "W0215",
+      "arrivalDate": "2019-06-19T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3445,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1887,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1149,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 119,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 251,
+      "name": "王韻嘉",
+      "code": "W0242",
+      "arrivalDate": "2019-12-18T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 29000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 5000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1993,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1259,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 348,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 916,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3208,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 592,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1860,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2292,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 252,
+      "name": "徐子芸",
+      "code": "W0282",
+      "arrivalDate": "2020-08-25T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3349,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1834,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1117,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 300,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 253,
+      "name": "林怡君",
+      "code": "W0284",
+      "arrivalDate": "2020-08-19T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 254,
+      "name": "郭李繹",
+      "code": "W0327",
+      "arrivalDate": "2021-03-04T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1782,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1085,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 480,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 255,
+      "name": "吳維倫",
+      "code": "W0331",
+      "arrivalDate": "2021-04-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1782,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1085,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 480,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 256,
+      "name": "陳雪柔",
+      "code": "W0351",
+      "arrivalDate": "2021-07-06T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1750,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1105,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 745,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 257,
+      "name": "李岑諭",
+      "code": "W0396",
+      "arrivalDate": "2021-10-08T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1628,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1029,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 443,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 258,
+      "name": "李偲瑄",
+      "code": "W0415",
+      "arrivalDate": "2021-12-08T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1782,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1085,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 480,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 259,
+      "name": "林佩璇",
+      "code": "W0419",
+      "arrivalDate": "2022-01-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3349,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1834,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1117,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 300,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 260,
+      "name": "楊建隆",
+      "code": "W0421",
+      "arrivalDate": "2022-01-05T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 23000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3158,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1729,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1053,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 660,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 261,
+      "name": "孫葦庭",
+      "code": "W0424",
+      "arrivalDate": "2022-02-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 262,
+      "name": "曾文敏",
+      "code": "W0428",
+      "arrivalDate": "2022-04-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1628,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1029,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 443,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 263,
+      "name": "曾怡渟",
+      "code": "W0511",
+      "arrivalDate": "2022-06-06T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1782,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1085,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 480,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 264,
+      "name": "宋宇琁",
+      "code": "W0514",
+      "arrivalDate": "2022-07-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 2600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1504,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 1096,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 692,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2420,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 447,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1403,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1728,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1728,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 265,
+      "name": "林意修",
+      "code": "W0516",
+      "arrivalDate": "2022-07-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1782,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1085,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 480,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 268,
+      "name": "王珮菱",
+      "code": "W0139",
+      "arrivalDate": "2017-10-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1823,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1151,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 126,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 872,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3049,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 563,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1768,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2178,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 269,
+      "name": "劉芷妡",
+      "code": "W0340",
+      "arrivalDate": "2021-05-10T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26500,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1013,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1604,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 483,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 270,
+      "name": "曾詒靖",
+      "code": "W0348",
+      "arrivalDate": "2021-06-17T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1628,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1029,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 443,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 271,
+      "name": "張妤瑄",
+      "code": "W0422",
+      "arrivalDate": "2022-01-10T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25500,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1555,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 983,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 562,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 728,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2545,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 470,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1476,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1818,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 272,
+      "name": "鄧桔誠",
+      "code": "W0435",
+      "arrivalDate": "2022-04-23T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 31000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 8600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 4401,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2411,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1467,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 321,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1054,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3687,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 681,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2138,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2634,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 273,
+      "name": "徐品瑜",
+      "code": "W0436",
+      "arrivalDate": "2022-04-26T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 7100,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3493,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1913,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1165,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 529,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 274,
+      "name": "黃詩芸",
+      "code": "W0226",
+      "arrivalDate": "2019-09-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 41600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1054,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3687,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 681,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2138,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2634,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 275,
+      "name": "馬偉理",
+      "code": "W0235",
+      "arrivalDate": "2019-11-20T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3233,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1683,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1063,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 487,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 276,
+      "name": "王筱均",
+      "code": "W0250",
+      "arrivalDate": "2020-02-11T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 34600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 916,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3208,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 592,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1860,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2292,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 277,
+      "name": "吳函書",
+      "code": "W0271",
+      "arrivalDate": "2020-07-06T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 35600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 916,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3208,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 592,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1860,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2292,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 278,
+      "name": "鍾淑如",
+      "code": "W0367",
+      "arrivalDate": "2021-08-23T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 30600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 279,
+      "name": "葉怡柔",
+      "code": "W0383",
+      "arrivalDate": "2021-09-13T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 31600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 280,
+      "name": "林鼎益",
+      "code": "W0429",
+      "arrivalDate": "2022-04-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1653,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1044,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 903,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 281,
+      "name": "張維耘",
+      "code": "W0520",
+      "arrivalDate": "2022-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26600,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 692,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2420,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 447,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1403,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1728,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1728,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 284,
+      "name": "陳筱青",
+      "code": "W0330",
+      "arrivalDate": "2021-03-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 285,
+      "name": "劉至烜",
+      "code": "W0335",
+      "arrivalDate": "2021-05-04T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 286,
+      "name": "曾昱邯",
+      "code": "W0353",
+      "arrivalDate": "2021-07-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 29000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 8600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 4210,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2306,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1404,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 680,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1008,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3528,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 651,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2045,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2520,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 287,
+      "name": "徐資雅",
+      "code": "W0365",
+      "arrivalDate": "2021-08-16T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1701,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1075,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 824,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 288,
+      "name": "陳黃芳英",
+      "code": "W0529",
+      "arrivalDate": "2022-09-12T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 289,
+      "name": "葉品逸",
+      "code": "W0532",
+      "arrivalDate": "2022-10-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 29000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 8600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 4349,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2382,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 1869,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1008,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3528,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 651,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2045,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2520,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 290,
+      "name": "劉子寧",
+      "code": "W0533",
+      "arrivalDate": "2022-10-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 291,
+      "name": "莊曉詩",
+      "code": "W0534",
+      "arrivalDate": "2022-10-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 292,
+      "name": "王世蓉",
+      "code": "W0536",
+      "arrivalDate": "2022-10-04T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 293,
+      "name": "徐煒貽",
+      "code": "W0537",
+      "arrivalDate": "2022-10-12T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 294,
+      "name": "李傑龍",
+      "code": "W0538",
+      "arrivalDate": "2022-10-14T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1782,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1085,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 480,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 295,
+      "name": "鄭燕珊",
+      "code": "W0539",
+      "arrivalDate": "2022-10-14T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 296,
+      "name": "陳維軒",
+      "code": "W0600",
+      "arrivalDate": "2022-10-17T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 297,
+      "name": "蔡承真",
+      "code": "W0601",
+      "arrivalDate": "2022-10-16T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 312,
+      "name": "余佳璇",
+      "code": "W0021",
+      "arrivalDate": "2012-05-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3879,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1812,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1145,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 922,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 313,
+      "name": "張堪慶",
+      "code": "W0123",
+      "arrivalDate": "2017-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 31000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 5000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3734,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2097,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1324,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 313,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1008,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3528,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 651,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2045,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2520,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 314,
+      "name": "張馨云",
+      "code": "W0147",
+      "arrivalDate": "2018-02-03T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1105,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1750,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 745,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 315,
+      "name": "買勛偉",
+      "code": "W0238",
+      "arrivalDate": "2019-12-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 7600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3636,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1991,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1212,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 761,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 872,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3049,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 563,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1768,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2178,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 316,
+      "name": "葉晏樺",
+      "code": "W0265",
+      "arrivalDate": "2020-05-19T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3400,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1643,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1038,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 719,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 317,
+      "name": "賴怡靜",
+      "code": "W0295",
+      "arrivalDate": "2020-09-10T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3400,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1643,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1038,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 719,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 318,
+      "name": "陳怡妏",
+      "code": "W0310",
+      "arrivalDate": "2020-11-23T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 7600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3445,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1887,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1149,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 1119,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 872,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3049,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 563,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1768,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2178,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 319,
+      "name": "黃豪偉",
+      "code": "W0342",
+      "arrivalDate": "2021-06-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3349,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1834,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1117,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 300,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 320,
+      "name": "黃依婷",
+      "code": "W0354",
+      "arrivalDate": "2021-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26500,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1604,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1013,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 483,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 321,
+      "name": "王德仁",
+      "code": "W0356",
+      "arrivalDate": "2021-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 7600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3540,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1939,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1180,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 941,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 338,
+      "name": "黃玉雲",
+      "code": "W0366",
+      "arrivalDate": "2021-08-16T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1653,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1044,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 903,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 339,
+      "name": "吳昶輝",
+      "code": "W0368",
+      "arrivalDate": "2021-08-23T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28500,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 8100,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 4114,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2253,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1372,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 361,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1008,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3528,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 651,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2045,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2520,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 340,
+      "name": "蔡沛珊",
+      "code": "W0370",
+      "arrivalDate": "2021-08-23T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1750,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1105,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 745,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 341,
+      "name": "劉家佑",
+      "code": "W0372",
+      "arrivalDate": "2021-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1701,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1075,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 824,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 342,
+      "name": "陳宥達",
+      "code": "W0380",
+      "arrivalDate": "2021-09-10T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1653,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1044,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 903,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 343,
+      "name": "林峻毅",
+      "code": "W0384",
+      "arrivalDate": "2021-09-14T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3349,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1834,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1117,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 300,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 344,
+      "name": "張家鴻",
+      "code": "W0388",
+      "arrivalDate": "2021-10-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1653,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1044,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 903,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 345,
+      "name": "顏家琪",
+      "code": "W0390",
+      "arrivalDate": "2021-10-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1701,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1075,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 824,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 346,
+      "name": "許景閎",
+      "code": "W0395",
+      "arrivalDate": "2021-10-04T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1750,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1105,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 745,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 347,
+      "name": "林琪偉",
+      "code": "W0420",
+      "arrivalDate": "2022-01-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 7600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3540,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1939,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1180,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 941,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 348,
+      "name": "黃杏娟",
+      "code": "W0430",
+      "arrivalDate": "2022-04-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1653,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1044,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 903,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 349,
+      "name": "龎依文",
+      "code": "W0510",
+      "arrivalDate": "2022-06-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 25000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3349,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1834,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1117,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 300,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 350,
+      "name": "黃思嘉",
+      "code": "W0522",
+      "arrivalDate": "2022-08-11T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 351,
+      "name": "許博渝",
+      "code": "W0523",
+      "arrivalDate": "2022-08-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 322,
+      "name": "陳慧秦",
+      "code": "W0394",
+      "arrivalDate": "2021-10-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 323,
+      "name": "陳璽昶",
+      "code": "W0408",
+      "arrivalDate": "2021-11-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 31000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 8600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 4401,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2411,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1467,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 321,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1054,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3687,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 681,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2138,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2634,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 324,
+      "name": "林鈺芮",
+      "code": "W0416",
+      "arrivalDate": "2021-12-10T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3100,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1580,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 998,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 522,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 728,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2545,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 470,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1476,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1818,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 325,
+      "name": "陳廷瑀",
+      "code": "W0438",
+      "arrivalDate": "2022-05-16T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 326,
+      "name": "高巧臻",
+      "code": "W0521",
+      "arrivalDate": "2022-08-08T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 23000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3158,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1729,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1053,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 660,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 327,
+      "name": "蘇姿樺",
+      "code": "W0602",
+      "arrivalDate": "2022-10-26T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 24000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3360,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1840,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 1400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 328,
+      "name": "張苙雯",
+      "code": "W0605",
+      "arrivalDate": "2022-11-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3445,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1887,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1149,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 119,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 329,
+      "name": "金士傑",
+      "code": "W0606",
+      "arrivalDate": "2022-11-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 22000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3062,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1677,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1021,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 840,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 692,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2420,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 447,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1403,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1728,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1728,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 330,
+      "name": "林佑儒",
+      "code": "W0607",
+      "arrivalDate": "2022-11-14T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 7600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 4052,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2219,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 1329,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 916,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3208,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 592,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1860,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2292,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 333,
+      "name": "劉瓊瑤",
+      "code": "W0517",
+      "arrivalDate": "2022-07-13T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 334,
+      "name": "胡沛媛",
+      "code": "W0518",
+      "arrivalDate": "2022-07-13T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 335,
+      "name": "陳厚任",
+      "code": "W0604",
+      "arrivalDate": "2022-10-24T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 7600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3657,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 2003,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 1940,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 356,
+      "name": "林子涵",
+      "code": "W0197",
+      "arrivalDate": "2019-02-11T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 28000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1701,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1075,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 824,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 800,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2797,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 516,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1622,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1998,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1998,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 357,
+      "name": "畢斐宓",
+      "code": "W0208",
+      "arrivalDate": "2019-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 50100,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1100,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3848,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 822,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2581,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 3180,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 358,
+      "name": "黃俐菁",
+      "code": "W0290",
+      "arrivalDate": "2020-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 29000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 5000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1993,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1259,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 348,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 916,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3208,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 592,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1860,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2292,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 359,
+      "name": "潘家辰",
+      "code": "W0292",
+      "arrivalDate": "2020-09-07T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1798,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1136,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 666,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 360,
+      "name": "林子文",
+      "code": "W0317",
+      "arrivalDate": "2021-02-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 6600,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 3445,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1887,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1149,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 119,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 836,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2924,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 540,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1695,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 2088,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 361,
+      "name": "胡依琳",
+      "code": "W0320",
+      "arrivalDate": "2021-03-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 362,
+      "name": "高雅婷",
+      "code": "W0321",
+      "arrivalDate": "2021-03-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 9000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 16600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 3245,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1975,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 11380,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1100,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3848,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 822,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 2581,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 3180,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 352,
+      "name": "吳欣樺",
+      "code": "W0526",
+      "arrivalDate": "2022-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 392,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1230,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 666,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 353,
+      "name": "葉亞欣",
+      "code": "W0528",
+      "arrivalDate": "2022-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 27000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 3600,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 1653,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 1044,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 903,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 764,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2672,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 493,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1549,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1908,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 247,
+      "name": "高聖億",
+      "code": "W0001",
+      "arrivalDate": "2006-08-24T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 40000,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 2400,
+        "type": "normal"
+      },
+      {
+        "title": "職務津貼",
+        "amount": 15000,
+        "type": "normal"
+      },
+      {
+        "title": "全勤獎金",
+        "amount": 16230,
+        "type": "normal"
+      },
+      {
+        "title": "約定平日延長",
+        "amount": 7140,
+        "type": "normal"
+      },
+      {
+        "title": "約定休息日",
+        "amount": 3910,
+        "type": "normal"
+      },
+      {
+        "title": "約定休假日",
+        "amount": 2380,
+        "type": "normal"
+      },
+      {
+        "title": "其他津貼",
+        "amount": 2800,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 1100,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 3848,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 2374,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 3726,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 4590,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 680,
+      "name": "劉妍芬",
+      "code": "1",
+      "arrivalDate": "2023-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 728,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2545,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 470,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1476,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 681,
+      "name": "林佳昇",
+      "code": "2",
+      "arrivalDate": "2023-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 634,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2218,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 409,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1286,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 671,
+      "name": "劉妍芬",
+      "code": "0001",
+      "arrivalDate": "2023-01-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 180,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 728,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2545,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 672,
+      "name": "林佳昇",
+      "code": "0002",
+      "arrivalDate": "2023-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 35600,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 607,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2125,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 673,
+      "name": "簡睿妍",
+      "code": "0003",
+      "arrivalDate": "2023-08-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 1504000,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 368,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 1285,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 682,
+      "name": "簡睿妍",
+      "code": "222",
+      "arrivalDate": "2023-08-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 634,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2218,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 409,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1286,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  }
+]

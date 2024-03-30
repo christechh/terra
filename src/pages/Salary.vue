@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import Button from '../base-components/Button'
-// import Pagination from '../base-components/Pagination'
-// FormSelect
 import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
 import CreateSalaryModal from '../components/Modals/CreateSalaryModal'
-import useCompany from './settings/composables/useCompany'
+import ExportSalaryModal from '../components/Modals/ExportSalaryModal'
 
-const { companies, confirmDeleteCompany } = useCompany()
+import useSalary from './settings/composables/useSalary'
 
 const showCreateSalaryModal = ref(false)
+const showExportSalaryModal = ref(false)
 const selectedCompanyIndex = ref(-1)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedCompany: any = computed(
-  () => companies.value[selectedCompanyIndex.value] || null
-)
+
+const { salaries, salaryGroups, salaryExtends, confirmDeleteSalary } =
+  useSalary(1)
 
 const creatOredit = (idx?: number) => {
   selectedCompanyIndex.value = -1
@@ -25,6 +23,16 @@ const creatOredit = (idx?: number) => {
   }
   showCreateSalaryModal.value = true
 }
+
+const exportSalary = () => {
+  showExportSalaryModal.value = true
+}
+
+console.log({
+  salaries,
+  salaryGroups,
+  salaryExtends
+})
 </script>
 
 <template>
@@ -116,7 +124,7 @@ const creatOredit = (idx?: number) => {
               variant="primary"
               type="button"
               class="m-3"
-              @click="() => creatOredit()"
+              @click="() => exportSalary()"
             >
               <Lucide icon="Download" class="mr-1 h-4 w-4" />
               匯出薪資明細
@@ -156,7 +164,7 @@ const creatOredit = (idx?: number) => {
 
           <Table.Tbody>
             <Table.Tr
-              v-for="(item, index) in companies"
+              v-for="(item, index) in salaries"
               :key="index"
               class="intro-x"
             >
@@ -227,7 +235,7 @@ const creatOredit = (idx?: number) => {
                     variant="danger"
                     type="button"
                     class="m-3 w-20"
-                    @click="confirmDeleteCompany(item.id)"
+                    @click="confirmDeleteSalary(item.id)"
                   >
                     <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                     刪除
@@ -275,8 +283,13 @@ const creatOredit = (idx?: number) => {
     <CreateSalaryModal
       v-if="showCreateSalaryModal"
       @close="showCreateSalaryModal = false"
-      :company="selectedCompany"
-      :idx="selectedCompanyIndex"
+      :companyId="1"
+    />
+    <ExportSalaryModal
+      v-if="showExportSalaryModal"
+      @close="showExportSalaryModal = false"
+      :companyId="1"
+      :salaryGroups="salaryGroups"
     />
   </div>
 </template>
