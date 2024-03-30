@@ -11,9 +11,9 @@ export default function useSubAccount() {
 
   const users = computed(() => subUserStore.users)
 
-  const confirmDeleteCompany = (id: number) => {
+  const confirmDeleteUser = (id: number) => {
     useDeleteModalStore().showModal({
-      deleteType: 'company',
+      deleteType: 'user',
       title: i18n.global.t('delete-alert-title'),
       content: i18n.global.t('page-delete-check-desc'),
       deleteData: { id }
@@ -33,7 +33,7 @@ export default function useSubAccount() {
   return {
     users,
     fetchUsers,
-    confirmDeleteCompany,
+    confirmDeleteUser,
     confirmLinkSalary
   }
 }

@@ -8,6 +8,7 @@ import Lucide from '../../../base-components/Lucide'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useCompanyStore } from '../../../stores/company'
+import { useUsersStore } from '../../../stores/users'
 const deleteModalStore = useDeleteModalStore()
 const router = useRouter()
 
@@ -39,6 +40,10 @@ const deleteExec = async () => {
     case 'company':
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       useCompanyStore().deleteCompany((deleteData as any).id)
+      break
+    case 'user':
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      useUsersStore().deleteUser((deleteData as any).id)
       break
     case 'chatLink': {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

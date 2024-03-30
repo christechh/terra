@@ -1,121 +1,122 @@
 import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
-import { useCompanyStore } from '../../../stores/company'
-import { parsePhone } from '../../../utils/helper'
+import { useUsersStore } from '../../../stores/users'
 
-interface CreateSubAccountPayload {
-  account: string
+interface CreateUsersPayload {
   name: string
-  password: string
-  notifyType: number | string
-  notifyEmail: string
-  notifyPhone: string
-  phoneCode: string
+  email?: string
+  password?: string
+  employeeId: string
+  workStatus: string
+  onboardDate: string
+  resignationDate?: string
+  identity: string
+  salaryType: string
+  isEmployeeRetirementPercentage: boolean
+  companyIds?: string[]
+  enabledModules: string[]
 }
 
-export default function useCreateSubAccount(
+export default function useCreateUser(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  subAccount?: any
+  user?: any
 ) {
-  const payload: CreateSubAccountPayload = reactive({
-    account: '',
-    name: '',
+  const payload: CreateUsersPayload = reactive({
+    name: '1',
+    email: '111',
     password: '',
-    notifyType: 20,
-    notifyEmail: '',
-    notifyPhone: '',
-    phoneCode: '+886'
+    employeeId: '123',
+    workStatus: '在職',
+    onboardDate: '2024-03-29',
+    resignationDate: '',
+    identity: '員工',
+    salaryType: '月薪',
+    isEmployeeRetirementPercentage: false,
+    companyIds: ['1', '2'],
+    enabledModules: []
   })
   const {
-    account,
     name,
+    email,
     password,
-    notifyType,
-    notifyEmail,
-    notifyPhone,
-    phoneCode
+    employeeId,
+    workStatus,
+    onboardDate,
+    resignationDate,
+    identity,
+    salaryType,
+    isEmployeeRetirementPercentage,
+    companyIds,
+    enabledModules
   } = toRefs(payload)
 
   const isEdit = computed(() => {
-    return !!subAccount
+    return !!user
   })
 
   onMounted(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const extend: any = {}
-    if (subAccount) {
-      if (subAccount.notifyType === 10) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { phoneCode, phone } = parsePhone(subAccount.notifyPhone)
-        extend.phoneCode = `+${phoneCode}`
-        extend.notifyPhone = phone
-      }
-      if (subAccount.notifyType === 0) {
-        extend.notifyType = 'none'
-      }
+    if (user) {
       const newValue = {
-        ...subAccount,
+        ...user,
         ...extend
       }
       Object.keys(payload).forEach((key) => {
         if (newValue[key] !== undefined) {
-          payload[key as keyof CreateSubAccountPayload] = newValue[key]
+          payload[key as keyof CreateUsersPayload] = newValue[key]
         }
       })
-      // Object.assign(payload, { ...subAccount, ...extend })
+      // Object.assign(payload, { ...user, ...extend })
     }
   })
 
   const canSubmit = computed(() => {
-    return !isEdit.value
-      ? account.value !== '' &&
-          name.value !== '' &&
-          password.value !== '' &&
-          ((notifyType.value === 20 && notifyEmail.value !== '') ||
-            (notifyType.value === 10 && notifyPhone.value !== '') ||
-            notifyType.value === 'none')
-      : account.value !== '' &&
-          name.value !== '' &&
-          ((notifyType.value === 20 && notifyEmail.value !== '') ||
-            (notifyType.value === 10 && notifyPhone.value !== '') ||
-            notifyType.value === 'none')
+    return name.value !== '' &&
+      email.value !== '' &&
+      employeeId.value !== '' &&
+      workStatus.value !== '' &&
+      onboardDate.value !== '' &&
+      identity.value !== '' &&
+      salaryType.value !== ''
+      ? true
+      : false
   })
 
   const submit = async (isEdit: boolean, callback: () => void) => {
     const action = isEdit ? 'update' : 'create'
+    console.log(action)
     const actionMap = {
       create: () =>
-        axios.post('user/subAccount', {
-          ...payload,
-          ...(notifyType.value === 10 && {
-            notifyPhone: `${payload.phoneCode}${payload.notifyPhone}`
-          })
+        axios.post('/user', {
+          ...payload
         }),
       update: () =>
-        axios.put(`user/subAccount/${subAccount.id}`, {
+        axios.put(`/user/${user.id}`, {
           ...payload,
-          id: subAccount.id,
-          type: payload.notifyType,
-          ...(notifyType.value === 10 && {
-            notifyPhone: `${payload.phoneCode}${payload.notifyPhone}`
-          })
+          id: user.id
         })
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useCompanyStore().fetchCompanies()
+    useUsersStore().fetchUsers()
   }
 
   return {
-    account,
     name,
+    email,
     password,
-    notifyType,
-    notifyEmail,
-    notifyPhone,
-    phoneCode,
+    employeeId,
+    workStatus,
+    onboardDate,
+    resignationDate,
+    identity,
+    salaryType,
+    isEmployeeRetirementPercentage,
+    companyIds,
+    enabledModules,
     canSubmit,
     isEdit,
     submit

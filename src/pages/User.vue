@@ -9,7 +9,7 @@ import Table from '../base-components/Table'
 import CreateUserModal from '../components/Modals/CreateUserModal'
 import useUser from './settings/composables/useUser'
 
-const { users, confirmDeleteCompany } = useUser()
+const { users, confirmDeleteUser } = useUser()
 
 const showCreateUserModal = ref(false)
 const selectedUserIndex = ref(-1)
@@ -66,10 +66,25 @@ const creatOredit = (idx?: number) => {
       <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
         <div class="relative text-slate-500">
           <Button
+            variant="danger"
+            type="button"
+            class="m-3"
+            @click="() => creatOredit()"
+            disabled
+          >
+            <Lucide icon="Download" class="mr-1 h-4 w-4" />
+            員工資料範例
+          </Button>
+        </div>
+      </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button
             variant="primary"
             type="button"
             class="m-3"
             @click="() => creatOredit()"
+            disabled
           >
             <Lucide icon="Upload" class="mr-1 h-4 w-4" />
             匯入員工資料
@@ -83,6 +98,7 @@ const creatOredit = (idx?: number) => {
             type="button"
             class="m-3"
             @click="() => creatOredit()"
+            disabled
           >
             <Lucide icon="Download" class="mr-1 h-4 w-4" />
             匯出員工資料
@@ -102,7 +118,7 @@ const creatOredit = (idx?: number) => {
             <Table.Th class="whitespace-nowrap border-b-0">離職日</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">在職狀態</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">計薪方式</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">薪資總計</Table.Th>
+            <!-- <Table.Th class="whitespace-nowrap border-b-0">薪資總計</Table.Th> -->
             <Table.Th class="whitespace-nowrap border-b-0">更新日期</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
           </Table.Tr>
@@ -128,49 +144,49 @@ const creatOredit = (idx?: number) => {
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.name }}
+                {{ item.email }}
               </div>
             </Table.Td>
             <Table.Td
+              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+            >
+              <div class="font-medium">
+                {{ item.onboardDate }}
+              </div>
+            </Table.Td>
+            <Table.Td
+              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+            >
+              <div class="font-medium">
+                {{ item.resignationDate }}
+              </div>
+            </Table.Td>
+            <Table.Td
+              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+            >
+              <div class="font-medium">
+                {{ item.workStatus }}
+              </div>
+            </Table.Td>
+            <Table.Td
+              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+            >
+              <div class="font-medium">
+                {{ item.salaryType }}
+              </div>
+            </Table.Td>
+            <!-- <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
                 {{ item.taxId }}
               </div>
-            </Table.Td>
+            </Table.Td> -->
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                <!-- {{ item.taxId }} -->
-              </div>
-            </Table.Td>
-            <Table.Td
-              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-            >
-              <div class="font-medium">
-                <!-- {{ item.taxId }} -->
-              </div>
-            </Table.Td>
-            <Table.Td
-              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-            >
-              <div class="font-medium">
-                <!-- {{ item.taxId }} -->
-              </div>
-            </Table.Td>
-            <Table.Td
-              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-            >
-              <div class="font-medium">
-                <!-- {{ item.taxId }} -->
-              </div>
-            </Table.Td>
-            <Table.Td
-              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-            >
-              <div class="font-medium">
-                <!-- {{ item.taxId }} -->
+                {{ item.updatedAt }}
               </div>
             </Table.Td>
 
@@ -191,7 +207,7 @@ const creatOredit = (idx?: number) => {
                   variant="danger"
                   type="button"
                   class="m-3 w-20"
-                  @click="confirmDeleteCompany(item.id)"
+                  @click="confirmDeleteUser(item.id)"
                 >
                   <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                   刪除
@@ -202,38 +218,6 @@ const creatOredit = (idx?: number) => {
         </Table.Tbody>
       </Table>
     </div>
-    <!-- END: Data List -->
-    <!-- BEGIN: Pagination -->
-    <!-- <div
-      class="intro-y col-span-12 flex flex-wrap items-center sm:flex-row sm:flex-nowrap"
-    >
-      <Pagination class="w-full sm:mr-auto sm:w-auto">
-        <Pagination.Link>
-          <Lucide icon="ChevronsLeft" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronLeft" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>...</Pagination.Link>
-        <Pagination.Link>1</Pagination.Link>
-        <Pagination.Link active>2</Pagination.Link>
-        <Pagination.Link>3</Pagination.Link>
-        <Pagination.Link>...</Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronRight" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronsRight" class="h-4 w-4" />
-        </Pagination.Link>
-      </Pagination>
-      <FormSelect class="!box mt-3 w-20 sm:mt-0">
-        <option>10</option>
-        <option>25</option>
-        <option>35</option>
-        <option>50</option>
-      </FormSelect>
-    </div> -->
-    <!-- END: Pagination -->
   </div>
 
   <CreateUserModal

@@ -6,6 +6,7 @@ import FormInline from './FormInline.vue'
 import FormLabel from './FormLabel.vue'
 import FormSelect from './FormSelect.vue'
 import FormSwitch from './FormSwitch'
+import FormDatepicker from './FormDatepicker.vue'
 import InputGroup from './InputGroup'
 import Upload from './Upload.vue'
 
@@ -18,6 +19,7 @@ export {
   FormLabel,
   FormSelect,
   FormSwitch,
+  FormDatepicker,
   InputGroup,
   Upload
 }

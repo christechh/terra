@@ -16,11 +16,11 @@ const transTimestampToString = (timestampString: string) => {
   const timestamp = Number(timestampString)
   const date = new Date(timestamp)
   const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours().toString().padStart(2, '0')
-  const minute = date.getMinutes().toString().padStart(2, '0')
-  return `${year}.${month}.${day} ${hour}:${minute}`
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const day = date.getDate().toString().padStart(2, '0')
+  // const hour = date.getHours().toString().padStart(2, '0')
+  // const minute = date.getMinutes().toString().padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
 const isTimestampNotString = (value: string) => {
   return Number(value) > 0
@@ -54,7 +54,7 @@ const handleBlur = () => {
 }
 
 watch(localValue, (newValue) => {
-  emit('update:modelValue', newValue)
+  emit('update:modelValue', transModalValue(newValue))
 })
 </script>
 
@@ -63,7 +63,7 @@ watch(localValue, (newValue) => {
     v-model="localValue"
     class="c-date-picker p-0"
     :input-class-name="computedClass"
-    format="yyyy.MM.dd"
+    format="yyyy/MM/dd"
     model-type="timestamp"
     :enable-time-picker="false"
     @blur="handleBlur"
