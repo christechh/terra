@@ -19,8 +19,7 @@ export const useSalaryStore = defineStore('salary', {
   state: () => ({
     salaries: [] as Salary[],
     salaryGroups: [] as SalaryGroup[],
-    salaryExtends: [] as SalaryExtend[],
-    calculateSalaries: [] as CalculateSalary[]
+    salaryExtends: [] as SalaryExtend[]
   }),
   actions: {
     async fetchSalaries({
@@ -30,10 +29,11 @@ export const useSalaryStore = defineStore('salary', {
       page: number
       companyId: number
     }) {
+      console.log(page)
       const response = await axios.get('/salary', {
         params: {
-          page,
-          pageSize: 100,
+          // page,
+          // pageSize: 100,
           companyId: companyId.toString()
         }
       })
@@ -53,6 +53,7 @@ export const useSalaryStore = defineStore('salary', {
           companyId: companyId.toString()
         }
       })
+      console.log('fetchSalaryGroups response', response.data.data)
       this.salaryGroups = response.data.data
     },
     async fetchSalaryExtends({
@@ -82,15 +83,25 @@ export const useSalaryStore = defineStore('salary', {
       endDate: string
       yearMonth: string
     }) {
-      const response = await axios.post('/salary/salary-extend', {
-        params: {
-          companyId: companyId.toString(),
-          startDate,
-          endDate,
-          yearMonth
-        }
+      const response = await axios.post('/salary/calculate', {
+        companyId: companyId.toString(),
+        startDate,
+        endDate,
+        yearMonth
       })
-      this.calculateSalaries = response.data.data
+      return response.data
+    },
+    deleteSalaryGroup(companyId: number, groupId: number) {
+      axios
+        .delete(`/salary/salary-group/${groupId}`, {
+          params: {
+            companyId
+          }
+        })
+        .then(() => {
+          // todo companyid要帶參數
+          this.fetchSalaryGroups({ companyId: 1, page: 1 })
+        })
     }
   }
 })

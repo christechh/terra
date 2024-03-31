@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
@@ -9,6 +10,7 @@ import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useCompanyStore } from '../../../stores/company'
 import { useUsersStore } from '../../../stores/users'
+import { useSalaryStore } from '../../../stores/salary'
 const deleteModalStore = useDeleteModalStore()
 const router = useRouter()
 
@@ -38,15 +40,18 @@ const deleteExec = async () => {
       await axios.delete('/user')
       break
     case 'company':
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       useCompanyStore().deleteCompany((deleteData as any).id)
       break
     case 'user':
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       useUsersStore().deleteUser((deleteData as any).id)
       break
+    case 'salaryGroup':
+      useSalaryStore().deleteSalaryGroup(
+        (deleteData as any).companyId,
+        (deleteData as any).id
+      )
+      break
     case 'chatLink': {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { token, id } = deleteData as any
       await axios.post('/dashboard/enterpoint', { id, token, is_valid: false })
       router.push('/dashboard')

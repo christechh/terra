@@ -23,7 +23,7 @@ const selectedCompany: any = computed(
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
           <div class="text-base font-medium">最新消息</div>
-          <router-link to="/dashboard/salary">
+          <router-link :to="{ name: 'SalaryGroupList' }">
             <Button variant="primary" disabled>
               <Lucide icon="LibraryBig" class="mr-1 h-4 w-4" />
               查看更多
@@ -40,7 +40,7 @@ const selectedCompany: any = computed(
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
           <div class="text-base font-medium">薪資小工具</div>
-          <router-link to="/dashboard/salary">
+          <router-link :to="{ name: 'SalaryGroupList' }">
             <Button variant="primary">
               <Lucide icon="Send" class="mr-1 h-4 w-4" />
               薪資計算
@@ -57,7 +57,7 @@ const selectedCompany: any = computed(
           class="flex items-center justify-between border-b border-slate-200 p-4"
         >
           <div class="text-base font-medium">勞報單</div>
-          <router-link to="/dashboard/salary">
+          <router-link :to="{ name: 'SalaryGroupList' }">
             <Button variant="primary" disabled>
               <Lucide icon="Send" class="mr-1 h-4 w-4" />
               新增勞報

@@ -7,7 +7,7 @@ import { FormSelect, FormLabel } from '../../../base-components/Form'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import { SalaryGroup } from '../../../stores/salary'
-import useExportSalary from './useExportSalary'
+import useExportSalary, { ExportSalaryPayload } from './useExportSalary'
 
 interface Props {
   companyId: number
@@ -16,9 +16,9 @@ interface Props {
 
 const emit = defineEmits(['close'])
 const { salaryGroups, companyId } = defineProps<Props>()
-const selectGroup = ref(null)
+const selectGroup = ref<string>('')
 
-const { exportSalary } = useExportSalary()
+const { exportSalary, loading: exportLoading } = useExportSalary()
 
 const onSalaryGroupSelect = (value: any) => {
   console.log('select group', value)
@@ -26,10 +26,11 @@ const onSalaryGroupSelect = (value: any) => {
 
 const onSubmitButtonClick = () => {
   if (!selectGroup.value || !companyId) return
-  exportSalary({
+  const payload: ExportSalaryPayload = {
     companyId,
     salaryGroupId: selectGroup.value
-  })
+  }
+  exportSalary(payload, () => emit('close'))
 }
 </script>
 
@@ -49,15 +50,15 @@ const onSubmitButtonClick = () => {
         <FormSelect
           v-model="selectGroup"
           class="flex-1"
-          placeholder="薪資發放名稱"
           @change="onSalaryGroupSelect"
         >
+          <option disabled selected value="">選擇發放名稱</option>
           <option
             v-for="salaryGroup in salaryGroups"
             :key="salaryGroup.id"
             :value="salaryGroup.id"
           >
-            {{ salaryGroup.title }}
+            {{ salaryGroup.name }}
           </option>
         </FormSelect>
       </div>
@@ -74,11 +75,12 @@ const onSubmitButtonClick = () => {
       <div class="flex justify-center">
         <Button
           class="flex-1"
-          :disabled="!selectGroup"
+          :disabled="!selectGroup || exportLoading"
+          :loading="exportLoading"
           variant="primary"
           @click="onSubmitButtonClick"
         >
-          送出
+          匯出
         </Button>
       </div>
     </Dialog.Panel>

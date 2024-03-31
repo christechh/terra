@@ -8,9 +8,13 @@ interface FormDatepickerProps {
   formInputSize?: 'sm' | 'lg'
   rounded?: boolean
   monthPicker?: boolean
+  autoApply?: boolean
 }
 
-const props = defineProps<FormDatepickerProps>()
+const props = withDefaults(defineProps<FormDatepickerProps>(), {
+  monthPicker: false,
+  autoApply: false
+})
 const emit = defineEmits(['update:modelValue', 'blur'])
 
 const transTimestampToString = (timestampString: string) => {
@@ -64,9 +68,10 @@ watch(localValue, (newValue) => {
     v-model="localValue"
     class="c-date-picker p-0"
     :input-class-name="computedClass"
-    format="yyyy/MM/dd"
+    :format="props.monthPicker ? 'yyyy/MM' : 'yyyy/MM/dd'"
     model-type="timestamp"
     :enable-time-picker="false"
+    :auto-apply="props.autoApply"
     @blur="handleBlur"
     :month-picker="props.monthPicker"
   />

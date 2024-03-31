@@ -1,0 +1,550 @@
+[
+  {
+    "employee": {
+      "id": 186,
+      "name": "林佳昇",
+      "code": "0002",
+      "arrivalDate": "2023-09-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "免稅加班費",
+        "amount": 0,
+        "type": "plus"
+      },
+      {
+        "title": "勞保費",
+        "amount": 659,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2307,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 426,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1338,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 196,
+      "name": "魏秉豐",
+      "code": "0009",
+      "arrivalDate": "2023-07-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 187,
+      "name": "簡睿妍",
+      "code": "0003",
+      "arrivalDate": "2023-08-02T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 0,
+        "type": "normal"
+      },
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 197,
+      "name": "呂亞潔",
+      "code": "0010",
+      "arrivalDate": "2023-09-21T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 380,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 1331,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 246,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 771,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 950,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 188,
+      "name": "楊彩儀",
+      "code": "0013",
+      "arrivalDate": "2023-10-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 189,
+      "name": "沈潔",
+      "code": "0012",
+      "arrivalDate": "2023-12-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 190,
+      "name": "林昶佑",
+      "code": "0004",
+      "arrivalDate": "2023-12-15T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 172,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 541,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 192,
+      "name": "陳威寰",
+      "code": "0007",
+      "arrivalDate": "2022-12-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 193,
+      "name": "洪文正",
+      "code": "0008",
+      "arrivalDate": "2023-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 194,
+      "name": "許宭銣",
+      "code": "0005",
+      "arrivalDate": "2023-08-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "免稅加班費",
+        "amount": 0,
+        "type": "plus"
+      },
+      {
+        "title": "勞保費",
+        "amount": 581,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2033,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 1887,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 195,
+      "name": "許詠鼎",
+      "code": "0006",
+      "arrivalDate": "2023-12-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "免稅加班費",
+        "amount": 0,
+        "type": "plus"
+      },
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 198,
+      "name": "楊宸居",
+      "code": "0011",
+      "arrivalDate": "2023-12-25T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 266,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 933,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 172,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 541,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 667,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 199,
+      "name": "游志緯",
+      "code": "0014",
+      "arrivalDate": "2023-12-25T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "hourly"
+    },
+    "salaryItems": [
+      {
+        "title": "勞保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 0,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 0,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 0,
+        "type": "company"
+      }
+    ]
+  },
+  {
+    "employee": {
+      "id": 191,
+      "name": "劉妍芬",
+      "code": "0001",
+      "arrivalDate": "2023-01-01T00:00:00.000Z",
+      "leaveDate": null,
+      "type": "monthly"
+    },
+    "salaryItems": [
+      {
+        "title": "基本薪資",
+        "amount": 26400,
+        "type": "normal"
+      },
+      {
+        "title": "伙食費",
+        "amount": 3000,
+        "type": "normal"
+      },
+      {
+        "title": "免稅加班費",
+        "amount": 0,
+        "type": "plus"
+      },
+      {
+        "title": "勞保費",
+        "amount": 728,
+        "type": "minus"
+      },
+      {
+        "title": "勞保費(公)",
+        "amount": 2545,
+        "type": "company"
+      },
+      {
+        "title": "健保費",
+        "amount": 470,
+        "type": "minus"
+      },
+      {
+        "title": "健保費(公)",
+        "amount": 1476,
+        "type": "company"
+      },
+      {
+        "title": "新制退休金",
+        "amount": 1818,
+        "type": "minus"
+      },
+      {
+        "title": "新制退休金(公)",
+        "amount": 1818,
+        "type": "company"
+      }
+    ]
+  }
+]

@@ -1,38 +1,33 @@
+<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
-import CreateSalaryModal from '../components/Modals/CreateSalaryModal'
-import ExportSalaryModal from '../components/Modals/ExportSalaryModal'
+import dayjs from 'dayjs'
 
-import useSalary from './settings/composables/useSalary'
+// import useSalary from './settings/composables/useSalary'
 
-const showCreateSalaryModal = ref(false)
-const showExportSalaryModal = ref(false)
+const companyId = ref(1)
+console.log(companyId)
+const showCreateSalaryGroupModal = ref(false)
 const selectedCompanyIndex = ref(-1)
 
-const { salaries, salaryGroups, salaryExtends, confirmDeleteSalary } =
-  useSalary(1)
+// const { salaries } = useSalary(1)
+const salaryGroups = reactive<any[]>([])
 
 const creatOredit = (idx?: number) => {
   selectedCompanyIndex.value = -1
   if (idx !== undefined) {
     selectedCompanyIndex.value = idx
   }
-  showCreateSalaryModal.value = true
+  showCreateSalaryGroupModal.value = true
 }
 
-const exportSalary = () => {
-  showExportSalaryModal.value = true
+const confirmDeleteSalary = (id: number) => {
+  console.log(id)
 }
-
-console.log({
-  salaries,
-  salaryGroups,
-  salaryExtends
-})
 </script>
 
 <template>
@@ -55,116 +50,32 @@ console.log({
           </div>
         </div>
       </div>
-
-      <div
-        class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap"
-      >
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="() => creatOredit()"
-            >
-              <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              加班/兼職出勤
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="() => creatOredit()"
-            >
-              <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              薪資科別加減項
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="() => creatOredit()"
-            >
-              <Lucide icon="Settings" class="mr-1 h-4 w-4" />
-              假勤設定
-            </Button>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="mt-5 grid grid-cols-12 gap-6">
       <div
         class="intro-y col-span-12 flex flex-wrap items-center sm:flex-nowrap"
-      >
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="() => creatOredit()"
-            >
-              <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              薪資計算
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="() => exportSalary()"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              匯出薪資明細
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="() => creatOredit()"
-              disabled
-            >
-              <Lucide icon="Send" class="mr-1 h-4 w-4" />
-              薪資單寄送
-            </Button>
-          </div>
-        </div>
-      </div>
+      ></div>
       <!-- BEGIN: Data List -->
       <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
+              <Table.Th class="whitespace-nowrap border-b-0">員工編號</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">姓名</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">
+                薪資發放名稱
+              </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">薪資年月</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放名稱</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">起始日</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">結束日</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放人數</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放日期</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">狀態</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">應發金額</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">實發金額</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
           <Table.Tbody>
             <Table.Tr
-              v-for="(item, index) in salaries"
+              v-for="(salaryGroup, index) in salaryGroups"
               :key="index"
               class="intro-x"
             >
@@ -172,49 +83,53 @@ console.log({
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ item.id }}
+                  {{ salaryGroup.yearMonth }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ item.name }}
+                  {{ salaryGroup.name }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ item.taxId }}
+                  {{ dayjs(salaryGroup.startDate).format('YYYY-MM-DD') }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ item.taxId }}
+                  {{ dayjs(salaryGroup.endDate).format('YYYY-MM-DD') }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ item.taxId }}
+                  {{ 0 }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ item.taxId }}
+                  {{ dayjs(salaryGroup.paymentDate).format('YYYY-MM-DD') }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ item.taxId }}
+                  {{
+                    new Date() > new Date(salaryGroup.paymentDate)
+                      ? '已發放'
+                      : '未發放'
+                  }}
                 </div>
               </Table.Td>
 
@@ -235,7 +150,7 @@ console.log({
                     variant="danger"
                     type="button"
                     class="m-3 w-20"
-                    @click="confirmDeleteSalary(item.id)"
+                    @click="confirmDeleteSalary(salaryGroup.id)"
                   >
                     <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                     刪除
@@ -279,17 +194,5 @@ console.log({
     </div> -->
       <!-- END: Pagination -->
     </div>
-
-    <CreateSalaryModal
-      v-if="showCreateSalaryModal"
-      @close="showCreateSalaryModal = false"
-      :companyId="1"
-    />
-    <ExportSalaryModal
-      v-if="showExportSalaryModal"
-      @close="showExportSalaryModal = false"
-      :companyId="1"
-      :salaryGroups="salaryGroups"
-    />
   </div>
 </template>

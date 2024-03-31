@@ -54,10 +54,28 @@ const routes = [
       },
       {
         path: 'salary',
-        name: 'Salary',
-        component: () => import('@/pages/Salary.vue'),
+        name: 'SalaryGroupList',
+        component: () => import('@/pages/SalaryGroupsPage.vue'),
         meta: {
           title: i18n.global.t('salary-title'),
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'salary/group/:groupId/salaries',
+        name: 'GroupSalaries',
+        component: () => import('@/pages/GroupSalariesPage.vue'),
+        meta: {
+          title: i18n.global.t('salary-group-title'),
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'workrecord',
+        name: 'WorkRecordList',
+        component: () => import('@/pages/WorkRecordListPage.vue'),
+        meta: {
+          title: '加班/兼職出勤管理',
           requiresAuth: true
         }
       }

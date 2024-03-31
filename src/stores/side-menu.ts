@@ -53,12 +53,12 @@ export const useSideMenuStore = defineStore('sideMenu', {
         subMenu: [
           {
             icon: 'Banknote',
-            pageName: 'Salary',
+            pageName: 'SalaryGroupList',
             title: i18n.global.t('薪資管理')
           },
           {
             icon: 'Tent',
-            pageName: 'holiday',
+            pageName: 'WorkRecordList',
             title: i18n.global.t('加班/兼職出勤')
           },
           {
