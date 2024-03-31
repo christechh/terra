@@ -2,16 +2,16 @@
 import { defineStore } from 'pinia'
 import axios from '../axios'
 
-export interface WorkRecord {
+export interface UserLeave {
   [key: string]: any
 }
 
-export const useWorkRecordStore = defineStore('work-record', {
+export const useUserLeaveStore = defineStore('user-leave', {
   state: () => ({
-    workRecordList: [] as WorkRecord[]
+    userLeave: [] as UserLeave[]
   }),
   actions: {
-    async fetchWorkRecordList({
+    async fetchUserLeaveList({
       page,
       companyId
     }: {
@@ -19,26 +19,26 @@ export const useWorkRecordStore = defineStore('work-record', {
       companyId: string
     }) {
       axios
-        .get('/salary/work-record', {
+        .get('/salary/user-leave', {
           params: {
             page: page,
             companyId: companyId.toString()
           }
         })
         .then((res) => {
-          this.workRecordList = res.data.data
+          this.userLeave = res.data.data
         })
     },
-    deleteWorkRecord(companyId: string, id: number) {
+    deleteUserLeave(companyId: string, id: number) {
       axios
-        .delete(`salary/work-record/${id}`, {
+        .delete(`salary/user-leave/${id}`, {
           params: {
             companyId
           }
         })
         .then(() => {
           // todo companyid要帶參數
-          this.fetchWorkRecordList({ companyId: '1', page: 1 })
+          this.fetchUserLeaveList({ companyId: '1', page: 1 })
         })
     }
   }

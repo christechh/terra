@@ -1,29 +1,29 @@
 import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
-import { useWorkRecordStore } from '../../../stores/work-record'
+import { useUserLeaveStore } from '../../../stores/user-leave'
 
-interface CreateWorkRecordPayload {
+interface CreateUserLeavePayload {
   userId: string
   companyId: string
   startTime: string
   endTime: string
   restHours: number
-  type: string
+  leaveId: string
   description: string
 }
 
-export default function useCreateWorkRecord(
+export default function useCreateUserLeave(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  workRecord?: any
+  userLeave?: any
 ) {
-  const payload: CreateWorkRecordPayload = reactive({
+  const payload: CreateUserLeavePayload = reactive({
     userId: '1',
     companyId: '1',
     startTime: '2024-03-25 09:00:00',
     endTime: '2024-03-25 18:00:00',
     restHours: 1.5,
-    type: 'HOLIDAY',
+    leaveId: '',
     description: ''
   })
   const {
@@ -32,28 +32,28 @@ export default function useCreateWorkRecord(
     startTime,
     endTime,
     restHours,
-    type,
+    leaveId,
     description
   } = toRefs(payload)
 
   const isEdit = computed(() => {
-    return !!workRecord
+    return !!userLeave
   })
 
   onMounted(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const extend: any = {}
-    if (workRecord) {
+    if (userLeave) {
       const newValue = {
-        ...workRecord,
+        ...userLeave,
         ...extend
       }
       Object.keys(payload).forEach((key) => {
         if (newValue[key] !== undefined) {
-          payload[key as keyof CreateWorkRecordPayload] = newValue[key] as never
+          payload[key as keyof CreateUserLeavePayload] = newValue[key] as never
         }
       })
-      // Object.assign(payload, { ...workRecord, ...extend })
+      // Object.assign(payload, { ...userLeave, ...extend })
     }
   })
 
@@ -62,8 +62,7 @@ export default function useCreateWorkRecord(
       companyId.value !== '' &&
       startTime.value !== '' &&
       endTime.value !== '' &&
-      restHours.value !== 0 &&
-      type.value !== ''
+      leaveId.value !== ''
       ? true
       : false
   })
@@ -73,19 +72,19 @@ export default function useCreateWorkRecord(
     console.log(action)
     const actionMap = {
       create: () =>
-        axios.post('/salary/work-record', {
+        axios.post('/salary/user-leave', {
           ...payload
         }),
       update: () =>
-        axios.put(`/salary/work-record/${workRecord.id}`, {
+        axios.put(`/salary/user-leave/${userLeave.id}`, {
           ...payload,
-          id: workRecord.id
+          id: userLeave.id
         })
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useWorkRecordStore().fetchWorkRecordList({ companyId: '1', page: 1 })
+    useUserLeaveStore().fetchUserLeaveList({ companyId: '1', page: 1 })
   }
 
   return {
@@ -94,7 +93,7 @@ export default function useCreateWorkRecord(
     startTime,
     endTime,
     restHours,
-    type,
+    leaveId,
     description,
     canSubmit,
     isEdit,

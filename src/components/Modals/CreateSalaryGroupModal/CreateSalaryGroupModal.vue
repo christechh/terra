@@ -105,12 +105,12 @@ const employeeSalaries = computed(() => {
       })
 
       return {
-        id: employee.id,
-        name: employee.name,
-        code: employee.code,
-        arrivalDate: employee.arrivalDate,
-        leaveDate: employee.leaveDate,
-        type: employee.type,
+        id: employee?.id,
+        name: employee?.name,
+        code: employee?.code,
+        arrivalDate: employee?.arrivalDate,
+        leaveDate: employee?.leaveDate,
+        type: employee?.type,
         plusSalary,
         minusSalary,
         netSalary,

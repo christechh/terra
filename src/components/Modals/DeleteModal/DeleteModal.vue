@@ -11,6 +11,9 @@ import { useNotificationsStore } from '../../../stores/notifications'
 import { useCompanyStore } from '../../../stores/company'
 import { useUsersStore } from '../../../stores/users'
 import { useSalaryStore } from '../../../stores/salary'
+import { useWorkRecordStore } from '../../../stores/work-record'
+import { useUserLeaveStore } from '../../../stores/user-leave'
+
 const deleteModalStore = useDeleteModalStore()
 const router = useRouter()
 
@@ -45,8 +48,20 @@ const deleteExec = async () => {
     case 'user':
       useUsersStore().deleteUser((deleteData as any).id)
       break
+    case 'workRecord':
+      useWorkRecordStore().deleteWorkRecord(
+        (deleteData as any).companyId,
+        (deleteData as any).id
+      )
+      break
     case 'salaryGroup':
       useSalaryStore().deleteSalaryGroup(
+        (deleteData as any).companyId,
+        (deleteData as any).id
+      )
+      break
+    case 'userLeave':
+      useUserLeaveStore().deleteUserLeave(
         (deleteData as any).companyId,
         (deleteData as any).id
       )

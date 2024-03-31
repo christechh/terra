@@ -5,9 +5,7 @@ import { useCompanyStore } from '../../../stores/company'
 
 export default function useSubAccount() {
   const subCompanyStore = useCompanyStore()
-
   const { fetchCompanies } = subCompanyStore
-
   const companies = computed(() => subCompanyStore.companies)
 
   const confirmDeleteCompany = (id: number) => {

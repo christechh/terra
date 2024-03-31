@@ -64,7 +64,7 @@ const childComponet = computed(() => {
 
 <template>
   <component :is="component" :open="true" size="md">
-    <component :is="childComponet" class="p-4 md:w-[400px]">
+    <component :is="childComponet" class="p-4 md:w-[600px]">
       <div
         class="relative mb-5"
         :class="isEdit ? 'text-primary' : 'text-center text-xl'"

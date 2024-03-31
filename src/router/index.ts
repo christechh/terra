@@ -78,6 +78,24 @@ const routes = [
           title: '加班/兼職出勤管理',
           requiresAuth: true
         }
+      },
+      {
+        path: 'userleave',
+        name: 'UserLeave',
+        component: () => import('@/pages/UserLeavePage.vue'),
+        meta: {
+          title: '假勤申請',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'leave',
+        name: 'Leave',
+        component: () => import('@/pages/LeavePage.vue'),
+        meta: {
+          title: '假勤申請',
+          requiresAuth: true
+        }
       }
     ]
   },

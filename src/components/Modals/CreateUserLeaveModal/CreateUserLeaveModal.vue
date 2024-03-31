@@ -5,15 +5,15 @@ import { FormInput, FormLabel, FormSelect } from '../../../base-components/Form'
 import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
-import useCreateWorkRecord from './useCreateWorkRecord'
+import useCreateUserLeave from './useCreateUserLeave'
 
 interface Props {
-  workRecord?: {
+  userLeave?: {
     id?: number
     userId: string
     startTime: string
     endTime: string
-    type: string
+    leaveId: string
     userName: string
     restHours: string
     description: string
@@ -22,26 +22,26 @@ interface Props {
 }
 
 const emit = defineEmits(['close'])
-const { workRecord } = defineProps<Props>()
+const { userLeave } = defineProps<Props>()
 
 const {
   userId,
   startTime,
   endTime,
-  type,
+  leaveId,
   restHours,
   description,
   canSubmit,
   isEdit,
   submit
-} = useCreateWorkRecord(workRecord)
+} = useCreateUserLeave(userLeave)
 </script>
 <!-- eslint-disable prettier/prettier -->
 <template>
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '加班/兼職申請' + (idx + 1) : '加班/兼職申請' }}
+        {{ isEdit ? '請假申請' + (idx + 1) : '請假申請' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"
@@ -54,12 +54,9 @@ const {
           <FormInput class="flex-1" type="text" v-model="userId" />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">加班歸屬日</FormLabel>
-          <FormSelect class="flex-1" v-model="type">
-            <option value="HOLIDAY">例假日</option>
-            <option value="OFFICIALHOLIDAY">國定假日</option>
-            <option value="RESTDAY">休息日</option>
-            <option value="WORKDAY">工作日</option>
+          <FormLabel class="w-[120px]">假別</FormLabel>
+          <FormSelect class="flex-1" v-model="leaveId">
+            <option value="1">病假</option>
           </FormSelect>
         </div>
         <div class="mb-4 flex items-center">
@@ -75,7 +72,7 @@ const {
           <FormInput class="flex-1" type="text" v-model="restHours" />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">工作內容備註</FormLabel>
+          <FormLabel class="w-[120px]">原因備註</FormLabel>
           <FormInput class="flex-1" type="text" v-model="description" />
         </div>
         <div class="flex justify-center">

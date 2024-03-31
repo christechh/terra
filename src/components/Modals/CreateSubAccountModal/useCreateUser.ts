@@ -60,7 +60,7 @@ export default function useCreateSubAccount(
       }
       Object.keys(payload).forEach((key) => {
         if (newValue[key] !== undefined) {
-          payload[key as keyof CreateSubAccountPayload] = newValue[key]
+          payload[key as keyof CreateSubAccountPayload] = newValue[key] as never
         }
       })
       // Object.assign(payload, { ...subAccount, ...extend })

@@ -34,7 +34,7 @@ export default function useCreateCompany(
       }
       Object.keys(payload).forEach((key) => {
         if (newValue[key] !== undefined) {
-          payload[key as keyof CreateCompanyPayload] = newValue[key]
+          payload[key as keyof CreateCompanyPayload] = newValue[key] as never
         }
       })
       // Object.assign(payload, { ...company, ...extend })
