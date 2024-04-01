@@ -81,7 +81,6 @@ export default function useCreateLeave(
     limitHours,
     salaryStandard,
     description,
-    description,
     canSubmit,
     isEdit,
     submit
