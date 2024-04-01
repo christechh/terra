@@ -23,6 +23,12 @@ import {
   nestedMenu
 } from './side-menu'
 
+import { FormSelect } from '../../base-components/Form'
+import useCompany from '../../../src/pages/settings/composables/useCompany'
+
+const { companies } = useCompany()
+const companyId = 1
+
 const route: Route = useRoute()
 let formattedMenu = ref<Array<FormattedMenu | 'divider'>>([])
 // TODO: Check if this is needed
@@ -34,6 +40,11 @@ const setFormattedMenu = (
 }
 const sideMenuStore = useSideMenuStore()
 const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route))
+
+const changeCompany = (e: Event) => {
+  const { value } = e.target as HTMLInputElement
+  localStorage.setItem('companyId', value)
+}
 
 provide<ProvideForceActiveMenu>('forceActiveMenu', (pageName: string) => {
   forceActiveMenu(route, pageName)
@@ -81,6 +92,26 @@ onMounted(() => {
           />
           <img alt="Pinchat" class="xl:hidden" width="32" :src="logoUrlM" />
         </RouterLink>
+
+        <Divider type="div" class="my-6"></Divider>
+
+        <div class="mb-4 items-center">
+          <FormLabel class="w-[120px]">目前管理公司：</FormLabel>
+          <FormSelect
+            class="mt-2"
+            v-model="companyId"
+            @change="changeCompany($event)"
+          >
+            <option
+              v-for="(company, index) in companies"
+              :key="index"
+              :value="company.id"
+            >
+              {{ company.name }}
+            </option>
+          </FormSelect>
+        </div>
+
         <Divider type="div" class="my-6"></Divider>
         <ul>
           <!-- BEGIN: First Child -->

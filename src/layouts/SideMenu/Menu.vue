@@ -66,7 +66,12 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState
           props.level == 'first'
       }"
     >
+      <!-- <div v-if="props.menu.image">
+        <img src="props.menu.image" alt="" />
+      </div>
+      <div v-else> -->
       <Lucide :icon="props.menu.icon" />
+      <!-- </div> -->
     </div>
     <div
       :class="[

@@ -23,20 +23,20 @@ interface Sort {
 interface SalaryRecord {
   id: string
   name: string
-  code: string
-  arrivalDate: string
-  leaveDate: string
-  type: 'monthly' | 'hourly'
+  employee_id: string
+  onboard_date: string
+  resignation_date: string
+  salary_type: string
   plusSalary: number
   minusSalary: number
   netSalary: number
   [key: string]: any
 }
 
-const WorkTypeMap = {
-  hourly: '時薪',
-  monthly: '月薪'
-}
+// const WorkTypeMap = {
+//   hourly: '時薪',
+//   monthly: '月薪'
+// }
 
 const emit = defineEmits(['close'])
 const props = defineProps<Props>()
@@ -65,7 +65,7 @@ const employeeSalaries = computed(() => {
   let totalNetSalary = 0 // 實發金額
 
   const result = calcSalariesData.value
-    .map(({ salaryItems, employee }: any) => {
+    .map(({ salaryItems, user }: any) => {
       let plusSalary = 0 // 應發金額
       let minusSalary = 0 // 應減金額
       let netSalary = 0 // 實發金額
@@ -73,44 +73,44 @@ const employeeSalaries = computed(() => {
 
       salaryItems.forEach((salaryItem: any) => {
         // 動態欄位設置
-        if (salaryItem.type === 'plus') plusCols.add(salaryItem.title)
-        if (salaryItem.type === 'minus') minusCols.add(salaryItem.title)
-        if (salaryItem.type === 'normal') normalCols.add(salaryItem.title)
-        if (salaryItem.type === 'company') companyCols.add(salaryItem.title)
+        if (salaryItem.type === 'plus') plusCols.add(salaryItem.name)
+        if (salaryItem.type === 'minus') minusCols.add(salaryItem.name)
+        if (salaryItem.type === 'normal') normalCols.add(salaryItem.name)
+        if (salaryItem.type === 'company') companyCols.add(salaryItem.name)
 
         // 欄位金額加總
-        columnMap[salaryItem.title] =
-          Number(columnMap[salaryItem.title] || 0) + Number(salaryItem.amount)
+        columnMap[salaryItem.name] =
+          Number(columnMap[salaryItem.name] || 0) + Number(salaryItem.amount)
 
         // 處理 應發、應減、實發
         switch (salaryItem.type) {
-          case 'normal':
-          case 'plus':
+          case 'NORMAL':
+          case 'PLUS':
             plusSalary += Number(salaryItem.amount)
             netSalary += Number(salaryItem.amount)
             // total
             totalPlusSalary += Number(salaryItem.amount)
             totalNetSalary += Number(salaryItem.amount)
             break
-          case 'minus':
+          case 'MINUS':
             minusSalary += Number(salaryItem.amount)
             netSalary -= Number(salaryItem.amount)
             // total
             totalMinusSalary += Number(salaryItem.amount)
             totalNetSalary -= Number(salaryItem.amount)
             break
-          case 'company':
+          case 'COMPANY':
             break
         }
       })
 
       return {
-        id: employee?.id,
-        name: employee?.name,
-        code: employee?.code,
-        arrivalDate: employee?.arrivalDate,
-        leaveDate: employee?.leaveDate,
-        type: employee?.type,
+        id: user?.id,
+        name: user?.name,
+        employee_id: user?.employee_id,
+        onboard_date: user?.onboard_date,
+        resignation_date: user?.resignation_date,
+        salary_type: user?.salary_type,
         plusSalary,
         minusSalary,
         netSalary,
@@ -240,19 +240,19 @@ onMounted(() => {
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">薪資年月</FormLabel>
-          <FormDatepicker v-model="payloadRefs.yearMonth.value" month-picker auto-apply />
+          <FormDatepicker class="flex-1" v-model="payloadRefs.yearMonth.value" month-picker auto-apply />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">起始日</FormLabel>
-          <FormDatepicker v-model="payloadRefs.startDate.value" auto-apply />
+          <FormDatepicker class="flex-1" v-model="payloadRefs.startDate.value" auto-apply />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">結束日</FormLabel>
-          <FormDatepicker v-model="payloadRefs.endDate.value" auto-apply />
+          <FormDatepicker class="flex-1" v-model="payloadRefs.endDate.value" auto-apply />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">發薪日</FormLabel>
-          <FormDatepicker v-model="payloadRefs.paymentDate.value" auto-apply />
+          <FormDatepicker class="flex-1" v-model="payloadRefs.paymentDate.value" auto-apply />
         </div>
         <div class="flex justify-center">
           <Button
@@ -359,27 +359,28 @@ onMounted(() => {
                   :key="`employSalary_${employeeSalary.id}`"
                 >
                   <Table.Td class="whitespace-nowrap">
-                    {{ employeeSalary['code'] }}
+                    {{ employeeSalary['employee_id'] }}
                   </Table.Td>
                   <Table.Td class="whitespace-nowrap">
                     {{ employeeSalary['name'] }}
                   </Table.Td>
                   <Table.Td class="whitespace-nowrap">
+                    {{ employeeSalary['onboard_date'] }}
                     {{
-                      employeeSalary['arrivalDate']
-                        ? dayjs(employeeSalary['arrivalDate']).format('YYYY-MM-DD')
+                      employeeSalary['onboard_date']
+                        ? dayjs(employeeSalary['onboard_date']).format('YYYY-MM-DD')
                         : '--'
                     }}
                   </Table.Td>
                   <Table.Td class="whitespace-nowrap">
                     {{
-                      employeeSalary['leaveDate']
-                        ? dayjs(employeeSalary['leaveDate']).format('YYYY-MM-DD')
+                      employeeSalary['resignation_date']
+                        ? dayjs(employeeSalary['resignation_date']).format('YYYY-MM-DD')
                         : '--'
                     }}
                   </Table.Td>
                   <Table.Td class="whitespace-nowrap">
-                    {{ WorkTypeMap[employeeSalary['type']] }}
+                    {{ employeeSalary['salary_type'] }}
                   </Table.Td>
                   <Table.Td
                     class="whitespace-nowrap"

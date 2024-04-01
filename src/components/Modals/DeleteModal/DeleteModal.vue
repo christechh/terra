@@ -12,6 +12,7 @@ import { useCompanyStore } from '../../../stores/company'
 import { useUsersStore } from '../../../stores/users'
 import { useSalaryStore } from '../../../stores/salary'
 import { useWorkRecordStore } from '../../../stores/work-record'
+import { useSalaryExtendStore } from '../../../stores/salary-extend'
 import { useUserLeaveStore } from '../../../stores/user-leave'
 import { useLeaveStore } from '../../../stores/leave'
 
@@ -57,6 +58,12 @@ const deleteExec = async () => {
       break
     case 'salaryGroup':
       useSalaryStore().deleteSalaryGroup(
+        (deleteData as any).companyId,
+        (deleteData as any).id
+      )
+      break
+    case 'salaryExtend':
+      useSalaryExtendStore().deleteSalaryExtend(
         (deleteData as any).companyId,
         (deleteData as any).id
       )

@@ -1,57 +1,63 @@
 import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
-import { useLeaveStore } from '../../../stores/leave'
+import { useSalaryExtendStore } from '../../../stores/salary-extend'
 
-interface CreateLeavePayload {
+interface CreateSalaryExtendPayload {
   companyId: string
+  userId: string
+  type: string
   name: string
-  limitHours: string
-  salaryStandard: string
   description: string
+  amount: number
+  yearMonth: string
 }
 
-export default function useCreateLeave(
+export default function useCreateSalaryExtend(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  leave?: any
+  salaryExtend?: any
 ) {
-  const payload: CreateLeavePayload = reactive({
+  const payload: CreateSalaryExtendPayload = reactive({
     companyId: '1',
+    userId: '1',
+    type: 'PLUS',
     name: '',
-    limitHours: '1',
-    salaryStandard: 'ALL',
-    description: ''
+    description: '',
+    amount: 0,
+    yearMonth: ''
   })
-
-  const { companyId, name, limitHours, salaryStandard, description } =
+  const { companyId, userId, type, name, description, amount, yearMonth } =
     toRefs(payload)
 
   const isEdit = computed(() => {
-    return !!leave
+    return !!salaryExtend
   })
 
   onMounted(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const extend: any = {}
-    if (leave) {
+    if (salaryExtend) {
       const newValue = {
-        ...leave,
+        ...salaryExtend,
         ...extend
       }
       Object.keys(payload).forEach((key) => {
         if (newValue[key] !== undefined) {
-          payload[key as keyof CreateLeavePayload] = newValue[key] as never
+          payload[key as keyof CreateSalaryExtendPayload] = newValue[
+            key
+          ] as never
         }
       })
-      // Object.assign(payload, { ...leave, ...extend })
+      // Object.assign(payload, { ...salaryExtend, ...extend })
     }
   })
 
   const canSubmit = computed(() => {
-    return name.value !== '' &&
-      limitHours.value !== '' &&
-      salaryStandard.value !== '' &&
-      description.value !== ''
+    return userId.value !== '' &&
+      type.value !== '' &&
+      name.value !== '' &&
+      amount.value !== 0 &&
+      yearMonth.value !== ''
       ? true
       : false
   })
@@ -61,30 +67,29 @@ export default function useCreateLeave(
     console.log(action)
     const actionMap = {
       create: () =>
-        axios.post('/salary/leave', {
+        axios.post('/salary/salary-extend', {
           ...payload
         }),
       update: () =>
-        axios.put(`/salary/leave/${leave.id}`, {
+        axios.put(`/salary/salary-extend/${salaryExtend.id}`, {
           ...payload,
-          id: leave.id
+          id: salaryExtend.id
         })
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useLeaveStore().fetchLeaveList({
-      companyId: '1',
-      page: 1
-    })
+    useSalaryExtendStore().fetchSalaryExtendList({ companyId: '1', page: 1 })
   }
 
   return {
     companyId,
+    userId,
+    type,
     name,
-    limitHours,
-    salaryStandard,
     description,
+    amount,
+    yearMonth,
     canSubmit,
     isEdit,
     submit

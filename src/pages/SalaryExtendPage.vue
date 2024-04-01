@@ -1,43 +1,44 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import dayjs from 'dayjs'
-import { useRouter } from 'vue-router'
+import { computed, ref } from 'vue'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
 import { FormInput } from '../base-components/Form'
-import CreateSalaryGroupModal from '../components/Modals/CreateSalaryGroupModal'
-import ExportSalaryModal from '../components/Modals/ExportSalaryModal'
+import CreateSalaryExtendModal from '../components/Modals/CreateSalaryExtendModal'
 
-import useSalary from './settings/composables/useSalary'
-
-const router = useRouter()
+import useSalaryExtend from './settings/composables/useSalaryExtend'
 
 const companyId = ref(1)
-const showExportSalaryModal = ref(false)
-const showCreateSalaryGroupModal = ref(false)
+const { salaryExtendList, confirmDeleteSalaryExtend } = useSalaryExtend('1')
+const showCreateSalaryExtendModal = ref(false)
+const selectedSalaryExtendIndex = ref(-1)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const selectedSalaryExtend: any = computed(
+  () => salaryExtendList.value[selectedSalaryExtendIndex.value] || null
+)
 
-const { salaryGroups, confirmDeleteSalaryGroup } = useSalary(1)
-
-const onCreateSalaryGroupButtonClick = () => {
-  showCreateSalaryGroupModal.value = true
+const onCreateSalaryExtendClick = (idx?: number) => {
+  selectedSalaryExtendIndex.value = -1
+  if (idx !== undefined) {
+    selectedSalaryExtendIndex.value = idx
+  }
+  showCreateSalaryExtendModal.value = true
 }
 
-const onOpenGroupSalariesButtonClick = (groupId: string) => {
-  router.push({
-    name: 'GroupSalaries',
-    params: {
-      groupId
-    }
-  })
+const onExportSalaryExtendClick = () => {
+  console.log('onExportSalaryExtendClick')
 }
 
-const onExportSalaryButtonClick = () => {
-  showExportSalaryModal.value = true
+const onImportButtonClick = () => {
+  console.log('onImportButtonClick')
 }
 
-const onDeleteSalaryGroupButtonClick = (groupId: number) => {
-  confirmDeleteSalaryGroup(companyId.value, groupId)
+const onDownloadImportExampleClick = () => {
+  console.log('onDownloadImportExampleClick')
+}
+
+const onDeleteSalaryExtendButtonClick = (id: number) => {
+  confirmDeleteSalaryExtend(companyId.value, id)
 }
 </script>
 
@@ -61,51 +62,6 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
           </div>
         </div>
       </div>
-
-      <div
-        class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap"
-      >
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="workrecord">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-                加班/兼職出勤
-              </Button>
-            </router-link>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="salary-extend">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-                薪資科別加減項
-              </Button>
-            </router-link>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="userleave">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Settings" class="mr-1 h-4 w-4" />
-                假勤申請
-              </Button>
-            </router-link>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="leave">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Settings" class="mr-1 h-4 w-4" />
-                假勤設定
-              </Button>
-            </router-link>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="mt-5 grid grid-cols-12 gap-6">
@@ -118,10 +74,10 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
               variant="primary"
               type="button"
               class="m-3"
-              @click="onCreateSalaryGroupButtonClick"
+              @click="onCreateSalaryExtendClick()"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              薪資計算
+              新增薪資加減項
             </Button>
           </div>
         </div>
@@ -131,24 +87,39 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
               variant="primary"
               type="button"
               class="m-3"
-              @click="onExportSalaryButtonClick"
+              disabled
+              @click="onImportButtonClick"
+            >
+              <Lucide icon="Upload" class="mr-1 h-4 w-4" />
+              匯入薪資加減項
+            </Button>
+          </div>
+        </div>
+        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+          <div class="relative text-slate-500">
+            <Button
+              variant="primary"
+              type="button"
+              class="m-3"
+              disabled
+              @click="onExportSalaryExtendClick"
             >
               <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              匯出薪資明細
+              匯出薪資加減項
             </Button>
           </div>
         </div>
         <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
           <div class="relative text-slate-500">
             <Button
-              variant="primary"
+              variant="danger"
               type="button"
               class="m-3"
-              @click="onCreateSalaryGroupButtonClick"
               disabled
+              @click="onDownloadImportExampleClick"
             >
-              <Lucide icon="Send" class="mr-1 h-4 w-4" />
-              薪資單寄送
+              <Lucide icon="Download" class="mr-1 h-4 w-4" />
+              薪資加減項匯入範例
             </Button>
           </div>
         </div>
@@ -158,20 +129,23 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">薪資年月</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放名稱</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">起始日</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">結束日</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放人數</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放日期</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">狀態</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">
+                員工編號
+              </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">姓名</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">
+                薪資年月
+              </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">薪資科目</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">金額</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">加減項</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
           <Table.Tbody>
             <Table.Tr
-              v-for="(salaryGroup, index) in salaryGroups"
+              v-for="(salaryExtend, index) in salaryExtendList"
               :key="index"
               class="intro-x"
             >
@@ -179,56 +153,44 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryGroup.yearMonth }}
+                  {{ salaryExtend.employeeId }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryGroup.name }}
+                  {{ salaryExtend.name }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.startDate).format('YYYY-MM-DD') }}
+                  {{ salaryExtend.yearMonth }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.endDate).format('YYYY-MM-DD') }}
+                  {{ salaryExtend.name }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ 0 }}
+                  {{ salaryExtend.amount }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.paymentDate).format('YYYY-MM-DD') }}
+                  {{ salaryExtend.type }}
                 </div>
               </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{
-                    new Date() > new Date(salaryGroup.paymentDate)
-                      ? '已發放'
-                      : '未發放'
-                  }}
-                </div>
-              </Table.Td>
-
               <Table.Td
                 class="relative w-56 border-b-0 bg-white py-0 shadow-[20px_3px_20px_#0000000b] before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600 before:dark:bg-darkmode-400"
               >
@@ -236,17 +198,17 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
                   <Button
                     variant="primary"
                     type="button"
-                    class="m-3 w-24"
-                    @click="onOpenGroupSalariesButtonClick(salaryGroup.id)"
+                    class="m-3 w-20"
+                    @click="onCreateSalaryExtendClick(index)"
                   >
-                    <Lucide icon="LibraryBig" class="mr-1 h-4 w-4" />
-                    薪資單
+                    <Lucide icon="Edit" class="mr-1 h-4 w-4" />
+                    修改
                   </Button>
                   <Button
                     variant="danger"
                     type="button"
                     class="m-3 w-20"
-                    @click="onDeleteSalaryGroupButtonClick(salaryGroup.id)"
+                    @click="onDeleteSalaryExtendButtonClick(salaryExtend.id)"
                   >
                     <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                     刪除
@@ -291,16 +253,11 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
       <!-- END: Pagination -->
     </div>
 
-    <CreateSalaryGroupModal
-      v-if="showCreateSalaryGroupModal"
-      @close="showCreateSalaryGroupModal = false"
-      :companyId="companyId"
-    />
-    <ExportSalaryModal
-      v-if="showExportSalaryModal"
-      @close="showExportSalaryModal = false"
-      :companyId="companyId"
-      :salaryGroups="salaryGroups"
+    <CreateSalaryExtendModal
+      v-if="showCreateSalaryExtendModal"
+      :salaryExtend="selectedSalaryExtend"
+      @close="showCreateSalaryExtendModal = false"
+      :idx="selectedSalaryExtendIndex"
     />
   </div>
 </template>
