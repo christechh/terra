@@ -118,7 +118,7 @@ const childComponet = computed(() => {
           <FormLabel class="w-[120px]">員工編號 *</FormLabel>
           <FormInput
             class="flex-1"
-            type="password"
+            type="text"
             placeholder="請輸入員工編號"
             v-model="employeeId"
           />

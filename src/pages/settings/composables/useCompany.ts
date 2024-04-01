@@ -12,7 +12,7 @@ export default function useSubAccount() {
     useDeleteModalStore().showModal({
       deleteType: 'company',
       title: i18n.global.t('delete-alert-title'),
-      content: i18n.global.t('page-delete-check-desc'),
+      content: '確定要刪除這筆資料嗎？刪除後無法復原，需要重新新增',
       deleteData: { id }
     })
   }
