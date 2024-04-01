@@ -1,33 +1,32 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import dayjs from 'dayjs'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
 import { FormInput } from '../base-components/Form'
-import CreateWorkRecordModal from '../components/Modals/CreateWorkRecordModal'
+import CreateLeaveModal from '../components/Modals/CreateLeaveModal'
 
-import useWorkRecord from './settings/composables/useWorkRecord'
+import useLeave from './settings/composables/useLeave'
 
 const companyId = ref(1)
-const { workRecordList, confirmDeleteWorkRecord } = useWorkRecord('1')
-const showCreateWorkRecordModal = ref(false)
-const selectedWorkRecordIndex = ref(-1)
+const { leaveList, confirmDeleteLeave } = useLeave('1')
+const showCreateLeaveModal = ref(false)
+const selectedLeaveIndex = ref(-1)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedWorkRecord: any = computed(
-  () => workRecordList.value[selectedWorkRecordIndex.value] || null
+const selectedLeave: any = computed(
+  () => leaveList.value[selectedLeaveIndex.value] || null
 )
 
-const onCreateWorkRecordClick = (idx?: number) => {
-  selectedWorkRecordIndex.value = -1
+const onCreateLeaveClick = (idx?: number) => {
+  selectedLeaveIndex.value = -1
   if (idx !== undefined) {
-    selectedWorkRecordIndex.value = idx
+    selectedLeaveIndex.value = idx
   }
-  showCreateWorkRecordModal.value = true
+  showCreateLeaveModal.value = true
 }
 
-const onExportWorkRecordClick = () => {
-  console.log('onExportWorkRecordClick')
+const onExportLeaveClick = () => {
+  console.log('onExportLeaveClick')
 }
 
 const onImportButtonClick = () => {
@@ -38,8 +37,8 @@ const onDownloadImportExampleClick = () => {
   console.log('onDownloadImportExampleClick')
 }
 
-const onDeleteWorkRecordButtonClick = (id: number) => {
-  confirmDeleteWorkRecord(companyId.value, id)
+const onDeleteLeaveButtonClick = (id: number) => {
+  confirmDeleteLeave(companyId.value, id)
 }
 </script>
 
@@ -75,10 +74,10 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
               variant="primary"
               type="button"
               class="m-3"
-              @click="onCreateWorkRecordClick()"
+              @click="onCreateLeaveClick()"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              加班/兼職申請
+              新增假勤
             </Button>
           </div>
         </div>
@@ -92,7 +91,7 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
               @click="onImportButtonClick"
             >
               <Lucide icon="Upload" class="mr-1 h-4 w-4" />
-              匯入加班/出勤
+              匯入假勤
             </Button>
           </div>
         </div>
@@ -103,10 +102,10 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
               type="button"
               class="m-3"
               disabled
-              @click="onExportWorkRecordClick"
+              @click="onExportLeaveClick"
             >
               <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              匯出加班/出勤
+              匯出假勤
             </Button>
           </div>
         </div>
@@ -120,7 +119,7 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
               @click="onDownloadImportExampleClick"
             >
               <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              加班/兼職匯入範例
+              假勤匯入範例
             </Button>
           </div>
         </div>
@@ -130,26 +129,19 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">員工編號</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">姓名</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">假勤名稱</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">請假上限</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">
-                加班歸屬日
+                薪資給新標準
               </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">開始時間</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">結束時間</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                休息時間(小時)
-              </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                工作內容備註
-              </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">說明</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
           <Table.Tbody>
             <Table.Tr
-              v-for="(workRecord, index) in workRecordList"
+              v-for="(leave, index) in leaveList"
               :key="index"
               class="intro-x"
             >
@@ -157,49 +149,28 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ workRecord.employeeId }}
+                  {{ leave.name }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ workRecord.userName }}
+                  {{ leave.limitHours }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ workRecord.type }}
+                  {{ leave.salaryStandard }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(workRecord.startTime).format('YYYY-MM-DD') }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ dayjs(workRecord.endTime).format('YYYY-MM-DD') }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ workRecord.restHours }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ workRecord.description }}
+                  {{ leave.description }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -210,7 +181,7 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
                     variant="primary"
                     type="button"
                     class="m-3 w-20"
-                    @click="onCreateWorkRecordClick(index)"
+                    @click="onCreateLeaveClick(index)"
                   >
                     <Lucide icon="Edit" class="mr-1 h-4 w-4" />
                     修改
@@ -219,7 +190,7 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
                     variant="danger"
                     type="button"
                     class="m-3 w-20"
-                    @click="onDeleteWorkRecordButtonClick(workRecord.id)"
+                    @click="onDeleteLeaveButtonClick(leave.id)"
                   >
                     <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                     刪除
@@ -264,11 +235,11 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
       <!-- END: Pagination -->
     </div>
 
-    <CreateWorkRecordModal
-      v-if="showCreateWorkRecordModal"
-      :workRecord="selectedWorkRecord"
-      @close="showCreateWorkRecordModal = false"
-      :idx="selectedWorkRecordIndex"
+    <CreateLeaveModal
+      v-if="showCreateLeaveModal"
+      :leave="selectedLeave"
+      @close="showCreateLeaveModal = false"
+      :idx="selectedLeaveIndex"
     />
   </div>
 </template>

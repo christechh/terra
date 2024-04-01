@@ -67,41 +67,42 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
       >
         <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
           <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="onCreateSalaryGroupButtonClick"
-            >
-              <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              加班/兼職出勤
-            </Button>
+            <router-link to="workrecord">
+              <Button variant="primary" type="button" class="m-3">
+                <Lucide icon="Plus" class="mr-1 h-4 w-4" />
+                加班/兼職出勤
+              </Button>
+            </router-link>
           </div>
         </div>
         <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
           <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="onCreateSalaryGroupButtonClick"
-            >
-              <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              薪資科別加減項
-            </Button>
+            <router-link to="">
+              <Button variant="primary" type="button" class="m-3">
+                <Lucide icon="Plus" class="mr-1 h-4 w-4" />
+                薪資科別加減項
+              </Button>
+            </router-link>
           </div>
         </div>
         <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
           <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="onCreateSalaryGroupButtonClick"
-            >
-              <Lucide icon="Settings" class="mr-1 h-4 w-4" />
-              假勤設定
-            </Button>
+            <router-link to="userleave">
+              <Button variant="primary" type="button" class="m-3">
+                <Lucide icon="Settings" class="mr-1 h-4 w-4" />
+                假勤申請
+              </Button>
+            </router-link>
+          </div>
+        </div>
+        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+          <div class="relative text-slate-500">
+            <router-link to="leave">
+              <Button variant="primary" type="button" class="m-3">
+                <Lucide icon="Settings" class="mr-1 h-4 w-4" />
+                假勤設定
+              </Button>
+            </router-link>
           </div>
         </div>
       </div>
