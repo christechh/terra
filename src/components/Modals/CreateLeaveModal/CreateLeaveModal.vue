@@ -44,13 +44,13 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">假勤名稱</FormLabel>
+          <FormLabel class="w-[120px]">假勤名稱 *</FormLabel>
           <FormInput class="flex-1" type="text" v-model="name" />
         </div>
 
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">請假上限（小時）</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="limitHours" />
+          <FormLabel class="w-[120px]">請假上限 (小時) *</FormLabel>
+          <FormInput class="flex-1" type="number" v-model="limitHours" />
         </div>
 
         <div class="mb-4 flex items-center">
@@ -74,7 +74,7 @@ const {
             @click="() => submit(isEdit, () => emit('close'))"
             :disabled="!canSubmit"
           >
-            新增
+            {{ !isEdit ? '新增' : '儲存' }}
           </Button>
         </div>
       </section>

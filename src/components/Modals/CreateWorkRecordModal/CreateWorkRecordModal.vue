@@ -6,6 +6,7 @@ import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateWorkRecord from './useCreateWorkRecord'
+import useUser from '../../../pages/settings/composables/useUser'
 
 interface Props {
   workRecord?: {
@@ -21,6 +22,7 @@ interface Props {
   idx: number
 }
 
+const { users } = useUser()
 const emit = defineEmits(['close'])
 const { workRecord } = defineProps<Props>()
 
@@ -50,11 +52,23 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">員工</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="userId" />
+          <FormLabel class="w-[120px]">選擇員工 *</FormLabel>
+          <FormSelect
+            class="flex-1"
+            type="text"
+            v-model="userId"
+          >
+            <option
+              v-for="(user, index) in users"
+              :key="index"
+              :value="user.id"
+            >
+              {{ user.name }}
+            </option>
+          </FormSelect>
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">加班歸屬日</FormLabel>
+          <FormLabel class="w-[120px]">選擇加班歸屬日</FormLabel>
           <FormSelect class="flex-1" v-model="type">
             <option value="HOLIDAY">例假日</option>
             <option value="OFFICIALHOLIDAY">國定假日</option>
@@ -63,16 +77,16 @@ const {
           </FormSelect>
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">起始時間</FormLabel>
-          <FormDatepicker class="flex-1" v-model="startTime" auto-apply />
+          <FormLabel class="w-[120px]">起始時間 *</FormLabel>
+          <FormDatepicker class="flex-1" v-model="startTime" auto-apply detail />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">結束時間</FormLabel>
-          <FormDatepicker class="flex-1" v-model="endTime" auto-apply />
+          <FormLabel class="w-[120px]">結束時間 *</FormLabel>
+          <FormDatepicker class="flex-1" v-model="endTime" auto-apply detail />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">休息時間</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="restHours" />
+          <FormLabel class="w-[120px]">休息時間 (小時) *</FormLabel>
+          <FormInput class="flex-1" type="number" v-model="restHours" />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">工作內容備註</FormLabel>

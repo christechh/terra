@@ -193,10 +193,12 @@ const doLogout = () => {
       <Menu.Items class="mt-px w-56 bg-primary text-white">
         <Menu.Header class="font-normal">
           <div class="font-medium">{{ email }}</div>
+          <Menu.Divider class="bg-white/[0.08]" />
+          <div class="font-medium">版本：v2.0.1</div>
         </Menu.Header>
         <Menu.Divider class="bg-white/[0.08]" />
         <Menu.Item class="hover:bg-white/5" @click="doLogout">
-          <Lucide icon="ToggleRight" class="mr-2 h-4 w-4" /> Logout
+          <Lucide icon="ToggleRight" class="mr-2 h-4 w-4" /> 登出
         </Menu.Item>
       </Menu.Items>
     </Menu>

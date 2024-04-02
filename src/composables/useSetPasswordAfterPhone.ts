@@ -32,7 +32,7 @@ export default function useEmailReset() {
       return
     }
     try {
-      await axios.put('/user/setPassword', {
+      await axios.patch('/user/setPassword', {
         name: name.value,
         new_password: newPassword.value,
         new_password_confirmation: newPasswordAgain.value

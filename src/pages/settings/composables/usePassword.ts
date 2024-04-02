@@ -10,7 +10,7 @@ export default function usePassword() {
 
   const updatePassword = async () => {
     try {
-      await axios.put('/auth/updatePassword', {
+      await axios.patch('/auth/updatePassword', {
         new_password: newPsd.value,
         new_password_confirmation: newPsdAgain.value,
         old_password: oldPsd.value

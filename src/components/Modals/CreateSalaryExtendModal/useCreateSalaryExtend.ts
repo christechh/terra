@@ -56,7 +56,7 @@ export default function useCreateSalaryExtend(
     return userId.value !== '' &&
       type.value !== '' &&
       name.value !== '' &&
-      amount.value !== 0 &&
+      amount.value.toString() !== '' &&
       yearMonth.value !== ''
       ? true
       : false
@@ -71,7 +71,7 @@ export default function useCreateSalaryExtend(
           ...payload
         }),
       update: () =>
-        axios.put(`/salary/salary-extend/${salaryExtend.id}`, {
+        axios.patch(`/salary/salary-extend/${salaryExtend.id}`, {
           ...payload,
           id: salaryExtend.id
         })

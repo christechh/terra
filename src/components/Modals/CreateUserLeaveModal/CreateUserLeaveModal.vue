@@ -6,6 +6,8 @@ import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateUserLeave from './useCreateUserLeave'
+import useUser from '../../../pages/settings/composables/useUser'
+import useLeave from '../../../pages/settings/composables/useLeave'
 
 interface Props {
   userLeave?: {
@@ -21,6 +23,8 @@ interface Props {
   idx: number
 }
 
+const { users } = useUser()
+const { leaveList } = useLeave('1')
 const emit = defineEmits(['close'])
 const { userLeave } = defineProps<Props>()
 
@@ -50,26 +54,44 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">員工</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="userId" />
-        </div>
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">假別</FormLabel>
-          <FormSelect class="flex-1" v-model="leaveId">
-            <option value="1">病假</option>
+          <FormLabel class="w-[120px]">選擇員工 *</FormLabel>
+          <FormSelect
+            class="flex-1"
+            type="text"
+            v-model="userId"
+          >
+            <option
+              v-for="(user, index) in users"
+              :key="index"
+              :value="user.id"
+            >
+              {{ user.name }}
+            </option>
           </FormSelect>
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">起始時間</FormLabel>
-          <FormDatepicker class="flex-1" v-model="startTime" auto-apply />
+          <FormLabel class="w-[120px]">假別 *</FormLabel>
+          <FormSelect class="flex-1" v-model="leaveId">
+            <option
+              v-for="(leave, index) in leaveList"
+              :key="index"
+              :value="leave.id"
+            >
+              {{ leave.name }}
+            </option>
+          </FormSelect>
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">結束時間</FormLabel>
-          <FormDatepicker class="flex-1" v-model="endTime" auto-apply />
+          <FormLabel class="w-[120px]">起始時間 *</FormLabel>
+          <FormDatepicker class="flex-1" v-model="startTime" auto-apply detail />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">休息時間</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="restHours" />
+          <FormLabel class="w-[120px]">結束時間 *</FormLabel>
+          <FormDatepicker class="flex-1" v-model="endTime" auto-apply detail />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">休息時間 (小時) *</FormLabel>
+          <FormInput class="flex-1" type="number" v-model="restHours" />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">原因備註</FormLabel>
@@ -82,7 +104,7 @@ const {
             @click="() => submit(isEdit, () => emit('close'))"
             :disabled="!canSubmit"
           >
-            申請
+            {{ !isEdit ? '申請' : '儲存' }}
           </Button>
         </div>
       </section>

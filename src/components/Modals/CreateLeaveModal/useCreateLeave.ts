@@ -50,8 +50,7 @@ export default function useCreateLeave(
   const canSubmit = computed(() => {
     return name.value !== '' &&
       limitHours.value !== '' &&
-      salaryStandard.value !== '' &&
-      description.value !== ''
+      salaryStandard.value !== ''
       ? true
       : false
   })
@@ -65,7 +64,7 @@ export default function useCreateLeave(
           ...payload
         }),
       update: () =>
-        axios.put(`/salary/leave/${leave.id}`, {
+        axios.patch(`/salary/leave/${leave.id}`, {
           ...payload,
           id: leave.id
         })

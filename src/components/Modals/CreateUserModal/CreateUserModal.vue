@@ -138,6 +138,7 @@ const childComponet = computed(() => {
             type="text"
             placeholder="請輸入到職日期"
             v-model="onboardDate"
+            auto-apply
           />
         </div>
         <div class="mb-4 flex items-center">
@@ -147,6 +148,7 @@ const childComponet = computed(() => {
             type="text"
             placeholder="請輸入離職日期"
             v-model="resignationDate"
+            auto-apply
           />
         </div>
       </div>

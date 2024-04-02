@@ -18,7 +18,7 @@ export const useSideMenuStore = defineStore('sideMenu', {
       {
         icon: 'Home',
         pageName: 'Dashboard',
-        title: '首頁(缺文字及教學影片)'
+        title: '首頁'
       },
       {
         icon: 'Building2',

@@ -54,7 +54,7 @@ export default function useCreateCompany(
           ...payload
         }),
       update: () =>
-        axios.put(`/company/${company.id}`, {
+        axios.patch(`/company/${company.id}`, {
           ...payload,
           id: company.id
         })

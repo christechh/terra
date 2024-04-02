@@ -130,9 +130,11 @@ const onDeleteLeaveButtonClick = (id: number) => {
           <Table.Thead>
             <Table.Tr>
               <Table.Th class="whitespace-nowrap border-b-0">假勤名稱</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">請假上限</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">
-                薪資給新標準
+                請假上限 (小時)
+              </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">
+                薪資給薪標準
               </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">說明</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>

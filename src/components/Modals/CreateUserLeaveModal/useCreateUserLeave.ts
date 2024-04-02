@@ -20,9 +20,9 @@ export default function useCreateUserLeave(
   const payload: CreateUserLeavePayload = reactive({
     userId: '1',
     companyId: '1',
-    startTime: '2024-03-25 09:00:00',
-    endTime: '2024-03-25 18:00:00',
-    restHours: 1.5,
+    startTime: '',
+    endTime: '',
+    restHours: 0,
     leaveId: '',
     description: ''
   })
@@ -62,7 +62,8 @@ export default function useCreateUserLeave(
       companyId.value !== '' &&
       startTime.value !== '' &&
       endTime.value !== '' &&
-      leaveId.value !== ''
+      leaveId.value !== '' &&
+      restHours.value.toString() !== ''
       ? true
       : false
   })
@@ -76,7 +77,7 @@ export default function useCreateUserLeave(
           ...payload
         }),
       update: () =>
-        axios.put(`/salary/user-leave/${userLeave.id}`, {
+        axios.patch(`/salary/user-leave/${userLeave.id}`, {
           ...payload,
           id: userLeave.id
         })

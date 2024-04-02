@@ -133,13 +133,13 @@ export const usePaymentStore = defineStore('payment', {
       }
     },
     async setLinePay(dto: CreateLinePayDTO) {
-      return axios.put('user/linePay', dto)
+      return axios.patch('user/linePay', dto)
     },
     async setStripe(dto: CreateStripeDTO) {
-      return axios.put('user/stripe', dto)
+      return axios.patch('user/stripe', dto)
     },
     async setPayPal(dto: CreatePayPalDTO) {
-      return axios.put('user/paypal', dto)
+      return axios.patch('user/paypal', dto)
     }
   }
 })

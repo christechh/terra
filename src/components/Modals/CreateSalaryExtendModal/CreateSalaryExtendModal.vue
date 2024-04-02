@@ -4,11 +4,13 @@ import Button from '../../../base-components/Button'
 import {
   FormInput,
   FormLabel,
-  FormDatepicker
+  FormDatepicker,
+  FormSelect
 } from '../../../base-components/Form'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateSalaryExtend from './useCreateSalaryExtend'
+import useUser from '../../../pages/settings/composables/useUser'
 
 interface Props {
   salaryExtend?: {
@@ -23,6 +25,7 @@ interface Props {
   idx: number
 }
 
+const { users } = useUser()
 const emit = defineEmits(['close'])
 const { salaryExtend } = defineProps<Props>()
 
@@ -43,7 +46,7 @@ const {
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '編輯假勤' + (idx + 1) : '新增假勤' }}
+        {{ isEdit ? '編輯科別加減項' + (idx + 1) : '新增科別加減項' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"
@@ -52,12 +55,24 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">員工</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="userId" />
+          <FormLabel class="w-[120px]">選擇員工 *</FormLabel>
+          <FormSelect
+            class="flex-1"
+            type="text"
+            v-model="userId"
+          >
+            <option
+              v-for="(user, index) in users"
+              :key="index"
+              :value="user.id"
+            >
+              {{ user.name }}
+            </option>
+          </FormSelect>
         </div>
 
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">薪資年月</FormLabel>
+          <FormLabel class="w-[120px]">薪資年月 *</FormLabel>
           <FormDatepicker
             class="flex-1"
             v-model="yearMonth"
@@ -67,13 +82,21 @@ const {
         </div>
 
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">薪資科目</FormLabel>
+          <FormLabel class="w-[120px]">薪資科目 *</FormLabel>
           <FormInput class="flex-1" type="text" v-model="name" />
         </div>
 
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">金額</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="amount" />
+          <FormLabel class="w-[120px]">金額 *</FormLabel>
+          <FormInput class="flex-1" type="number" v-model="amount" />
+        </div>
+
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">加減項 *</FormLabel>
+          <FormSelect class="flex-1" type="text" v-model="type">
+            <option value="PLUS">加項</option>
+            <option value="REDUCE">減項</option>
+          </FormSelect>
         </div>
 
         <div class="mb-4 flex items-center">
@@ -81,10 +104,6 @@ const {
           <FormInput class="flex-1" type="text" v-model="description" />
         </div>
 
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">加減項</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="type" />
-        </div>
         <div class="flex justify-center">
           <Button
             class="mr-2 flex-1"
@@ -92,7 +111,7 @@ const {
             @click="() => submit(isEdit, () => emit('close'))"
             :disabled="!canSubmit"
           >
-            新增
+            {{ !isEdit ? '新增' : '儲存' }}
           </Button>
         </div>
       </section>

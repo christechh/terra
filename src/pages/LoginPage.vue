@@ -9,7 +9,7 @@ import CommonModal from '../components/Modals/CommonModal'
 
 import { useI18n } from 'vue-i18n'
 // import { useRouter } from 'vue-router'
-import logoImg from '../assets/images/logo_dark_v6.png'
+import logoImg from '../assets/images/login-logo.svg'
 import Lucide from '../base-components/Lucide'
 import { useUserStore } from '../stores/user'
 
@@ -62,7 +62,7 @@ watch([email, password], () => {
 
 <template>
   <div>
-    <img :src="logoImg" alt="" class="mx-auto mb-[50px] mt-16 w-40" />
+    <img :src="logoImg" alt="" class="mx-auto mb-[50px] mt-16 w-80" />
     <div
       class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
     >

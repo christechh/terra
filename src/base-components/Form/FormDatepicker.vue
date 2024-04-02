@@ -2,6 +2,7 @@
 import VueDatePicker from '@vuepic/vue-datepicker'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
+import { zhTW } from 'date-fns/locale'
 
 interface FormDatepickerProps {
   modelValue?: string
@@ -9,11 +10,13 @@ interface FormDatepickerProps {
   rounded?: boolean
   monthPicker?: boolean
   autoApply?: boolean
+  detail?: boolean
 }
 
 const props = withDefaults(defineProps<FormDatepickerProps>(), {
   monthPicker: false,
-  autoApply: false
+  autoApply: false,
+  detail: false
 })
 const emit = defineEmits(['update:modelValue', 'blur'])
 
@@ -23,9 +26,13 @@ const transTimestampToString = (timestampString: string) => {
   const year = date.getFullYear()
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   const day = date.getDate().toString().padStart(2, '0')
-  // const hour = date.getHours().toString().padStart(2, '0')
-  // const minute = date.getMinutes().toString().padStart(2, '0')
-  return props.monthPicker ? `${year}-${month}` : `${year}-${month}-${day}`
+  const hour = date.getHours().toString().padStart(2, '0')
+  const minute = date.getMinutes().toString().padStart(2, '0')
+  return props.detail
+    ? `${year}-${month}-${day} ${hour}:${minute}:00`
+    : props.monthPicker
+      ? `${year}-${month}`
+      : `${year}-${month}-${day}`
 }
 const isTimestampNotString = (value: string) => {
   return Number(value) > 0
@@ -68,12 +75,19 @@ watch(localValue, (newValue) => {
     v-model="localValue"
     class="c-date-picker p-0"
     :input-class-name="computedClass"
-    :format="props.monthPicker ? 'yyyy/MM' : 'yyyy/MM/dd'"
+    :format="
+      props.detail
+        ? 'yyyy/MM/dd HH:mm:ss'
+        : props.monthPicker
+          ? 'yyyy/MM'
+          : 'yyyy/MM/dd'
+    "
     model-type="timestamp"
-    :enable-time-picker="false"
+    :enable-time-picker="props.detail"
     :auto-apply="props.autoApply"
     @blur="handleBlur"
     :month-picker="props.monthPicker"
+    :format-locale="zhTW"
   />
 </template>
 

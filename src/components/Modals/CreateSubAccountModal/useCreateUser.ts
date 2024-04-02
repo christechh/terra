@@ -93,7 +93,7 @@ export default function useCreateSubAccount(
           })
         }),
       update: () =>
-        axios.put(`user/subAccount/${subAccount.id}`, {
+        axios.patch(`user/subAccount/${subAccount.id}`, {
           ...payload,
           id: subAccount.id,
           type: payload.notifyType,

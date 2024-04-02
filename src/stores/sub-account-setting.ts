@@ -205,7 +205,7 @@ export const useCompanyStore = defineStore('subAccounts', {
 
         const { token } = form.query
         const url = `/enterpoint/${token}/subAccounts/rules`
-        const res = await axios.put(url, JSON.stringify(body))
+        const res = await axios.patch(url, JSON.stringify(body))
 
         // 2. if ok, dispatch get subaccount list
         // if (res.statusCode == 200)

@@ -18,11 +18,11 @@ export default function useCreateWorkRecord(
   workRecord?: any
 ) {
   const payload: CreateWorkRecordPayload = reactive({
-    userId: '1',
+    userId: '',
     companyId: '1',
-    startTime: '2024-03-25 09:00:00',
-    endTime: '2024-03-25 18:00:00',
-    restHours: 1.5,
+    startTime: '',
+    endTime: '',
+    restHours: 0,
     type: 'HOLIDAY',
     description: ''
   })
@@ -62,8 +62,8 @@ export default function useCreateWorkRecord(
       companyId.value !== '' &&
       startTime.value !== '' &&
       endTime.value !== '' &&
-      restHours.value !== 0 &&
-      type.value !== ''
+      type.value !== '' &&
+      restHours.value.toString() !== ''
       ? true
       : false
   })
@@ -77,7 +77,7 @@ export default function useCreateWorkRecord(
           ...payload
         }),
       update: () =>
-        axios.put(`/salary/work-record/${workRecord.id}`, {
+        axios.patch(`/salary/work-record/${workRecord.id}`, {
           ...payload,
           id: workRecord.id
         })

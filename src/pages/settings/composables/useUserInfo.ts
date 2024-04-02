@@ -69,7 +69,7 @@ export default function useUserInfo() {
 
   const updateNotification = async () => {
     try {
-      await axios.put('/user/notify', {
+      await axios.patch('/user/notify', {
         email: userInfo.notify_email,
         is_open_notify: userInfo.is_open_notify,
         phone: `${phoneCode.value}${userInfo.notify_phone}`,
