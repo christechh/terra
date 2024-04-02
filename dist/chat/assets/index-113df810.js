@@ -6994,7 +6994,7 @@ const Ml = {
       const a = o.rooms[t],
         {
           data: { result: n }
-        } = await o.axios.put(s, {
+        } = await o.axios.patch(s, {
           message: (r = a.lastMessage) == null ? void 0 : r.id
         })
       n && e(x.updateRoom, { id: t, numberOfUnread: 0 })
