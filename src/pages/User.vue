@@ -18,7 +18,7 @@ const selectedUser: any = computed(
   () => users.value[selectedUserIndex.value] || null
 )
 
-const creatOredit = (idx?: number) => {
+const createOrEdit = (idx?: number) => {
   selectedUserIndex.value = -1
   if (idx !== undefined) {
     selectedUserIndex.value = idx
@@ -56,7 +56,7 @@ const creatOredit = (idx?: number) => {
             variant="primary"
             type="button"
             class="m-3"
-            @click="() => creatOredit()"
+            @click="() => createOrEdit()"
           >
             <Lucide icon="Plus" class="mr-1 h-4 w-4" />
             新增員工
@@ -69,7 +69,7 @@ const creatOredit = (idx?: number) => {
             variant="danger"
             type="button"
             class="m-3"
-            @click="() => creatOredit()"
+            @click="() => createOrEdit()"
             disabled
           >
             <Lucide icon="Download" class="mr-1 h-4 w-4" />
@@ -83,7 +83,7 @@ const creatOredit = (idx?: number) => {
             variant="primary"
             type="button"
             class="m-3"
-            @click="() => creatOredit()"
+            @click="() => createOrEdit()"
             disabled
           >
             <Lucide icon="Upload" class="mr-1 h-4 w-4" />
@@ -97,7 +97,7 @@ const creatOredit = (idx?: number) => {
             variant="primary"
             type="button"
             class="m-3"
-            @click="() => creatOredit()"
+            @click="() => createOrEdit()"
             disabled
           >
             <Lucide icon="Download" class="mr-1 h-4 w-4" />
@@ -198,7 +198,7 @@ const creatOredit = (idx?: number) => {
                   variant="primary"
                   type="button"
                   class="m-3 w-20"
-                  @click="creatOredit(index)"
+                  @click="createOrEdit(index)"
                 >
                   <Lucide icon="Edit" class="mr-1 h-4 w-4" />
                   修改
@@ -223,7 +223,7 @@ const creatOredit = (idx?: number) => {
   <CreateUserModal
     v-if="showCreateUserModal"
     @close="showCreateUserModal = false"
-    :company="selectedUser"
+    :subAccount="selectedUser"
     :idx="selectedUserIndex"
   />
 </template>

@@ -7,6 +7,14 @@ import { useUsersStore } from '../../../stores/users'
 interface CreateUsersPayload {
   name: string
   email?: string
+  gender?: string
+  nationality?: string
+  birthday?: string
+  idCardNumber?: string
+  address: string
+  mobile: string
+  bankCode: string
+  bankAccount: string
   password?: string
   employeeId: string
   workStatus: string
@@ -15,6 +23,14 @@ interface CreateUsersPayload {
   identity: string
   salaryType: string
   isEmployeeRetirementPercentage: boolean
+  employeeRetirementPercentage: number
+  family: {
+    name: string
+    gender: string
+    nationality: string
+    relationship: string
+    id_card_number: string
+  }[]
   companyIds?: string[]
   enabledModules: string[]
   [key: string]: any
@@ -24,20 +40,34 @@ export default function useCreateUser(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user?: any
 ) {
-  const payload: CreateUsersPayload = reactive({
-    name: '1',
-    email: '111',
-    password: '',
-    employeeId: '123',
-    workStatus: '在職',
-    onboardDate: '2024-03-29',
-    resignationDate: '',
-    identity: '員工',
-    salaryType: '月薪',
-    isEmployeeRetirementPercentage: false,
-    companyIds: ['1', '2'],
-    enabledModules: []
-  })
+  const payload: CreateUsersPayload = reactive(
+    user
+      ? user
+      : {
+          name: '1',
+          email: '111',
+          password: '',
+          employeeId: '123',
+          workStatus: '在職',
+          onboardDate: '2024-03-29',
+          resignationDate: '',
+          identity: '員工',
+          gender: '男',
+          nationality: '',
+          birthday: '',
+          idCardNumber: '',
+          address: '',
+          mobile: '',
+          bankCode: '',
+          bankAccount: '',
+          salaryType: '月薪',
+          salaryItems: [],
+          isEmployeeRetirementPercentage: false,
+          family: [],
+          companyIds: ['1', '2'],
+          enabledModules: []
+        }
+  )
   const {
     name,
     email,
@@ -48,7 +78,18 @@ export default function useCreateUser(
     resignationDate,
     identity,
     salaryType,
+    salaryItems,
+    gender,
+    nationality,
+    birthday,
+    idCardNumber,
+    address,
+    mobile,
+    bankCode,
+    bankAccount,
     isEmployeeRetirementPercentage,
+    employeeRetirementPercentage,
+    family,
     companyIds,
     enabledModules
   } = toRefs(payload)
@@ -116,7 +157,18 @@ export default function useCreateUser(
     resignationDate,
     identity,
     salaryType,
+    salaryItems,
+    gender,
+    nationality,
+    birthday,
+    idCardNumber,
+    address,
+    mobile,
+    bankCode,
+    bankAccount,
     isEmployeeRetirementPercentage,
+    employeeRetirementPercentage,
+    family,
     companyIds,
     enabledModules,
     canSubmit,
