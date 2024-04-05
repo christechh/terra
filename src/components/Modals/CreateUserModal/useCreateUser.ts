@@ -44,8 +44,8 @@ export default function useCreateUser(
     user
       ? user
       : {
-          name: '1',
-          email: '111',
+          name: 'XXX',
+          email: '111@gmail.com',
           password: '',
           employeeId: '123',
           workStatus: '在職',
@@ -62,7 +62,7 @@ export default function useCreateUser(
           bankAccount: '',
           salaryType: '月薪',
           salaryItems: [],
-          isEmployeeRetirementPercentage: false,
+          isEmployeeRetirementPercentage: true,
           family: [],
           companyIds: ['1', '2'],
           enabledModules: []
@@ -94,9 +94,8 @@ export default function useCreateUser(
     enabledModules
   } = toRefs(payload)
 
-  // FIX: 不管是否新增或是編輯現有人員都是 true
   const isEdit = computed(() => {
-    return true
+    return !!user
   })
 
   onMounted(() => {

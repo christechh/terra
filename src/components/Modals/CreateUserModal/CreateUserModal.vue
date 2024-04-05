@@ -96,7 +96,7 @@ const deleteSalaryItem = (index: number) => {
 
 const addFamilyMember = () => {
   family.value.push({
-    name: 'XX津貼',
+    name: '誰誰誰',
     gender: '男',
     nationality: '',
     relationship: '',
@@ -117,11 +117,13 @@ const deleteFamilyMember = (index: number) => {
     ) => idx !== index
   )
 }
-const totalSalary = salaryItems.value.length
-  ? salaryItems.value
-      .map((item: { name: string; amount: number }) => Number(item.amount))
-      .reduce((a: number, b: number) => a + b)
-  : 0
+const totalSalary = computed(() =>
+  salaryItems.value.length
+    ? salaryItems.value
+        .map((item: { name: string; amount: number }) => Number(item.amount))
+        .reduce((a: number, b: number) => a + b)
+    : 0
+)
 </script>
 
 <template>
