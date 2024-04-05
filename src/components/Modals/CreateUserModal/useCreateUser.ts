@@ -94,8 +94,9 @@ export default function useCreateUser(
     enabledModules
   } = toRefs(payload)
 
+  // FIX: 不管是否新增或是編輯現有人員都是 true
   const isEdit = computed(() => {
-    return !!user
+    return true
   })
 
   onMounted(() => {
@@ -136,7 +137,7 @@ export default function useCreateUser(
           ...payload
         }),
       update: () =>
-        axios.put(`/user/${user.id}`, {
+        axios.patch(`/user/${user.id}`, {
           ...payload,
           id: user.id
         })

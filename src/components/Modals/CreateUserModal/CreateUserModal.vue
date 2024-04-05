@@ -117,6 +117,11 @@ const deleteFamilyMember = (index: number) => {
     ) => idx !== index
   )
 }
+const totalSalary = salaryItems.value.length
+  ? salaryItems.value
+      .map((item: { name: string; amount: number }) => Number(item.amount))
+      .reduce((a: number, b: number) => a + b)
+  : 0
 </script>
 
 <template>
@@ -326,13 +331,7 @@ const deleteFamilyMember = (index: number) => {
               >
             </div>
           </div>
-          <div>
-            薪資合計：{{
-              salaryItems
-                .map((item) => Number(item.amount))
-                .reduce((a, b) => a + b)
-            }}
-          </div>
+          <div>薪資合計：{{ totalSalary }}</div>
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">是否自提</FormLabel>
