@@ -10,6 +10,7 @@ import Lucide from '../../../base-components/Lucide'
 import Table from '../../../base-components/Table'
 import useCalculateSalaries from './useCalculateSalaries'
 import useCreateSalaryGroup from './useCreateSalaryGroup'
+import { useSalaryStore } from '../../../stores/salary'
 
 interface Props {
   companyId: number
@@ -41,7 +42,7 @@ interface SalaryRecord {
 const emit = defineEmits(['close'])
 const props = defineProps<Props>()
 
-const { fetchData: getCalcualteSalaries, loading: calcLoading } =
+const { fetchData: getCalculateSalaries, loading: calcLoading } =
   useCalculateSalaries()
 const {
   createSalaryGroup,
@@ -164,7 +165,7 @@ const onFormSubmitClick = async () => {
     startDate: payloadRefs.startDate.value,
     endDate: payloadRefs.endDate.value
   }
-  await getCalcualteSalaries(payload, (result: any) => {
+  await getCalculateSalaries(payload, (result: any) => {
     calcSalariesData.value = result
     page.value = 'table'
   })
@@ -181,7 +182,13 @@ const onPreviewResultClick = () => {
 
 const onCreateSalaryGroupButtonClick = () => {
   if (!canSubmit) return
-  createSalaryGroup(() => emit('close'))
+  createSalaryGroup(() => {
+    emit('close')
+    useSalaryStore().fetchSalaryGroups({
+      companyId: Number(payloadRefs.companyId.value),
+      page: 0
+    })
+  })
 }
 
 const onSortEvent = ({
@@ -236,27 +243,48 @@ onMounted(() => {
       <section v-show="page === 'form'">
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">薪資發放名稱</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="payloadRefs.name.value" />
+          <FormInput
+            class="flex-1"
+            type="text"
+            v-model="payloadRefs.name.value"
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">薪資年月</FormLabel>
-          <FormDatepicker class="flex-1" v-model="payloadRefs.yearMonth.value" month-picker auto-apply />
+          <FormDatepicker
+            class="flex-1"
+            v-model="payloadRefs.yearMonth.value"
+            month-picker
+            auto-apply
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">起始日</FormLabel>
-          <FormDatepicker class="flex-1" v-model="payloadRefs.startDate.value" auto-apply />
+          <FormDatepicker
+            class="flex-1"
+            v-model="payloadRefs.startDate.value"
+            auto-apply
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">結束日</FormLabel>
-          <FormDatepicker class="flex-1" v-model="payloadRefs.endDate.value" auto-apply />
+          <FormDatepicker
+            class="flex-1"
+            v-model="payloadRefs.endDate.value"
+            auto-apply
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">發薪日</FormLabel>
-          <FormDatepicker class="flex-1" v-model="payloadRefs.paymentDate.value" auto-apply />
+          <FormDatepicker
+            class="flex-1"
+            v-model="payloadRefs.paymentDate.value"
+            auto-apply
+          />
         </div>
         <div class="flex justify-center">
           <Button
-            class="flex-1 mr-2"
+            class="mr-2 flex-1"
             variant="primary"
             @click="onFormSubmitClick"
             :loading="calcLoading"
@@ -271,7 +299,12 @@ onMounted(() => {
       </section>
       <section v-show="page === 'table'">
         <!--Empty Content-->
-        <div class="flex justify-center p-10" v-if="calcSalariesData.value.length === 0">查無資料</div>
+        <div
+          class="flex justify-center p-10"
+          v-if="calcSalariesData.value.length === 0"
+        >
+          查無資料
+        </div>
         <template v-else>
           <div class="max-h-[70vh] overflow-x-auto overflow-y-auto">
             <Table bordered @sort="onSortEvent">
@@ -340,9 +373,15 @@ onMounted(() => {
                   >
                     {{ minusCol }}
                   </Table.Th>
-                  <Table.Th class="whitespace-nowrap" sortableKey="plusSalary">應發金額</Table.Th>
-                  <Table.Th class="whitespace-nowrap" sortableKey="minusSalary">應減金額</Table.Th>
-                  <Table.Th class="whitespace-nowrap" sortableKey="netSalary">實發金額</Table.Th>
+                  <Table.Th class="whitespace-nowrap" sortableKey="plusSalary"
+                    >應發金額</Table.Th
+                  >
+                  <Table.Th class="whitespace-nowrap" sortableKey="minusSalary"
+                    >應減金額</Table.Th
+                  >
+                  <Table.Th class="whitespace-nowrap" sortableKey="netSalary"
+                    >實發金額</Table.Th
+                  >
                   <Table.Th
                     class="whitespace-nowrap"
                     v-for="companyCol in employeeSalaries.companyCols.values()"
@@ -368,14 +407,18 @@ onMounted(() => {
                     {{ employeeSalary['onboard_date'] }}
                     {{
                       employeeSalary['onboard_date']
-                        ? dayjs(employeeSalary['onboard_date']).format('YYYY-MM-DD')
+                        ? dayjs(employeeSalary['onboard_date']).format(
+                            'YYYY-MM-DD'
+                          )
                         : '--'
                     }}
                   </Table.Td>
                   <Table.Td class="whitespace-nowrap">
                     {{
                       employeeSalary['resignation_date']
-                        ? dayjs(employeeSalary['resignation_date']).format('YYYY-MM-DD')
+                        ? dayjs(employeeSalary['resignation_date']).format(
+                            'YYYY-MM-DD'
+                          )
                         : '--'
                     }}
                   </Table.Td>
@@ -423,7 +466,7 @@ onMounted(() => {
               </Table.Tbody>
             </Table>
           </div>
-          <div class="border text-right p-5">
+          <div class="border p-5 text-right">
             Total Rows: {{ employeeSalaries.result.length }}
           </div>
         </template>
@@ -437,38 +480,47 @@ onMounted(() => {
           >
             計算結果
           </Button>
-          <Button variant="primary" type="button" @click="() => onPrevButtonClick('form')">
+          <Button
+            variant="primary"
+            type="button"
+            @click="() => onPrevButtonClick('form')"
+          >
             上一步
           </Button>
         </div>
       </section>
       <section v-show="page === 'result'">
-        <div class="flex flex-col p-5 gap-3 text-base">
-          <div class="flex justify-between items-center">
+        <div class="flex flex-col gap-3 p-5 text-base">
+          <div class="flex items-center justify-between">
             <span>薪資年月：</span>
             <span>{{ payloadRefs.yearMonth.value }}</span>
           </div>
-          <div class="flex justify-between items-center">
+          <div class="flex items-center justify-between">
             <span>薪資發放名稱：</span>
             <span>{{ payloadRefs.name.value }}</span>
           </div>
-          <div class="flex justify-between items-center">
+          <div class="flex items-center justify-between">
             <span>計算區間：</span>
-            <span>{{ payloadRefs.startDate.value }} ~ {{ payloadRefs.endDate.value }}</span>
+            <span
+              >{{ payloadRefs.startDate.value }} ~
+              {{ payloadRefs.endDate.value }}</span
+            >
           </div>
-          <div class="flex justify-between items-center">
+          <div class="flex items-center justify-between">
             <span>發薪人數：</span>
             <span>{{ calcSalariesData.value.length }}人</span>
           </div>
-          <div class="flex justify-between items-center">
+          <div class="flex items-center justify-between">
             <span>應發總額：</span>
             <span>{{ employeeSalaries.totalPlusSalary.toLocaleString() }}</span>
           </div>
-          <div class="flex justify-between items-center">
+          <div class="flex items-center justify-between">
             <span>應減總額：</span>
-            <span>{{ employeeSalaries.totalMinusSalary.toLocaleString() }}</span>
+            <span>{{
+              employeeSalaries.totalMinusSalary.toLocaleString()
+            }}</span>
           </div>
-          <div class="flex justify-between items-center">
+          <div class="flex items-center justify-between">
             <span>實發總額：</span>
             <span>{{ employeeSalaries.totalNetSalary.toLocaleString() }}</span>
           </div>
@@ -484,7 +536,11 @@ onMounted(() => {
           >
             確認發放
           </Button>
-          <Button variant="primary" type="button" @click="() => onPrevButtonClick('table')">
+          <Button
+            variant="primary"
+            type="button"
+            @click="() => onPrevButtonClick('table')"
+          >
             上一步
           </Button>
         </div>

@@ -46,7 +46,7 @@ export default function useCreateSalaryGroup() {
       // 新舊資料格式轉換
       requestPayload.salaries = requestPayload.salaries.map((item) => {
         return {
-          userId: item.employee.id,
+          userId: item.user.id,
           salaryItems: item.salaryItems.map((salary: any) => {
             return {
               name: salary.title,

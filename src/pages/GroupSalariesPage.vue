@@ -6,18 +6,18 @@ import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
 import dayjs from 'dayjs'
-
+import { useRoute } from 'vue-router'
 // import useSalary from './settings/composables/useSalary'
 
 const companyId = ref(1)
 console.log(companyId)
 const showCreateSalaryGroupModal = ref(false)
 const selectedCompanyIndex = ref(-1)
-
-// const { salaries } = useSalary(1)
+const route = useRoute()
+const { salaries } = useSalary(1)
 const salaryGroups = reactive<any[]>([])
 
-const creatOredit = (idx?: number) => {
+const createOrEdit = (idx?: number) => {
   selectedCompanyIndex.value = -1
   if (idx !== undefined) {
     selectedCompanyIndex.value = idx
@@ -141,7 +141,7 @@ const confirmDeleteSalary = (id: number) => {
                     variant="primary"
                     type="button"
                     class="m-3 w-24"
-                    @click="creatOredit(index)"
+                    @click="createOrEdit(index)"
                   >
                     <Lucide icon="LibraryBig" class="mr-1 h-4 w-4" />
                     薪資單
