@@ -4,10 +4,10 @@ import { useRedirectToStore } from './stores/redirect-to'
 
 const instance = axios.create({
   headers: {
-    'Content-Type': 'application/json',
-    'X-User-Type': 'admin'
+    'Content-Type': 'application/json'
   }
 })
+
 const useBasicTokenRouters = [
   '/auth/login',
   '/auth/phone/login',
@@ -24,6 +24,9 @@ instance.interceptors.request.use(
       if (token) {
         config.headers.Authorization = 'Bearer ' + token
       }
+    }
+    if (localStorage.getItem('xUserType') && !config.headers['X-User-Type']) {
+      config.headers['X-User-Type'] = localStorage.getItem('xUserType')
     }
     config.baseURL = import.meta.env.VITE_API_URL
     return config

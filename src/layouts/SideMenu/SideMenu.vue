@@ -25,9 +25,9 @@ import {
 
 import { FormSelect } from '../../base-components/Form'
 import useCompany from '../../../src/pages/settings/composables/useCompany'
+import { useCompanyStore } from '../../stores/company'
 
-const { companies } = useCompany()
-const companyId = 1
+const { companies, companyId } = useCompany()
 
 const route: Route = useRoute()
 let formattedMenu = ref<Array<FormattedMenu | 'divider'>>([])
@@ -40,11 +40,16 @@ const setFormattedMenu = (
 }
 const sideMenuStore = useSideMenuStore()
 const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route))
-
 const changeCompany = (e: Event) => {
   const { value } = e.target as HTMLInputElement
-  localStorage.setItem('companyId', value)
+  useCompanyStore().setCompanyId(Number(value))
 }
+
+watch(companies, () => {
+  if (companies.value.length && companyId.value === -1) {
+    useCompanyStore().setCompanyId(Number(companies.value[0].id))
+  }
+})
 
 provide<ProvideForceActiveMenu>('forceActiveMenu', (pageName: string) => {
   forceActiveMenu(route, pageName)

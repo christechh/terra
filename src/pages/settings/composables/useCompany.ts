@@ -3,11 +3,11 @@ import i18n from '../../../i18n'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useCompanyStore } from '../../../stores/company'
 
-export default function useSubAccount() {
+export default function useCompany() {
   const subCompanyStore = useCompanyStore()
   const { fetchCompanies } = subCompanyStore
   const companies = computed(() => subCompanyStore.companies)
-
+  const companyId = computed(() => subCompanyStore.companyId)
   const confirmDeleteCompany = (id: number) => {
     useDeleteModalStore().showModal({
       deleteType: 'company',
@@ -21,6 +21,7 @@ export default function useSubAccount() {
 
   return {
     companies,
+    companyId,
     fetchCompanies,
     confirmDeleteCompany
   }
