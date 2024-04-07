@@ -65,6 +65,9 @@ const {
   bankAccount,
   salaryType,
   salaryItems,
+  employeeInsurance,
+  healthInsurance,
+  employeePension,
   isEmployeeRetirementPercentage,
   employeeRetirementPercentage,
   family,
@@ -100,7 +103,7 @@ const addFamilyMember = () => {
     gender: '男',
     nationality: '',
     relationship: '',
-    id_card_number: ''
+    idCardNumber: ''
   })
 }
 const deleteFamilyMember = (index: number) => {
@@ -111,7 +114,7 @@ const deleteFamilyMember = (index: number) => {
         gender: string
         nationality: string
         relationship: string
-        id_card_number: string
+        idCardNumber: string
       },
       idx: number
     ) => idx !== index
@@ -316,14 +319,20 @@ const totalSalary = computed(() =>
             :key="index"
           >
             <div class="flex items-center">
-              <FormInput
+              <!-- <FormInput
                 class="mr-8 max-w-[120px]"
                 type="text"
                 placeholder="薪資名目"
                 v-model="salaryItem.name"
-              />
+              /> -->
+              <FormSelect class="flex-1" v-model="salaryItem.name">
+                <option value="基本薪資">基本薪資</option>
+                <option value="伙食費">伙食費</option>
+                <option value="主管津貼">主管津貼</option>
+                <option value="其他津貼">其他津貼</option>
+              </FormSelect>
               <FormInput
-                class="max-w-[120px]"
+                class="ml-4 max-w-[50%]"
                 type="text"
                 placeholder="金額"
                 v-model="salaryItem.amount"
@@ -334,6 +343,33 @@ const totalSalary = computed(() =>
             </div>
           </div>
           <div>薪資合計：{{ totalSalary }}</div>
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">勞工保險</FormLabel>
+          <FormInput
+            class="flex-1"
+            type="number"
+            placeholder="勞工保險"
+            v-model="employeeInsurance"
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">健保</FormLabel>
+          <FormInput
+            class="flex-1"
+            type="number"
+            placeholder="健保"
+            v-model="healthInsurance"
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">退休金</FormLabel>
+          <FormInput
+            class="flex-1"
+            type="number"
+            placeholder="退休金"
+            v-model="employeePension"
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">是否自提</FormLabel>
@@ -412,7 +448,7 @@ const totalSalary = computed(() =>
               class="flex-1"
               type="text"
               placeholder="請輸入身分證字號"
-              v-model="member.id_card_number"
+              v-model="member.idCardNumber"
             />
             <Button variant="primary" @click="() => deleteFamilyMember(index)"
               >移除</Button

@@ -6,15 +6,12 @@ import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
 import dayjs from 'dayjs'
-// import { useRoute } from 'vue-router'
 // import useSalary from './settings/composables/useSalary'
 
 const companyId = ref(1)
 console.log(companyId)
 const showCreateSalaryGroupModal = ref(false)
 const selectedCompanyIndex = ref(-1)
-// const route = useRoute()
-// const { salaries } = useSalary(1)
 const salaryGroups = reactive<any[]>([])
 
 const createOrEdit = (idx?: number) => {

@@ -24,12 +24,15 @@ interface CreateUsersPayload {
   salaryType: string
   isEmployeeRetirementPercentage: boolean
   employeeRetirementPercentage: number
+  employeeInsurance: number
+  healthInsurance: number
+  employeePension: number
   family: {
     name: string
     gender: string
     nationality: string
     relationship: string
-    id_card_number: string
+    idCardNumber: string
   }[]
   companyIds?: string[]
   enabledModules: string[]
@@ -65,7 +68,10 @@ export default function useCreateUser(
           isEmployeeRetirementPercentage: true,
           family: [],
           companyIds: ['1', '2'],
-          enabledModules: []
+          enabledModules: [],
+          employeeInsurance: 0,
+          healthInsurance: 0,
+          employeePension: 0
         }
   )
   const {
@@ -79,6 +85,9 @@ export default function useCreateUser(
     identity,
     salaryType,
     salaryItems,
+    employeeInsurance,
+    healthInsurance,
+    employeePension,
     gender,
     nationality,
     birthday,
@@ -158,6 +167,9 @@ export default function useCreateUser(
     identity,
     salaryType,
     salaryItems,
+    employeeInsurance,
+    healthInsurance,
+    employeePension,
     gender,
     nationality,
     birthday,
