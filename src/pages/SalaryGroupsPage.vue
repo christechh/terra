@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import dayjs from 'dayjs'
 // import { useRouter } from 'vue-router'
 import Table from '../base-components/Table'
@@ -10,15 +10,18 @@ import CreateSalaryGroupModal from '../components/Modals/CreateSalaryGroupModal'
 import ExportSalaryModal from '../components/Modals/ExportSalaryModal'
 
 import useSalary from './settings/composables/useSalary'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
 // const router = useRouter()
-
-const companyId = ref(1)
+const { companyId } = useCompany()
 const showExportSalaryModal = ref(false)
 const showCreateSalaryGroupModal = ref(false)
 
-const { salaryGroups, confirmDeleteSalaryGroup } = useSalary(1)
+watch(companyId, () => {
+  useSalary(companyId.value)
+})
 
+const { salaryGroups, confirmDeleteSalaryGroup } = useSalary(companyId.value)
 const onCreateSalaryGroupButtonClick = () => {
   showCreateSalaryGroupModal.value = true
 }
@@ -37,7 +40,7 @@ const onExportSalaryButtonClick = () => {
 }
 
 const onDeleteSalaryGroupButtonClick = (groupId: number) => {
-  confirmDeleteSalaryGroup(companyId.value, groupId)
+  confirmDeleteSalaryGroup(Number(companyId.value) ?? -1, groupId)
 }
 </script>
 

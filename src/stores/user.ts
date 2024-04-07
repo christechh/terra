@@ -6,6 +6,7 @@ export const useUserStore = defineStore('user', {
   state: () => ({
     email: localStorage.getItem('email') || '',
     token: localStorage.getItem('token') || '',
+    xUserType: localStorage.getItem('xUserType') || '',
     imkitToken: ''
   }),
   actions: {
@@ -13,8 +14,10 @@ export const useUserStore = defineStore('user', {
       const resp = await axios.post('/admin/login', credentials)
       this.email = credentials.email
       this.token = resp.data.data.accessToken
+      this.xUserType = resp.data.data.xUserType
       localStorage.setItem('token', this.token)
       localStorage.setItem('email', credentials.email)
+      localStorage.setItem('xUserType', resp.data.data.xUserType)
       useRedirectToStore().redirect({ path: '/dashboard' })
     },
     async loginByPhone(credentials: { phone: string; password: string }) {

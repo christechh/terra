@@ -10,9 +10,13 @@ export interface Company {
 
 export const useCompanyStore = defineStore('company', {
   state: () => ({
-    companies: [] as Company[]
+    companies: [] as Company[],
+    companyId: -1 as number
   }),
   actions: {
+    setCompanyId(value: number) {
+      this.companyId = value
+    },
     fetchCompanies() {
       axios
         .get('/company', {
@@ -23,6 +27,7 @@ export const useCompanyStore = defineStore('company', {
         })
         .then((res) => {
           this.companies = res.data.data
+          this.companyId = res.data.data[0].id
         })
     },
     deleteCompany(id: number) {
