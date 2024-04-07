@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import dayjs from 'dayjs'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
@@ -11,7 +11,7 @@ import ExportSalaryModal from '../components/Modals/ExportSalaryModal'
 
 import useSalary from './settings/composables/useSalary'
 
-const router = useRouter()
+// const router = useRouter()
 
 const companyId = ref(1)
 const showExportSalaryModal = ref(false)
@@ -23,14 +23,14 @@ const onCreateSalaryGroupButtonClick = () => {
   showCreateSalaryGroupModal.value = true
 }
 
-const onOpenGroupSalariesButtonClick = (groupId: string) => {
-  router.push({
-    name: 'GroupSalaries',
-    params: {
-      groupId
-    }
-  })
-}
+// const onOpenGroupSalariesButtonClick = (groupId: string) => {
+//   router.push({
+//     name: 'GroupSalaries',
+//     params: {
+//       groupId
+//     }
+//   })
+// }
 
 const onExportSalaryButtonClick = () => {
   showExportSalaryModal.value = true
@@ -233,7 +233,7 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
                 class="relative w-56 border-b-0 bg-white py-0 shadow-[20px_3px_20px_#0000000b] before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600 before:dark:bg-darkmode-400"
               >
                 <div class="flex items-center justify-center">
-                  <Button
+                  <!-- <Button
                     variant="primary"
                     type="button"
                     class="m-3 w-24"
@@ -241,7 +241,7 @@ const onDeleteSalaryGroupButtonClick = (groupId: number) => {
                   >
                     <Lucide icon="LibraryBig" class="mr-1 h-4 w-4" />
                     薪資單
-                  </Button>
+                  </Button> -->
                   <Button
                     variant="danger"
                     type="button"

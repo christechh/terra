@@ -35,7 +35,7 @@ const {
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '編輯假勤' + (idx + 1) : '新增假勤' }}
+        {{ isEdit ? '編輯假勤' : '新增假勤' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"

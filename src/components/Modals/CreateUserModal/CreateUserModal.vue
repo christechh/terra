@@ -44,7 +44,7 @@ interface Props {
 
 // const { confirmLinkSalary } = useUser()
 const emit = defineEmits(['close'])
-const { subAccount, idx } = defineProps<Props>()
+const { subAccount } = defineProps<Props>()
 
 const {
   email,
@@ -137,9 +137,7 @@ const totalSalary = computed(() =>
         :class="isEdit ? 'text-primary' : 'text-center text-xl'"
       >
         {{
-          isEdit
-            ? $t('user-edit-model-title') + (idx + 1)
-            : $t('user-create-model-title')
+          isEdit ? $t('user-edit-model-title') : $t('user-create-model-title')
         }}
         <Lucide
           icon="X"

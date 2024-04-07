@@ -40,6 +40,15 @@ const onDownloadImportExampleClick = () => {
 const onDeleteSalaryExtendButtonClick = (id: number) => {
   confirmDeleteSalaryExtend(companyId.value, id)
 }
+
+const transfer = (type: string): string => {
+  const m: { [key: string]: string } = {
+    PLUS: '加項',
+    MINUS: '減項'
+  }
+
+  return m[type] || 'null'
+}
 </script>
 
 <template>
@@ -160,7 +169,7 @@ const onDeleteSalaryExtendButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryExtend.name }}
+                  {{ salaryExtend.userName }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -188,7 +197,7 @@ const onDeleteSalaryExtendButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryExtend.type }}
+                  {{ transfer(salaryExtend.type) }}
                 </div>
               </Table.Td>
               <Table.Td

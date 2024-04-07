@@ -63,14 +63,22 @@ export default function useCreateWorkRecord(
       startTime.value !== '' &&
       endTime.value !== '' &&
       type.value !== '' &&
-      restHours.value.toString() !== ''
+      restHours.value.toString() !== '' &&
+      restHours.value >= 0
       ? true
       : false
   })
 
   const submit = async (isEdit: boolean, callback: () => void) => {
     const action = isEdit ? 'update' : 'create'
-    console.log(action)
+    if (payload.restHours < 0) {
+      useNotificationsStore().showError({
+        title: '休息時間需大於0',
+        content: '休息時間需大於0'
+      })
+
+      return
+    }
     const actionMap = {
       create: () =>
         axios.post('/salary/work-record', {

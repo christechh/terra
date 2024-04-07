@@ -63,7 +63,8 @@ export default function useCreateUserLeave(
       startTime.value !== '' &&
       endTime.value !== '' &&
       leaveId.value !== '' &&
-      restHours.value.toString() !== ''
+      restHours.value.toString() !== '' &&
+      restHours.value >= 0
       ? true
       : false
   })

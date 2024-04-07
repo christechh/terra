@@ -6,7 +6,7 @@ import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 
 export default function useSalary(companyId: number) {
   const salaryStore = useSalaryStore()
-  const { fetchSalaries, fetchSalaryExtends, fetchSalaryGroups } = salaryStore
+  const { fetchSalaryExtends, fetchSalaryGroups } = salaryStore
 
   const confirmDeleteSalaryGroup = (companyId: number, groupId: number) => {
     useDeleteModalStore().showModal({
@@ -21,12 +21,12 @@ export default function useSalary(companyId: number) {
   const salaryGroups = computed(() => salaryStore.salaryGroups)
   const salaryExtends = computed(() => salaryStore.salaryExtends)
 
-  fetchSalaries({ companyId, page: 1 })
+  // fetchSalaries({ companyId, page: 1 })
   fetchSalaryExtends({ companyId, page: 1 })
   fetchSalaryGroups({ companyId, page: 1 })
 
   return {
-    fetchSalaries,
+    // fetchSalaries,
     fetchSalaryExtends,
     fetchSalaryGroups,
     confirmDeleteSalaryGroup,

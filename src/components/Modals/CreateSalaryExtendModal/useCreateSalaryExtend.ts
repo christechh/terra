@@ -57,6 +57,7 @@ export default function useCreateSalaryExtend(
       type.value !== '' &&
       name.value !== '' &&
       amount.value.toString() !== '' &&
+      amount.value >= 0 &&
       yearMonth.value !== ''
       ? true
       : false

@@ -45,7 +45,7 @@ const {
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '請假申請' + (idx + 1) : '請假申請' }}
+        {{ isEdit ? '請假申請' : '請假申請' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"
@@ -83,11 +83,11 @@ const {
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">起始時間 *</FormLabel>
-          <FormDatepicker class="flex-1" v-model="startTime" auto-apply detail />
+          <FormDatepicker class="flex-1" v-model="startTime" detail time-picker-inline/>
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">結束時間 *</FormLabel>
-          <FormDatepicker class="flex-1" v-model="endTime" auto-apply detail />
+          <FormDatepicker class="flex-1" v-model="endTime" detail time-picker-inline />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">休息時間 (小時) *</FormLabel>

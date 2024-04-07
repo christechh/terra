@@ -31,7 +31,7 @@ const { name, taxId, canSubmit, isEdit, submit } = useCreateCompany(company)
         class="relative mb-5"
         :class="isEdit ? 'text-primary' : 'text-center text-xl'"
       >
-        {{ isEdit ? $t('feature-section8-title') + (idx + 1) : '新增公司' }}
+        {{ isEdit ? $t('feature-section8-title') : '新增公司' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"

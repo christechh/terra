@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import dayjs from 'dayjs'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
 import { FormInput } from '../base-components/Form'
 import CreateWorkRecordModal from '../components/Modals/CreateWorkRecordModal'
+import dayjs from 'dayjs'
 
 import useWorkRecord from './settings/composables/useWorkRecord'
 
@@ -40,6 +40,17 @@ const onDownloadImportExampleClick = () => {
 
 const onDeleteWorkRecordButtonClick = (id: number) => {
   confirmDeleteWorkRecord(companyId.value, id)
+}
+
+const transfer = (type: string): string => {
+  const m: { [key: string]: string } = {
+    HOLIDAY: '例假日',
+    OFFICIALHOLIDAY: '國定假日',
+    RESTDAY: '休息日',
+    WORKDAY: '工作日'
+  }
+
+  return m[type] || 'null'
 }
 </script>
 
@@ -141,6 +152,9 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
                 休息時間(小時)
               </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">
+                時數（小時）
+              </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">
                 工作內容備註
               </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
@@ -171,21 +185,21 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ workRecord.type }}
+                  {{ transfer(workRecord.type) }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(workRecord.startTime).format('YYYY-MM-DD') }}
+                  {{ workRecord.startTime }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(workRecord.endTime).format('YYYY-MM-DD') }}
+                  {{ workRecord.endTime }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -193,6 +207,18 @@ const onDeleteWorkRecordButtonClick = (id: number) => {
               >
                 <div class="font-medium">
                   {{ workRecord.restHours }}
+                </div>
+              </Table.Td>
+              <Table.Td
+                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+              >
+                <div class="font-medium">
+                  {{
+                    dayjs(workRecord.endTime).diff(
+                      dayjs(workRecord.startTime),
+                      'hour'
+                    ) - workRecord.restHours
+                  }}
                 </div>
               </Table.Td>
               <Table.Td

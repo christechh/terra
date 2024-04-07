@@ -46,7 +46,7 @@ const {
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '編輯科別加減項' + (idx + 1) : '新增科別加減項' }}
+        {{ isEdit ? '編輯科別加減項' : '新增科別加減項' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"
@@ -88,14 +88,14 @@ const {
 
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">金額 *</FormLabel>
-          <FormInput class="flex-1" type="number" v-model="amount" />
+          <FormInput class="flex-1" type="number" min="0" step="1" v-model="amount"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
         </div>
 
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">加減項 *</FormLabel>
           <FormSelect class="flex-1" type="text" v-model="type">
             <option value="PLUS">加項</option>
-            <option value="REDUCE">減項</option>
+            <option value="MINUS">減項</option>
           </FormSelect>
         </div>
 

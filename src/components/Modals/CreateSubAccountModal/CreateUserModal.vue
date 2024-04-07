@@ -66,7 +66,7 @@ const reset = () => {
       >
         {{
           isEdit
-            ? $t('feature-section8-title') + (idx + 1)
+            ? $t('feature-section8-title')
             : $t('sub-account-add-btn-text')
         }}
         <Lucide

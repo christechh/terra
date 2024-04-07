@@ -33,7 +33,7 @@ export const useUsersStore = defineStore('users', {
         })
     },
     deleteUser(id: number) {
-      axios.delete(`/user/${id}`).then(() => {
+      axios.delete(`/admin/user/${id}`).then(() => {
         this.fetchUsers()
       })
     }
