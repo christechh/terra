@@ -10,8 +10,17 @@ export const useUserStore = defineStore('user', {
     imkitToken: ''
   }),
   actions: {
-    async login(credentials: { email: string; password: string }) {
-      const resp = await axios.post('/admin/login', credentials)
+    async login(
+      credentials: {
+        email: string
+        password: string
+      },
+      isAdmin: boolean
+    ) {
+      const resp = await axios.post(
+        isAdmin ? '/admin/login' : '/user/login',
+        credentials
+      )
       this.email = credentials.email
       this.token = resp.data.data.accessToken
       this.xUserType = resp.data.data.xUserType

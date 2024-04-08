@@ -23,8 +23,16 @@ const { t } = useI18n()
 const isInputError = ref(false)
 const isLoging = ref(false)
 const apiError = ref('')
+const isAdminLoginMode = ref(false)
+const count = ref(0)
 // const isAndroid = ref(navigator.userAgent.toLowerCase().indexOf('android') > -1)
+const accumulateCount = () => {
+  if (!isAdminLoginMode.value) count.value++
+  else count.value--
 
+  if (count.value === 5) isAdminLoginMode.value = true
+  else if (count.value === 0) isAdminLoginMode.value = false
+}
 const doLogin = () => {
   if (!email.value || !password.value) {
     return (isInputError.value = true)
@@ -32,10 +40,13 @@ const doLogin = () => {
   apiError.value = ''
   isLoging.value = true
   useUserStore()
-    .login({
-      email: email.value,
-      password: password.value
-    })
+    .login(
+      {
+        email: email.value,
+        password: password.value
+      },
+      isAdminLoginMode.value
+    )
     .catch((e) => {
       apiError.value = e.response.data.errors[0].message
     })
@@ -66,8 +77,8 @@ watch([email, password], () => {
     <div
       class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
     >
-      <div class="mb-7 text-center font-extrabold">
-        {{ t('login-title') }}
+      <div class="mb-7 text-center font-extrabold" @click="accumulateCount">
+        {{ isAdminLoginMode ? 'admin ' + t('login-title') : t('login-title') }}
       </div>
       <div class="mb-3">
         <span class="mb-1 text-sm">{{ t('login-email-label') }}</span>
