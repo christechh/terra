@@ -194,7 +194,7 @@ const doLogout = () => {
         <Menu.Header class="font-normal">
           <div class="font-medium">{{ email }}</div>
           <Menu.Divider class="bg-white/[0.08]" />
-          <div class="font-medium">版本：v2.0.1</div>
+          <div class="font-medium">版本：v2.0.3</div>
         </Menu.Header>
         <Menu.Divider class="bg-white/[0.08]" />
         <Menu.Item class="hover:bg-white/5" @click="doLogout">
