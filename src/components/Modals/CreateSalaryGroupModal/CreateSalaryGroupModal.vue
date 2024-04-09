@@ -74,10 +74,10 @@ const employeeSalaries = computed(() => {
 
       salaryItems.forEach((salaryItem: any) => {
         // 動態欄位設置
-        if (salaryItem.type === 'plus') plusCols.add(salaryItem.name)
-        if (salaryItem.type === 'minus') minusCols.add(salaryItem.name)
-        if (salaryItem.type === 'normal') normalCols.add(salaryItem.name)
-        if (salaryItem.type === 'company') companyCols.add(salaryItem.name)
+        if (salaryItem.type === 'PLUS') plusCols.add(salaryItem.name)
+        if (salaryItem.type === 'MINUS') minusCols.add(salaryItem.name)
+        if (salaryItem.type === 'NORMAL') normalCols.add(salaryItem.name)
+        if (salaryItem.type === 'COMPANY') companyCols.add(salaryItem.name)
 
         // 欄位金額加總
         columnMap[salaryItem.name] =
@@ -404,7 +404,6 @@ onMounted(() => {
                     {{ employeeSalary['name'] }}
                   </Table.Td>
                   <Table.Td class="whitespace-nowrap">
-                    {{ employeeSalary['onboard_date'] }}
                     {{
                       employeeSalary['onboard_date']
                         ? dayjs(employeeSalary['onboard_date']).format(
