@@ -27,10 +27,7 @@ const { name, taxId, canSubmit, isEdit, submit } = useCreateCompany(company)
 <template>
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[400px]">
-      <div
-        class="relative mb-5"
-        :class="isEdit ? 'text-primary' : 'text-center text-xl'"
-      >
+      <div class="relative mb-5 text-center text-xl">
         {{ isEdit ? $t('feature-section8-title') : '新增公司' }}
         <Lucide
           icon="X"

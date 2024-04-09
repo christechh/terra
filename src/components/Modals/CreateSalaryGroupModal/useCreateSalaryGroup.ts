@@ -4,7 +4,7 @@ import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 
 interface CreateSalaryPayload {
-  companyId: string
+  companyId: number
   name: string
   yearMonth: string
   startDate: string

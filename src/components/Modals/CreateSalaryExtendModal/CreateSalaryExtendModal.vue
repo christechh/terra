@@ -88,7 +88,7 @@ const {
 
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">金額 *</FormLabel>
-          <FormInput class="flex-1" type="number" min="0" step="1" v-model="amount"  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
+          <FormInput class="flex-1" type="number" min="0" step="1" v-model="amount" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
         </div>
 
         <div class="mb-4 flex items-center">

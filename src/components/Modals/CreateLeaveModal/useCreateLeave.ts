@@ -2,9 +2,8 @@ import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useLeaveStore } from '../../../stores/leave'
-
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 interface CreateLeavePayload {
-  companyId: string
   name: string
   limitHours: string
   salaryStandard: string
@@ -15,16 +14,17 @@ export default function useCreateLeave(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   leave?: any
 ) {
+  const { companyId } = useCompany()
+
   const payload: CreateLeavePayload = reactive({
-    companyId: '1',
+    companyId: companyId.value,
     name: '',
     limitHours: '1',
     salaryStandard: 'ALL',
     description: ''
   })
 
-  const { companyId, name, limitHours, salaryStandard, description } =
-    toRefs(payload)
+  const { name, limitHours, salaryStandard, description } = toRefs(payload)
 
   const isEdit = computed(() => {
     return !!leave
@@ -73,7 +73,7 @@ export default function useCreateLeave(
     useNotificationsStore().showSaveSuccess()
     callback()
     useLeaveStore().fetchLeaveList({
-      companyId: '1',
+      companyId: companyId.value,
       page: 1
     })
   }

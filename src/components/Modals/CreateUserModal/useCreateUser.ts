@@ -3,6 +3,7 @@ import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useUsersStore } from '../../../stores/users'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateUsersPayload {
   name: string
@@ -43,20 +44,21 @@ export default function useCreateUser(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user?: any
 ) {
+  const { companyId } = useCompany()
   const payload: CreateUsersPayload = reactive(
     user
       ? user
       : {
-          name: 'XXX',
-          email: '111@gmail.com',
+          name: '',
+          email: '',
           password: '',
-          employeeId: '123',
+          employeeId: '',
           workStatus: '在職',
-          onboardDate: '2024-03-29',
+          onboardDate: '',
           resignationDate: '',
           identity: '員工',
           gender: '男',
-          nationality: '',
+          nationality: '台灣',
           birthday: '',
           idCardNumber: '',
           address: '',
@@ -66,6 +68,7 @@ export default function useCreateUser(
           salaryType: '月薪',
           salaryItems: [],
           isEmployeeRetirementPercentage: true,
+          employeeRetirementPercentage: 6,
           family: [],
           companyIds: ['1', '2'],
           enabledModules: [],
@@ -131,29 +134,97 @@ export default function useCreateUser(
       workStatus.value !== '' &&
       onboardDate.value !== '' &&
       identity.value !== '' &&
-      salaryType.value !== ''
+      salaryType.value !== '' &&
+      employeeInsurance.value.toString() !== '' &&
+      healthInsurance.value.toString() !== '' &&
+      employeePension.value.toString() !== '' &&
+      employeeRetirementPercentage.value.toString() !== ''
       ? true
       : false
   })
 
+  // 在 reactive 對象中保存原始數據
+  const originalData = reactive({ ...user })
+
   const submit = async (isEdit: boolean, callback: () => void) => {
     const action = isEdit ? 'update' : 'create'
-    console.log(action)
-    const actionMap = {
-      create: () =>
-        axios.post('/user', {
-          ...payload
-        }),
-      update: () =>
-        axios.patch(`/user/${user.id}`, {
-          ...payload,
-          id: user.id
+    if (!payload.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      useNotificationsStore().showError({
+        title: '請檢查 Email 格式',
+        content: '請檢查 Email 格式'
+      })
+
+      return
+    }
+
+    console.log(1, password)
+    console.log(2, payload.email)
+
+    // 構建要發送的數據，僅包含有實際更改的字段
+    const sendData: any = {}
+    Object.keys(payload).forEach((key) => {
+      // console.log(0, key)
+      // console.log(1, originalData[key])
+      // console.log(2, payload[key])
+      if (
+        (user && payload[key] !== originalData[key] && payload[key] !== '') ||
+        (!user && payload[key] !== '')
+      ) {
+        sendData[key] = payload[key]
+      }
+    })
+
+    // 如果有 family 字段且不為空，處理 family 數據
+    if (payload.family && payload.family.length > 0) {
+      sendData.family = payload.family.map((member: any) => {
+        const updatedMember: any = {}
+        Object.keys(member).forEach((memberKey) => {
+          if (member[memberKey] !== '') {
+            updatedMember[memberKey] = member[memberKey]
+          }
         })
+        return updatedMember
+      })
+    }
+
+    // 如果有 salaryItems 字段且不為空，處理 salaryItems 數據
+    if (payload.salaryItems && payload.salaryItems.length > 0) {
+      sendData.salaryItems = payload.salaryItems.map((item: any) => {
+        const updatedItem: any = {}
+        Object.keys(item).forEach((itemKey) => {
+          if (item[itemKey] !== '') {
+            updatedItem[itemKey] = item[itemKey]
+          }
+        })
+        return updatedItem
+      })
+    }
+
+    let actionMap: any = {}
+    if (localStorage.getItem('xUserType') === 'admin') {
+      actionMap = {
+        create: () =>
+          axios.post('/admin/user', {
+            ...payload
+          }),
+        update: () => axios.patch(`/admin/user/${user.id}`, sendData)
+      }
+    } else {
+      actionMap = {
+        create: () =>
+          axios.post('/admin/user', {
+            ...payload
+          }),
+        update: () => axios.patch(`/user/${user.id}`, sendData)
+      }
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useUsersStore().fetchUsers()
+    useUsersStore().fetchUsers({
+      companyId: companyId.value,
+      page: 1
+    })
   }
 
   return {

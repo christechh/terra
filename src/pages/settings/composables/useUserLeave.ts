@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useUserLeaveStore } from '../../../stores/user-leave'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 
-export default function useUserLeave(companyId: string) {
+export default function useUserLeave(companyId: number) {
   const userLeaveStore = useUserLeaveStore()
   const { fetchUserLeaveList } = userLeaveStore
   const userLeaveList = computed(() => userLeaveStore.userLeave)

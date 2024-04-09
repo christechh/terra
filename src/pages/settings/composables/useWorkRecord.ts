@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useWorkRecordStore } from '../../../stores/work-record'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 
-export default function useWorkRecord(companyId: string) {
+export default function useWorkRecord(companyId: number) {
   const workRecordStore = useWorkRecordStore()
   const { fetchWorkRecordList } = workRecordStore
   const workRecordList = computed(() => workRecordStore.workRecordList)

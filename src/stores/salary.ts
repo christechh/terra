@@ -24,17 +24,20 @@ export const useSalaryStore = defineStore('salary', {
   actions: {
     async fetchSalaries({
       page,
-      companyId
+      companyId,
+      salaryGroupId
     }: {
       page: number
       companyId: number
+      salaryGroupId: any
     }) {
       console.log(page)
       const response = await axios.get('/salary', {
         params: {
           // page,
           // pageSize: 100,
-          companyId: companyId.toString()
+          companyId: companyId.toString(),
+          salaryGroupId: salaryGroupId.toString()
         }
       })
       this.salaries = response.data.data
@@ -100,7 +103,7 @@ export const useSalaryStore = defineStore('salary', {
         })
         .then(() => {
           // todo companyid要帶參數
-          this.fetchSalaryGroups({ companyId: 1, page: 1 })
+          this.fetchSalaryGroups({ companyId: companyId.value, page: 1 })
         })
     }
   }

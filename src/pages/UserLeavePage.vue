@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import dayjs from 'dayjs'
+import { computed, ref, watch } from 'vue'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
 import { FormInput } from '../base-components/Form'
 import CreateUserLeaveModal from '../components/Modals/CreateUserLeaveModal'
-
+import dayjs from 'dayjs'
 import useUserLeave from './settings/composables/useUserLeave'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
-const companyId = ref(1)
-const { userLeaveList, confirmDeleteUserLeave } = useUserLeave('1')
+const { companyId } = useCompany()
+const { userLeaveList, confirmDeleteUserLeave } = useUserLeave(companyId.value)
 const showCreateUserLeaveModal = ref(false)
 const selectedUserLeaveIndex = ref(-1)
+
+watch(companyId, () => {
+  useUserLeave(companyId.value)
+})
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedUserLeave: any = computed(
   () => userLeaveList.value[selectedUserLeaveIndex.value] || null
@@ -141,6 +145,9 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
                 休息時間(小時)
               </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">
+                時數（小時）
+              </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">
                 原因備註
               </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
@@ -178,14 +185,14 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(userLeave.startTime).format('YYYY-MM-DD') }}
+                  {{ userLeave.startTime }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(userLeave.endTime).format('YYYY-MM-DD') }}
+                  {{ userLeave.endTime }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -193,6 +200,18 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
               >
                 <div class="font-medium">
                   {{ userLeave.restHours }}
+                </div>
+              </Table.Td>
+              <Table.Td
+                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+              >
+                <div class="font-medium">
+                  {{
+                    dayjs(userLeave.endTime).diff(
+                      dayjs(userLeave.startTime),
+                      'hour'
+                    ) - userLeave.restHours
+                  }}
                 </div>
               </Table.Td>
               <Table.Td

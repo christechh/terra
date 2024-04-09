@@ -1,18 +1,23 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref, watch } from 'vue'
 import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
-import dayjs from 'dayjs'
-// import useSalary from './settings/composables/useSalary'
+import useGroupSalary from './settings/composables/useGroupSalary'
+import { useRoute } from 'vue-router'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
-const companyId = ref(1)
-console.log(companyId)
+const { companyId } = useCompany()
+const route = useRoute()
+const { salaries } = useGroupSalary(companyId.value, route.params.groupId)
 const showCreateSalaryGroupModal = ref(false)
 const selectedCompanyIndex = ref(-1)
-const salaryGroups = reactive<any[]>([])
+
+watch(companyId, () => {
+  useGroupSalary(companyId.value, route.params.groupId)
+})
 
 const createOrEdit = (idx?: number) => {
   selectedCompanyIndex.value = -1
@@ -20,10 +25,6 @@ const createOrEdit = (idx?: number) => {
     selectedCompanyIndex.value = idx
   }
   showCreateSalaryGroupModal.value = true
-}
-
-const confirmDeleteSalary = (id: number) => {
-  console.log(id)
 }
 </script>
 
@@ -65,6 +66,7 @@ const confirmDeleteSalary = (id: number) => {
               </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">薪資年月</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">應發金額</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">應減金額</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">實發金額</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
@@ -72,7 +74,7 @@ const confirmDeleteSalary = (id: number) => {
 
           <Table.Tbody>
             <Table.Tr
-              v-for="(salaryGroup, index) in salaryGroups"
+              v-for="(item, index) in salaries[0] && salaries[0].salaries"
               :key="index"
               class="intro-x"
             >
@@ -80,53 +82,49 @@ const confirmDeleteSalary = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryGroup.yearMonth }}
+                  {{ item.user.employeeId }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryGroup.name }}
+                  {{ item.user.name }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.startDate).format('YYYY-MM-DD') }}
+                  {{ item.salaryGroup.name }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.endDate).format('YYYY-MM-DD') }}
+                  {{ item.salaryGroup.yearMonth }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ 0 }}
+                  {{ item.salaryGroup.salaryItems }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.paymentDate).format('YYYY-MM-DD') }}
+                  {{ item.salaryGroup.salaryItems }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{
-                    new Date() > new Date(salaryGroup.paymentDate)
-                      ? '已發放'
-                      : '未發放'
-                  }}
+                  {{ item.salaryGroup.salaryItems }}
                 </div>
               </Table.Td>
 
@@ -139,18 +137,10 @@ const confirmDeleteSalary = (id: number) => {
                     type="button"
                     class="m-3 w-24"
                     @click="createOrEdit(index)"
+                    disabled
                   >
-                    <Lucide icon="LibraryBig" class="mr-1 h-4 w-4" />
-                    薪資單
-                  </Button>
-                  <Button
-                    variant="danger"
-                    type="button"
-                    class="m-3 w-20"
-                    @click="confirmDeleteSalary(salaryGroup.id)"
-                  >
-                    <Lucide icon="Trash" class="mr-1 h-4 w-4" />
-                    刪除
+                    <Lucide icon="Eye" class="mr-1 h-4 w-4" />
+                    查看
                   </Button>
                 </div>
               </Table.Td>
@@ -158,38 +148,6 @@ const confirmDeleteSalary = (id: number) => {
           </Table.Tbody>
         </Table>
       </div>
-      <!-- END: Data List -->
-      <!-- BEGIN: Pagination -->
-      <!-- <div
-      class="intro-y col-span-12 flex flex-wrap items-center sm:flex-row sm:flex-nowrap"
-    >
-      <Pagination class="w-full sm:mr-auto sm:w-auto">
-        <Pagination.Link>
-          <Lucide icon="ChevronsLeft" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronLeft" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>...</Pagination.Link>
-        <Pagination.Link>1</Pagination.Link>
-        <Pagination.Link active>2</Pagination.Link>
-        <Pagination.Link>3</Pagination.Link>
-        <Pagination.Link>...</Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronRight" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronsRight" class="h-4 w-4" />
-        </Pagination.Link>
-      </Pagination>
-      <FormSelect class="!box mt-3 w-20 sm:mt-0">
-        <option>10</option>
-        <option>25</option>
-        <option>35</option>
-        <option>50</option>
-      </FormSelect>
-    </div> -->
-      <!-- END: Pagination -->
     </div>
   </div>
 </template>

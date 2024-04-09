@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
 import axios from '../axios'
-
+import useCompany from '../../src/pages/settings/composables/useCompany'
 export interface UserLeave {
   [key: string]: any
 }
@@ -16,7 +16,7 @@ export const useUserLeaveStore = defineStore('user-leave', {
       companyId
     }: {
       page: number
-      companyId: string
+      companyId: number
     }) {
       axios
         .get('/salary/user-leave', {
@@ -29,7 +29,7 @@ export const useUserLeaveStore = defineStore('user-leave', {
           this.userLeave = res.data.data
         })
     },
-    deleteUserLeave(companyId: string, id: number) {
+    deleteUserLeave(companyId: number, id: number) {
       axios
         .delete(`salary/user-leave/${id}`, {
           params: {
@@ -37,8 +37,9 @@ export const useUserLeaveStore = defineStore('user-leave', {
           }
         })
         .then(() => {
+          const { companyId } = useCompany()
           // todo companyid要帶參數
-          this.fetchUserLeaveList({ companyId: '1', page: 1 })
+          this.fetchUserLeaveList({ companyId: companyId.value, page: 1 })
         })
     }
   }

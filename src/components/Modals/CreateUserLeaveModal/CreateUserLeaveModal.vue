@@ -8,6 +8,7 @@ import Lucide from '../../../base-components/Lucide'
 import useCreateUserLeave from './useCreateUserLeave'
 import useUser from '../../../pages/settings/composables/useUser'
 import useLeave from '../../../pages/settings/composables/useLeave'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface Props {
   userLeave?: {
@@ -23,8 +24,9 @@ interface Props {
   idx: number
 }
 
+const { companyId } = useCompany()
 const { users } = useUser()
-const { leaveList } = useLeave('1')
+const { leaveList } = useLeave(companyId.value)
 const emit = defineEmits(['close'])
 const { userLeave } = defineProps<Props>()
 
@@ -45,7 +47,7 @@ const {
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '請假申請' : '請假申請' }}
+        {{ isEdit ? '編輯請假申請' : '請假申請' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"

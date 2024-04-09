@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
@@ -7,11 +7,18 @@ import { FormInput } from '../base-components/Form'
 import CreateSalaryExtendModal from '../components/Modals/CreateSalaryExtendModal'
 
 import useSalaryExtend from './settings/composables/useSalaryExtend'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
-const companyId = ref(1)
-const { salaryExtendList, confirmDeleteSalaryExtend } = useSalaryExtend('1')
+const { companyId } = useCompany()
+const { salaryExtendList, confirmDeleteSalaryExtend } = useSalaryExtend(
+  companyId.value
+)
 const showCreateSalaryExtendModal = ref(false)
 const selectedSalaryExtendIndex = ref(-1)
+
+watch(companyId, () => {
+  useSalaryExtend(companyId.value)
+})
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedSalaryExtend: any = computed(
   () => salaryExtendList.value[selectedSalaryExtendIndex.value] || null

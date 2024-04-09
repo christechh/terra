@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useWaningModalStore } from './stores/modals/warrningModal'
 import { useRedirectToStore } from './stores/redirect-to'
+import i18n from './i18n'
 
 const instance = axios.create({
   headers: {
@@ -42,9 +43,16 @@ instance.interceptors.response.use(
       return Promise.reject(error)
     }
 
-    useWaningModalStore().showModal({
-      text: error.response.data.errors[0].message
-    })
+    // 眷屬應急處理
+    if (error.response.data.errors[0].message.startsWith('The family.')) {
+      useWaningModalStore().showModal({
+        text: '眷屬必填資料未填'
+      })
+    } else {
+      useWaningModalStore().showModal({
+        text: i18n.global.t(error.response.data.errors[0].message)
+      })
+    }
 
     if (error.response.status === 401) {
       useRedirectToStore().redirect({ path: '/login' })

@@ -78,7 +78,7 @@ watch([email, password], () => {
       class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
     >
       <div class="mb-7 text-center font-extrabold" @click="accumulateCount">
-        {{ isAdminLoginMode ? 'admin ' + t('login-title') : t('login-title') }}
+        {{ isAdminLoginMode ? '管理員 ' + t('login-title') : t('login-title') }}
       </div>
       <div class="mb-3">
         <span class="mb-1 text-sm">{{ t('login-email-label') }}</span>
@@ -101,7 +101,7 @@ watch([email, password], () => {
           :placeholder="t('signup-password-place-holder')"
           @keyup.enter="doLogin"
         />
-        <div
+        <!-- <div
           v-if="isInputError && !password && email"
           class="mt-1 text-xs text-red-500"
         >
@@ -109,7 +109,7 @@ watch([email, password], () => {
         </div>
         <div v-if="apiError" class="mt-1 text-xs text-red-500">
           {{ apiError }}
-        </div>
+        </div> -->
       </div>
       <!-- <div class="mb-5 text-center">
         <button
@@ -136,9 +136,9 @@ watch([email, password], () => {
         </button>
       </div> -->
       <div class="my-5 flex items-center justify-center">
-        <hr class="flex-1" />
-        <span class="px-1 text-sm">{{ t('or') }}</span>
-        <hr class="flex-1" />
+        <!-- <hr class="flex-1" /> -->
+        <!-- <span class="px-1 text-sm">{{ t('or') }}</span> -->
+        <!-- <hr class="flex-1" /> -->
       </div>
       <div class="flex flex-col gap-3">
         <!-- <Button
@@ -152,7 +152,7 @@ watch([email, password], () => {
           />
           {{ t('signup-apple-btn-title') }}</Button
         > -->
-        <Button
+        <!-- <Button
           class="relative w-full border border-black text-sm font-semibold"
         >
           <img
@@ -160,7 +160,7 @@ watch([email, password], () => {
             src="../assets/images/google_logo.svg"
             alt=""
           />{{ t('signup-google-btn-title') }}</Button
-        >
+        > -->
         <!-- <Button
           class="relative w-full border border-black text-sm font-semibold"
         >

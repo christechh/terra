@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useSalaryExtendStore } from '../../../stores/salary-extend'
 import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 
-export default function useSalaryExtend(companyId: string) {
+export default function useSalaryExtend(companyId: number) {
   const salaryExtendStore = useSalaryExtendStore()
   const { fetchSalaryExtendList } = salaryExtendStore
   const salaryExtendList = computed(() => salaryExtendStore.salaryExtend)

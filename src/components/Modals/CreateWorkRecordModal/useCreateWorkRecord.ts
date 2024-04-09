@@ -2,10 +2,11 @@ import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useWorkRecordStore } from '../../../stores/work-record'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateWorkRecordPayload {
   userId: string
-  companyId: string
+  companyId: number
   startTime: string
   endTime: string
   restHours: number
@@ -17,24 +18,19 @@ export default function useCreateWorkRecord(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   workRecord?: any
 ) {
+  const { companyId } = useCompany()
+
   const payload: CreateWorkRecordPayload = reactive({
     userId: '',
-    companyId: '1',
+    companyId: companyId.value,
     startTime: '',
     endTime: '',
     restHours: 0,
     type: 'HOLIDAY',
     description: ''
   })
-  const {
-    userId,
-    companyId,
-    startTime,
-    endTime,
-    restHours,
-    type,
-    description
-  } = toRefs(payload)
+  const { userId, startTime, endTime, restHours, type, description } =
+    toRefs(payload)
 
   const isEdit = computed(() => {
     return !!workRecord
@@ -59,7 +55,7 @@ export default function useCreateWorkRecord(
 
   const canSubmit = computed(() => {
     return userId.value !== '' &&
-      companyId.value !== '' &&
+      companyId.value.toString() !== '' &&
       startTime.value !== '' &&
       endTime.value !== '' &&
       type.value !== '' &&
@@ -93,7 +89,10 @@ export default function useCreateWorkRecord(
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useWorkRecordStore().fetchWorkRecordList({ companyId: '1', page: 1 })
+    useWorkRecordStore().fetchWorkRecordList({
+      companyId: companyId.value,
+      page: 1
+    })
   }
 
   return {

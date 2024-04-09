@@ -2,10 +2,11 @@ import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useUserLeaveStore } from '../../../stores/user-leave'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateUserLeavePayload {
   userId: string
-  companyId: string
+  companyId: number
   startTime: string
   endTime: string
   restHours: number
@@ -17,24 +18,18 @@ export default function useCreateUserLeave(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   userLeave?: any
 ) {
+  const { companyId } = useCompany()
   const payload: CreateUserLeavePayload = reactive({
     userId: '1',
-    companyId: '1',
+    companyId: companyId.value,
     startTime: '',
     endTime: '',
     restHours: 0,
     leaveId: '',
     description: ''
   })
-  const {
-    userId,
-    companyId,
-    startTime,
-    endTime,
-    restHours,
-    leaveId,
-    description
-  } = toRefs(payload)
+  const { userId, startTime, endTime, restHours, leaveId, description } =
+    toRefs(payload)
 
   const isEdit = computed(() => {
     return !!userLeave
@@ -59,7 +54,7 @@ export default function useCreateUserLeave(
 
   const canSubmit = computed(() => {
     return userId.value !== '' &&
-      companyId.value !== '' &&
+      companyId.value.toString() !== '' &&
       startTime.value !== '' &&
       endTime.value !== '' &&
       leaveId.value !== '' &&
@@ -86,7 +81,10 @@ export default function useCreateUserLeave(
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useUserLeaveStore().fetchUserLeaveList({ companyId: '1', page: 1 })
+    useUserLeaveStore().fetchUserLeaveList({
+      companyId: companyId.value,
+      page: 1
+    })
   }
 
   return {

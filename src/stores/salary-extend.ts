@@ -16,7 +16,7 @@ export const useSalaryExtendStore = defineStore('salary-extend', {
       companyId
     }: {
       page: number
-      companyId: string
+      companyId: number
     }) {
       axios
         .get('/salary/salary-extend', {
@@ -29,7 +29,7 @@ export const useSalaryExtendStore = defineStore('salary-extend', {
           this.salaryExtend = res.data.data
         })
     },
-    deleteSalaryExtend(companyId: string, id: number) {
+    deleteSalaryExtend(companyId: number, id: number) {
       axios
         .delete(`salary/salary-extend/${id}`, {
           params: {
@@ -38,7 +38,7 @@ export const useSalaryExtendStore = defineStore('salary-extend', {
         })
         .then(() => {
           // todo companyid要帶參數
-          this.fetchSalaryExtendList({ companyId: '1', page: 1 })
+          this.fetchSalaryExtendList({ companyId: companyId.value, page: 1 })
         })
     }
   }

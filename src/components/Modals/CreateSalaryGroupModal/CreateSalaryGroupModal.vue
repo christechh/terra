@@ -285,15 +285,19 @@ onMounted(() => {
         <div class="flex justify-center">
           <Button
             class="mr-2 flex-1"
+            variant="outline-primary"
+            @click="() => emit('close')"
+          >
+            關閉
+          </Button>
+          <Button
+            class="flex-1"
             variant="primary"
             @click="onFormSubmitClick"
             :loading="calcLoading"
             :disabled="calcLoading || !canCalcSubmit"
           >
             下一步
-          </Button>
-          <Button class="flex-1" variant="primary" @click="() => emit('close')">
-            關閉
           </Button>
         </div>
       </section>

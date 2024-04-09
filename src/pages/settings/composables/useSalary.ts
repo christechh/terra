@@ -17,20 +17,16 @@ export default function useSalary(companyId: number) {
     })
   }
 
-  const salaries = computed(() => salaryStore.salaries)
   const salaryGroups = computed(() => salaryStore.salaryGroups)
   const salaryExtends = computed(() => salaryStore.salaryExtends)
 
-  // fetchSalaries({ companyId, page: 1 })
   fetchSalaryExtends({ companyId, page: 1 })
   fetchSalaryGroups({ companyId, page: 1 })
 
   return {
-    // fetchSalaries,
     fetchSalaryExtends,
     fetchSalaryGroups,
     confirmDeleteSalaryGroup,
-    salaries,
     salaryGroups,
     salaryExtends
   }

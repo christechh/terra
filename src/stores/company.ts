@@ -11,7 +11,7 @@ export interface Company {
 export const useCompanyStore = defineStore('company', {
   state: () => ({
     companies: [] as Company[],
-    companyId: -1 as number
+    companyId: 1 as number
   }),
   actions: {
     setCompanyId(value: number) {

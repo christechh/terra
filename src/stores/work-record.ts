@@ -16,7 +16,7 @@ export const useWorkRecordStore = defineStore('work-record', {
       companyId
     }: {
       page: number
-      companyId: string
+      companyId: number
     }) {
       axios
         .get('/salary/work-record', {
@@ -29,7 +29,7 @@ export const useWorkRecordStore = defineStore('work-record', {
           this.workRecordList = res.data.data
         })
     },
-    deleteWorkRecord(companyId: string, id: number) {
+    deleteWorkRecord(companyId: number, id: number) {
       axios
         .delete(`salary/work-record/${id}`, {
           params: {
@@ -38,7 +38,7 @@ export const useWorkRecordStore = defineStore('work-record', {
         })
         .then(() => {
           // todo companyid要帶參數
-          this.fetchWorkRecordList({ companyId: '1', page: 1 })
+          this.fetchWorkRecordList({ companyId: companyId.value, page: 1 })
         })
     }
   }

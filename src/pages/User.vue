@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Button from '../base-components/Button'
 // import Pagination from '../base-components/Pagination'
 // FormSelect
@@ -8,11 +8,17 @@ import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
 import CreateUserModal from '../components/Modals/CreateUserModal'
 import useUser from './settings/composables/useUser'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
-const { users, confirmDeleteUser } = useUser()
+const { companyId } = useCompany()
+const { users, confirmDeleteUser } = useUser(companyId.value)
 
 const showCreateUserModal = ref(false)
 const selectedUserIndex = ref(-1)
+
+watch(companyId, () => {
+  useUser(companyId.value)
+})
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedUser: any = computed(
   () => users.value[selectedUserIndex.value] || null
@@ -130,7 +136,7 @@ const createOrEdit = (idx?: number) => {
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.id }}
+                {{ item.employeeId }}
               </div>
             </Table.Td>
             <Table.Td

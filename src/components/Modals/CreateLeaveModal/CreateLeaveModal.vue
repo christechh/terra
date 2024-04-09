@@ -9,6 +9,7 @@ import useCreateLeave from './useCreateLeave'
 interface Props {
   leave?: {
     id?: number
+    companyId: number
     name: string
     limitHours: string
     salaryStandard: string
@@ -50,7 +51,7 @@ const {
 
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">請假上限 (小時) *</FormLabel>
-          <FormInput class="flex-1" type="number" v-model="limitHours" />
+          <FormInput class="flex-1" type="number" v-model="limitHours" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
         </div>
 
         <div class="mb-4 flex items-center">

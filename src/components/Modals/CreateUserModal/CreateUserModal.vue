@@ -88,7 +88,7 @@ const childComponent = computed(() => {
 })
 
 const addSalaryItems = () => {
-  salaryItems.value.push({ name: 'XX津貼', amount: 1000 })
+  salaryItems.value.push({ name: '基本薪資', amount: 0 })
 }
 
 const deleteSalaryItem = (index: number) => {
@@ -99,9 +99,9 @@ const deleteSalaryItem = (index: number) => {
 
 const addFamilyMember = () => {
   family.value.push({
-    name: '誰誰誰',
+    name: '',
     gender: '男',
-    nationality: '',
+    nationality: '台灣',
     relationship: '',
     idCardNumber: ''
   })
@@ -132,10 +132,7 @@ const totalSalary = computed(() =>
 <template>
   <component :is="component" :open="true" size="md">
     <component :is="childComponent" class="p-4 md:w-[600px]">
-      <div
-        class="relative mb-5"
-        :class="isEdit ? 'text-primary' : 'text-center text-xl'"
-      >
+      <div class="relative mb-5 text-center text-xl">
         {{
           isEdit ? $t('user-edit-model-title') : $t('user-create-model-title')
         }}
@@ -153,7 +150,7 @@ const totalSalary = computed(() =>
           基本資料
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">姓名</FormLabel>
+          <FormLabel class="w-[120px]">姓名 *</FormLabel>
           <FormInput
             class="flex-1"
             type="text"
@@ -162,12 +159,21 @@ const totalSalary = computed(() =>
           />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">Email</FormLabel>
+          <FormLabel class="w-[120px]">Email *</FormLabel>
           <FormInput
             class="flex-1"
-            type="text"
+            type="email"
             placeholder="請輸入Email"
             v-model="email"
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">登入密碼</FormLabel>
+          <FormInput
+            class="flex-1"
+            type="password"
+            :placeholder="$t('error-message36')"
+            v-model="password"
           />
         </div>
         <div class="mb-4 flex items-center">
@@ -203,15 +209,6 @@ const totalSalary = computed(() =>
             type="text"
             placeholder="請輸入身分證字號"
             v-model="idCardNumber"
-          />
-        </div>
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">登入密碼</FormLabel>
-          <FormInput
-            class="flex-1"
-            type="password"
-            :placeholder="$t('error-message36')"
-            v-model="password"
           />
         </div>
         <div class="mb-4 flex items-center">
@@ -304,7 +301,7 @@ const totalSalary = computed(() =>
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">計薪方式 *</FormLabel>
-          <FormSelect class="flex-1" v-model="salaryType">
+          <FormSelect class="mr-3 flex-1" v-model="salaryType">
             <option value="月薪">月薪</option>
             <option value="時薪">時薪</option>
           </FormSelect>
@@ -330,43 +327,47 @@ const totalSalary = computed(() =>
                 <option value="其他津貼">其他津貼</option>
               </FormSelect>
               <FormInput
-                class="ml-4 max-w-[50%]"
-                type="text"
+                class="ml-4 mr-3 max-w-[50%]"
+                type="number"
                 placeholder="金額"
                 v-model="salaryItem.amount"
+                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
               />
-              <Button variant="primary" @click="() => deleteSalaryItem(index)"
-                >移除</Button
-              >
+              <Button variant="primary" @click="() => deleteSalaryItem(index)">
+                移除
+              </Button>
             </div>
           </div>
           <div>薪資合計：{{ totalSalary }}</div>
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">勞工保險</FormLabel>
+          <FormLabel class="w-[120px]">勞工保險 *</FormLabel>
           <FormInput
             class="flex-1"
             type="number"
             placeholder="勞工保險"
             v-model="employeeInsurance"
+            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
           />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">健保</FormLabel>
+          <FormLabel class="w-[120px]">健保 *</FormLabel>
           <FormInput
             class="flex-1"
             type="number"
             placeholder="健保"
             v-model="healthInsurance"
+            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
           />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">退休金</FormLabel>
+          <FormLabel class="w-[120px]">退休金 *</FormLabel>
           <FormInput
             class="flex-1"
             type="number"
             placeholder="退休金"
             v-model="employeePension"
+            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
           />
         </div>
         <div class="mb-4 flex items-center">
@@ -388,9 +389,11 @@ const totalSalary = computed(() =>
           <FormLabel class="w-[120px]">自提 % 數</FormLabel>
           <FormInput
             class="flex-1"
-            type="text"
+            type="number"
             placeholder="自提 % 數"
             v-model="employeeRetirementPercentage"
+            max="6"
+            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
           />
         </div>
         <!-- <div class="mb-4 flex items-center">
@@ -408,54 +411,54 @@ const totalSalary = computed(() =>
         >
           眷屬
         </div>
-        <Button variant="primary" class="w-full" @click="addFamilyMember"
-          >新增成員</Button
-        >
+        <Button variant="primary" class="mb-3" @click="addFamilyMember">
+          新增成員
+        </Button>
 
         <div
-          class="flex flex-wrap items-center rounded-[6px] border p-3"
+          class="mb-3 flex flex-wrap items-center rounded-[6px] border p-3"
           v-for="(member, index) in family"
           :key="index"
         >
           <FormInput
-            class="flex-1"
+            class="m-2 flex-1"
             type="text"
             placeholder="請輸入姓名"
             v-model="member.name"
           />
 
-          <FormSelect class="flex-1" v-model="member.gender">
+          <FormSelect class="m-2 flex-1" v-model="member.gender">
             <option value="男">男</option>
             <option value="女">女</option>
           </FormSelect>
           <div class="mb-4 flex items-center">
             <FormInput
-              class="flex-1"
+              class="m-2 flex-1"
               type="text"
               placeholder="請輸入國籍"
               v-model="member.nationality"
             />
             <FormInput
-              class="flex-1"
+              class="m-2 flex-1"
               type="text"
               placeholder="關係"
               v-model="member.relationship"
             />
 
             <FormInput
-              class="flex-1"
+              class="m-2 flex-1"
               type="text"
               placeholder="請輸入身分證字號"
               v-model="member.idCardNumber"
             />
-            <Button variant="primary" @click="() => deleteFamilyMember(index)"
-              >移除</Button
-            >
+            <Button variant="primary" @click="() => deleteFamilyMember(index)">
+              移除
+            </Button>
           </div>
         </div>
       </div>
 
-      <div class="flex justify-center">
+      <div class="mt-3 flex justify-center">
         <Button
           v-if="isEdit"
           variant="outline-primary"

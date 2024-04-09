@@ -2,9 +2,10 @@ import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useSalaryExtendStore } from '../../../stores/salary-extend'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateSalaryExtendPayload {
-  companyId: string
+  companyId: number
   userId: string
   type: string
   name: string
@@ -17,8 +18,9 @@ export default function useCreateSalaryExtend(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   salaryExtend?: any
 ) {
+  const { companyId } = useCompany()
   const payload: CreateSalaryExtendPayload = reactive({
-    companyId: '1',
+    companyId: companyId.value,
     userId: '1',
     type: 'PLUS',
     name: '',
@@ -26,8 +28,7 @@ export default function useCreateSalaryExtend(
     amount: 0,
     yearMonth: ''
   })
-  const { companyId, userId, type, name, description, amount, yearMonth } =
-    toRefs(payload)
+  const { userId, type, name, description, amount, yearMonth } = toRefs(payload)
 
   const isEdit = computed(() => {
     return !!salaryExtend
@@ -80,7 +81,10 @@ export default function useCreateSalaryExtend(
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useSalaryExtendStore().fetchSalaryExtendList({ companyId: '1', page: 1 })
+    useSalaryExtendStore().fetchSalaryExtendList({
+      companyId: companyId.value,
+      page: 1
+    })
   }
 
   return {

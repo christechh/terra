@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
@@ -8,11 +8,18 @@ import CreateWorkRecordModal from '../components/Modals/CreateWorkRecordModal'
 import dayjs from 'dayjs'
 
 import useWorkRecord from './settings/composables/useWorkRecord'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
-const companyId = ref(1)
-const { workRecordList, confirmDeleteWorkRecord } = useWorkRecord('1')
+const { companyId } = useCompany()
+const { workRecordList, confirmDeleteWorkRecord } = useWorkRecord(
+  companyId.value
+)
 const showCreateWorkRecordModal = ref(false)
 const selectedWorkRecordIndex = ref(-1)
+
+watch(companyId, () => {
+  useWorkRecord(companyId.value)
+})
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedWorkRecord: any = computed(
   () => workRecordList.value[selectedWorkRecordIndex.value] || null

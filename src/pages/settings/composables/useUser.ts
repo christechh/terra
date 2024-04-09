@@ -4,19 +4,19 @@ import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useSuccessModalStore } from '../../../stores/modals/successModal'
 import { useUsersStore } from '../../../stores/users'
 
-export default function useSubAccount() {
+export default function useSubAccount(companyId: number) {
   const subUserStore = useUsersStore()
 
   const { fetchUsers } = subUserStore
 
   const users = computed(() => subUserStore.users)
 
-  const confirmDeleteUser = (id: number) => {
+  const confirmDeleteUser = (companyId: number, id: number) => {
     useDeleteModalStore().showModal({
       deleteType: 'user',
       title: i18n.global.t('delete-alert-title'),
       content: i18n.global.t('page-delete-check-desc'),
-      deleteData: { id }
+      deleteData: { companyId, id }
     })
   }
 
@@ -28,7 +28,7 @@ export default function useSubAccount() {
     })
   }
 
-  fetchUsers()
+  fetchUsers({ companyId, page: 1 })
 
   return {
     users,

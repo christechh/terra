@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
@@ -7,11 +7,16 @@ import { FormInput } from '../base-components/Form'
 import CreateLeaveModal from '../components/Modals/CreateLeaveModal'
 
 import useLeave from './settings/composables/useLeave'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
-const companyId = ref(1)
-const { leaveList, confirmDeleteLeave } = useLeave('1')
+const { companyId } = useCompany()
+const { leaveList, confirmDeleteLeave } = useLeave(companyId.value)
 const showCreateLeaveModal = ref(false)
 const selectedLeaveIndex = ref(-1)
+
+watch(companyId, () => {
+  useLeave(companyId.value)
+})
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedLeave: any = computed(
   () => leaveList.value[selectedLeaveIndex.value] || null
@@ -39,6 +44,17 @@ const onDownloadImportExampleClick = () => {
 
 const onDeleteLeaveButtonClick = (id: number) => {
   confirmDeleteLeave(companyId.value, id)
+}
+
+const transfer = (type: string): string => {
+  const m: { [key: string]: string } = {
+    ALL: '全薪',
+    HALF: '半薪',
+    NONE: '不支薪',
+    OTHER: '其他'
+  }
+
+  return m[type] || 'null'
 }
 </script>
 
@@ -165,7 +181,7 @@ const onDeleteLeaveButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ leave.salaryStandard }}
+                  {{ transfer(leave.salaryStandard) }}
                 </div>
               </Table.Td>
               <Table.Td

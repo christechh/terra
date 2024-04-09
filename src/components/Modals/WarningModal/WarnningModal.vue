@@ -77,7 +77,7 @@ const clickHandler = () => {
             :class="iconColor"
           />
           <div class="mt-5 text-3xl"></div>
-          <div class="mt-2 text-3xl font-bold text-dark">
+          <div class="mt-2 text-2xl font-bold text-dark">
             {{ modalText }}
           </div>
           <div class="mt-2 text-sm text-slate-500" v-if="content">
