@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
 import axios from '../axios'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
 export interface Salary {
   [key: string]: any
@@ -102,6 +103,7 @@ export const useSalaryStore = defineStore('salary', {
           }
         })
         .then(() => {
+          const { companyId } = useCompany()
           // todo companyid要帶參數
           this.fetchSalaryGroups({ companyId: companyId.value, page: 1 })
         })

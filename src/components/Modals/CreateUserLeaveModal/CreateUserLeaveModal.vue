@@ -25,7 +25,7 @@ interface Props {
 }
 
 const { companyId } = useCompany()
-const { users } = useUser()
+const { users } = useUser(companyId.value)
 const { leaveList } = useLeave(companyId.value)
 const emit = defineEmits(['close'])
 const { userLeave } = defineProps<Props>()

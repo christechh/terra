@@ -217,7 +217,7 @@ const onSortEvent = ({
 }
 
 onMounted(() => {
-  payloadRefs.companyId.value = String(props.companyId)
+  payloadRefs.companyId.value = props.companyId
 })
 </script>
 <!-- eslint-disable prettier/prettier -->

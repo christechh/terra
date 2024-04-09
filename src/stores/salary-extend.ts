@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
 import axios from '../axios'
+import useCompany from '../../src/pages/settings/composables/useCompany'
 
 export interface SalaryExtend {
   [key: string]: any
@@ -37,6 +38,7 @@ export const useSalaryExtendStore = defineStore('salary-extend', {
           }
         })
         .then(() => {
+          const { companyId } = useCompany()
           // todo companyid要帶參數
           this.fetchSalaryExtendList({ companyId: companyId.value, page: 1 })
         })

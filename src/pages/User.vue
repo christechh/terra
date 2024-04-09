@@ -31,6 +31,10 @@ const createOrEdit = (idx?: number) => {
   }
   showCreateUserModal.value = true
 }
+
+const onDeleteUserButtonClick = (id: number) => {
+  confirmDeleteUser(companyId.value, id)
+}
 </script>
 
 <template>
@@ -213,7 +217,7 @@ const createOrEdit = (idx?: number) => {
                   variant="danger"
                   type="button"
                   class="m-3 w-20"
-                  @click="confirmDeleteUser(item.id)"
+                  @click="onDeleteUserButtonClick(item.id)"
                 >
                   <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                   刪除

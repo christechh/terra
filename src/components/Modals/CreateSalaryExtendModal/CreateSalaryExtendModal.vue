@@ -11,10 +11,12 @@ import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateSalaryExtend from './useCreateSalaryExtend'
 import useUser from '../../../pages/settings/composables/useUser'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface Props {
   salaryExtend?: {
     id?: number
+    companyId: number
     userId: string
     name: string
     description: string
@@ -25,7 +27,8 @@ interface Props {
   idx: number
 }
 
-const { users } = useUser()
+const { companyId } = useCompany()
+const { users } = useUser(companyId.value)
 const emit = defineEmits(['close'])
 const { salaryExtend } = defineProps<Props>()
 

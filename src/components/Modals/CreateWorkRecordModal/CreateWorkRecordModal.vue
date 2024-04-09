@@ -7,6 +7,7 @@ import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateWorkRecord from './useCreateWorkRecord'
 import useUser from '../../../pages/settings/composables/useUser'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface Props {
   workRecord?: {
@@ -22,7 +23,8 @@ interface Props {
   idx: number
 }
 
-const { users } = useUser()
+const { companyId } = useCompany()
+const { users } = useUser(companyId.value)
 const emit = defineEmits(['close'])
 const { workRecord } = defineProps<Props>()
 

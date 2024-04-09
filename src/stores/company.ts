@@ -27,7 +27,7 @@ export const useCompanyStore = defineStore('company', {
         })
         .then((res) => {
           this.companies = res.data.data
-          this.companyId = res.data.data[0].id
+          // this.companyId = res.data.data[0].id
         })
     },
     deleteCompany(id: number) {

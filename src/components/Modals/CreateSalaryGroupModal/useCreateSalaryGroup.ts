@@ -15,7 +15,7 @@ interface CreateSalaryPayload {
 
 export default function useCreateSalaryGroup() {
   const payload: CreateSalaryPayload = reactive({
-    companyId: '',
+    companyId: -1,
     name: '',
     yearMonth: '',
     startDate: '',
