@@ -86,7 +86,7 @@ onMounted(() => {
         v-if="!$route.meta.noLayout"
       >
         <RouterLink
-          :to="{ name: 'landing-page' }"
+          :to="{ name: 'Dashboard' }"
           class="intro-x flex items-center pl-5 pt-4"
         >
           <img

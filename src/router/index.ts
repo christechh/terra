@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '../i18n'
 import SideMenu from '../layouts/SideMenu/SideMenu.vue'
 import EmailRest from '../pages/EmailRest.vue'
-import LandingPage from '../pages/LandingPage.vue'
+// import LandingPage from '../pages/LandingPage.vue'
 import LoginByPhonePage from '../pages/LoginByPhone.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import PhoneReset from '../pages/PhoneReset.vue'
@@ -14,12 +14,7 @@ import SubLogin from '../pages/SubLogin.vue'
 const routes = [
   {
     path: '/',
-    name: 'landing-page',
-    redirect: '/dashboard',
-    component: LandingPage,
-    meta: {
-      requiresAuth: false
-    }
+    redirect: '/dashboard'
   },
   {
     path: '/dashboard',

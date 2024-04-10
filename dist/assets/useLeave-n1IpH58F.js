@@ -1,0 +1,1 @@
+import{a0 as c,c as r,N as i,O as d}from"./index-QvUli45Q.js";function u(a){const e=c(),{fetchLeaveList:t}=e,o=r(()=>e.leave),l=(s,n)=>{i().showModal({deleteType:"leave",title:d.global.t("delete-alert-title"),content:"確定要刪除這筆資料嗎？刪除後無法復原，需要重新新增",deleteData:{companyId:s,id:n}})};return t({companyId:a,page:1}),{leaveList:o,confirmDeleteLeave:l,fetchLeaveList:t}}export{u};
