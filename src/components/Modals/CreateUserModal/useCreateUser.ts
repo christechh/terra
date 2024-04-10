@@ -3,6 +3,7 @@ import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useUsersStore } from '../../../stores/users'
+import { useUserStore } from '../../../stores/user'
 import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateUsersPayload {
@@ -11,7 +12,7 @@ interface CreateUsersPayload {
   gender?: string
   nationality?: string
   birthday?: string
-  idCardNumber?: string
+  idCardNumber: string
   address: string
   mobile: string
   bankCode: string
@@ -45,6 +46,7 @@ export default function useCreateUser(
   user?: any
 ) {
   const { companyId } = useCompany()
+  const userStore = useUserStore()
   const payload: CreateUsersPayload = reactive(
     user
       ? user
@@ -138,7 +140,9 @@ export default function useCreateUser(
       employeeInsurance.value.toString() !== '' &&
       healthInsurance.value.toString() !== '' &&
       employeePension.value.toString() !== '' &&
-      employeeRetirementPercentage.value.toString() !== ''
+      employeeRetirementPercentage.value.toString() !== '' &&
+      idCardNumber.value !== '' &&
+      address.value !== ''
       ? true
       : false
   })
@@ -167,7 +171,7 @@ export default function useCreateUser(
       // console.log(1, originalData[key])
       // console.log(2, payload[key])
       if (
-        (user && payload[key] !== originalData[key] && payload[key] !== '') ||
+        (user && payload[key] !== originalData[key]) ||
         (!user && payload[key] !== '')
       ) {
         sendData[key] = payload[key]
@@ -201,7 +205,7 @@ export default function useCreateUser(
     }
 
     let actionMap: any = {}
-    if (localStorage.getItem('xUserType') === 'admin') {
+    if (userStore.xUserType === 'admin') {
       actionMap = {
         create: () =>
           axios.post('/admin/user', {
@@ -212,7 +216,7 @@ export default function useCreateUser(
     } else {
       actionMap = {
         create: () =>
-          axios.post('/admin/user', {
+          axios.post('/user', {
             ...payload
           }),
         update: () => axios.patch(`/user/${user.id}`, sendData)

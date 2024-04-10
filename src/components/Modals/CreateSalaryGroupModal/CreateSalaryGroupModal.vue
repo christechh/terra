@@ -284,13 +284,6 @@ onMounted(() => {
         </div>
         <div class="flex justify-center">
           <Button
-            class="mr-2 flex-1"
-            variant="outline-primary"
-            @click="() => emit('close')"
-          >
-            關閉
-          </Button>
-          <Button
             class="flex-1"
             variant="primary"
             @click="onFormSubmitClick"
@@ -298,6 +291,13 @@ onMounted(() => {
             :disabled="calcLoading || !canCalcSubmit"
           >
             下一步
+          </Button>
+          <Button
+            class="mr-2 flex-1"
+            variant="outline-primary"
+            @click="() => emit('close')"
+          >
+            關閉
           </Button>
         </div>
       </section>
@@ -475,20 +475,20 @@ onMounted(() => {
         </template>
         <div class="mt-5 flex justify-center">
           <Button
-            variant="primary"
+            variant="outline-primary"
             type="button"
             class="mr-2"
-            :disabled="calcSalariesData.value.length === 0"
-            @click="onPreviewResultClick"
+            @click="() => onPrevButtonClick('form')"
           >
-            計算結果
+            上一步
           </Button>
           <Button
             variant="primary"
             type="button"
-            @click="() => onPrevButtonClick('form')"
+            :disabled="calcSalariesData.value.length === 0"
+            @click="onPreviewResultClick"
           >
-            上一步
+            計算結果
           </Button>
         </div>
       </section>
@@ -530,21 +530,22 @@ onMounted(() => {
         </div>
         <div class="mt-5 flex justify-center">
           <Button
+            variant="outline-primary"
+            type="button"
+            class="flex-1 mr-2"
+            @click="() => onPrevButtonClick('table')"
+          >
+            上一步
+          </Button>
+          <Button
             variant="primary"
             type="button"
-            class="mr-2"
+            class="flex-1"
             :disabled="!canSubmit || createSalaryGroupLoading"
             :loading="createSalaryGroupLoading"
             @click="onCreateSalaryGroupButtonClick"
           >
             確認發放
-          </Button>
-          <Button
-            variant="primary"
-            type="button"
-            @click="() => onPrevButtonClick('table')"
-          >
-            上一步
           </Button>
         </div>
       </section>

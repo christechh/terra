@@ -5,7 +5,7 @@ import { useLeaveStore } from '../../../stores/leave'
 import useCompany from '../../../../src/pages/settings/composables/useCompany'
 interface CreateLeavePayload {
   name: string
-  limitHours: string
+  limitHours: number
   salaryStandard: string
   description: string
 }
@@ -19,7 +19,7 @@ export default function useCreateLeave(
   const payload: CreateLeavePayload = reactive({
     companyId: companyId.value,
     name: '',
-    limitHours: '1',
+    limitHours: 1,
     salaryStandard: 'ALL',
     description: ''
   })
@@ -49,7 +49,8 @@ export default function useCreateLeave(
 
   const canSubmit = computed(() => {
     return name.value !== '' &&
-      limitHours.value !== '' &&
+      limitHours.value.toString() !== '' &&
+      limitHours.value >= 0 &&
       salaryStandard.value !== ''
       ? true
       : false

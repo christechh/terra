@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/',
     name: 'landing-page',
-    // redirect: '/dashboard',
+    redirect: '/dashboard',
     component: LandingPage,
     meta: {
       requiresAuth: false

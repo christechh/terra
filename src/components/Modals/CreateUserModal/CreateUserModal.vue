@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import Button from '../../../base-components/Button'
 import {
   FormInput,
@@ -14,6 +14,7 @@ import Lucide from '../../../base-components/Lucide'
 import useCreateUser from './useCreateUser'
 // import ContryCodePicker from '../../ContryCodePicker'
 // import useUser from '../../../pages/settings/composables/useUser'
+import { useUserStore } from '../../../stores/user'
 
 interface Props {
   subAccount?: {
@@ -42,9 +43,13 @@ interface Props {
   idx: number
 }
 
-// const { confirmLinkSalary } = useUser()
+const userStore = useUserStore()
 const emit = defineEmits(['close'])
 const { subAccount } = defineProps<Props>()
+
+const isEmployeeRetirementPercentage = ref(
+  subAccount?.isEmployeeRetirementPercentage ? true : false
+)
 
 const {
   email,
@@ -68,7 +73,7 @@ const {
   employeeInsurance,
   healthInsurance,
   employeePension,
-  isEmployeeRetirementPercentage,
+  // isEmployeeRetirementPercentage,
   employeeRetirementPercentage,
   family,
   // companyIds,
@@ -167,7 +172,10 @@ const totalSalary = computed(() =>
             v-model="email"
           />
         </div>
-        <div class="mb-4 flex items-center">
+        <div
+          class="mb-4 flex items-center"
+          v-if="userStore.xUserType === 'admin'"
+        >
           <FormLabel class="w-[120px]">登入密碼</FormLabel>
           <FormInput
             class="flex-1"
@@ -203,7 +211,7 @@ const totalSalary = computed(() =>
           />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">身分證字號</FormLabel>
+          <FormLabel class="w-[120px]">身分證字號 *</FormLabel>
           <FormInput
             class="flex-1"
             type="text"
@@ -249,11 +257,11 @@ const totalSalary = computed(() =>
           />
         </div>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">戶籍</FormLabel>
+          <FormLabel class="w-[120px]">戶籍地址 *</FormLabel>
           <FormInput
             class="flex-1"
             type="text"
-            placeholder="請輸入地址"
+            placeholder="請輸入戶籍地址"
             v-model="address"
           />
         </div>
@@ -331,6 +339,7 @@ const totalSalary = computed(() =>
                 type="number"
                 placeholder="金額"
                 v-model="salaryItem.amount"
+                min="0"
                 onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
               />
               <Button variant="primary" @click="() => deleteSalaryItem(index)">
@@ -347,6 +356,7 @@ const totalSalary = computed(() =>
             type="number"
             placeholder="勞工保險"
             v-model="employeeInsurance"
+            min="0"
             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
           />
         </div>
@@ -357,6 +367,7 @@ const totalSalary = computed(() =>
             type="number"
             placeholder="健保"
             v-model="healthInsurance"
+            min="0"
             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
           />
         </div>
@@ -367,6 +378,7 @@ const totalSalary = computed(() =>
             type="number"
             placeholder="退休金"
             v-model="employeePension"
+            min="0"
             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
           />
         </div>
@@ -380,9 +392,6 @@ const totalSalary = computed(() =>
               v-model="isEmployeeRetirementPercentage"
               :value="20"
             />
-            <!-- <FormCheck.Label htmlFor="notify-switch-email">
-              是
-            </FormCheck.Label> -->
           </FormCheck>
         </div>
         <div class="mb-4 flex items-center">
@@ -393,7 +402,9 @@ const totalSalary = computed(() =>
             placeholder="自提 % 數"
             v-model="employeeRetirementPercentage"
             max="6"
+            min="1"
             onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+            :disabled="!isEmployeeRetirementPercentage"
           />
         </div>
         <!-- <div class="mb-4 flex items-center">

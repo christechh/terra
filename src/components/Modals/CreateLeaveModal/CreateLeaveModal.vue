@@ -11,7 +11,7 @@ interface Props {
     id?: number
     companyId: number
     name: string
-    limitHours: string
+    limitHours: number
     salaryStandard: string
     description: string
   }
@@ -51,7 +51,13 @@ const {
 
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">請假上限 (小時) *</FormLabel>
-          <FormInput class="flex-1" type="number" v-model="limitHours" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
+          <FormInput
+            class="flex-1"
+            type="number"
+            min="0"
+            step="0.1"
+            v-model="limitHours"
+          />
         </div>
 
         <div class="mb-4 flex items-center">
@@ -63,7 +69,7 @@ const {
             <option value="OTHER">其他</option>
           </FormSelect>
         </div>
- 
+
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">說明</FormLabel>
           <FormInput class="flex-1" type="text" v-model="description" />

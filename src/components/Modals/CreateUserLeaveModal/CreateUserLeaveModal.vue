@@ -57,11 +57,7 @@ const {
       <section>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">選擇員工 *</FormLabel>
-          <FormSelect
-            class="flex-1"
-            type="text"
-            v-model="userId"
-          >
+          <FormSelect class="flex-1" type="text" v-model="userId">
             <option
               v-for="(user, index) in users"
               :key="index"
@@ -85,15 +81,31 @@ const {
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">起始時間 *</FormLabel>
-          <FormDatepicker class="flex-1" v-model="startTime" detail time-picker-inline/>
+          <FormDatepicker
+            class="flex-1"
+            v-model="startTime"
+            detail
+            time-picker-inline
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">結束時間 *</FormLabel>
-          <FormDatepicker class="flex-1" v-model="endTime" detail time-picker-inline />
+          <FormDatepicker
+            class="flex-1"
+            v-model="endTime"
+            detail
+            time-picker-inline
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">休息時間 (小時) *</FormLabel>
-          <FormInput class="flex-1" type="number" v-model="restHours" />
+          <FormInput
+            class="flex-1"
+            type="number"
+            min="0"
+            v-model="restHours"
+            step="0.1"
+          />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">原因備註</FormLabel>

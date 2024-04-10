@@ -88,7 +88,7 @@ const {
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">休息時間 (小時) *</FormLabel>
-          <FormInput class="flex-1" type="number" min="0" v-model="restHours" />
+          <FormInput class="flex-1" type="number" min="0" step="0.1" v-model="restHours" />
         </div>
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">工作內容備註</FormLabel>
