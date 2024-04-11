@@ -8,7 +8,14 @@ import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
 import CreateUserModal from '../components/Modals/CreateUserModal'
 import useUser from './settings/composables/useUser'
-import useCompany from '../../src/pages/settings/composables/useCompany'
+import useCompany from './settings/composables/useCompany'
+import { useUsersStore } from '../stores/users'
+import axios from '../axios'
+const FILE_INPUT_DOMS = {
+  employee: 'EMPLOYEE',
+  family: 'FAMILY',
+  salary: 'SALARY_ITEM'
+}
 
 const { companyId } = useCompany()
 const { users, confirmDeleteUser } = useUser(companyId.value)
@@ -32,8 +39,29 @@ const createOrEdit = (idx?: number) => {
   showCreateUserModal.value = true
 }
 
-const onDeleteUserButtonClick = (id: number) => {
+const onDeleteUserButtonClick = (id: number) =>
   confirmDeleteUser(companyId.value, id)
+const getFamilyFileAndUpload = (domName: string) => {
+  const fileInput = document.getElementById(domName) as HTMLInputElement
+  if (fileInput && fileInput.files) {
+    const file = fileInput.files[0]
+    if (file) importData(domName, file)
+  }
+}
+
+const importData = async (domName: string, file: File) => {
+  const formData = new FormData()
+  formData.append('files', file)
+  formData.append('companyId', companyId.value.toString())
+  formData.append('type', domName)
+  const res = await axios.post('/user/import', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data' // 告诉服务器发送的数据是multipart/form-data类型
+    }
+  })
+  if (res) {
+    useUsersStore().fetchUsers({ companyId: companyId.value, page: 1 })
+  }
 }
 </script>
 
@@ -75,29 +103,62 @@ const onDeleteUserButtonClick = (id: number) => {
       </div>
       <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
         <div class="relative text-slate-500">
-          <Button
-            variant="danger"
-            type="button"
-            class="m-3"
-            @click="() => createOrEdit()"
-            disabled
-          >
-            <Lucide icon="Download" class="mr-1 h-4 w-4" />
-            員工資料範例
+          <Button variant="primary" type="button" class="m-3">
+            <Lucide icon="Upload" class="mr-1 h-4 w-4" />
+            匯入員工資料
           </Button>
+          <input
+            @change="getFamilyFileAndUpload(FILE_INPUT_DOMS.employee)"
+            :id="FILE_INPUT_DOMS.employee"
+            class="absolute left-0 top-0 h-full w-full opacity-0"
+            type="file"
+          />
+        </div>
+      </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button variant="primary" type="button" class="m-3">
+            <Lucide icon="Upload" class="mr-1 h-4 w-4" />
+            匯入眷屬資料
+          </Button>
+          <input
+            @change="getFamilyFileAndUpload(FILE_INPUT_DOMS.family)"
+            :id="FILE_INPUT_DOMS.family"
+            class="absolute left-0 top-0 h-full w-full opacity-0"
+            type="file"
+          />
         </div>
       </div>
       <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
         <div class="relative text-slate-500">
           <Button
             variant="primary"
+            type="button"
+            class="m-3"
+            @click="() => createOrEdit()"
+          >
+            <Lucide icon="Upload" class="mr-1 h-4 w-4" />
+            匯入薪資
+          </Button>
+          <input
+            @change="getFamilyFileAndUpload(FILE_INPUT_DOMS.salary)"
+            :id="FILE_INPUT_DOMS.salary"
+            class="absolute left-0 top-0 h-full w-full opacity-0"
+            type="file"
+          />
+        </div>
+      </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button
+            variant="soft-primary"
             type="button"
             class="m-3"
             @click="() => createOrEdit()"
             disabled
           >
             <Lucide icon="Upload" class="mr-1 h-4 w-4" />
-            匯入員工資料
+            匯入員工資料範例
           </Button>
         </div>
       </div>
@@ -111,7 +172,21 @@ const onDeleteUserButtonClick = (id: number) => {
             disabled
           >
             <Lucide icon="Download" class="mr-1 h-4 w-4" />
-            匯出員工資料
+            匯入眷屬資料範例
+          </Button>
+        </div>
+      </div>
+      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+        <div class="relative text-slate-500">
+          <Button
+            variant="primary"
+            type="button"
+            class="m-3"
+            @click="() => createOrEdit()"
+            disabled
+          >
+            <Lucide icon="Download" class="mr-1 h-4 w-4" />
+            匯入薪資範例
           </Button>
         </div>
       </div>
