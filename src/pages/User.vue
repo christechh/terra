@@ -11,11 +11,7 @@ import useUser from './settings/composables/useUser'
 import useCompany from './settings/composables/useCompany'
 import { useUsersStore } from '../stores/users'
 import axios from '../axios'
-const FILE_INPUT_DOMS = {
-  employee: 'EMPLOYEE',
-  family: 'FAMILY',
-  salary: 'SALARY_ITEM'
-}
+import { getImportExample, FILE_INPUT_DOMS } from '../../src/utils/xlsx'
 
 const { companyId } = useCompany()
 const { users, confirmDeleteUser } = useUser(companyId.value)
@@ -41,6 +37,7 @@ const createOrEdit = (idx?: number) => {
 
 const onDeleteUserButtonClick = (id: number) =>
   confirmDeleteUser(companyId.value, id)
+
 const getFamilyFileAndUpload = (domName: string) => {
   const fileInput = document.getElementById(domName) as HTMLInputElement
   if (fileInput && fileInput.files) {
@@ -154,8 +151,7 @@ const importData = async (domName: string, file: File) => {
             variant="soft-primary"
             type="button"
             class="m-3"
-            @click="() => createOrEdit()"
-            disabled
+            @click="getImportExample(FILE_INPUT_DOMS.employee)"
           >
             <Lucide icon="Upload" class="mr-1 h-4 w-4" />
             匯入員工資料範例
@@ -165,13 +161,12 @@ const importData = async (domName: string, file: File) => {
       <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
         <div class="relative text-slate-500">
           <Button
-            variant="primary"
+            variant="soft-primary"
             type="button"
             class="m-3"
-            @click="() => createOrEdit()"
-            disabled
+            @click="getImportExample(FILE_INPUT_DOMS.family)"
           >
-            <Lucide icon="Download" class="mr-1 h-4 w-4" />
+            <Lucide icon="Upload" class="mr-1 h-4 w-4" />
             匯入眷屬資料範例
           </Button>
         </div>
@@ -179,13 +174,13 @@ const importData = async (domName: string, file: File) => {
       <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
         <div class="relative text-slate-500">
           <Button
-            variant="primary"
+            variant="soft-primary"
             type="button"
             class="m-3"
-            @click="() => createOrEdit()"
-            disabled
+            @click="getImportExample(FILE_INPUT_DOMS.salary)"
           >
-            <Lucide icon="Download" class="mr-1 h-4 w-4" />
+            <Lucide icon="Upload" class="mr-1 h-4 w-4" />
+            <!-- <a></a> -->
             匯入薪資範例
           </Button>
         </div>
