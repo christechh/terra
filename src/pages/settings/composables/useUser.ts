@@ -4,7 +4,7 @@ import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useSuccessModalStore } from '../../../stores/modals/successModal'
 import { useUsersStore } from '../../../stores/users'
 
-export default function useSubAccount(companyId: number) {
+export default function userUser(companyId: number) {
   const subUserStore = useUsersStore()
 
   const { fetchUsers } = subUserStore
