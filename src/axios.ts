@@ -48,6 +48,8 @@ instance.interceptors.response.use(
       useWaningModalStore().showModal({
         text: '眷屬必填資料未填'
       })
+    } else if (error.response.status === 403) {
+      return
     } else {
       useWaningModalStore().showModal({
         text: i18n.global.t(error.response.data.errors[0].message)
