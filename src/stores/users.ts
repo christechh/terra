@@ -48,7 +48,7 @@ export const useUsersStore = defineStore('users', {
         )
         .then(() => {
           const { companyId } = useCompany()
-          this.fetchUsers({ companyId: companyId.value, page: 1 })
+          this.fetchUsers({ companyId: companyId.value ?? 1, page: 1 })
         })
     }
   }

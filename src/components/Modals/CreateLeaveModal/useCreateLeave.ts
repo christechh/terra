@@ -17,7 +17,7 @@ export default function useCreateLeave(
   const { companyId } = useCompany()
 
   const payload: CreateLeavePayload = reactive({
-    companyId: companyId.value,
+    companyId: companyId.value ?? 1,
     name: '',
     limitHours: 1,
     salaryStandard: 'ALL',
@@ -74,7 +74,7 @@ export default function useCreateLeave(
     useNotificationsStore().showSaveSuccess()
     callback()
     useLeaveStore().fetchLeaveList({
-      companyId: companyId.value,
+      companyId: companyId.value ?? 1,
       page: 1
     })
   }

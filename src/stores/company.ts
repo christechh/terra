@@ -11,11 +11,12 @@ export interface Company {
 export const useCompanyStore = defineStore('company', {
   state: () => ({
     companies: [] as Company[],
-    companyId: 1 as number
+    companyId: null as number | null
   }),
   actions: {
     setCompanyId(value: number) {
       this.companyId = value
+      localStorage.setItem('currentCompanyId', this.companyId?.toString())
     },
     fetchCompanies() {
       axios
@@ -27,7 +28,15 @@ export const useCompanyStore = defineStore('company', {
         })
         .then((res) => {
           this.companies = res.data.data
-          // this.companyId = res.data.data[0].id
+          if (!localStorage.getItem('currentCompanyId')) {
+            this.companyId = res.data.data[0].id
+            localStorage.setItem(
+              'currentCompanyId',
+              (this.companyId ?? 1).toString()
+            )
+          } else {
+            this.companyId = Number(localStorage.getItem('currentCompanyId'))
+          }
         })
     },
     deleteCompany(id: number) {

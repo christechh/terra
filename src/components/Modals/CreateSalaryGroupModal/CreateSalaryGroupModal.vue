@@ -185,7 +185,7 @@ const onCreateSalaryGroupButtonClick = () => {
   createSalaryGroup(() => {
     emit('close')
     useSalaryStore().fetchSalaryGroups({
-      companyId: Number(payloadRefs.companyId.value),
+      companyId: Number(payloadRefs.companyId.value ?? 1),
       page: 0
     })
   })

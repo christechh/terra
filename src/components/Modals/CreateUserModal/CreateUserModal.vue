@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Button from '../../../base-components/Button'
 import {
   FormInput,
@@ -132,6 +132,12 @@ const totalSalary = computed(() =>
         .reduce((a: number, b: number) => a + b)
     : 0
 )
+
+watch(isEmployeeRetirementPercentage, (newValue) => {
+  if (!newValue) {
+    employeeRetirementPercentage.value = 6
+  }
+})
 </script>
 
 <template>

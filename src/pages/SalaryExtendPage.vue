@@ -11,13 +11,13 @@ import useCompany from '../../src/pages/settings/composables/useCompany'
 
 const { companyId } = useCompany()
 const { salaryExtendList, confirmDeleteSalaryExtend } = useSalaryExtend(
-  companyId.value
+  companyId.value ?? 1
 )
 const showCreateSalaryExtendModal = ref(false)
 const selectedSalaryExtendIndex = ref(-1)
 
 watch(companyId, () => {
-  useSalaryExtend(companyId.value)
+  useSalaryExtend(companyId.value ?? 1)
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedSalaryExtend: any = computed(
@@ -45,7 +45,7 @@ const onDownloadImportExampleClick = () => {
 }
 
 const onDeleteSalaryExtendButtonClick = (id: number) => {
-  confirmDeleteSalaryExtend(companyId.value, id)
+  confirmDeleteSalaryExtend(companyId.value ?? 1, id)
 }
 
 const transfer = (type: string): string => {

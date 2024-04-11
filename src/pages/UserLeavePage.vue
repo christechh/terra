@@ -10,12 +10,14 @@ import useUserLeave from './settings/composables/useUserLeave'
 import useCompany from '../../src/pages/settings/composables/useCompany'
 
 const { companyId } = useCompany()
-const { userLeaveList, confirmDeleteUserLeave } = useUserLeave(companyId.value)
+const { userLeaveList, confirmDeleteUserLeave } = useUserLeave(
+  companyId.value ?? 1
+)
 const showCreateUserLeaveModal = ref(false)
 const selectedUserLeaveIndex = ref(-1)
 
 watch(companyId, () => {
-  useUserLeave(companyId.value)
+  useUserLeave(companyId.value ?? 1)
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedUserLeave: any = computed(
@@ -43,7 +45,7 @@ const onDownloadImportExampleClick = () => {
 }
 
 const onDeleteUserLeaveButtonClick = (id: number) => {
-  confirmDeleteUserLeave(companyId.value, id)
+  confirmDeleteUserLeave(companyId.value ?? 1, id)
 }
 </script>
 

@@ -39,7 +39,7 @@ export const useUserLeaveStore = defineStore('user-leave', {
         .then(() => {
           const { companyId } = useCompany()
           // todo companyid要帶參數
-          this.fetchUserLeaveList({ companyId: companyId.value, page: 1 })
+          this.fetchUserLeaveList({ companyId: companyId.value ?? 1, page: 1 })
         })
     }
   }

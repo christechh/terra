@@ -39,7 +39,7 @@ const setFormattedMenu = (
   // formattedMenu.value = computedFormattedMenu
 }
 const sideMenuStore = useSideMenuStore()
-const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route))
+const sideMenu = computed(() => nestedMenu(sideMenuStore.filteredMenu, route))
 const changeCompany = (e: Event) => {
   const { value } = e.target as HTMLInputElement
   useCompanyStore().setCompanyId(Number(value))

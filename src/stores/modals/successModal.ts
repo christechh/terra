@@ -11,6 +11,7 @@ export interface SuccessModal {
   iconColor: string
   cancelButtonText: string
   confirmButtonText: string
+  link: string
   onSubmit?: () => void
 }
 
@@ -25,6 +26,7 @@ export const useSuccessModalStore = defineStore('success_modal', {
     iconColor: 'text-success',
     cancelButtonText: '',
     confirmButtonText: '',
+    link: '',
     onSubmit: () => {}
   }),
   getters: {
@@ -46,6 +48,7 @@ export const useSuccessModalStore = defineStore('success_modal', {
       onSubmit?: () => void
       cancelButtonText?: string
       confirmButtonText?: string
+      link?: string
     }) {
       console.log(input)
       this.deleteType = input.deleteType || ''
@@ -58,6 +61,7 @@ export const useSuccessModalStore = defineStore('success_modal', {
       this.onSubmit = input.onSubmit
       this.cancelButtonText = input.cancelButtonText || ''
       this.confirmButtonText = input.confirmButtonText || ''
+      this.link = input.link || ''
     }
   }
 })

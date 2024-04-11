@@ -39,7 +39,7 @@ export const useLeaveStore = defineStore('leave', {
         .then(() => {
           const { companyId } = useCompany()
           // todo companyid要帶參數
-          this.fetchLeaveList({ companyId: companyId.value, page: 1 })
+          this.fetchLeaveList({ companyId: companyId.value || 1, page: 1 })
         })
     }
   }

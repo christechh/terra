@@ -24,7 +24,7 @@ interface Props {
 }
 
 const { companyId } = useCompany()
-const { users } = useUser(companyId.value)
+const { users } = useUser(companyId.value ?? 1)
 const emit = defineEmits(['close'])
 const { workRecord } = defineProps<Props>()
 

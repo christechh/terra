@@ -27,7 +27,7 @@ export const useUserStore = defineStore('user', {
       localStorage.setItem('token', this.token)
       localStorage.setItem('email', credentials.email)
       localStorage.setItem('xUserType', resp.data.data.xUserType)
-      useRedirectToStore().redirect({ path: '/dashboard' })
+      window.location.href = '/dashboard'
     },
     async loginByPhone(credentials: { phone: string; password: string }) {
       const resp = await axios.post('/auth/phone/login', credentials)
@@ -80,6 +80,7 @@ export const useUserStore = defineStore('user', {
     async logout() {
       localStorage.removeItem('token')
       localStorage.removeItem('email')
+      localStorage.removeItem('currentCompanyId')
       useRedirectToStore().redirect({ path: '/login' })
     }
   }

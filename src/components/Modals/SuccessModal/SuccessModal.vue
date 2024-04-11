@@ -16,6 +16,7 @@ const title = computed(() => successModalStore.title)
 const content = computed(() => successModalStore.content)
 const cancelButtonText = computed(() => successModalStore.cancelButtonText)
 const confirmButtonText = computed(() => successModalStore.confirmButtonText)
+const link = computed(() => successModalStore.link)
 const icon = computed(() => successModalStore.icon)
 const iconColor = computed(() => successModalStore.iconColor)
 // const submitVariant = computed(() => {
@@ -95,7 +96,7 @@ const deleteExec = async () => {
           >
             {{ cancelButtonText || $t('cancel-btn') }}
           </Button>
-          <router-link to="salary">
+          <router-link :to="link">
             <Button
               type="button"
               variant="primary"

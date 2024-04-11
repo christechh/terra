@@ -30,22 +30,22 @@ export const useSideMenuStore = defineStore('sideMenu', {
         pageName: 'User',
         title: '人事管理'
       },
-      {
-        icon: 'ScrollText',
-        title: '勞務管理',
-        subMenu: [
-          {
-            icon: 'ScrollText',
-            pageName: 'Labor',
-            title: '勞報單(會連到舊系統)'
-          },
-          {
-            icon: 'Briefcase',
-            pageName: 'account',
-            title: '合作廠商(會連到舊系統)'
-          }
-        ]
-      },
+      // {
+      //   icon: 'ScrollText',
+      //   title: '勞務管理',
+      //   subMenu: [
+      //     {
+      //       icon: 'ScrollText',
+      //       pageName: 'Labor',
+      //       title: '勞報單(會連到舊系統)'
+      //     },
+      //     {
+      //       icon: 'Briefcase',
+      //       pageName: 'account',
+      //       title: '合作廠商(會連到舊系統)'
+      //     }
+      //   ]
+      // },
       {
         icon: 'Banknote',
         title: '薪資小工具',
@@ -88,5 +88,14 @@ export const useSideMenuStore = defineStore('sideMenu', {
       //   title: '報表分析'
       // }
     ]
-  })
+  }),
+  getters: {
+    filteredMenu(state) {
+      if (localStorage.getItem('xUserType') === 'admin') {
+        return state.menu
+      } else {
+        return state.menu.filter((item) => (item as Menu).title !== '公司管理')
+      }
+    }
+  }
 })

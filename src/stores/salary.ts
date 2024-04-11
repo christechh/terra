@@ -105,7 +105,7 @@ export const useSalaryStore = defineStore('salary', {
         .then(() => {
           const { companyId } = useCompany()
           // todo companyid要帶參數
-          this.fetchSalaryGroups({ companyId: companyId.value, page: 1 })
+          this.fetchSalaryGroups({ companyId: companyId.value ?? 1, page: 1 })
         })
     }
   }

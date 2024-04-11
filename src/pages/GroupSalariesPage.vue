@@ -11,12 +11,12 @@ import useCompany from '../../src/pages/settings/composables/useCompany'
 
 const { companyId } = useCompany()
 const route = useRoute()
-const { salaries } = useGroupSalary(companyId.value, route.params.groupId)
+const { salaries } = useGroupSalary(companyId.value ?? 1, route.params.groupId)
 const showCreateSalaryGroupModal = ref(false)
 const selectedCompanyIndex = ref(-1)
 
 watch(companyId, () => {
-  useGroupSalary(companyId.value, route.params.groupId)
+  useGroupSalary(companyId.value ?? 1, route.params.groupId)
 })
 
 const createOrEdit = (idx?: number) => {

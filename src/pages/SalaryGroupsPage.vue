@@ -18,10 +18,12 @@ const showExportSalaryModal = ref(false)
 const showCreateSalaryGroupModal = ref(false)
 
 watch(companyId, () => {
-  useSalary(companyId.value)
+  useSalary(companyId.value ?? 1)
 })
 
-const { salaryGroups, confirmDeleteSalaryGroup } = useSalary(companyId.value)
+const { salaryGroups, confirmDeleteSalaryGroup } = useSalary(
+  companyId.value ?? 1
+)
 const onCreateSalaryGroupButtonClick = () => {
   showCreateSalaryGroupModal.value = true
 }
@@ -40,7 +42,7 @@ const onExportSalaryButtonClick = () => {
 }
 
 const onDeleteSalaryGroupButtonClick = (id: number) => {
-  confirmDeleteSalaryGroup(companyId.value, id)
+  confirmDeleteSalaryGroup(companyId.value ?? 1, id)
 }
 </script>
 
@@ -297,12 +299,12 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
     <CreateSalaryGroupModal
       v-if="showCreateSalaryGroupModal"
       @close="showCreateSalaryGroupModal = false"
-      :companyId="companyId"
+      :companyId="companyId ?? 1"
     />
     <ExportSalaryModal
       v-if="showExportSalaryModal"
       @close="showExportSalaryModal = false"
-      :companyId="companyId"
+      :companyId="companyId ?? 1"
       :salaryGroups="salaryGroups"
     />
   </div>

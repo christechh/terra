@@ -226,7 +226,7 @@ export default function useCreateUser(
     useNotificationsStore().showSaveSuccess()
     callback()
     useUsersStore().fetchUsers({
-      companyId: companyId.value,
+      companyId: companyId.value ?? 1,
       page: 1
     })
   }

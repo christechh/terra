@@ -20,7 +20,7 @@ export default function useCreateSalaryExtend(
 ) {
   const { companyId } = useCompany()
   const payload: CreateSalaryExtendPayload = reactive({
-    companyId: companyId.value,
+    companyId: companyId.value ?? 1,
     userId: '1',
     type: 'PLUS',
     name: '',
@@ -82,7 +82,7 @@ export default function useCreateSalaryExtend(
     useNotificationsStore().showSaveSuccess()
     callback()
     useSalaryExtendStore().fetchSalaryExtendList({
-      companyId: companyId.value,
+      companyId: companyId.value ?? 1,
       page: 1
     })
   }

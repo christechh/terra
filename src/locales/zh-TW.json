@@ -7,6 +7,8 @@
   "The employee retirement percentage must be less than or equal to 6.": "自提%數不可超過6",
   "notAuthorized": "權限不足，請聯繫客服",
   "The end date must be a date after start date.": "開始時間需小於結束時間",
+  "employeeNotFound": "匯入資料有誤-無此員工",
+  "unknownError": "發生錯誤，請聯繫客服",
   "hello": "哈囉",
   "lang-key": "zh-tw",
   "og-title": "PinChat : 商務即時通訊工具",

@@ -40,7 +40,10 @@ export const useSalaryExtendStore = defineStore('salary-extend', {
         .then(() => {
           const { companyId } = useCompany()
           // todo companyid要帶參數
-          this.fetchSalaryExtendList({ companyId: companyId.value, page: 1 })
+          this.fetchSalaryExtendList({
+            companyId: companyId.value ?? 1,
+            page: 1
+          })
         })
     }
   }

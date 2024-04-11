@@ -22,7 +22,7 @@ export default function useCreateWorkRecord(
 
   const payload: CreateWorkRecordPayload = reactive({
     userId: '',
-    companyId: companyId.value,
+    companyId: companyId.value ?? 1,
     startTime: '',
     endTime: '',
     restHours: 0,
@@ -55,7 +55,7 @@ export default function useCreateWorkRecord(
 
   const canSubmit = computed(() => {
     return userId.value !== '' &&
-      companyId.value.toString() !== '' &&
+      companyId.value?.toString() !== '' &&
       startTime.value !== '' &&
       endTime.value !== '' &&
       type.value !== '' &&
@@ -90,7 +90,7 @@ export default function useCreateWorkRecord(
     useNotificationsStore().showSaveSuccess()
     callback()
     useWorkRecordStore().fetchWorkRecordList({
-      companyId: companyId.value,
+      companyId: companyId.value ?? 1,
       page: 1
     })
   }

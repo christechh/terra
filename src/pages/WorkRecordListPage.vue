@@ -12,13 +12,13 @@ import useCompany from '../../src/pages/settings/composables/useCompany'
 
 const { companyId } = useCompany()
 const { workRecordList, confirmDeleteWorkRecord } = useWorkRecord(
-  companyId.value
+  companyId.value ?? 1
 )
 const showCreateWorkRecordModal = ref(false)
 const selectedWorkRecordIndex = ref(-1)
 
 watch(companyId, () => {
-  useWorkRecord(companyId.value)
+  useWorkRecord(companyId.value ?? 1)
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedWorkRecord: any = computed(
@@ -46,7 +46,7 @@ const onDownloadImportExampleClick = () => {
 }
 
 const onDeleteWorkRecordButtonClick = (id: number) => {
-  confirmDeleteWorkRecord(companyId.value, id)
+  confirmDeleteWorkRecord(companyId.value ?? 1, id)
 }
 
 const transfer = (type: string): string => {

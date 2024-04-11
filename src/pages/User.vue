@@ -12,15 +12,16 @@ import useCompany from './settings/composables/useCompany'
 import { useUsersStore } from '../stores/users'
 import axios from '../axios'
 import { getImportExample, FILE_INPUT_DOMS } from '../../src/utils/xlsx'
+import { useSuccessModalStore } from '../stores/modals/successModal'
 
 const { companyId } = useCompany()
-const { users, confirmDeleteUser } = useUser(companyId.value)
+const { users, confirmDeleteUser } = useUser(companyId.value ?? 1)
 
 const showCreateUserModal = ref(false)
 const selectedUserIndex = ref(-1)
 
 watch(companyId, () => {
-  useUser(companyId.value)
+  useUser(companyId.value ?? 1)
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedUser: any = computed(
@@ -36,7 +37,7 @@ const createOrEdit = (idx?: number) => {
 }
 
 const onDeleteUserButtonClick = (id: number) =>
-  confirmDeleteUser(companyId.value, id)
+  confirmDeleteUser(companyId.value ?? 1, id)
 
 const getFamilyFileAndUpload = (domName: string) => {
   const fileInput = document.getElementById(domName) as HTMLInputElement
@@ -49,7 +50,7 @@ const getFamilyFileAndUpload = (domName: string) => {
 const importData = async (domName: string, file: File) => {
   const formData = new FormData()
   formData.append('files', file)
-  formData.append('companyId', companyId.value.toString())
+  formData.append('companyId', (companyId.value ?? 1).toString())
   formData.append('type', domName)
   const res = await axios.post('/user/import', formData, {
     headers: {
@@ -57,7 +58,13 @@ const importData = async (domName: string, file: File) => {
     }
   })
   if (res) {
-    useUsersStore().fetchUsers({ companyId: companyId.value, page: 1 })
+    useUsersStore().fetchUsers({ companyId: companyId.value ?? 1, page: 1 })
+    useSuccessModalStore().showModal({
+      title: '匯入成功',
+      content: '確認人事資料新增完畢，前往下ㄧ步',
+      confirmButtonText: '前往薪資計算',
+      link: 'salary'
+    })
   }
 }
 </script>

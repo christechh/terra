@@ -21,7 +21,7 @@ export default function useCreateUserLeave(
   const { companyId } = useCompany()
   const payload: CreateUserLeavePayload = reactive({
     userId: '1',
-    companyId: companyId.value,
+    companyId: companyId.value ?? 1,
     startTime: '',
     endTime: '',
     restHours: 0,
@@ -54,7 +54,7 @@ export default function useCreateUserLeave(
 
   const canSubmit = computed(() => {
     return userId.value !== '' &&
-      companyId.value.toString() !== '' &&
+      companyId.value?.toString() !== '' &&
       startTime.value !== '' &&
       endTime.value !== '' &&
       leaveId.value !== '' &&
@@ -82,7 +82,7 @@ export default function useCreateUserLeave(
     useNotificationsStore().showSaveSuccess()
     callback()
     useUserLeaveStore().fetchUserLeaveList({
-      companyId: companyId.value,
+      companyId: companyId.value ?? 1,
       page: 1
     })
   }
