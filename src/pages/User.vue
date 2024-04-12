@@ -15,7 +15,7 @@ import { getImportExample, FILE_INPUT_DOMS } from '../../src/utils/xlsx'
 import { useSuccessModalStore } from '../stores/modals/successModal'
 
 const { companyId } = useCompany()
-const { users, confirmDeleteUser } = useUser(companyId.value ?? 1)
+const { users } = useUser(companyId.value ?? 1)
 
 const showCreateUserModal = ref(false)
 const selectedUserIndex = ref(-1)
@@ -36,8 +36,8 @@ const createOrEdit = (idx?: number) => {
   showCreateUserModal.value = true
 }
 
-const onDeleteUserButtonClick = (id: number) =>
-  confirmDeleteUser(companyId.value ?? 1, id)
+// const onDeleteUserButtonClick = (id: number) =>
+//   confirmDeleteUser(companyId.value ?? 1, id)
 
 const getFamilyFileAndUpload = (domName: string) => {
   const fileInput = document.getElementById(domName) as HTMLInputElement
@@ -290,7 +290,7 @@ const importData = async (domName: string, file: File) => {
                   <Lucide icon="Edit" class="mr-1 h-4 w-4" />
                   修改
                 </Button>
-                <Button
+                <!-- <Button
                   variant="danger"
                   type="button"
                   class="m-3 w-20"
@@ -299,7 +299,7 @@ const importData = async (domName: string, file: File) => {
                 >
                   <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                   刪除
-                </Button>
+                </Button> -->
               </div>
             </Table.Td>
           </Table.Tr>
