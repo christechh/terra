@@ -209,10 +209,14 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
               >
                 <div class="font-medium">
                   {{
-                    dayjs(userLeave.endTime).diff(
-                      dayjs(userLeave.startTime),
-                      'hour'
-                    ) - userLeave.restHours
+                    (
+                      (dayjs(userLeave.endTime).diff(
+                        dayjs(userLeave.startTime),
+                        'minute'
+                      ) -
+                        userLeave.restHours) /
+                      60
+                    ).toFixed(2)
                   }}
                 </div>
               </Table.Td>

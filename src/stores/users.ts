@@ -15,6 +15,7 @@ export interface Users {
   workStatus: number
   salaryType: number
   updatedAt: string
+  isAdmin: boolean
 }
 
 export const useUsersStore = defineStore('users', {

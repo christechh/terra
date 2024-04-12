@@ -135,7 +135,7 @@ const totalSalary = computed(() =>
 
 watch(isEmployeeRetirementPercentage, (newValue) => {
   if (!newValue) {
-    employeeRetirementPercentage.value = 6
+    employeeRetirementPercentage.value = 0
   }
 })
 </script>

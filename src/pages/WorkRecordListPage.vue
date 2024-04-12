@@ -221,10 +221,14 @@ const transfer = (type: string): string => {
               >
                 <div class="font-medium">
                   {{
-                    dayjs(workRecord.endTime).diff(
-                      dayjs(workRecord.startTime),
-                      'hour'
-                    ) - workRecord.restHours
+                    (
+                      (dayjs(workRecord.endTime).diff(
+                        dayjs(workRecord.startTime),
+                        'minute'
+                      ) -
+                        workRecord.restHours) /
+                      60
+                    ).toFixed(2)
                   }}
                 </div>
               </Table.Td>

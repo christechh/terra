@@ -72,7 +72,7 @@ export default function useCreateUser(
           isEmployeeRetirementPercentage: true,
           employeeRetirementPercentage: 6,
           family: [],
-          companyIds: ['1', '2'],
+          companyIds: [(companyId.value ?? 1).toString()],
           enabledModules: [],
           employeeInsurance: 0,
           healthInsurance: 0,
