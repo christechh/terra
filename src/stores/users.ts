@@ -4,18 +4,11 @@ import axios from '../axios'
 import useCompany from '../../src/pages/settings/composables/useCompany'
 export interface Users {
   id: number
-  employeeId: string
-  name: string
-  taxId: string
-  enabledModules: string[]
-  email: string
+  first_name: string
+  last_name: string
+  account: string
   password: string
-  onboardDate: string
-  resignationDate: string
-  workStatus: number
-  salaryType: number
-  updatedAt: string
-  isAdmin: boolean
+  email: string
 }
 
 export const useUsersStore = defineStore('users', {

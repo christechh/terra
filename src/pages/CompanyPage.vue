@@ -150,7 +150,6 @@ const onDeleteUserButtonClick = (id: number) =>
                   type="button"
                   class="m-3 w-20"
                   @click="onDeleteUserButtonClick(item.id)"
-                  v-if="!item.isAdmin"
                 >
                   <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                   刪除

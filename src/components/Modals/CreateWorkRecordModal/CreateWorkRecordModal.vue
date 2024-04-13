@@ -54,22 +54,6 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">選擇員工 *</FormLabel>
-          <FormSelect
-            class="flex-1"
-            type="text"
-            v-model="userId"
-          >
-            <option
-              v-for="(user, index) in users"
-              :key="index"
-              :value="user.id"
-            >
-              {{ user.name }}
-            </option>
-          </FormSelect>
-        </div>
-        <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">選擇加班歸屬日</FormLabel>
           <FormSelect class="flex-1" v-model="type">
             <option value="HOLIDAY">例假日</option>
