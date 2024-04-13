@@ -398,8 +398,8 @@ onMounted(() => {
   float: right;
 }
 .bg-theme-1 {
-  background-color: #c2512b !important;
-  border-color: #c2512b !important;
+  background-color: #00308F !important;
+  border-color: #00308F !important;
 }
 .primary-button:disabled {
   opacity: 0.5;
@@ -430,29 +430,29 @@ onMounted(() => {
 <style>
 .ant-pagination-item-active {
   font-weight: 500 !important;
-  border-color: #c2512b !important;
+  border-color: #00308F !important;
 }
 .ant-pagination-item-active a {
-  color: #c2512b !important;
+  color: #00308F !important;
 }
 .ant-radio-checked .ant-radio-inner,
 .ant-radio-checked:after {
-  border-color: #c2512b;
+  border-color: #00308F;
 }
 .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
-  border-color: #c2512b;
-  background-color: #c2512b;
+  border-color: #00308F;
+  background-color: #00308F;
 }
 .ant-checkbox-inner::after {
-  background: #c2512b !important;
+  background: #00308F !important;
 }
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #c2512b !important;
-  border-color: #c2512b !important;
+  background-color: #00308F !important;
+  border-color: #00308F !important;
 }
 
 .ant-btn-primary {
-  background-color: #c2512b !important;
+  background-color: #00308F !important;
   color: white;
   display: flex !important;
   align-items: center;
@@ -463,7 +463,7 @@ onMounted(() => {
 }
 .primary-font-color,
 .primary-font-color:hover {
-  color: #c2512b;
+  color: #00308F;
 }
 .primary-text-color {
   color: #939393;
@@ -478,10 +478,10 @@ onMounted(() => {
     .ant-select-customize-input
   ):not(.ant-pagination-size-changer)
   .ant-select-selector {
-  border-color: #c2512b !important;
+  border-color: #00308F !important;
 }
 .ant-select:hover .ant-select-selector {
-  border-color: #c2512b !important;
+  border-color: #00308F !important;
 }
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
   background: #d8f0dc !important;
@@ -493,10 +493,10 @@ onMounted(() => {
   .ant-checkbox-checked:not(.ant-checkbox-disabled):after,
 .ant-radio-wrapper:hover .ant-radio-wrapper,
 .ant-radio-wrapper:hover .ant-radio-inner {
-  border-color: #c2512b;
+  border-color: #00308F;
 }
 .ant-checkbox-checked:after {
-  border-color: #c2512b;
+  border-color: #00308F;
 }
 [class^='ant-col'],
 [class*=' ant-col'],

@@ -187,7 +187,7 @@ export default function usePinBoard() {
 
   const chatHeaderColorChangeHandler = (color: string, notChange?: boolean) => {
     const m = {
-      '#C2512B': {
+      '#00308F': {
         headerText: '#ffffff',
         msgBubble: '#DDEFE0',
         bubbleBorder: 'DDEFE0',

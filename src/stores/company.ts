@@ -19,25 +19,18 @@ export const useCompanyStore = defineStore('company', {
       localStorage.setItem('currentCompanyId', this.companyId?.toString())
     },
     fetchCompanies() {
-      axios
-        .get('/company', {
-          params: {
-            page: 0,
-            pageSize: 100
-          }
-        })
-        .then((res) => {
-          this.companies = res.data.data
-          if (!localStorage.getItem('currentCompanyId')) {
-            this.companyId = res.data.data[0].id
-            localStorage.setItem(
-              'currentCompanyId',
-              (this.companyId ?? 1).toString()
-            )
-          } else {
-            this.companyId = Number(localStorage.getItem('currentCompanyId'))
-          }
-        })
+      axios.get('/account').then((res) => {
+        this.companies = res.data.data
+        if (!localStorage.getItem('currentCompanyId')) {
+          this.companyId = res.data.data[0].id
+          localStorage.setItem(
+            'currentCompanyId',
+            (this.companyId ?? 1).toString()
+          )
+        } else {
+          this.companyId = Number(localStorage.getItem('currentCompanyId'))
+        }
+      })
     },
     deleteCompany(id: number) {
       axios.delete(`/company/${id}`).then(() => {

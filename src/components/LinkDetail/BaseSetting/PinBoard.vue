@@ -587,7 +587,7 @@ const beforeSetChatLogoSize = (event: Event) => {
               class="mt-3 flex w-full items-center justify-center rounded border border-dashed bg-dashboard_bg p-4 text-primary"
               @click="createHandler"
             >
-              <Lucide icon="PlusCircle" color="#C2512B" class="mr-2" />{{
+              <Lucide icon="PlusCircle" color="#00308F" class="mr-2" />{{
                 $t('chatbot-message-create-action')
               }}
             </button>

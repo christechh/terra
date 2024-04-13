@@ -589,8 +589,8 @@ getTypes()
                         icon="Send"
                         width="15"
                         class="ml-1"
-                        color="#C2512B"
-                        fill="#C2512B"
+                        color="#00308F"
+                        fill="#00308F"
                       />
                     </div>
                   </div>

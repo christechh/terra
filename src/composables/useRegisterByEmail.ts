@@ -8,7 +8,7 @@ import { useUserStore } from '../stores/user'
 declare const grecaptcha: any
 export default function useRegisterByEmail() {
   const { t } = useI18n()
-  const email = ref('')
+  const account = ref('')
   const password = ref('')
   const confirmPassword = ref('')
   const acceptedTerms = ref(false)
@@ -22,7 +22,7 @@ export default function useRegisterByEmail() {
   const registerBtnDisabled = computed(
     () =>
       !(
-        email.value &&
+        account.value &&
         password.value &&
         confirmPassword.value &&
         acceptedTerms.value &&
@@ -60,7 +60,7 @@ export default function useRegisterByEmail() {
     loading.value = true
     try {
       await useUserStore().registerByEmail({
-        email: email.value,
+        account: account.value,
         password: password.value,
         confirmPassword: confirmPassword.value
       })
@@ -79,7 +79,7 @@ export default function useRegisterByEmail() {
     return false
   }
   return {
-    email,
+    account,
     password,
     confirmPassword,
     acceptedTerms,

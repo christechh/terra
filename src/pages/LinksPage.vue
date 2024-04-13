@@ -287,7 +287,7 @@ onMounted(() => {
 .tab {
   @apply flex-grow cursor-pointer border-b-[2px] p-4 text-center text-[18px] font-medium;
   &.active {
-    @apply border-[#d9e756] text-[#C2512B];
+    @apply border-[#d9e756] text-[#00308F];
   }
   /* f0f0f0 */
 }

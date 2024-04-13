@@ -6,12 +6,12 @@ const { parseColor } = require('tailwindcss/lib/util/color')
 
 const DesignTemplate = {
   main: {
-    theme1: '#C2512B',
+    theme1: '#00308F',
     theme2: '#DE5B00',
     theme3: '#E3F2A5',
     theme4: '#F4FABD',
     theme5: '#1D3D0E',
-    disabled_bg: '#C2512B', // opactiy 30%
+    disabled_bg: '#00308F', // opactiy 30%
     disabled_font: '#7B7B7B',
     warning: '#FF4D4F',
     html_bg: '#FFFFFF',
@@ -25,7 +25,7 @@ const DesignTemplate = {
     black: '#2D3748'
   },
   dark: {
-    theme1: '#C2512B',
+    theme1: '#00308F',
     theme2: '#009E37',
     theme3: '#D7DFB3',
     theme4: '#E9ECD0',

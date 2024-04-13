@@ -40,7 +40,7 @@ const notificationsStore = useNotificationsStore()
 const originForm = ref<IForm>()
 const form = ref<IForm>({
   widgetType: 'circle',
-  buttonColor: '#C2512B',
+  buttonColor: '#00308F',
   buttonText: t('contact_us_text'),
   buttonTextColor: '#ffffff'
 })
@@ -90,7 +90,7 @@ const fetchConfig = async () => {
 
     form.value = {
       widgetType: config.value?.widget_type || 'circle',
-      buttonColor: config.value?.float_button_color || '#C2512B',
+      buttonColor: config.value?.float_button_color || '#00308F',
       buttonImageUrl: config.value?.widget_logo,
       buttonTextColor: config.value?.float_button_text_color || '#ffffff',
       buttonText: config.value?.float_button_text || t('contact_us_text')

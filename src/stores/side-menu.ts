@@ -23,79 +23,49 @@ export const useSideMenuStore = defineStore('sideMenu', {
       {
         icon: 'Building2',
         pageName: 'Company',
-        title: '公司管理'
+        title: '會員管理'
       },
       {
         icon: 'Users',
         pageName: 'User',
-        title: '人事管理'
+        title: '會員管理'
       },
-      // {
-      //   icon: 'ScrollText',
-      //   title: '勞務管理',
-      //   subMenu: [
-      //     {
-      //       icon: 'ScrollText',
-      //       pageName: 'Labor',
-      //       title: '勞報單(會連到舊系統)'
-      //     },
-      //     {
-      //       icon: 'Briefcase',
-      //       pageName: 'account',
-      //       title: '合作廠商(會連到舊系統)'
-      //     }
-      //   ]
-      // },
       {
-        icon: 'Banknote',
-        title: '薪資小工具',
+        icon: 'Settings',
+        title: '設定管理',
         subMenu: [
           {
             icon: 'Banknote',
             pageName: 'SalaryGroupList',
-            title: '薪資管理'
+            title: '廣告管理'
           },
           {
             icon: 'CalendarPlus',
             pageName: 'WorkRecordList',
-            title: '加班/兼職出勤'
+            title: '手環匯率管理'
           },
           {
             icon: 'CircleDollarSign',
             pageName: 'SalaryExtend',
-            title: '薪資科別加減項'
+            title: '儲值方案管理'
           },
           {
             icon: 'CalendarClock',
             pageName: 'UserLeave',
-            title: '假勤申請'
+            title: '幫助管理'
           },
           {
             icon: 'Settings',
             pageName: 'Leave',
-            title: '假勤設定'
+            title: '意見管理'
+          },
+          {
+            icon: 'Settings',
+            pageName: 'Leave',
+            title: '條款管理'
           }
         ]
       }
-      // {
-      //   icon: 'ListChecks',
-      //   pageName: 'Financial',
-      //   title: '財務報表'
-      // },
-      // {
-      //   icon: 'LineChart',
-      //   pageName: 'Report',
-      //   title: '報表分析'
-      // }
     ]
-  }),
-  getters: {
-    filteredMenu(state) {
-      if (localStorage.getItem('xUserType') === 'admin') {
-        return state.menu
-      } else {
-        return state.menu.filter((item) => (item as Menu).title !== '公司管理')
-      }
-    }
-  }
+  })
 })

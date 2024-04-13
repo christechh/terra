@@ -23,7 +23,6 @@ import {
   nestedMenu
 } from './side-menu'
 
-import { FormSelect } from '../../base-components/Form'
 import useCompany from '../../../src/pages/settings/composables/useCompany'
 import { useCompanyStore } from '../../stores/company'
 
@@ -39,11 +38,7 @@ const setFormattedMenu = (
   // formattedMenu.value = computedFormattedMenu
 }
 const sideMenuStore = useSideMenuStore()
-const sideMenu = computed(() => nestedMenu(sideMenuStore.filteredMenu, route))
-const changeCompany = (e: Event) => {
-  const { value } = e.target as HTMLInputElement
-  useCompanyStore().setCompanyId(Number(value))
-}
+const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route))
 
 watch(companies, () => {
   if (companies.value.length && companyId.value === -1) {
@@ -99,23 +94,6 @@ onMounted(() => {
         </RouterLink>
 
         <Divider type="div" class="my-6"></Divider>
-
-        <div class="mb-4 items-center">
-          <FormLabel class="w-[120px]">目前管理公司：</FormLabel>
-          <FormSelect
-            class="mt-2"
-            v-model="companyId"
-            @change="changeCompany($event)"
-          >
-            <option
-              v-for="(company, index) in companies"
-              :key="index"
-              :value="company.id"
-            >
-              {{ company.name }}
-            </option>
-          </FormSelect>
-        </div>
 
         <Divider type="div" class="my-6"></Divider>
         <ul>

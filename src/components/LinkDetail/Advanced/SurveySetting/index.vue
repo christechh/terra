@@ -260,7 +260,7 @@ const onDrop = (idx: number, list: any[]) => {
                 :width="20"
                 :height="20"
                 class="mr-2"
-                color="#C2512B"
+                color="#00308F"
               /><span class="font-bold text-primary">{{
                 $t('survey-question-add')
               }}</span>
@@ -350,7 +350,7 @@ const onDrop = (idx: number, list: any[]) => {
               class="mr-2"
               :stroke-width="6"
               width="20"
-              color="#C2512B"
+              color="#00308F"
             />
             {{ $t('survey-question-add-option') }}
           </button>

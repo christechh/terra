@@ -9,7 +9,7 @@ import { Menu } from '../../base-components/Headless'
 import Lucide from '../../base-components/Lucide'
 import { useUserStore } from '../../stores/user'
 import fakerData from '../../utils/faker'
-const email = computed(() => useUserStore().email)
+const email = computed(() => useUserStore().account)
 const route = useRoute()
 const searchDropdown = ref(false)
 const doLogout = () => {

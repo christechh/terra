@@ -29,7 +29,7 @@ const { plans, customContent, planUid, planChoice, getPlanUrl } = usePlanModal()
           <div
             :class="[
               index === 2
-                ? 'origin-bottom bg-[#C2512B] shadow-2xl md:scale-y-105'
+                ? 'origin-bottom bg-[#00308F] shadow-2xl md:scale-y-105'
                 : 'bg-white',
               'my-6 h-[550px] w-full max-w-[330px] rounded-[30px] p-[30px]'
             ]"

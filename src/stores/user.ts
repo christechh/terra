@@ -4,45 +4,35 @@ import { useRedirectToStore } from './redirect-to'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    email: localStorage.getItem('email') || '',
+    account: localStorage.getItem('account') || '',
     token: localStorage.getItem('token') || '',
     xUserType: localStorage.getItem('xUserType') || '',
     imkitToken: ''
   }),
   actions: {
-    async login(
-      credentials: {
-        email: string
-        password: string
-      },
-      isAdmin: boolean
-    ) {
-      const resp = await axios.post(
-        isAdmin ? '/admin/login' : '/user/login',
-        credentials
-      )
-      this.email = credentials.email
-      this.token = resp.data.data.accessToken
-      this.xUserType = resp.data.data.xUserType
+    async login(credentials: { account: string; password: string }) {
+      const resp = await axios.post('/account/login', credentials)
+      this.account = credentials.account
+      console.log(resp.data)
+      this.token = resp.data.Result
       localStorage.setItem('token', this.token)
-      localStorage.setItem('email', credentials.email)
-      localStorage.setItem('xUserType', resp.data.data.xUserType)
+      localStorage.setItem('account', credentials.account)
       window.location.href = '/dashboard'
     },
     async loginByPhone(credentials: { phone: string; password: string }) {
       const resp = await axios.post('/auth/phone/login', credentials)
-      this.email = credentials.phone
+      this.account = credentials.phone
       this.token = resp.data.data.data.access_token
       localStorage.setItem('token', this.token)
-      localStorage.setItem('email', '')
+      localStorage.setItem('account', '')
       useRedirectToStore().redirect({ path: '/dashboard' })
     },
-    async subLogin(credentials: { email: string; password: string }) {
+    async subLogin(credentials: { account: string; password: string }) {
       const resp = await axios.post('/chat/sub/login', credentials)
-      this.email = credentials.email
+      this.account = credentials.account
       this.token = resp.data.data.data.access_token
       localStorage.setItem('token', this.token)
-      localStorage.setItem('email', '')
+      localStorage.setItem('account', '')
       useRedirectToStore().redirect({ path: '/dashboard' })
     },
     async fetchSetting() {
@@ -56,14 +46,14 @@ export const useUserStore = defineStore('user', {
       }
     },
     async registerByEmail(credentials: {
-      email: string
+      account: string
       password: string
       confirmPassword: string
     }) {
       const res = await axios.post('/auth/register', {
-        email: credentials.email,
+        account: credentials.account,
         guestToken: null,
-        name: credentials.email.split('@')[0],
+        name: credentials.account.split('@')[0],
         password: credentials.password,
         password_confirmation: credentials.confirmPassword,
         sendMail: true
@@ -72,15 +62,14 @@ export const useUserStore = defineStore('user', {
       localStorage.setItem('token', access_token)
       // localStorage.setItem('refresh_token', refresh_token)
       // localStorage.setItem('token_end_at', token_end_at)
-      localStorage.setItem('email', credentials.email)
+      localStorage.setItem('account', credentials.account)
       this.token = access_token
-      this.email = credentials.email
+      this.account = credentials.account
       useRedirectToStore().redirect({ path: '/dashboard' })
     },
     async logout() {
       localStorage.removeItem('token')
-      localStorage.removeItem('email')
-      localStorage.removeItem('currentCompanyId')
+      localStorage.removeItem('account')
       useRedirectToStore().redirect({ path: '/login' })
     }
   }

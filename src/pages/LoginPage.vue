@@ -8,13 +8,11 @@ import { FormInput } from '../base-components/Form'
 import CommonModal from '../components/Modals/CommonModal'
 
 import { useI18n } from 'vue-i18n'
-// import { useRouter } from 'vue-router'
-import logoImg from '../assets/images/login-logo.svg'
 import Lucide from '../base-components/Lucide'
 import { useUserStore } from '../stores/user'
 
 // const router = useRouter()
-const email = ref('')
+const account = ref('')
 const password = ref('')
 const passwordType = ref('password')
 const isEyeOffVisible = ref(false)
@@ -25,7 +23,6 @@ const isLoging = ref(false)
 const apiError = ref('')
 const isAdminLoginMode = ref(false)
 const count = ref(0)
-// const isAndroid = ref(navigator.userAgent.toLowerCase().indexOf('android') > -1)
 const accumulateCount = () => {
   if (!isAdminLoginMode.value) count.value++
   else count.value--
@@ -34,19 +31,16 @@ const accumulateCount = () => {
   else if (count.value === 0) isAdminLoginMode.value = false
 }
 const doLogin = () => {
-  if (!email.value || !password.value) {
+  if (!account.value || !password.value) {
     return (isInputError.value = true)
   }
   apiError.value = ''
   isLoging.value = true
   useUserStore()
-    .login(
-      {
-        email: email.value,
-        password: password.value
-      },
-      isAdminLoginMode.value
-    )
+    .login({
+      account: account.value,
+      password: password.value
+    })
     .catch((e) => {
       apiError.value = e.response.data.errors[0].message
     })
@@ -66,14 +60,13 @@ const eyeOpen = (status: boolean) => {
     passwordType.value = 'text'
   }
 }
-watch([email, password], () => {
+watch([account, password], () => {
   isInputError.value = false
 })
 </script>
 
 <template>
   <div>
-    <img :src="logoImg" alt="" class="mx-auto mb-[50px] mt-16 w-80" />
     <div
       class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
     >
@@ -84,11 +77,11 @@ watch([email, password], () => {
         <span class="mb-1 text-sm">{{ t('login-email-label') }}</span>
         <FormInput
           class="rounded-lg border"
-          v-model="email"
+          v-model="account"
           type="text"
           :placeholder="t('signup-login-placeholder-email')"
         />
-        <div v-if="isInputError && !email" class="mt-1 text-xs text-red-500">
+        <div v-if="isInputError && !account" class="mt-1 text-xs text-red-500">
           {{ t('error-message7') }}
         </div>
       </div>
@@ -250,7 +243,7 @@ watch([email, password], () => {
             <div class="intro-x mt-8">
               <FormInput
                 type="text"
-                v-model="email"
+                v-model="account"
                 class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]"
                 placeholder="帳號"
               />

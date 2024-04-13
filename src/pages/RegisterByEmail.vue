@@ -9,7 +9,7 @@ import useRegisterByEmail from '../composables/useRegisterByEmail'
 import RegisterLayout from '../layouts/RegisterLayout.vue'
 const { t } = useI18n()
 const {
-  email,
+  account,
   password,
   confirmPassword,
   acceptedPrivacy,
@@ -36,11 +36,11 @@ const router = useRouter()
         <div class="mb-1 text-xs">{{ t('login-email-label') }}</div>
         <FormInput
           class="rounded-lg border"
-          v-model="email"
+          v-model="account"
           type="text"
           :placeholder="t('signup-login-placeholder-email')"
         />
-        <div v-if="isInputError && !email" class="mt-1 text-xs text-red-500">
+        <div v-if="isInputError && !account" class="mt-1 text-xs text-red-500">
           {{ t('error-message7') }}
         </div>
       </div>
@@ -54,7 +54,7 @@ const router = useRouter()
           @keyup.enter="register"
         />
         <div
-          v-if="isInputError && !password && email"
+          v-if="isInputError && !password && account"
           class="mt-1 text-xs text-red-500"
         >
           {{ t('error-message8') }}
@@ -77,7 +77,7 @@ const router = useRouter()
           @keyup.enter="register"
         />
         <div
-          v-if="isInputError && password && email && !confirmPassword"
+          v-if="isInputError && password && account && !confirmPassword"
           class="mt-1 text-xs text-red-500"
         >
           {{ t('error-message8') }}
