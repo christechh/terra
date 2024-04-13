@@ -32,7 +32,7 @@ const routes = [
       {
         path: '/company',
         name: 'Company',
-        component: () => import('@/pages/CompanyPage.vue'),
+        component: () => import('@/pages/User.vue'),
         meta: {
           title: i18n.global.t('company-title'),
           requiresAuth: true
@@ -41,7 +41,7 @@ const routes = [
       {
         path: 'user',
         name: 'User',
-        component: () => import('@/pages/User.vue'),
+        component: () => import('@/pages/Member.vue'),
         meta: {
           title: i18n.global.t('user-title'),
           requiresAuth: true
