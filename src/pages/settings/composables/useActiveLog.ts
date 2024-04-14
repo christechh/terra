@@ -13,14 +13,14 @@ export default function useActiveLog() {
 
   const getUserActiveLog = () => {
     getLogs(0, 5).then((res) => {
-      const { data } = res.data.data
+      const { data } = res.data.Result
       activeLogs.value = data
     })
   }
 
   const viewMore = async () => {
     const res = await getLogs(0, 50)
-    const { data } = res.data.data
+    const { data } = res.data.Result
     allLogs.value = data
     showActiveLogPopup.value = true
   }

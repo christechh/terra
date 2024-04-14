@@ -58,7 +58,7 @@ export const useUserStore = defineStore('user', {
         password_confirmation: credentials.confirmPassword,
         sendMail: true
       })
-      const { access_token } = res.data.data.data
+      const { access_token } = res.data.Result.data
       localStorage.setItem('token', access_token)
       // localStorage.setItem('refresh_token', refresh_token)
       // localStorage.setItem('token_end_at', token_end_at)

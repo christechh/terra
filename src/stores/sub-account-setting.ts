@@ -124,7 +124,7 @@ export const useCompanyStore = defineStore('subAccounts', {
         const res = await axios.get(url)
 
         // 3. update subAccountData
-        const rawData = res.data.data
+        const rawData = res.data.Result
         this.subAccountRawData = rawData
         this.shareAvatars = rawData.shareAvatars
 

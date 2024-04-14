@@ -22,12 +22,12 @@ export const useSideMenuStore = defineStore('sideMenu', {
       },
       {
         icon: 'Building2',
-        pageName: 'Company',
-        title: '會員管理'
+        pageName: 'User',
+        title: '用戶管理'
       },
       {
         icon: 'Users',
-        pageName: 'User',
+        pageName: 'Member',
         title: '會員管理'
       },
       {
@@ -55,8 +55,8 @@ export const useSideMenuStore = defineStore('sideMenu', {
             title: '幫助管理'
           },
           {
-            icon: 'Settings',
-            pageName: 'Leave',
+            icon: 'CalendarClock',
+            pageName: 'Advise',
             title: '意見管理'
           },
           {

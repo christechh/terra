@@ -6,8 +6,6 @@ import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateWorkRecord from './useCreateWorkRecord'
-import useUser from '../../../pages/settings/composables/useUser'
-import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface Props {
   workRecord?: {
@@ -23,13 +21,10 @@ interface Props {
   idx: number
 }
 
-const { companyId } = useCompany()
-const { users } = useUser(companyId.value ?? 1)
 const emit = defineEmits(['close'])
 const { workRecord } = defineProps<Props>()
 
 const {
-  userId,
   startTime,
   endTime,
   type,

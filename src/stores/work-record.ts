@@ -20,19 +20,19 @@ export const useWorkRecordStore = defineStore('work-record', {
       companyId: number
     }) {
       axios
-        .get('/salary/work-record', {
+        .get('/admin/ui/wallet/rate', {
           params: {
             page: page,
             companyId: companyId.toString()
           }
         })
         .then((res) => {
-          this.workRecordList = res.data.data
+          this.workRecordList = res.data.Result
         })
     },
     deleteWorkRecord(companyId: number, id: number) {
       axios
-        .delete(`salary/work-record/${id}`, {
+        .delete(`admin/ui/wallet/rate/${id}`, {
           params: {
             companyId
           }

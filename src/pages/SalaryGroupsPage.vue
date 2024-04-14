@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import dayjs from 'dayjs'
 import { useRouter } from 'vue-router'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
@@ -37,10 +36,6 @@ const onOpenGroupSalariesButtonClick = (groupId: string) => {
   })
 }
 
-const onExportSalaryButtonClick = () => {
-  showExportSalaryModal.value = true
-}
-
 const onDeleteSalaryGroupButtonClick = (id: number) => {
   confirmDeleteSalaryGroup(companyId.value ?? 1, id)
 }
@@ -66,51 +61,6 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
           </div>
         </div>
       </div>
-
-      <div
-        class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap"
-      >
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="workrecord">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-                加班/兼職出勤
-              </Button>
-            </router-link>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="salary-extend">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-                薪資科別加減項
-              </Button>
-            </router-link>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="userleave">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Settings" class="mr-1 h-4 w-4" />
-                假勤申請
-              </Button>
-            </router-link>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <router-link to="leave">
-              <Button variant="primary" type="button" class="m-3">
-                <Lucide icon="Settings" class="mr-1 h-4 w-4" />
-                假勤設定
-              </Button>
-            </router-link>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="mt-5 grid grid-cols-12 gap-6">
@@ -126,34 +76,7 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
               @click="onCreateSalaryGroupButtonClick"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              薪資計算
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="onExportSalaryButtonClick"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              匯出薪資明細
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="onCreateSalaryGroupButtonClick"
-              disabled
-            >
-              <Lucide icon="Send" class="mr-1 h-4 w-4" />
-              薪資單寄送
+              新建廣告
             </Button>
           </div>
         </div>
@@ -163,13 +86,12 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">薪資年月</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放名稱</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">起始日</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">結束日</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放人數</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">發放日期</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">狀態</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">圖片</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">轉址</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">過期日</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">順位</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">是否認證</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">創建時間</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -184,53 +106,44 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryGroup.yearMonth }}
+                  <img :src="salaryGroup.image_url" class="w-20" alt="" />
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryGroup.name }}
+                  <a :href="salaryGroup.redirect_url" target="_blank">
+                    {{ salaryGroup.redirect_url }}
+                  </a>
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.startDate).format('YYYY-MM-DD') }}
+                  {{ salaryGroup.expiration_date }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.endDate).format('YYYY-MM-DD') }}
+                  {{ salaryGroup.sequence }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ 0 }}
+                  {{ salaryGroup.valid }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ dayjs(salaryGroup.paymentDate).format('YYYY-MM-DD') }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{
-                    new Date() > new Date(salaryGroup.paymentDate)
-                      ? '已發放'
-                      : '未發放'
-                  }}
+                  {{ salaryGroup.created_at }}
                 </div>
               </Table.Td>
 
@@ -244,8 +157,8 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
                     class="m-3 w-24"
                     @click="onOpenGroupSalariesButtonClick(salaryGroup.id)"
                   >
-                    <Lucide icon="LibraryBig" class="mr-1 h-4 w-4" />
-                    薪資單
+                    <Lucide icon="Edit" class="mr-1 h-4 w-4" />
+                    修改
                   </Button>
                   <Button
                     variant="danger"

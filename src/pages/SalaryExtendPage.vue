@@ -32,29 +32,8 @@ const onCreateSalaryExtendClick = (idx?: number) => {
   showCreateSalaryExtendModal.value = true
 }
 
-const onExportSalaryExtendClick = () => {
-  console.log('onExportSalaryExtendClick')
-}
-
-const onImportButtonClick = () => {
-  console.log('onImportButtonClick')
-}
-
-const onDownloadImportExampleClick = () => {
-  console.log('onDownloadImportExampleClick')
-}
-
 const onDeleteSalaryExtendButtonClick = (id: number) => {
   confirmDeleteSalaryExtend(companyId.value ?? 1, id)
-}
-
-const transfer = (type: string): string => {
-  const m: { [key: string]: string } = {
-    PLUS: '加項',
-    MINUS: '減項'
-  }
-
-  return m[type] || 'null'
 }
 </script>
 
@@ -93,49 +72,7 @@ const transfer = (type: string): string => {
               @click="onCreateSalaryExtendClick()"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              新增薪資加減項
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onImportButtonClick"
-            >
-              <Lucide icon="Upload" class="mr-1 h-4 w-4" />
-              匯入薪資加減項
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onExportSalaryExtendClick"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              匯出薪資加減項
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="danger"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onDownloadImportExampleClick"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              薪資加減項匯入範例
+              新增儲值方案
             </Button>
           </div>
         </div>
@@ -146,16 +83,14 @@ const transfer = (type: string): string => {
           <Table.Thead>
             <Table.Tr>
               <Table.Th class="whitespace-nowrap border-b-0">
-                員工編號
+                退還點數
               </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">姓名</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                薪資年月
-              </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">薪資科目</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">金額</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">加減項</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">價錢</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">折扣</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">開始日期</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">結束日期</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">是否認證</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">創建時間</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
@@ -169,42 +104,42 @@ const transfer = (type: string): string => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryExtend.employeeId }}
+                  {{ salaryExtend.redeem_point }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryExtend.userName }}
+                  {{ salaryExtend.price }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryExtend.yearMonth }}
+                  {{ salaryExtend.discount }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryExtend.name }}
+                  {{ salaryExtend.start_date }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ salaryExtend.amount }}
+                  {{ salaryExtend.end_date }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ transfer(salaryExtend.type) }}
+                  {{ salaryExtend.valid }}
                 </div>
               </Table.Td>
               <Table.Td

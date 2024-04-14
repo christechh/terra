@@ -50,7 +50,7 @@ export default function useSurveySetting() {
 
   const getSurveys = async () => {
     const res = await axios.get(`survey?token=${token}`)
-    surveys.value = res.data.data.data
+    surveys.value = res.data.Result.data
   }
 
   const addSurveyContent = () => {

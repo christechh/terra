@@ -62,7 +62,7 @@ export default function usePhoneReset() {
 
   const verifyPhone = (token: string) => {
     axios.post('/auth/verify_phone', { token }).then((res) => {
-      localStorage.setItem('token', res.data.data.data.access_token)
+      localStorage.setItem('token', res.data.Result.data.access_token)
       router.push({ name: 'setpassword_after_phone' })
     })
   }

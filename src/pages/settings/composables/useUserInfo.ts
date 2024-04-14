@@ -39,7 +39,7 @@ export default function useUserInfo() {
 
   const getUserInfo = async () => {
     await axios.get('/meta').then((res) => {
-      const { data } = res.data.data
+      const { data } = res.data.Result
       Object.assign(userInfo, data)
       const ast = new AsYouType()
       if (userInfo.notify_type === 10) {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, provide, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import logoUrl from '../../assets/images/logo.svg'
+import logoUrl from '../../assets/images/logo.png'
 import DarkModeSwitcher from '../../components/DarkModeSwitcher'
 import MainColorSwitcher from '../../components/MainColorSwitcher'
 import MobileMenu from '../../components/MobileMenu'

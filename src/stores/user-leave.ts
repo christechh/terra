@@ -19,19 +19,19 @@ export const useUserLeaveStore = defineStore('user-leave', {
       companyId: number
     }) {
       axios
-        .get('/salary/user-leave', {
+        .get('/admin/ui/help', {
           params: {
             page: page,
             companyId: companyId.toString()
           }
         })
         .then((res) => {
-          this.userLeave = res.data.data
+          this.userLeave = res.data.Result
         })
     },
     deleteUserLeave(companyId: number, id: number) {
       axios
-        .delete(`salary/user-leave/${id}`, {
+        .delete(`admin/ui/help/${id}`, {
           params: {
             companyId
           }

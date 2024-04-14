@@ -30,20 +30,20 @@ const routes = [
         }
       },
       {
-        path: '/company',
-        name: 'Company',
+        path: '/user',
+        name: 'User',
         component: () => import('@/pages/User.vue'),
         meta: {
-          title: i18n.global.t('company-title'),
+          title: i18n.global.t('user-title'),
           requiresAuth: true
         }
       },
       {
-        path: 'user',
-        name: 'User',
+        path: '/member',
+        name: 'Member',
         component: () => import('@/pages/Member.vue'),
         meta: {
-          title: i18n.global.t('user-title'),
+          title: i18n.global.t('company-title'),
           requiresAuth: true
         }
       },
@@ -70,7 +70,7 @@ const routes = [
         name: 'WorkRecordList',
         component: () => import('@/pages/WorkRecordListPage.vue'),
         meta: {
-          title: '加班/兼職出勤管理',
+          title: '手環匯率管理',
           requiresAuth: true
         }
       },
@@ -79,7 +79,7 @@ const routes = [
         name: 'SalaryExtend',
         component: () => import('@/pages/SalaryExtendPage.vue'),
         meta: {
-          title: '薪資科別加減項',
+          title: '儲值方案管理',
           requiresAuth: true
         }
       },
@@ -88,7 +88,16 @@ const routes = [
         name: 'UserLeave',
         component: () => import('@/pages/UserLeavePage.vue'),
         meta: {
-          title: '假勤申請',
+          title: '幫助管理',
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'advise',
+        name: 'Advise',
+        component: () => import('@/pages/Advise.vue'),
+        meta: {
+          title: '意見管理',
           requiresAuth: true
         }
       },
@@ -97,7 +106,7 @@ const routes = [
         name: 'Leave',
         component: () => import('@/pages/LeavePage.vue'),
         meta: {
-          title: '假勤設定',
+          title: '條款管理',
           requiresAuth: true
         }
       }

@@ -68,7 +68,7 @@ const onDeleteUserButtonClick = (id: number) =>
             @click="() => createOrEdit()"
           >
             <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-            新增員工
+            新增用戶
           </Button>
         </div>
       </div>

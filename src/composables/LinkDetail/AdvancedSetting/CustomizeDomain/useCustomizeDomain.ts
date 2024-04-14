@@ -117,7 +117,7 @@ export default function useCustomizeDomain() {
     const res = await axios.post('/dashboard/enterpoint/check-domain-cname', {
       domain: custom_domain.value
     })
-    isValid.value = res.data.data.valid
+    isValid.value = res.data.Result.valid
     doValid.value = true
     validing.value = false
   }
@@ -136,7 +136,7 @@ export default function useCustomizeDomain() {
     }
     console.log(payload)
     const res = await axios.post('/dashboard/enterpoint', payload)
-    store.data.custom_domain = res.data.data.data.custom_domain
+    store.data.custom_domain = res.data.Result.data.custom_domain
   }
 
   const enableCustomDomain = async () => {

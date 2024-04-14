@@ -16,22 +16,10 @@ export const useUsersStore = defineStore('users', {
     users: [] as Users[]
   }),
   actions: {
-    fetchUsers({ page, companyId }: { page: number; companyId: number }) {
-      axios
-        .get(
-          localStorage.getItem('xUserType') === 'admin'
-            ? '/admin/user'
-            : '/user',
-          {
-            params: {
-              page: page,
-              companyId: companyId.toString()
-            }
-          }
-        )
-        .then((res) => {
-          this.users = res.data.data
-        })
+    fetchUsers() {
+      axios.get('/account/users').then((res) => {
+        this.users = res.data.Result
+      })
     },
     deleteUser(id: number) {
       axios

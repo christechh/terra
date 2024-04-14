@@ -10,8 +10,6 @@ import {
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateSalaryExtend from './useCreateSalaryExtend'
-import useUser from '../../../pages/settings/composables/useUser'
-import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface Props {
   salaryExtend?: {
@@ -27,13 +25,10 @@ interface Props {
   idx: number
 }
 
-const { companyId } = useCompany()
-const { users } = useUser(companyId.value ?? 1)
 const emit = defineEmits(['close'])
 const { salaryExtend } = defineProps<Props>()
 
 const {
-  userId,
   name,
   description,
   type,
@@ -74,7 +69,14 @@ const {
 
         <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">金額 *</FormLabel>
-          <FormInput class="flex-1" type="number" min="0" step="1" v-model="amount" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" />
+          <FormInput
+            class="flex-1"
+            type="number"
+            min="0"
+            step="1"
+            v-model="amount"
+            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+          />
         </div>
 
         <div class="mb-4 flex items-center">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import illustrationUrl from '../assets/images/illustration.svg'
-import logoUrl from '../assets/images/logo.svg'
+import logoUrl from '../assets/images/logo.png'
 import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 
@@ -67,6 +67,7 @@ watch([account, password], () => {
 
 <template>
   <div>
+    <img :src="logoUrl" alt="" class="mx-auto mb-[50px] mt-16 w-60" />
     <div
       class="mx-auto w-full rounded-lg border p-[50px] pt-[30px] text-xl sm:w-[66%] md:w-1/2 lg:w-[467px]"
     >
@@ -140,7 +141,7 @@ watch([account, password], () => {
         >
           <img
             class="absolute left-3"
-            src="../assets/images/apple_logo.svg"
+            src="../assets/images/apple_logo.png"
             alt=""
           />
           {{ t('signup-apple-btn-title') }}</Button
@@ -150,7 +151,7 @@ watch([account, password], () => {
         >
           <img
             class="absolute left-3"
-            src="../assets/images/google_logo.svg"
+            src="../assets/images/google_logo.png"
             alt=""
           />{{ t('signup-google-btn-title') }}</Button
         > -->
@@ -159,7 +160,7 @@ watch([account, password], () => {
         >
           <img
             class="absolute left-3"
-            src="../assets/images/facebook_logo.svg"
+            src="../assets/images/facebook_logo.png"
             alt=""
           />{{ t('signup-facebook-btn-title') }}</Button
         > -->

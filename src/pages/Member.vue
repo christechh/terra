@@ -6,34 +6,34 @@ import Button from '../base-components/Button'
 import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
-import CreateUserModal from '../components/Modals/CreateUserModal'
-import useUser from './settings/composables/useUser'
+import CreateMemberModal from '../components/Modals/CreateMemberModal'
+import useMember from './settings/composables/useMember'
 import useCompany from './settings/composables/useCompany'
 
 const { companyId } = useCompany()
-const { users, confirmDeleteUser } = useUser(companyId.value ?? 1)
+const { member, confirmDeleteMember } = useMember(companyId.value ?? 1)
 
-const showCreateUserModal = ref(false)
-const selectedUserIndex = ref(-1)
+const showCreateMemberModal = ref(false)
+const selectedMemberIndex = ref(-1)
 
 watch(companyId, () => {
-  useUser(companyId.value ?? 1)
+  useMember(companyId.value ?? 1)
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedUser: any = computed(
-  () => users.value[selectedUserIndex.value] || null
+const selectedMember: any = computed(
+  () => member.value[selectedMemberIndex.value] || null
 )
 
 const createOrEdit = (idx?: number) => {
-  selectedUserIndex.value = -1
+  selectedMemberIndex.value = -1
   if (idx !== undefined) {
-    selectedUserIndex.value = idx
+    selectedMemberIndex.value = idx
   }
-  showCreateUserModal.value = true
+  showCreateMemberModal.value = true
 }
 
-const onDeleteUserButtonClick = (id: number) =>
-  confirmDeleteUser(companyId.value ?? 1, id)
+const onDeleteMemberButtonClick = (id: number) =>
+  confirmDeleteMember(companyId.value ?? 1, id)
 </script>
 
 <template>
@@ -68,7 +68,7 @@ const onDeleteUserButtonClick = (id: number) =>
             @click="() => createOrEdit()"
           >
             <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-            新增員工
+            新增會員
           </Button>
         </div>
       </div>
@@ -78,60 +78,64 @@ const onDeleteUserButtonClick = (id: number) =>
       <Table class="-mt-2 border-separate border-spacing-y-[10px]">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th class="whitespace-nowrap border-b-0">帳號</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">密碼</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">Email</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">姓</Table.Th>
-            <Table.Th class="whitespace-nowrap border-b-0">名</Table.Th>
-            <!-- <Table.Th class="whitespace-nowrap border-b-0">權限</Table.Th> -->
+            <Table.Th class="whitespace-nowrap border-b-0">註冊次數</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">手機</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">生日</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">姓名</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">性別</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">職業</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
           </Table.Tr>
         </Table.Thead>
 
         <Table.Tbody>
-          <Table.Tr v-for="(item, index) in users" :key="index" class="intro-x">
+          <Table.Tr
+            v-for="(item, index) in member"
+            :key="index"
+            class="intro-x"
+          >
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.account }}
+                {{ item.regist_time }}
               </div>
             </Table.Td>
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.password }}
+                {{ item.mobile }}
               </div>
             </Table.Td>
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.email }}
+                {{ item.birth }}
               </div>
             </Table.Td>
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.first_name }}
+                {{ item.name }}
               </div>
             </Table.Td>
             <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.last_name }}
+                {{ item.gender === 1 ? '男' : '女' }}
               </div>
             </Table.Td>
-            <!-- <Table.Td
+            <Table.Td
               class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
             >
               <div class="font-medium">
-                {{ item.access }}
+                {{ item.career }}
               </div>
-            </Table.Td> -->
+            </Table.Td>
             <Table.Td
               class="relative w-56 border-b-0 bg-white py-0 shadow-[20px_3px_20px_#0000000b] before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600 before:dark:bg-darkmode-400"
             >
@@ -149,7 +153,7 @@ const onDeleteUserButtonClick = (id: number) =>
                   variant="danger"
                   type="button"
                   class="m-3 w-20"
-                  @click="onDeleteUserButtonClick(item.id)"
+                  @click="onDeleteMemberButtonClick(item.id)"
                 >
                   <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                   刪除
@@ -162,10 +166,10 @@ const onDeleteUserButtonClick = (id: number) =>
     </div>
   </div>
 
-  <CreateUserModal
-    v-if="showCreateUserModal"
-    @close="showCreateUserModal = false"
-    :subAccount="selectedUser"
-    :idx="selectedUserIndex"
+  <CreateMemberModal
+    v-if="showCreateMemberModal"
+    @close="showCreateMemberModal = false"
+    :subAccount="selectedMember"
+    :idx="selectedMemberIndex"
   />
 </template>

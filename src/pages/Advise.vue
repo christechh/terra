@@ -4,35 +4,33 @@ import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
 import { FormInput } from '../base-components/Form'
-import CreateUserLeaveModal from '../components/Modals/CreateUserLeaveModal'
-import useUserLeave from './settings/composables/useUserLeave'
-import useCompany from '../../src/pages/settings/composables/useCompany'
+import CreateAdviseModal from '../components/Modals/CreateAdviseModal'
+import useAdvise from './settings/composables/useAdvise'
+import useCompany from './settings/composables/useCompany'
 
 const { companyId } = useCompany()
-const { userLeaveList, confirmDeleteUserLeave } = useUserLeave(
-  companyId.value ?? 1
-)
-const showCreateUserLeaveModal = ref(false)
-const selectedUserLeaveIndex = ref(-1)
+const { adviseList, confirmDeleteAdvise } = useAdvise(companyId.value ?? 1)
+const showCreateAdviseModal = ref(false)
+const selectedAdviseIndex = ref(-1)
 
 watch(companyId, () => {
-  useUserLeave(companyId.value ?? 1)
+  useAdvise(companyId.value ?? 1)
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const selectedUserLeave: any = computed(
-  () => userLeaveList.value[selectedUserLeaveIndex.value] || null
+const selectedAdvise: any = computed(
+  () => adviseList.value[selectedAdviseIndex.value] || null
 )
 
-const onCreateUserLeaveClick = (idx?: number) => {
-  selectedUserLeaveIndex.value = -1
+const onCreateAdviseClick = (idx?: number) => {
+  selectedAdviseIndex.value = -1
   if (idx !== undefined) {
-    selectedUserLeaveIndex.value = idx
+    selectedAdviseIndex.value = idx
   }
-  showCreateUserLeaveModal.value = true
+  showCreateAdviseModal.value = true
 }
 
-const onDeleteUserLeaveButtonClick = (id: number) => {
-  confirmDeleteUserLeave(companyId.value ?? 1, id)
+const onDeleteAdviseButtonClick = (id: number) => {
+  confirmDeleteAdvise(companyId.value ?? 1, id)
 }
 </script>
 
@@ -68,10 +66,10 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
               variant="primary"
               type="button"
               class="m-3"
-              @click="onCreateUserLeaveClick()"
+              @click="onCreateAdviseClick()"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              新增幫助
+              新增意見
             </Button>
           </div>
         </div>
@@ -81,16 +79,18 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">類別</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">會員</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">標題</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">內容</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">回饋</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">狀態</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
 
           <Table.Tbody>
             <Table.Tr
-              v-for="(userLeave, index) in userLeaveList"
+              v-for="(advise, index) in adviseList"
               :key="index"
               class="intro-x"
             >
@@ -98,21 +98,35 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ userLeave.help_type }}
+                  {{ advise.members_id }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ userLeave.title }}
+                  {{ advise.title }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ userLeave.content }}
+                  {{ advise.content }}
+                </div>
+              </Table.Td>
+              <Table.Td
+                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+              >
+                <div class="font-medium">
+                  {{ advise.response }}
+                </div>
+              </Table.Td>
+              <Table.Td
+                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+              >
+                <div class="font-medium">
+                  {{ advise.advise_status }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -123,7 +137,7 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
                     variant="primary"
                     type="button"
                     class="m-3 w-20"
-                    @click="onCreateUserLeaveClick(index)"
+                    @click="onCreateAdviseClick(index)"
                   >
                     <Lucide icon="Edit" class="mr-1 h-4 w-4" />
                     修改
@@ -132,7 +146,7 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
                     variant="danger"
                     type="button"
                     class="m-3 w-20"
-                    @click="onDeleteUserLeaveButtonClick(userLeave.id)"
+                    @click="onDeleteAdviseButtonClick(advise.id)"
                   >
                     <Lucide icon="Trash" class="mr-1 h-4 w-4" />
                     刪除
@@ -177,11 +191,11 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
       <!-- END: Pagination -->
     </div>
 
-    <CreateUserLeaveModal
-      v-if="showCreateUserLeaveModal"
-      :userLeave="selectedUserLeave"
-      @close="showCreateUserLeaveModal = false"
-      :idx="selectedUserLeaveIndex"
+    <CreateAdviseModal
+      v-if="showCreateAdviseModal"
+      :advise="selectedAdvise"
+      @close="showCreateAdviseModal = false"
+      :idx="selectedAdviseIndex"
     />
   </div>
 </template>

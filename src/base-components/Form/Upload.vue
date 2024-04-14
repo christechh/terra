@@ -88,7 +88,7 @@ const fileChangeHandler = async (e: Event) => {
           'Content-Type': 'multipart/form-data'
         }
       })
-      const url = res.data.data.data.url
+      const url = res.data.Result.data.url
       emit('update:modelValue', [{ name: '', data: url }])
       useNotificationsStore().showSuccess({
         title: t('upload-success'),

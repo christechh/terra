@@ -5,8 +5,6 @@ import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
 import { FormInput } from '../base-components/Form'
 import CreateWorkRecordModal from '../components/Modals/CreateWorkRecordModal'
-import dayjs from 'dayjs'
-
 import useWorkRecord from './settings/composables/useWorkRecord'
 import useCompany from '../../src/pages/settings/composables/useCompany'
 
@@ -33,31 +31,8 @@ const onCreateWorkRecordClick = (idx?: number) => {
   showCreateWorkRecordModal.value = true
 }
 
-const onExportWorkRecordClick = () => {
-  console.log('onExportWorkRecordClick')
-}
-
-const onImportButtonClick = () => {
-  console.log('onImportButtonClick')
-}
-
-const onDownloadImportExampleClick = () => {
-  console.log('onDownloadImportExampleClick')
-}
-
 const onDeleteWorkRecordButtonClick = (id: number) => {
   confirmDeleteWorkRecord(companyId.value ?? 1, id)
-}
-
-const transfer = (type: string): string => {
-  const m: { [key: string]: string } = {
-    HOLIDAY: '例假日',
-    OFFICIALHOLIDAY: '國定假日',
-    RESTDAY: '休息日',
-    WORKDAY: '工作日'
-  }
-
-  return m[type] || 'null'
 }
 </script>
 
@@ -96,49 +71,7 @@ const transfer = (type: string): string => {
               @click="onCreateWorkRecordClick()"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              加班/兼職申請
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onImportButtonClick"
-            >
-              <Lucide icon="Upload" class="mr-1 h-4 w-4" />
-              匯入加班/出勤
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onExportWorkRecordClick"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              匯出加班/出勤
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="danger"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onDownloadImportExampleClick"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              加班/兼職匯入範例
+              新增手環匯率
             </Button>
           </div>
         </div>
@@ -148,22 +81,9 @@ const transfer = (type: string): string => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">員工編號</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">姓名</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                加班歸屬日
-              </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">開始時間</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">結束時間</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                休息時間(小時)
-              </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                時數（小時）
-              </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                工作內容備註
-              </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">比率</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">有效期限</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">建立時間</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -178,65 +98,21 @@ const transfer = (type: string): string => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ workRecord.employeeId }}
+                  {{ workRecord.rate }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ workRecord.userName }}
+                  {{ workRecord.effective_date }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ transfer(workRecord.type) }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ workRecord.startTime }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ workRecord.endTime }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ workRecord.restHours }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{
-                    (
-                      (dayjs(workRecord.endTime).diff(
-                        dayjs(workRecord.startTime),
-                        'minute'
-                      ) -
-                        workRecord.restHours) /
-                      60
-                    ).toFixed(2)
-                  }}
-                </div>
-              </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ workRecord.description }}
+                  {{ workRecord.created_at }}
                 </div>
               </Table.Td>
               <Table.Td

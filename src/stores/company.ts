@@ -20,9 +20,9 @@ export const useCompanyStore = defineStore('company', {
     },
     fetchCompanies() {
       axios.get('/account').then((res) => {
-        this.companies = res.data.data
+        this.companies = res.data.Result
         if (!localStorage.getItem('currentCompanyId')) {
-          this.companyId = res.data.data[0].id
+          this.companyId = res.data.Result[0].id
           localStorage.setItem(
             'currentCompanyId',
             (this.companyId ?? 1).toString()

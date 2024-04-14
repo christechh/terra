@@ -80,10 +80,10 @@ export const getLoginAccessToken = async (
     //   window.location.href = '/500'
     // }
 
-    setLocalStorage('access_token', res.data.data.access_token)
-    setLocalStorage('refresh_token', res.data.data.refresh_token)
-    setLocalStorage('token_end_at', res.data.data.end_at)
-    accessTokenEndAt = res.data.data.end_at
+    setLocalStorage('access_token', res.data.Result.access_token)
+    setLocalStorage('refresh_token', res.data.Result.refresh_token)
+    setLocalStorage('token_end_at', res.data.Result.end_at)
+    accessTokenEndAt = res.data.Result.end_at
   } catch (error) {
     console.log('refresh error : \n', error)
   }

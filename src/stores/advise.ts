@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
 import axios from '../axios'
-import useCompany from '../../src/pages/settings/composables/useCompany'
-export interface Leave {
+import useCompany from '../pages/settings/composables/useCompany'
+export interface Advise {
   [key: string]: any
 }
 
-export const useLeaveStore = defineStore('leave', {
+export const useAdviseStore = defineStore('advise', {
   state: () => ({
-    leave: [] as Leave[]
+    advise: [] as Advise[]
   }),
   actions: {
-    async fetchLeaveList({
+    async fetchAdviseList({
       page,
       companyId
     }: {
@@ -19,19 +19,19 @@ export const useLeaveStore = defineStore('leave', {
       companyId: number
     }) {
       axios
-        .get('/admin/ui/term', {
+        .get('/admin/ui/advise', {
           params: {
             page: page,
             companyId: companyId.toString()
           }
         })
         .then((res) => {
-          this.leave = res.data.Result
+          this.advise = res.data.Result
         })
     },
-    deleteLeave(companyId: number, id: number) {
+    deleteAdvise(companyId: number, id: number) {
       axios
-        .delete(`admin/ui/term/${id}`, {
+        .delete(`admin/ui/advise/${id}`, {
           params: {
             companyId
           }
@@ -39,7 +39,7 @@ export const useLeaveStore = defineStore('leave', {
         .then(() => {
           const { companyId } = useCompany()
           // todo companyid要帶參數
-          this.fetchLeaveList({ companyId: companyId.value || 1, page: 1 })
+          this.fetchAdviseList({ companyId: companyId.value ?? 1, page: 1 })
         })
     }
   }

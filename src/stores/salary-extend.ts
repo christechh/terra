@@ -20,19 +20,19 @@ export const useSalaryExtendStore = defineStore('salary-extend', {
       companyId: number
     }) {
       axios
-        .get('/salary/salary-extend', {
+        .get('/admin/ui/wallet/plan', {
           params: {
             page: page,
             companyId: companyId.toString()
           }
         })
         .then((res) => {
-          this.salaryExtend = res.data.data
+          this.salaryExtend = res.data.Result
         })
     },
     deleteSalaryExtend(companyId: number, id: number) {
       axios
-        .delete(`salary/salary-extend/${id}`, {
+        .delete(`admin/ui/wallet/plan/${id}`, {
           params: {
             companyId
           }

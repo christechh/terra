@@ -5,9 +5,9 @@ import { FormInput, FormLabel, FormSelect } from '../../../base-components/Form'
 import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
-import useCreateUserLeave from './useCreateUserLeave'
+import useCreateUserLeave from './useCreateAdvise'
 import useLeave from '../../../pages/settings/composables/useLeave'
-import useCompany from '../../../../src/pages/settings/composables/useCompany'
+import useCompany from '../../../pages/settings/composables/useCompany'
 
 interface Props {
   userLeave?: {

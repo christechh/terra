@@ -50,7 +50,7 @@ export const useSalaryStore = defineStore('salary', {
       page: number
       companyId: number
     }) {
-      const response = await axios.get('/salary/salary-group', {
+      const response = await axios.get('/admin/ui/ads', {
         params: {
           page,
           pageSize: 100,
@@ -58,7 +58,7 @@ export const useSalaryStore = defineStore('salary', {
         }
       })
       console.log('fetchSalaryGroups response', response.data.data)
-      this.salaryGroups = response.data.data
+      this.salaryGroups = response.data.Result
     },
     async fetchSalaryExtends({
       page,
@@ -97,7 +97,7 @@ export const useSalaryStore = defineStore('salary', {
     },
     deleteSalaryGroup(companyId: number, groupId: number) {
       axios
-        .delete(`/salary/salary-group/${groupId}`, {
+        .delete(`/admin/ui/ads/${groupId}`, {
           params: {
             companyId
           }

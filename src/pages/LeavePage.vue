@@ -30,32 +30,20 @@ const onCreateLeaveClick = (idx?: number) => {
   showCreateLeaveModal.value = true
 }
 
-const onExportLeaveClick = () => {
-  console.log('onExportLeaveClick')
-}
-
-const onImportButtonClick = () => {
-  console.log('onImportButtonClick')
-}
-
-const onDownloadImportExampleClick = () => {
-  console.log('onDownloadImportExampleClick')
-}
-
 const onDeleteLeaveButtonClick = (id: number) => {
   confirmDeleteLeave(companyId.value ?? 1, id)
 }
 
-const transfer = (type: string): string => {
-  const m: { [key: string]: string } = {
-    ALL: '全薪',
-    HALF: '半薪',
-    NONE: '不支薪',
-    OTHER: '其他'
-  }
+// const transfer = (type: string): string => {
+//   const m: { [key: string]: string } = {
+//     ALL: '全薪',
+//     HALF: '半薪',
+//     NONE: '不支薪',
+//     OTHER: '其他'
+//   }
 
-  return m[type] || 'null'
-}
+//   return m[type] || 'null'
+// }
 </script>
 
 <template>
@@ -93,49 +81,7 @@ const transfer = (type: string): string => {
               @click="onCreateLeaveClick()"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              新增假勤
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onImportButtonClick"
-            >
-              <Lucide icon="Upload" class="mr-1 h-4 w-4" />
-              匯入假勤
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onExportLeaveClick"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              匯出假勤
-            </Button>
-          </div>
-        </div>
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="danger"
-              type="button"
-              class="m-3"
-              disabled
-              @click="onDownloadImportExampleClick"
-            >
-              <Lucide icon="Download" class="mr-1 h-4 w-4" />
-              假勤匯入範例
+              新增條款
             </Button>
           </div>
         </div>
@@ -145,14 +91,9 @@ const transfer = (type: string): string => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">假勤名稱</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                請假上限 (小時)
-              </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">
-                薪資給薪標準
-              </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">說明</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">名稱</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0"> 類別 </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0"> 版本 </Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -167,30 +108,24 @@ const transfer = (type: string): string => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ leave.name }}
+                  {{ leave.content }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ leave.limitHours }}
+                  {{ leave.term_type }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ transfer(leave.salaryStandard) }}
+                  {{ leave.version }}
                 </div>
               </Table.Td>
-              <Table.Td
-                class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
-              >
-                <div class="font-medium">
-                  {{ leave.description }}
-                </div>
-              </Table.Td>
+
               <Table.Td
                 class="relative w-56 border-b-0 bg-white py-0 shadow-[20px_3px_20px_#0000000b] before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600 before:dark:bg-darkmode-400"
               >
@@ -219,38 +154,6 @@ const transfer = (type: string): string => {
           </Table.Tbody>
         </Table>
       </div>
-      <!-- END: Data List -->
-      <!-- BEGIN: Pagination -->
-      <!-- <div
-      class="intro-y col-span-12 flex flex-wrap items-center sm:flex-row sm:flex-nowrap"
-    >
-      <Pagination class="w-full sm:mr-auto sm:w-auto">
-        <Pagination.Link>
-          <Lucide icon="ChevronsLeft" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronLeft" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>...</Pagination.Link>
-        <Pagination.Link>1</Pagination.Link>
-        <Pagination.Link active>2</Pagination.Link>
-        <Pagination.Link>3</Pagination.Link>
-        <Pagination.Link>...</Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronRight" class="h-4 w-4" />
-        </Pagination.Link>
-        <Pagination.Link>
-          <Lucide icon="ChevronsRight" class="h-4 w-4" />
-        </Pagination.Link>
-      </Pagination>
-      <FormSelect class="!box mt-3 w-20 sm:mt-0">
-        <option>10</option>
-        <option>25</option>
-        <option>35</option>
-        <option>50</option>
-      </FormSelect>
-    </div> -->
-      <!-- END: Pagination -->
     </div>
 
     <CreateLeaveModal

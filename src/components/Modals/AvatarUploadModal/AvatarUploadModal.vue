@@ -128,7 +128,7 @@ const uploadAvatar = async () => {
       'Content-Type': 'multipart/form-data'
     }
   })
-  const { id, url } = res.data.data.data
+  const { id, url } = res.data.Result.data
   selectedId.value = id
   localImg.value = url
 }

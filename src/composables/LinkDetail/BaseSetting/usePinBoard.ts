@@ -68,7 +68,7 @@ export default function usePinBoard() {
 
   const getPinboardSetting = () => {
     axios.get(`/chat/enterpoints/config/${token.value}`).then((res) => {
-      const data = res.data.data.data
+      const data = res.data.Result.data
       showPinBoard.value = data.show_landing
       welecomeMessage.value = data.welcome
       btnText.value = data.start_btn_text

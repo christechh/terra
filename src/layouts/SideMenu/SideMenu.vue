@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import logoUrl from '../../assets/images/logo.svg'
-import logoUrlM from '../../assets/images/logo.svg'
+import logoUrl from '../../assets/images/logo.png'
+import logoUrlM from '../../assets/images/logo.png'
 import TopBar from '../../components/TopBar'
 import Divider from './Divider.vue'
 import Menu from './Menu.vue'
