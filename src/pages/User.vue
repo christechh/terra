@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import Button from '../base-components/Button'
-// import Pagination from '../base-components/Pagination'
-// FormSelect
 import { FormInput } from '../base-components/Form'
 import Lucide from '../base-components/Lucide'
 import Table from '../base-components/Table'
@@ -11,13 +9,13 @@ import useUser from './settings/composables/useUser'
 import useCompany from './settings/composables/useCompany'
 
 const { companyId } = useCompany()
-const { users, confirmDeleteUser } = useUser(companyId.value ?? 1)
+const { users, confirmDeleteUser } = useUser()
 
 const showCreateUserModal = ref(false)
 const selectedUserIndex = ref(-1)
 
 watch(companyId, () => {
-  useUser(companyId.value ?? 1)
+  useUser()
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedUser: any = computed(

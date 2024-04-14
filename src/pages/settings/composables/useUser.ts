@@ -4,7 +4,7 @@ import { useDeleteModalStore } from '../../../stores/modals/deleteModal'
 import { useSuccessModalStore } from '../../../stores/modals/successModal'
 import { useUsersStore } from '../../../stores/users'
 
-export default function userUser(companyId: number) {
+export default function userUser() {
   const subUserStore = useUsersStore()
 
   const { fetchUsers } = subUserStore
@@ -28,7 +28,7 @@ export default function userUser(companyId: number) {
     })
   }
 
-  fetchUsers({ companyId, page: 1 })
+  fetchUsers()
 
   return {
     users,

@@ -225,10 +225,7 @@ export default function useCreateUser(
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()
-    useUsersStore().fetchUsers({
-      companyId: companyId.value ?? 1,
-      page: 1
-    })
+    useUsersStore().fetchUsers()
   }
 
   return {

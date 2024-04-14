@@ -22,7 +22,7 @@ const router = useRouter()
       >
         <img
           class="absolute left-3"
-          src="../assets/images/email_logo.png"
+          src="../assets/images/email_logo.svg"
           alt=""
         />
         {{ t('signup-email-btn-title') }}</Button
@@ -45,7 +45,7 @@ const router = useRouter()
         >
           <img
             class="absolute left-3"
-            src="../assets/images/apple_logo.png"
+            src="../assets/images/apple_logo.svg"
             alt=""
           />
           {{ t('signup-apple-btn-title') }}</Button
@@ -55,7 +55,7 @@ const router = useRouter()
         >
           <img
             class="absolute left-3"
-            src="../assets/images/google_logo.png"
+            src="../assets/images/google_logo.svg"
             alt=""
           />{{ t('signup-google-btn-title') }}</Button
         >
@@ -64,7 +64,7 @@ const router = useRouter()
         >
           <img
             class="absolute left-3"
-            src="../assets/images/facebook_logo.png"
+            src="../assets/images/facebook_logo.svg"
             alt=""
           />{{ t('signup-facebook-btn-title') }}</Button
         >

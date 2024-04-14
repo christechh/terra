@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineStore } from 'pinia'
 import axios from '../axios'
-import useCompany from '../../src/pages/settings/composables/useCompany'
 export interface Users {
   id: number
   first_name: string
@@ -29,8 +28,7 @@ export const useUsersStore = defineStore('users', {
             : `/user/${id}`
         )
         .then(() => {
-          const { companyId } = useCompany()
-          this.fetchUsers({ companyId: companyId.value ?? 1, page: 1 })
+          this.fetchUsers()
         })
     }
   }

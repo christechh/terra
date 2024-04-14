@@ -45,7 +45,6 @@ export default function useCreateUser(
   member?: any
 ) {
   const { companyId } = useCompany()
-  const memberStore = useMemberStore()
   const payload: CreateMemberPayload = reactive(
     member
       ? member
@@ -204,23 +203,15 @@ export default function useCreateUser(
     }
 
     let actionMap: any = {}
-    if (memberStore.xUserType === 'admin') {
-      actionMap = {
-        create: () =>
-          axios.post('/admin/member', {
-            ...payload
-          }),
-        update: () => axios.patch(`/admin/member/${member.id}`, sendData)
-      }
-    } else {
-      actionMap = {
-        create: () =>
-          axios.post('/member', {
-            ...payload
-          }),
-        update: () => axios.patch(`/member/${member.id}`, sendData)
-      }
+
+    actionMap = {
+      create: () =>
+        axios.post('/member', {
+          ...payload
+        }),
+      update: () => axios.patch(`/member/${member.id}`, sendData)
     }
+
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
     callback()

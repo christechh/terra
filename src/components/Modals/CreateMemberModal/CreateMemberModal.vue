@@ -11,7 +11,6 @@ import {
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateMember from './useCreateMember'
-import { useMemberStore } from '../../../stores/member'
 
 interface Props {
   subAccount?: {
@@ -40,7 +39,6 @@ interface Props {
   idx: number
 }
 
-const userStore = useMemberStore()
 const emit = defineEmits(['close'])
 const { subAccount } = defineProps<Props>()
 
@@ -177,10 +175,7 @@ watch(isEmployeeRetirementPercentage, (newValue) => {
             v-model="email"
           />
         </div>
-        <div
-          class="mb-4 flex items-center"
-          v-if="userStore.xMemberType === 'admin'"
-        >
+        <div class="mb-4 flex items-center">
           <FormLabel class="w-[120px]">登入密碼</FormLabel>
           <FormInput
             class="flex-1"

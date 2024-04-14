@@ -11,13 +11,13 @@ import useUser from './settings/composables/useUser'
 import useCompany from './settings/composables/useCompany'
 
 const { companyId } = useCompany()
-const { users, confirmDeleteUser } = useUser(companyId.value ?? 1)
+const { users, confirmDeleteUser } = useUser()
 
 const showCreateUserModal = ref(false)
 const selectedUserIndex = ref(-1)
 
 watch(companyId, () => {
-  useUser(companyId.value ?? 1)
+  useUser()
 })
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const selectedUser: any = computed(
