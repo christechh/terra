@@ -13,7 +13,7 @@ import useCreateSalaryExtend from './useCreateSalaryExtend'
 
 interface Props {
   salaryExtend?: {
-    id?: number
+    id: number
     redeem_point: number
     price: number
     discount: number

@@ -5,13 +5,13 @@ import { useSalaryExtendStore } from '../../../stores/salary-extend'
 import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateSalaryExtendPayload {
-  companyId: number
-  userId: string
-  type: string
-  name: string
-  description: string
-  amount: number
-  yearMonth: string
+  id: number
+  redeem_point: number
+  price: number
+  discount: number
+  start_date: string
+  end_date: string
+  valid: number
 }
 
 export default function useCreateSalaryExtend(
@@ -20,15 +20,16 @@ export default function useCreateSalaryExtend(
 ) {
   const { companyId } = useCompany()
   const payload: CreateSalaryExtendPayload = reactive({
-    companyId: companyId.value ?? 1,
-    userId: '1',
-    type: 'PLUS',
-    name: '',
-    description: '',
-    amount: 0,
-    yearMonth: ''
+    id: 1,
+    redeem_point: 1,
+    price: 1,
+    discount: 1,
+    start_date: '',
+    end_date: '',
+    valid: 1
   })
-  const { userId, type, name, description, amount, yearMonth } = toRefs(payload)
+  const { id, redeem_point, price, discount, start_date, end_date, valid } =
+    toRefs(payload)
 
   const isEdit = computed(() => {
     return !!salaryExtend
@@ -54,14 +55,7 @@ export default function useCreateSalaryExtend(
   })
 
   const canSubmit = computed(() => {
-    return userId.value !== '' &&
-      type.value !== '' &&
-      name.value !== '' &&
-      amount.value.toString() !== '' &&
-      amount.value >= 0 &&
-      yearMonth.value !== ''
-      ? true
-      : false
+    return redeem_point.value.toString() !== ''
   })
 
   const submit = async (isEdit: boolean, callback: () => void) => {
@@ -69,14 +63,17 @@ export default function useCreateSalaryExtend(
     console.log(action)
     const actionMap = {
       create: () =>
-        axios.post('/salary/salary-extend', {
+        axios.post('/admin/ui/wallet/plan', {
           ...payload
         }),
       update: () =>
-        axios.patch(`/salary/salary-extend/${salaryExtend.id}`, {
-          ...payload,
-          id: salaryExtend.id
-        })
+        axios.put(
+          `/admin/ui/wallet/plan?id=${id.value}&redeem_point=${redeem_point.value}&price=${price.value}&discount=${discount.value}&start_date=${start_date.value}&end_date=${end_date.value}&valid=${valid.value}`,
+          {
+            ...payload,
+            id: salaryExtend.id
+          }
+        )
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
@@ -88,13 +85,13 @@ export default function useCreateSalaryExtend(
   }
 
   return {
-    companyId,
-    userId,
-    type,
-    name,
-    description,
-    amount,
-    yearMonth,
+    id,
+    redeem_point,
+    price,
+    discount,
+    start_date,
+    end_date,
+    valid,
     canSubmit,
     isEdit,
     submit

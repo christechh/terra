@@ -53,24 +53,6 @@ const onDeleteUserButtonClick = (id: number) =>
         </div>
       </div>
     </div>
-
-    <div
-      class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap"
-    >
-      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-        <div class="relative text-slate-500">
-          <Button
-            variant="primary"
-            type="button"
-            class="m-3"
-            @click="() => createOrEdit()"
-          >
-            <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-            新增用戶
-          </Button>
-        </div>
-      </div>
-    </div>
     <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
       <Table class="-mt-2 border-separate border-spacing-y-[10px]">
@@ -82,7 +64,7 @@ const onDeleteUserButtonClick = (id: number) =>
             <Table.Th class="whitespace-nowrap border-b-0">姓</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">名</Table.Th>
             <!-- <Table.Th class="whitespace-nowrap border-b-0">權限</Table.Th> -->
-            <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
+            <!-- <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th> -->
           </Table.Tr>
         </Table.Thead>
 
@@ -131,10 +113,12 @@ const onDeleteUserButtonClick = (id: number) =>
               </div>
             </Table.Td> -->
             <Table.Td
+              v-if="false"
               class="relative w-56 border-b-0 bg-white py-0 shadow-[20px_3px_20px_#0000000b] before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600 before:dark:bg-darkmode-400"
             >
               <div class="flex items-center justify-center">
                 <Button
+                  v-if="false"
                   variant="primary"
                   type="button"
                   class="m-3 w-20"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, watch, computed } from 'vue'
 import Table from '../base-components/Table'
 import Button from '../base-components/Button'
 import Lucide from '../base-components/Lucide'
@@ -11,10 +10,10 @@ import ExportSalaryModal from '../components/Modals/ExportSalaryModal'
 import useSalary from './settings/composables/useSalary'
 import useCompany from '../../src/pages/settings/composables/useCompany'
 
-const router = useRouter()
 const { companyId } = useCompany()
 const showExportSalaryModal = ref(false)
 const showCreateSalaryGroupModal = ref(false)
+const selectedSalaryGroupIndex = ref(-1)
 
 watch(companyId, () => {
   useSalary(companyId.value ?? 1)
@@ -23,17 +22,20 @@ watch(companyId, () => {
 const { salaryGroups, confirmDeleteSalaryGroup } = useSalary(
   companyId.value ?? 1
 )
-const onCreateSalaryGroupButtonClick = () => {
-  showCreateSalaryGroupModal.value = true
-}
 
-const onOpenGroupSalariesButtonClick = (groupId: string) => {
-  router.push({
-    name: 'GroupSalaries',
-    params: {
-      groupId
-    }
-  })
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const selectedSalaryGroup: any = computed(
+  () => salaryGroups.value[selectedSalaryGroupIndex.value] || null
+)
+
+const onCreateSalaryGroupButtonClick = (idx?: number) => {
+  showCreateSalaryGroupModal.value = true
+
+  selectedSalaryGroupIndex.value = -1
+  if (idx !== undefined) {
+    selectedSalaryGroupIndex.value = idx
+  }
+  showCreateSalaryGroupModal.value = true
 }
 
 const onDeleteSalaryGroupButtonClick = (id: number) => {
@@ -155,7 +157,7 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
                     variant="primary"
                     type="button"
                     class="m-3 w-24"
-                    @click="onOpenGroupSalariesButtonClick(salaryGroup.id)"
+                    @click="onCreateSalaryGroupButtonClick(index)"
                   >
                     <Lucide icon="Edit" class="mr-1 h-4 w-4" />
                     修改
@@ -212,8 +214,9 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
 
     <CreateSalaryGroupModal
       v-if="showCreateSalaryGroupModal"
+      :salaryGroup="selectedSalaryGroup"
       @close="showCreateSalaryGroupModal = false"
-      :companyId="companyId ?? 1"
+      :idx="selectedSalaryGroupIndex"
     />
     <ExportSalaryModal
       v-if="showExportSalaryModal"
