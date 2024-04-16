@@ -91,9 +91,9 @@ const onDeleteLeaveButtonClick = (id: number) => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
+              <Table.Th class="whitespace-nowrap border-b-0">類別</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">名稱</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0"> 類別 </Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0"> 版本 </Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">版本</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -108,14 +108,20 @@ const onDeleteLeaveButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ leave.content }}
+                  {{
+                    leave.term_type === 1
+                      ? '平台規範'
+                      : leave.term_type === 2
+                        ? '隱私政策'
+                        : '服務條款'
+                  }}
                 </div>
               </Table.Td>
               <Table.Td
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ leave.term_type }}
+                  {{ leave.content }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -140,6 +146,7 @@ const onDeleteLeaveButtonClick = (id: number) => {
                     修改
                   </Button>
                   <Button
+                    v-if="false"
                     variant="danger"
                     type="button"
                     class="m-3 w-20"

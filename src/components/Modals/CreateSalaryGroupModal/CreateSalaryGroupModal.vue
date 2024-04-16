@@ -233,7 +233,7 @@ onMounted(() => {
       ]"
     >
       <div class="relative mb-5 text-center text-xl">
-        薪資計算
+        建立廣告
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"

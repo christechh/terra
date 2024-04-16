@@ -11,7 +11,7 @@ import useMember from './settings/composables/useMember'
 import useCompany from './settings/composables/useCompany'
 
 const { companyId } = useCompany()
-const { member, confirmDeleteMember } = useMember(companyId.value ?? 1)
+const { member } = useMember(companyId.value ?? 1)
 
 const showCreateMemberModal = ref(false)
 const selectedMemberIndex = ref(-1)
@@ -31,9 +31,6 @@ const createOrEdit = (idx?: number) => {
   }
   showCreateMemberModal.value = true
 }
-
-const onDeleteMemberButtonClick = (id: number) =>
-  confirmDeleteMember(companyId.value ?? 1, id)
 </script>
 
 <template>
@@ -56,23 +53,6 @@ const onDeleteMemberButtonClick = (id: number) =>
       </div>
     </div>
 
-    <div
-      class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap"
-    >
-      <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-        <div class="relative text-slate-500">
-          <Button
-            variant="primary"
-            type="button"
-            class="m-3"
-            @click="() => createOrEdit()"
-          >
-            <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-            新增會員
-          </Button>
-        </div>
-      </div>
-    </div>
     <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
       <Table class="-mt-2 border-separate border-spacing-y-[10px]">
@@ -84,6 +64,7 @@ const onDeleteMemberButtonClick = (id: number) =>
             <Table.Th class="whitespace-nowrap border-b-0">姓名</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">性別</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">職業</Table.Th>
+            <Table.Th class="whitespace-nowrap border-b-0">狀態</Table.Th>
             <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
           </Table.Tr>
         </Table.Thead>
@@ -137,26 +118,30 @@ const onDeleteMemberButtonClick = (id: number) =>
               </div>
             </Table.Td>
             <Table.Td
+              class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
+            >
+              <div class="font-medium">
+                {{
+                  item.review_status === 1
+                    ? '審核中'
+                    : item.review_status === 2
+                      ? '通過'
+                      : '不通過'
+                }}
+              </div>
+            </Table.Td>
+            <Table.Td
               class="relative w-56 border-b-0 bg-white py-0 shadow-[20px_3px_20px_#0000000b] before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600 before:dark:bg-darkmode-400"
             >
               <div class="flex items-center justify-center">
                 <Button
                   variant="primary"
                   type="button"
-                  class="m-3 w-20"
+                  class="m-3 w-28"
                   @click="createOrEdit(index)"
                 >
                   <Lucide icon="Edit" class="mr-1 h-4 w-4" />
-                  修改
-                </Button>
-                <Button
-                  variant="danger"
-                  type="button"
-                  class="m-3 w-20"
-                  @click="onDeleteMemberButtonClick(item.id)"
-                >
-                  <Lucide icon="Trash" class="mr-1 h-4 w-4" />
-                  刪除
+                  修改資料
                 </Button>
               </div>
             </Table.Td>

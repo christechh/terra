@@ -5,13 +5,10 @@ import { useUserLeaveStore } from '../../../stores/user-leave'
 import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateUserLeavePayload {
-  userId: string
-  companyId: number
-  startTime: string
-  endTime: string
-  restHours: number
-  leaveId: string
-  description: string
+  id: number
+  title: string
+  content: string
+  help_type: number
 }
 
 export default function useCreateUserLeave(
@@ -20,16 +17,12 @@ export default function useCreateUserLeave(
 ) {
   const { companyId } = useCompany()
   const payload: CreateUserLeavePayload = reactive({
-    userId: '1',
-    companyId: companyId.value ?? 1,
-    startTime: '',
-    endTime: '',
-    restHours: 0,
-    leaveId: '',
-    description: ''
+    id: 1,
+    title: '',
+    content: '',
+    help_type: 1
   })
-  const { userId, startTime, endTime, restHours, leaveId, description } =
-    toRefs(payload)
+  const { id, title, content, help_type } = toRefs(payload)
 
   const isEdit = computed(() => {
     return !!userLeave
@@ -53,15 +46,12 @@ export default function useCreateUserLeave(
   })
 
   const canSubmit = computed(() => {
-    return userId.value !== '' &&
-      companyId.value?.toString() !== '' &&
-      startTime.value !== '' &&
-      endTime.value !== '' &&
-      leaveId.value !== '' &&
-      restHours.value.toString() !== '' &&
-      restHours.value >= 0
-      ? true
-      : false
+    return (
+      title.value !== '' &&
+      content.value !== '' &&
+      help_type.value.toString() !== '' &&
+      help_type.value !== 0
+    )
   })
 
   const submit = async (isEdit: boolean, callback: () => void) => {
@@ -69,14 +59,13 @@ export default function useCreateUserLeave(
     console.log(action)
     const actionMap = {
       create: () =>
-        axios.post('/salary/user-leave', {
+        axios.post(`admin/ui/help`, {
           ...payload
         }),
       update: () =>
-        axios.patch(`/salary/user-leave/${userLeave.id}`, {
-          ...payload,
-          id: userLeave.id
-        })
+        axios.put(
+          `admin/ui/help?id=${id.value}&help_type=${help_type.value}&title=${title.value}&content=${content.value}`
+        )
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
@@ -88,13 +77,10 @@ export default function useCreateUserLeave(
   }
 
   return {
-    userId,
-    companyId,
-    startTime,
-    endTime,
-    restHours,
-    leaveId,
-    description,
+    id,
+    title,
+    content,
+    help_type,
     canSubmit,
     isEdit,
     submit

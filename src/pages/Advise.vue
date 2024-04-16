@@ -57,33 +57,18 @@ const onDeleteAdviseButtonClick = (id: number) => {
     </div>
 
     <div class="mt-5 grid grid-cols-12 gap-6">
-      <div
-        class="intro-y col-span-12 flex flex-wrap items-center sm:flex-nowrap"
-      >
-        <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
-          <div class="relative text-slate-500">
-            <Button
-              variant="primary"
-              type="button"
-              class="m-3"
-              @click="onCreateAdviseClick()"
-            >
-              <Lucide icon="Plus" class="mr-1 h-4 w-4" />
-              新增意見
-            </Button>
-          </div>
-        </div>
-      </div>
       <!-- BEGIN: Data List -->
       <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">會員</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">標題</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">內容</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">回饋</Table.Th>
-              <Table.Th class="whitespace-nowrap border-b-0">狀態</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">會員ID</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">意見標題</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">意見內容</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0"
+                >管理員回覆</Table.Th
+              >
+              <Table.Th class="whitespace-nowrap border-b-0">處理狀態</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -126,7 +111,7 @@ const onDeleteAdviseButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ advise.advise_status }}
+                  {{ advise.advise_status === '1' ? '未處理' : '已處理' }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -143,6 +128,7 @@ const onDeleteAdviseButtonClick = (id: number) => {
                     修改
                   </Button>
                   <Button
+                    v-if="false"
                     variant="danger"
                     type="button"
                     class="m-3 w-20"

@@ -2,49 +2,32 @@
 <script lang="ts" setup>
 import Button from '../../../base-components/Button'
 import { FormInput, FormLabel, FormSelect } from '../../../base-components/Form'
-import FormDatepicker from '../../../base-components/Form/FormDatepicker.vue'
 import { Dialog } from '../../../base-components/Headless'
 import Lucide from '../../../base-components/Lucide'
 import useCreateUserLeave from './useCreateUserLeave'
-import useLeave from '../../../pages/settings/composables/useLeave'
-import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface Props {
   userLeave?: {
     id?: number
-    userId: string
-    startTime: string
-    endTime: string
-    leaveId: string
-    userName: string
-    restHours: string
-    description: string
+    title: string
+    content: string
+    help_type: number
   }
   idx: number
 }
 
-const { companyId } = useCompany()
-const { leaveList } = useLeave(companyId.value ?? 1)
 const emit = defineEmits(['close'])
 const { userLeave } = defineProps<Props>()
 
-const {
-  startTime,
-  endTime,
-  leaveId,
-  restHours,
-  description,
-  canSubmit,
-  isEdit,
-  submit
-} = useCreateUserLeave(userLeave)
+const { title, content, help_type, canSubmit, isEdit, submit } =
+  useCreateUserLeave(userLeave)
 </script>
 <!-- eslint-disable prettier/prettier -->
 <template>
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '編輯請假申請' : '請假申請' }}
+        {{ isEdit ? '編輯幫助' : '幫助' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"
@@ -53,48 +36,19 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">假別 *</FormLabel>
-          <FormSelect class="flex-1" v-model="leaveId">
-            <option
-              v-for="(leave, index) in leaveList"
-              :key="index"
-              :value="leave.id"
-            >
-              {{ leave.name }}
-            </option>
+          <FormLabel class="w-[120px]">幫助標題</FormLabel>
+          <FormInput class="flex-1" type="text" v-model="title" />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">幫助內容</FormLabel>
+          <FormInput class="flex-1" type="text" v-model="content" />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">幫助類型</FormLabel>
+          <FormSelect class="flex-1" v-model="help_type">
+            <option value="1">技術問題</option>
+            <option value="2">帳號設定</option>
           </FormSelect>
-        </div>
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">起始時間 *</FormLabel>
-          <FormDatepicker
-            class="flex-1"
-            v-model="startTime"
-            detail
-            time-picker-inline
-          />
-        </div>
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">結束時間 *</FormLabel>
-          <FormDatepicker
-            class="flex-1"
-            v-model="endTime"
-            detail
-            time-picker-inline
-          />
-        </div>
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">休息時間 (小時) *</FormLabel>
-          <FormInput
-            class="flex-1"
-            type="number"
-            min="0"
-            v-model="restHours"
-            step="0.1"
-          />
-        </div>
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">原因備註</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="description" />
         </div>
         <div class="flex justify-center">
           <Button

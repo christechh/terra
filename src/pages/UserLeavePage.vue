@@ -81,7 +81,7 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
         <Table class="-mt-2 border-separate border-spacing-y-[10px]">
           <Table.Thead>
             <Table.Tr>
-              <Table.Th class="whitespace-nowrap border-b-0">類別</Table.Th>
+              <Table.Th class="whitespace-nowrap border-b-0">幫助類型</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">標題</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">內容</Table.Th>
               <Table.Th class="whitespace-nowrap border-b-0">動作</Table.Th>
@@ -98,7 +98,7 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
                 class="border-b-0 bg-white text-center shadow-[20px_3px_20px_#0000000b] first:rounded-l-md last:rounded-r-md dark:bg-darkmode-600"
               >
                 <div class="font-medium">
-                  {{ userLeave.help_type }}
+                  {{ userLeave.help_type === 1 ? '技術問題' : '帳號設定' }}
                 </div>
               </Table.Td>
               <Table.Td
@@ -129,6 +129,7 @@ const onDeleteUserLeaveButtonClick = (id: number) => {
                     修改
                   </Button>
                   <Button
+                    v-if="false"
                     variant="danger"
                     type="button"
                     class="m-3 w-20"

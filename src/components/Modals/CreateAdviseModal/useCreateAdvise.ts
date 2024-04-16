@@ -2,16 +2,15 @@ import { computed, onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useAdviseStore } from '../../../stores/advise'
-import useCompany from '../../../pages/settings/composables/useCompany'
+import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateAdvisePayload {
-  userId: string
-  companyId: number
-  startTime: string
-  endTime: string
-  restHours: number
-  leaveId: string
-  description: string
+  id: number
+  members_id: number
+  title: string
+  content: string
+  response: string
+  advise_status: number
 }
 
 export default function useCreateAdvise(
@@ -20,15 +19,14 @@ export default function useCreateAdvise(
 ) {
   const { companyId } = useCompany()
   const payload: CreateAdvisePayload = reactive({
-    userId: '1',
-    companyId: companyId.value ?? 1,
-    startTime: '',
-    endTime: '',
-    restHours: 0,
-    leaveId: '',
-    description: ''
+    id: 1,
+    members_id: 1,
+    title: '',
+    content: '',
+    response: '',
+    advise_status: 1
   })
-  const { userId, startTime, endTime, restHours, leaveId, description } =
+  const { id, members_id, title, content, response, advise_status } =
     toRefs(payload)
 
   const isEdit = computed(() => {
@@ -53,15 +51,13 @@ export default function useCreateAdvise(
   })
 
   const canSubmit = computed(() => {
-    return userId.value !== '' &&
-      companyId.value?.toString() !== '' &&
-      startTime.value !== '' &&
-      endTime.value !== '' &&
-      leaveId.value !== '' &&
-      restHours.value.toString() !== '' &&
-      restHours.value >= 0
-      ? true
-      : false
+    return (
+      title.value !== '' &&
+      content.value !== '' &&
+      response.value !== '' &&
+      advise_status.value.toString() !== '' &&
+      advise_status.value !== 0
+    )
   })
 
   const submit = async (isEdit: boolean, callback: () => void) => {
@@ -69,14 +65,16 @@ export default function useCreateAdvise(
     console.log(action)
     const actionMap = {
       create: () =>
-        axios.post('/admin/ui/advise', {
-          ...payload
-        }),
+        axios.post(
+          `/admin/ui/advise?id=${id.value}&members_id=${members_id.value}&title=${title.value}&content=${content.value}&response=${response.value}&advise_status=${advise_status.value}`,
+          {
+            ...payload
+          }
+        ),
       update: () =>
-        axios.patch(`/admin/ui/advise/${advise.id}`, {
-          ...payload,
-          id: advise.id
-        })
+        axios.put(
+          `/admin/ui/advise?id=${id.value}&members_id=${members_id.value}&title=${title.value}&content=${content.value}&response=${response.value}&advise_status=${advise_status.value}`
+        )
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
@@ -88,13 +86,12 @@ export default function useCreateAdvise(
   }
 
   return {
-    userId,
-    companyId,
-    startTime,
-    endTime,
-    restHours,
-    leaveId,
-    description,
+    id,
+    members_id,
+    title,
+    content,
+    response,
+    advise_status,
     canSubmit,
     isEdit,
     submit

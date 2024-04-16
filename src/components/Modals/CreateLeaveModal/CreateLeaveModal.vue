@@ -9,11 +9,8 @@ import useCreateLeave from './useCreateLeave'
 interface Props {
   leave?: {
     id?: number
-    companyId: number
-    name: string
-    limitHours: number
-    salaryStandard: string
-    description: string
+    term_type: number
+    content: string
   }
   idx: number
 }
@@ -21,22 +18,14 @@ interface Props {
 const emit = defineEmits(['close'])
 const { leave } = defineProps<Props>()
 
-const {
-  name,
-  limitHours,
-  salaryStandard,
-  description,
-  canSubmit,
-  isEdit,
-  submit
-} = useCreateLeave(leave)
+const { term_type, content, canSubmit, isEdit, submit } = useCreateLeave(leave)
 </script>
 <!-- eslint-disable prettier/prettier -->
 <template>
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '編輯假勤' : '新增假勤' }}
+        {{ isEdit ? '編輯條款' : '新增條款' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"
@@ -45,34 +34,17 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">假勤名稱 *</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="name" />
-        </div>
-
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">請假上限 (小時) *</FormLabel>
-          <FormInput
-            class="flex-1"
-            type="number"
-            min="0"
-            step="0.1"
-            v-model="limitHours"
-          />
-        </div>
-
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">薪資給薪標準</FormLabel>
-          <FormSelect class="flex-1" v-model="salaryStandard">
-            <option value="ALL">全薪</option>
-            <option value="HALF">半薪</option>
-            <option value="NONE">不支薪</option>
-            <option value="OTHER">其他</option>
+          <FormLabel class="w-[120px]">條款類型 *</FormLabel>
+          <FormSelect class="mr-3 flex-1" v-model="term_type">
+            <option value="1">平台規範</option>
+            <option value="2">隱私政策</option>
+            <option value="3">服務條款</option>
           </FormSelect>
         </div>
 
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">說明</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="description" />
+          <FormLabel class="w-[120px]">內容</FormLabel>
+          <FormInput class="flex-1" type="text" v-model="content" />
         </div>
         <div class="flex justify-center">
           <Button

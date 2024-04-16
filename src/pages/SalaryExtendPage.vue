@@ -156,6 +156,7 @@ const onDeleteSalaryExtendButtonClick = (id: number) => {
                     修改
                   </Button>
                   <Button
+                    v-if="false"
                     variant="danger"
                     type="button"
                     class="m-3 w-20"

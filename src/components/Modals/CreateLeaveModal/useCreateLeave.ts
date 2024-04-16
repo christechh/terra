@@ -4,10 +4,9 @@ import { useNotificationsStore } from '../../../stores/notifications'
 import { useLeaveStore } from '../../../stores/leave'
 import useCompany from '../../../../src/pages/settings/composables/useCompany'
 interface CreateLeavePayload {
-  name: string
-  limitHours: number
-  salaryStandard: string
-  description: string
+  id: number
+  term_type: number
+  content: string
 }
 
 export default function useCreateLeave(
@@ -17,14 +16,12 @@ export default function useCreateLeave(
   const { companyId } = useCompany()
 
   const payload: CreateLeavePayload = reactive({
-    companyId: companyId.value ?? 1,
-    name: '',
-    limitHours: 1,
-    salaryStandard: 'ALL',
-    description: ''
+    id: 1,
+    term_type: 1,
+    content: ''
   })
 
-  const { name, limitHours, salaryStandard, description } = toRefs(payload)
+  const { id, term_type, content } = toRefs(payload)
 
   const isEdit = computed(() => {
     return !!leave
@@ -48,12 +45,7 @@ export default function useCreateLeave(
   })
 
   const canSubmit = computed(() => {
-    return name.value !== '' &&
-      limitHours.value.toString() !== '' &&
-      limitHours.value >= 0 &&
-      salaryStandard.value !== ''
-      ? true
-      : false
+    return term_type.value.toString() !== '' && content.value !== ''
   })
 
   const submit = async (isEdit: boolean, callback: () => void) => {
@@ -61,14 +53,14 @@ export default function useCreateLeave(
     console.log(action)
     const actionMap = {
       create: () =>
-        axios.post('/salary/leave', {
-          ...payload
+        axios.post(`/admin/ui/term`, {
+          term_type: term_type.value,
+          content: content.value
         }),
       update: () =>
-        axios.patch(`/salary/leave/${leave.id}`, {
-          ...payload,
-          id: leave.id
-        })
+        axios.put(
+          `/admin/ui/term?id=${id.value}&term_type=${term_type.value}&content=${content.value}`
+        )
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
@@ -80,11 +72,9 @@ export default function useCreateLeave(
   }
 
   return {
-    companyId,
-    name,
-    limitHours,
-    salaryStandard,
-    description,
+    id,
+    term_type,
+    content,
     canSubmit,
     isEdit,
     submit

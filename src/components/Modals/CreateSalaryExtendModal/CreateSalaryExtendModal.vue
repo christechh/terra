@@ -14,13 +14,12 @@ import useCreateSalaryExtend from './useCreateSalaryExtend'
 interface Props {
   salaryExtend?: {
     id?: number
-    companyId: number
-    userId: string
-    name: string
-    description: string
-    type: string
-    amount: number
-    yearMonth: string
+    redeem_point: number
+    price: number
+    discount: number
+    start_date: string
+    end_date: string
+    valid: number
   }
   idx: number
 }
@@ -29,11 +28,12 @@ const emit = defineEmits(['close'])
 const { salaryExtend } = defineProps<Props>()
 
 const {
-  name,
-  description,
-  type,
-  amount,
-  yearMonth,
+  redeem_point,
+  price,
+  discount,
+  start_date,
+  end_date,
+  valid,
   canSubmit,
   isEdit,
   submit
@@ -44,7 +44,7 @@ const {
   <Dialog :open="true" size="md">
     <Dialog.Panel class="p-4 md:w-[600px]">
       <div class="relative mb-5 text-center text-xl">
-        {{ isEdit ? '編輯科別加減項' : '新增科別加減項' }}
+        {{ isEdit ? '編輯儲值方案' : '新增儲值方案' }}
         <Lucide
           icon="X"
           class="absolute right-0 top-0 cursor-pointer text-[#939393]"
@@ -53,43 +53,60 @@ const {
       </div>
       <section>
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">薪資年月 *</FormLabel>
-          <FormDatepicker
-            class="flex-1"
-            v-model="yearMonth"
-            month-picker
-            auto-apply
-          />
-        </div>
-
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">薪資科目 *</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="name" />
-        </div>
-
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">金額 *</FormLabel>
+          <FormLabel class="w-[120px]">手環數量</FormLabel>
           <FormInput
             class="flex-1"
             type="number"
             min="0"
             step="1"
-            v-model="amount"
-            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+            v-model="redeem_point"
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">價格</FormLabel>
+          <FormInput
+            class="flex-1"
+            type="number"
+            min="0"
+            step="1"
+            v-model="price"
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">折扣</FormLabel>
+          <FormInput
+            class="flex-1"
+            type="number"
+            min="0"
+            step="1"
+            v-model="discount"
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">開始日期</FormLabel>
+          <FormDatepicker
+            class="flex-1"
+            v-model="start_date"
+            detail
+            time-picker-inline
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <FormLabel class="w-[120px]">結束日期</FormLabel>
+          <FormDatepicker
+            class="flex-1"
+            v-model="end_date"
+            detail
+            time-picker-inline
           />
         </div>
 
         <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">加減項 *</FormLabel>
-          <FormSelect class="flex-1" type="text" v-model="type">
-            <option value="PLUS">加項</option>
-            <option value="MINUS">減項</option>
+          <FormLabel class="w-[120px]">是否有效</FormLabel>
+          <FormSelect class="flex-1" type="text" v-model="valid">
+            <option value="1">有效</option>
+            <option value="2">無效</option>
           </FormSelect>
-        </div>
-
-        <div class="mb-4 flex items-center">
-          <FormLabel class="w-[120px]">備註</FormLabel>
-          <FormInput class="flex-1" type="text" v-model="description" />
         </div>
 
         <div class="flex justify-center">

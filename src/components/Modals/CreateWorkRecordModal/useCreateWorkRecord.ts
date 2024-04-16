@@ -5,13 +5,8 @@ import { useWorkRecordStore } from '../../../stores/work-record'
 import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateWorkRecordPayload {
-  userId: string
-  companyId: number
-  startTime: string
-  endTime: string
-  restHours: number
-  type: string
-  description: string
+  rate: number
+  effective_date: string
 }
 
 export default function useCreateWorkRecord(
@@ -21,16 +16,10 @@ export default function useCreateWorkRecord(
   const { companyId } = useCompany()
 
   const payload: CreateWorkRecordPayload = reactive({
-    userId: '',
-    companyId: companyId.value ?? 1,
-    startTime: '',
-    endTime: '',
-    restHours: 0,
-    type: 'HOLIDAY',
-    description: ''
+    rate: 1,
+    effective_date: ''
   })
-  const { userId, startTime, endTime, restHours, type, description } =
-    toRefs(payload)
+  const { rate, effective_date } = toRefs(payload)
 
   const isEdit = computed(() => {
     return !!workRecord
@@ -54,37 +43,25 @@ export default function useCreateWorkRecord(
   })
 
   const canSubmit = computed(() => {
-    return userId.value !== '' &&
-      companyId.value?.toString() !== '' &&
-      startTime.value !== '' &&
-      endTime.value !== '' &&
-      type.value !== '' &&
-      restHours.value.toString() !== '' &&
-      restHours.value >= 0
-      ? true
-      : false
+    return (
+      effective_date.value !== '' &&
+      rate.value !== 0 &&
+      rate.value?.toString() !== ''
+    )
   })
 
   const submit = async (isEdit: boolean, callback: () => void) => {
     const action = isEdit ? 'update' : 'create'
-    if (payload.restHours < 0) {
-      useNotificationsStore().showError({
-        title: '休息時間需大於0',
-        content: '休息時間需大於0'
-      })
 
-      return
-    }
     const actionMap = {
       create: () =>
-        axios.post('/salary/work-record', {
+        axios.post('/admin/ui/wallet/rate', {
           ...payload
         }),
       update: () =>
-        axios.patch(`/salary/work-record/${workRecord.id}`, {
-          ...payload,
-          id: workRecord.id
-        })
+        axios.put(
+          `/admin/ui/wallet/rate?rate=${rate.value}&effective_date=${effective_date.value}`
+        )
     }
     await actionMap[action]()
     useNotificationsStore().showSaveSuccess()
@@ -96,13 +73,8 @@ export default function useCreateWorkRecord(
   }
 
   return {
-    userId,
-    companyId,
-    startTime,
-    endTime,
-    restHours,
-    type,
-    description,
+    rate,
+    effective_date,
     canSubmit,
     isEdit,
     submit

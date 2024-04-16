@@ -1,42 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { computed, onMounted, reactive, toRefs } from 'vue'
+import { onMounted, reactive, toRefs } from 'vue'
 import axios from '../../../axios'
 import { useNotificationsStore } from '../../../stores/notifications'
 import { useMemberStore } from '../../../stores/member'
 import useCompany from '../../../../src/pages/settings/composables/useCompany'
 
 interface CreateMemberPayload {
-  name: string
-  email?: string
-  gender?: string
-  nationality?: string
-  birthday?: string
-  idCardNumber: string
-  address: string
-  mobile: string
-  bankCode: string
-  bankAccount: string
-  password?: string
-  employeeId: string
-  workStatus: string
-  onboardDate: string
-  resignationDate?: string
-  identity: string
-  salaryType: string
-  isEmployeeRetirementPercentage: boolean
-  employeeRetirementPercentage: number
-  employeeInsurance: number
-  healthInsurance: number
-  employeePension: number
-  family: {
-    name: string
-    gender: string
-    nationality: string
-    relationship: string
-    idCardNumber: string
-  }[]
-  companyIds?: string[]
-  enabledModules: string[]
+  review_status: number
+  amount: number
   [key: string]: any
 }
 
@@ -49,66 +20,11 @@ export default function useCreateUser(
     member
       ? member
       : {
-          name: '',
-          email: '',
-          password: '',
-          employeeId: '',
-          workStatus: '在職',
-          onboardDate: '',
-          resignationDate: '',
-          identity: '員工',
-          gender: '男',
-          nationality: '台灣',
-          birthday: '',
-          idCardNumber: '',
-          address: '',
-          mobile: '',
-          bankCode: '',
-          bankAccount: '',
-          salaryType: '月薪',
-          salaryItems: [],
-          isEmployeeRetirementPercentage: true,
-          employeeRetirementPercentage: 6,
-          family: [],
-          companyIds: [(companyId.value ?? 1).toString()],
-          enabledModules: [],
-          employeeInsurance: 0,
-          healthInsurance: 0,
-          employeePension: 0
+          review_status: 2,
+          amount: 1
         }
   )
-  const {
-    name,
-    email,
-    password,
-    employeeId,
-    workStatus,
-    onboardDate,
-    resignationDate,
-    identity,
-    salaryType,
-    salaryItems,
-    employeeInsurance,
-    healthInsurance,
-    employeePension,
-    gender,
-    nationality,
-    birthday,
-    idCardNumber,
-    address,
-    mobile,
-    bankCode,
-    bankAccount,
-    isEmployeeRetirementPercentage,
-    employeeRetirementPercentage,
-    family,
-    companyIds,
-    enabledModules
-  } = toRefs(payload)
-
-  const isEdit = computed(() => {
-    return !!member
-  })
+  const { review_status, amount } = toRefs(payload)
 
   onMounted(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -127,47 +43,16 @@ export default function useCreateUser(
     }
   })
 
-  const canSubmit = computed(() => {
-    return name.value !== '' &&
-      email?.value !== '' &&
-      employeeId.value !== '' &&
-      workStatus.value !== '' &&
-      onboardDate.value !== '' &&
-      identity.value !== '' &&
-      salaryType.value !== '' &&
-      employeeInsurance.value.toString() !== '' &&
-      healthInsurance.value.toString() !== '' &&
-      employeePension.value.toString() !== '' &&
-      employeeRetirementPercentage.value.toString() !== '' &&
-      idCardNumber.value !== '' &&
-      address.value !== ''
-      ? true
-      : false
-  })
-
   // 在 reactive 對象中保存原始數據
   const originalData = reactive({ ...member })
 
-  const submit = async (isEdit: boolean, callback: () => void) => {
-    const action = isEdit ? 'update' : 'create'
-    if (!payload.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
-      useNotificationsStore().showError({
-        title: '請檢查 Email 格式',
-        content: '請檢查 Email 格式'
-      })
-
-      return
-    }
-
-    console.log(1, password)
-    console.log(2, payload.email)
+  const submit = async (type: string, callback: () => void) => {
+    const action = type
 
     // 構建要發送的數據，僅包含有實際更改的字段
     const sendData: any = {}
     Object.keys(payload).forEach((key) => {
-      // console.log(0, key)
-      // console.log(1, originalData[key])
-      // console.log(2, payload[key])
+      console.log(payload[key])
       if (
         (member && payload[key] !== originalData[key]) ||
         (!member && payload[key] !== '')
@@ -176,40 +61,20 @@ export default function useCreateUser(
       }
     })
 
-    // 如果有 family 字段且不為空，處理 family 數據
-    if (payload.family && payload.family.length > 0) {
-      sendData.family = payload.family.map((member: any) => {
-        const updatedMember: any = {}
-        Object.keys(member).forEach((memberKey) => {
-          if (member[memberKey] !== '') {
-            updatedMember[memberKey] = member[memberKey]
-          }
-        })
-        return updatedMember
-      })
-    }
-
-    // 如果有 salaryItems 字段且不為空，處理 salaryItems 數據
-    if (payload.salaryItems && payload.salaryItems.length > 0) {
-      sendData.salaryItems = payload.salaryItems.map((item: any) => {
-        const updatedItem: any = {}
-        Object.keys(item).forEach((itemKey) => {
-          if (item[itemKey] !== '') {
-            updatedItem[itemKey] = item[itemKey]
-          }
-        })
-        return updatedItem
-      })
-    }
-
     let actionMap: any = {}
 
+    console.log(1, payload)
+    console.log(2, sendData)
+
     actionMap = {
-      create: () =>
-        axios.post('/member', {
-          ...payload
-        }),
-      update: () => axios.patch(`/member/${member.id}`, sendData)
+      update_wallet: () =>
+        axios.put(
+          `/members/${member.id}?action=delete&amount=${sendData.amount}`
+        ),
+      update: () =>
+        axios.put(
+          `/members/${member.id}?review_status=${sendData.review_status}`
+        )
     }
 
     await actionMap[action]()
@@ -222,34 +87,8 @@ export default function useCreateUser(
   }
 
   return {
-    name,
-    email,
-    password,
-    employeeId,
-    workStatus,
-    onboardDate,
-    resignationDate,
-    identity,
-    salaryType,
-    salaryItems,
-    employeeInsurance,
-    healthInsurance,
-    employeePension,
-    gender,
-    nationality,
-    birthday,
-    idCardNumber,
-    address,
-    mobile,
-    bankCode,
-    bankAccount,
-    isEmployeeRetirementPercentage,
-    employeeRetirementPercentage,
-    family,
-    companyIds,
-    enabledModules,
-    canSubmit,
-    isEdit,
+    review_status,
+    amount,
     submit
   }
 }
