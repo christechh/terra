@@ -75,7 +75,7 @@ const onDeleteSalaryGroupButtonClick = (id: number) => {
               variant="primary"
               type="button"
               class="m-3"
-              @click="onCreateSalaryGroupButtonClick"
+              @click="onCreateSalaryGroupButtonClick()"
             >
               <Lucide icon="Plus" class="mr-1 h-4 w-4" />
               新建廣告
